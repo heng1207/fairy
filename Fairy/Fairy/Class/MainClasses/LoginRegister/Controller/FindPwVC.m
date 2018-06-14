@@ -7,7 +7,7 @@
 //
 
 #import "FindPwVC.h"
-#import "LoginVC.h"
+
 
 @interface FindPwVC ()
 @property(nonatomic,strong)UITextField *phoneTF;
@@ -74,7 +74,7 @@
     [self.view addSubview:sendCodeBtn];
     [sendCodeBtn addTarget:self action:@selector(sendCodeClick) forControlEvents:UIControlEventTouchUpInside];
     [sendCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(100));
         make.right.mas_equalTo(-AdaptedWidth(38));
         make.width.mas_equalTo(AdaptedWidth(216));
         make.height.mas_equalTo(AdaptedHeight(50));
@@ -82,7 +82,7 @@
     
     
     UIView *line1 =[UIView new];
-    line1.backgroundColor=[UIColor blueColor];
+    line1.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line1];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(phoneLab.mas_bottom).offset(AdaptedHeight(10));
@@ -120,7 +120,7 @@
     
     
     UIView *line2 =[UIView new];
-    line2.backgroundColor=[UIColor blueColor];
+    line2.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line2];
     [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(codeLab.mas_bottom).offset(AdaptedHeight(10));
@@ -146,7 +146,7 @@
     
     
     UITextField *passwordTF =[UITextField new];
-    self.passwordTF= passwordLab;
+    self.passwordTF= passwordTF;
     passwordTF.placeholder=@"请输入新密码";
     [self.view addSubview:passwordTF];
     [passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -158,7 +158,7 @@
     
     
     UIView *line3 =[UIView new];
-    line3.backgroundColor=[UIColor blueColor];
+    line3.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line3];
     [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(passwordLab.mas_bottom).offset(AdaptedHeight(10));

@@ -7,7 +7,9 @@
 //
 
 #import "RegisterVC.h"
-#import "LoginVC.h"
+#import "PhoneZhuCeModel.h"
+#import "MainTabBarController.h"
+
 
 @interface RegisterVC ()
 @property(nonatomic,strong)UITextField *phoneTF;
@@ -74,7 +76,7 @@
     [self.view addSubview:sendCodeBtn];
     [sendCodeBtn addTarget:self action:@selector(sendCodeClick) forControlEvents:UIControlEventTouchUpInside];
     [sendCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(100));
         make.right.mas_equalTo(-AdaptedWidth(38));
         make.width.mas_equalTo(AdaptedWidth(216));
         make.height.mas_equalTo(AdaptedHeight(50));
@@ -82,7 +84,7 @@
     
     
     UIView *line1 =[UIView new];
-    line1.backgroundColor=[UIColor blueColor];
+    line1.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line1];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(phoneLab.mas_bottom).offset(AdaptedHeight(10));
@@ -121,7 +123,7 @@
     
     
     UIView *line2 =[UIView new];
-    line2.backgroundColor=[UIColor blueColor];
+    line2.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line2];
     [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(codeLab.mas_bottom).offset(AdaptedHeight(10));
@@ -147,7 +149,7 @@
     
     
     UITextField *passwordTF =[UITextField new];
-    self.passwordTF = passwordLab;
+    self.passwordTF = passwordTF;
     passwordTF.placeholder=@"请输入密码";
     [self.view addSubview:passwordTF];
     [passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -159,7 +161,7 @@
     
     
     UIView *line3 =[UIView new];
-    line3.backgroundColor=[UIColor blueColor];
+    line3.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line3];
     [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(passwordLab.mas_bottom).offset(AdaptedHeight(10));
@@ -206,13 +208,20 @@
 
 -(void)sendCodeClick{
 
+    if ( ![Tool checkTel:self.phoneTF.text]){
+        return;
+    }
     NSLog(@"%@",GetLoginMessage(self.phoneTF.text));
     [NetworkManage  Get:GetLoginMessage(self.phoneTF.text)  andParams:nil success:^(id responseObject) {
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+        NSLog(@"%@",responseObject);
         if ([dic[@"code"] integerValue] ==200 ) {
-            [self showHint:@"验证码发送成功"];
+            [self showHint:dic[@"message"]];
+        }else{
+            [self showHint:@"验证码获取失败"];
         }
     } failure:^(NSError *error) {
+        [self showHint:@"网络有问题"];
         NSLog(@"%@",error);
     }];
 }
@@ -220,6 +229,40 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)LoginClick{
+    if ( ![Tool checkTel:self.phoneTF.text]){
+        return;
+    }
+//    if ( ![Tool checkPassWord:self.passwordTF.text]){
+//        return;
+//    }
+    if ([Tool isBlankString:self.codeTF.text]) {
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"验证码不能为空" message:@"请键入验证码" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alertView show];
+    }
+
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    dict[@"loginName"] = self.phoneTF.text;
+    dict[@"phoneNumbe"] = self.phoneTF.text;
+    dict[@"checkCode"] = self.codeTF.text;
+    dict[@"password"] = self.passwordTF.text;
+    [NetworkManage Post:@"http://47.75.145.77:8080/interface/consumer/insert" andParams:dict success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+        if ([dic[@"code"] integerValue] ==200 ) {
+
+            PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:@""];
+            // 归档存储模型数据
+            [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            
+            MainTabBarController *homeVC=[MainTabBarController new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+        }else{
+            [self showHint:@"注册失败"];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+   
     
 }
 

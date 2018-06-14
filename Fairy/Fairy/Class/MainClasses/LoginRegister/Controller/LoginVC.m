@@ -9,10 +9,14 @@
 #import "LoginVC.h"
 #import "RegisterVC.h"
 #import "FindPwVC.h"
+#import "MainTabBarController.h"
 
 @interface LoginVC ()
+
 @property(nonatomic,strong)UITextField *phoneTF;
 @property(nonatomic,strong)UITextField *passwordTF;
+
+@property(nonatomic,strong)NSArray *logoArr;
 @end
 
 @implementation LoginVC
@@ -21,6 +25,9 @@
     [super viewDidLoad];
      self.view.backgroundColor=[UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:YES];
+    
+    self.logoArr= @[@"WeiBo",@"WechatFriend",@"WechatCircle"];
+    
     [self creatSubViews];
     // Do any additional setup after loading the view.
 }
@@ -54,6 +61,7 @@
 
     UITextField *phoneTF =[UITextField new];
     self.phoneTF= phoneTF;
+    phoneTF.keyboardType = UIKeyboardTypeNumberPad;
     phoneTF.placeholder=@"请输入手机号";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -64,7 +72,7 @@
     }];
 
     UIView *line1 =[UIView new];
-    line1.backgroundColor=[UIColor blueColor];
+    line1.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line1];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(phoneLab.mas_bottom).offset(AdaptedHeight(10));
@@ -76,7 +84,6 @@
     
     //密码
     UILabel *passwordLab =[UILabel new];
-    self.passwordTF = passwordLab;
     passwordLab.text=@"密码";
     passwordLab.font=[UIFont systemFontOfSize:15];
     passwordLab.textAlignment = NSTextAlignmentLeft;
@@ -92,6 +99,7 @@
     
     UITextField *passwordTF =[UITextField new];
     passwordTF.placeholder=@"请输入密码";
+    self.passwordTF = passwordTF;
     [self.view addSubview:passwordTF];
     [passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(18));
@@ -109,14 +117,14 @@
     [self.view addSubview:findPWBtn];
     [findPWBtn addTarget:self action:@selector(findPWClick) forControlEvents:UIControlEventTouchUpInside];
     [findPWBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(18));
+        make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(28));
         make.right.mas_equalTo(-AdaptedWidth(38));
         make.width.mas_equalTo(AdaptedWidth(200));
         make.height.mas_equalTo(AdaptedHeight(50));
     }];
     
     UIView *line2 =[UIView new];
-    line2.backgroundColor=[UIColor blueColor];
+    line2.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line2];
     [line2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(passwordLab.mas_bottom).offset(AdaptedHeight(10));
@@ -170,16 +178,16 @@
         UIButton *btn =[[UIButton alloc]init];
         btn.frame= CGRectMake(leftRightSpace + i*(MidSpace+width), UIScreenH-Y, width, height);
         btn.tag = i;
-        [btn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+        [btn setImage:[UIImage imageNamed:self.logoArr[i]] forState:UIControlStateNormal];
         [btn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
-        btn.backgroundColor =[UIColor blueColor];
         [self.view addSubview:btn];
     }
+
     
     
     UILabel *thirdPartyLab= [UILabel new];
     thirdPartyLab.text = @"第三方登录";
-    thirdPartyLab.font = AdaptedFontSize(20);
+    thirdPartyLab.font = AdaptedFontSize(26);
     thirdPartyLab.textColor = [UIColor grayColor];
     thirdPartyLab.textAlignment =NSTextAlignmentCenter;
     [self.view addSubview:thirdPartyLab];
@@ -193,7 +201,7 @@
     }];
     
     UIView *thirdPartyline1 = [UIView new];
-    thirdPartyline1.backgroundColor =[UIColor grayColor];
+    thirdPartyline1.backgroundColor =[UIColor colorWithHex:@"#cccccc"];;
     [self.view addSubview:thirdPartyline1];
     [thirdPartyline1 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(AdaptedWidth(60));
@@ -203,7 +211,7 @@
     }];
     
     UIView *thirdPartyline2 = [UIView new];
-    thirdPartyline2.backgroundColor =[UIColor grayColor];
+    thirdPartyline2.backgroundColor =[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:thirdPartyline2];
     [thirdPartyline2 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.mas_equalTo(thirdPartyLab.mas_right).offset(AdaptedWidth(24));
@@ -223,6 +231,41 @@
     FindPwVC *vc=[FindPwVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+-(void)LoginClick{
+    if ( ![Tool checkTel:self.phoneTF.text]){
+        return;
+    }
+    //    if ( ![Tool checkPassWord:self.passwordTF.text]){
+    //        return;
+    //    }
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    dict[@"loginName"] = self.phoneTF.text;
+    dict[@"password"] = self.passwordTF.text;
+    [NetworkManage Post:@"http://47.75.145.77:8080/interface/login" andParams:dict success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+        if ([dic[@"code"] integerValue] ==200 ) {
+            MainTabBarController *homeVC=[MainTabBarController new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+        }else{
+            [self showHint:dic[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+    
+    
+}
+
+#pragma mark 三方登陆
+-(void)shareBtn:(UIButton *)btn{
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

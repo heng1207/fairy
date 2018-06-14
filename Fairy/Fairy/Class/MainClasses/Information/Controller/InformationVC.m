@@ -20,7 +20,7 @@
 {
     [super viewWillLayoutSubviews];
     _tabBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44);
-    _pagerController.view.frame = CGRectMake(0, CGRectGetMaxY(_tabBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- CGRectGetMaxY(_tabBar.frame));
+    _pagerController.view.frame = CGRectMake(0, CGRectGetMaxY(_tabBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- CGRectGetMaxY(_tabBar.frame)-LL_StatusBarHeight);
 }
 - (void)viewDidLoad {
     [super viewDidLoad];

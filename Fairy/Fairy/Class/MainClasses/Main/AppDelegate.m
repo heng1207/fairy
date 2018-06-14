@@ -56,10 +56,11 @@
 //
 //    }else{
     
-        MainTabBarController *homeVC=[MainTabBarController new];
-//    UINavigationController *nav =  [[UINavigationController alloc]initWithRootViewController:[LoginVC new]];
+    MainTabBarController *homeVC=[MainTabBarController new];
     self.window.rootViewController = homeVC;
-        
+//    UINavigationController *nav =  [[UINavigationController alloc]initWithRootViewController:[LoginVC new]];
+//    self.window.rootViewController = nav;
+    
 //    }
     
     // Override point for customization after application launch.

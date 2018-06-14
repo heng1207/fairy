@@ -85,11 +85,11 @@
 #define AdaptedHeight(x)    ceilf((x) * kScreenHeightRatio)
 
 
+/// 用户资料存取的沙盒地址
+#define kFilePath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"account.plist"]
 
 /// nil保护，当为nil时，返回@""，避免一些Crash
 #define TL_Str_Protect(str) ((str) ? (str) : (@""))
-/// 用户资料存取的沙盒地址
-#define kFilePath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"account.plist"]
 
 
 //重写NSLog,Debug模式下打印日志和当前行数

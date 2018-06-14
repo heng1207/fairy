@@ -33,6 +33,7 @@
 		0445DBE120CFD277009BA6BF /* HeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0445DBDF20CFD277009BA6BF /* HeadCell.xib */; };
 		0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBE320CFD550009BA6BF /* SettingCell.m */; };
 		0445DBE620CFD550009BA6BF /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0445DBE420CFD550009BA6BF /* SettingCell.xib */; };
+		0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469DFC620D26AF60096C35C /* PhoneZhuCeModel.m */; };
 		04B218D520D1047B000D661F /* MemberVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218D420D1047B000D661F /* MemberVC.m */; };
 		04B218D820D106FD000D661F /* GeneralVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218D720D106FD000D661F /* GeneralVC.m */; };
 		04B218DB20D10B8F000D661F /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DA20D10B8F000D661F /* ShareVC.m */; };
@@ -120,6 +121,8 @@
 		0445DBE220CFD550009BA6BF /* SettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
 		0445DBE320CFD550009BA6BF /* SettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		0445DBE420CFD550009BA6BF /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
+		0469DFC520D26AF60096C35C /* PhoneZhuCeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhoneZhuCeModel.h; sourceTree = "<group>"; };
+		0469DFC620D26AF60096C35C /* PhoneZhuCeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhoneZhuCeModel.m; sourceTree = "<group>"; };
 		04B218D320D1047B000D661F /* MemberVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemberVC.h; sourceTree = "<group>"; };
 		04B218D420D1047B000D661F /* MemberVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemberVC.m; sourceTree = "<group>"; };
 		04B218D620D106FD000D661F /* GeneralVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneralVC.h; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 		7EB5E23E20CCAD40004BFAE2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0469DFC520D26AF60096C35C /* PhoneZhuCeModel.h */,
+				0469DFC620D26AF60096C35C /* PhoneZhuCeModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -856,6 +861,7 @@
 				7EB5E28B20CCB60A004BFAE2 /* RegisterVC.m in Sources */,
 				7EFBA36220CC2F050059090B /* main.m in Sources */,
 				7EB5E25320CCAD40004BFAE2 /* MainTabBarController.m in Sources */,
+				0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */,
 				04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */,
 				04204F8D20CE4B9D007BD075 /* PriceVC.m in Sources */,
 				04204F9220CE4BBD007BD075 /* PriceDetailedVC.m in Sources */,

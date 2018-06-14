@@ -94,7 +94,7 @@
         _contentCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (!_contentCell) {
             _contentCell = [[FSBottomTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-            NSArray *titles = @[@"全部",@"服饰穿搭",@"生活百货",@"美食吃货",@"美容护理",@"母婴儿童",@"数码家电"];
+            NSArray *titles = @[@"自选",@"基础链",@"社交通讯"];
             NSMutableArray *contentVCs = [NSMutableArray array];
             //            for (NSString *title in titles) {
             //                FSScrollContentViewController *vc = [[FSScrollContentViewController alloc]init];
@@ -134,7 +134,9 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50) titles:@[@"全部",@"服饰穿搭",@"生活百货",@"美食吃货",@"美容护理",@"母婴儿童",@"数码家电"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+    self.titleView.itemMargin = 0;
+    self.titleView.indicatorExtension = 0;
     self.titleView.backgroundColor = [UIColor lightGrayColor];
     return self.titleView;
 }
@@ -185,7 +187,7 @@
 - (FSBaseTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[FSBaseTableView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH) style:UITableViewStylePlain];
+        _tableView = [[FSBaseTableView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH-LL_TabbarHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
