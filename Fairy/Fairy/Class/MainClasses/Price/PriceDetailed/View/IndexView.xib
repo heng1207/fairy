@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="IndexView"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hnN-t9-vOQ">
+                    <rect key="frame" x="0.0" y="69" width="375" height="1"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="XrV-hh-ikr"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥117.3800" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gqz-HL-gab">
+                    <rect key="frame" x="30" y="12" width="103" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+0.7600       +0.7600" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qaz-ZY-AIi">
+                    <rect key="frame" x="30" y="36" width="170.5" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="当前价格:116.733" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWf-8k-vfY">
+                    <rect key="frame" x="204" y="12" width="141" height="21.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="涨幅:+16%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iYa-gA-JKM">
+                    <rect key="frame" x="264" y="36" width="81" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="gqz-HL-gab" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="Hyn-XD-5pc"/>
+                <constraint firstItem="lWf-8k-vfY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="Qea-n8-oDf"/>
+                <constraint firstItem="hnN-t9-vOQ" firstAttribute="top" secondItem="iYa-gA-JKM" secondAttribute="bottom" constant="12" id="Seg-8d-gkD"/>
+                <constraint firstItem="gqz-HL-gab" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="12" id="Zl8-tv-4h3"/>
+                <constraint firstAttribute="trailing" secondItem="lWf-8k-vfY" secondAttribute="trailing" constant="30" id="a0L-cQ-WIl"/>
+                <constraint firstItem="hnN-t9-vOQ" firstAttribute="top" secondItem="Qaz-ZY-AIi" secondAttribute="bottom" constant="12" id="aTB-44-T4S"/>
+                <constraint firstItem="Qaz-ZY-AIi" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="iOn-gJ-qnZ"/>
+                <constraint firstAttribute="trailing" secondItem="hnN-t9-vOQ" secondAttribute="trailing" id="jEl-3F-Ctu"/>
+                <constraint firstItem="hnN-t9-vOQ" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="s30-GY-swM"/>
+                <constraint firstAttribute="trailing" secondItem="iYa-gA-JKM" secondAttribute="trailing" constant="30" id="uOP-rl-bS0"/>
+                <constraint firstAttribute="bottom" secondItem="hnN-t9-vOQ" secondAttribute="bottom" id="yyk-rN-Y2E"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-76" y="65"/>
+        </view>
+    </objects>
+</document>

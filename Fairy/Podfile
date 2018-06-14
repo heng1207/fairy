@@ -1,0 +1,20 @@
+platform :ios, ‘8.0‘
+
+
+
+target "Fairy" do
+
+use_frameworks!
+
+#pod 'LTScrollView', '~> 0.1.6'
+pod 'AFNetworking'
+pod 'MJExtension'
+pod 'SDWebImage'
+pod 'Masonry'
+pod 'IQKeyboardManager' 
+pod 'MBProgressHUD'
+pod 'SVProgressHUD'
+pod 'MJRefresh'
+pod 'TYPagerController'
+
+end
