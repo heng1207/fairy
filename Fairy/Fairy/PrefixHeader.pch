@@ -9,6 +9,7 @@
 #ifndef PrefixHeader_pch
 #define PrefixHeader_pch
 
+#import "Fairy-Bridging-Header.h"
 #import "Tool.h"
 #import "NetworkManage.h"
 #import "HTTPRequestDefine.h"

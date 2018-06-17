@@ -1,10 +1,12 @@
 //
 //  BezierCurveView.h
-//  BezierCurveLineDemo
+//  BezierDrawLine
 //
-//  Created by mac on 16/7/20.
-//  Copyright © 2016年 xiayuanquan. All rights reserved.
+//  Created by 张恒 on 2018/6/15.
+//  Copyright © 2018年 张恒. All rights reserved.
 //
+
+
 
 /*
  UIBezierPath ：画贝塞尔曲线的path类
@@ -44,16 +46,18 @@
  - (void)addArcWithCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise
  
  使用贝塞尔曲线的基本步骤是：
-    (1）创建一个Bezier path对象。
-   （2）使用方法moveToPoint:去设置初始线段的起点。
-   （3）添加line或者curve去定义一个或者多个subpaths。
-   （4）改变UIBezierPath对象跟绘图相关的属性。
+ (1）创建一个Bezier path对象。
+ （2）使用方法moveToPoint:去设置初始线段的起点。
+ （3）添加line或者curve去定义一个或者多个subpaths。
+ （4）改变UIBezierPath对象跟绘图相关的属性。
  */
 
 #import <UIKit/UIKit.h>
 
-#define MARGIN            30   // 坐标轴与画布间距
-#define Y_EVERY_MARGIN    20   // y轴每一个值的间隔数
+
+#define MARGIN            30   // 坐标轴与画布间距(Y轴)
+#define MARGIN_X          15   // 坐标轴与画布间距(X轴)
+
 
 // 颜色RGB
 #define XYQColor(r, g, b)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
@@ -68,10 +72,11 @@ typedef NS_ENUM(NSInteger, LineType) {
     LineType_Curve     // 曲线
 };
 
+
+
 @interface BezierCurveView : UIView
 
-//初始化画布
-+(instancetype)initWithFrame:(CGRect)frame;
+
 
 /**
  *  画折线图
@@ -96,6 +101,7 @@ typedef NS_ENUM(NSInteger, LineType) {
  *  @param targetValues 所有目标值
  */
 -(void)drawPieChartViewWithX_Value_Names:(NSMutableArray *)x_names TargetValues:(NSMutableArray *)targetValues;
+
 
 
 @end

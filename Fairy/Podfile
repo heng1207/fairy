@@ -16,5 +16,6 @@ pod 'MBProgressHUD'
 pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'TYPagerController'
+pod 'Charts'
 
 end

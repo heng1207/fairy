@@ -11,9 +11,7 @@
 @implementation PriceCell
 
 - (void)awakeFromNib {
-    [super awakeFromNib];
-    NSLog(@"%f---%f",self.width,self.height);//320.000000---80.000000
-    
+    [super awakeFromNib];    
     // Initialization code
 }
 

@@ -10,4 +10,6 @@
 
 @interface PriceDetailedSubVC : UIViewController
 
+- (void)loadMainTableData:(NSString *)type isPull:(BOOL)isPull;
+
 @end

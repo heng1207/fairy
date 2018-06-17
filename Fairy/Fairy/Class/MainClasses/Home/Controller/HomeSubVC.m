@@ -7,6 +7,7 @@
 //
 
 #import "HomeSubVC.h"
+#import "PriceCell.h"
 
 @interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) BOOL fingerIsTouch;
@@ -19,11 +20,13 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-LL_TabbarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-LL_TabbarHeight - LL_StatusBarHeight) style:UITableViewStylePlain];
     _tableView.separatorStyle =UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    [_tableView registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:@"PriceCell"];
     [self.view addSubview:_tableView];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -72,11 +75,8 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (!cell) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    }
-    cell.textLabel.text = [NSString stringWithFormat:@"第%ld行",(long)indexPath.row];
+    PriceCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"PriceCell"  forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

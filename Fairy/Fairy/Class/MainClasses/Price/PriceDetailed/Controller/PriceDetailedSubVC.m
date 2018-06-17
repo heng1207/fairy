@@ -7,8 +7,17 @@
 //
 
 #import "PriceDetailedSubVC.h"
+#import "BezierLineView.h"
+
+
 
 @interface PriceDetailedSubVC ()
+@property (nonatomic,strong) NSString *currentType;
+@property (strong,nonatomic)BezierLineView *bezierView;
+@property (strong,nonatomic)NSMutableArray *x_names;
+@property (strong,nonatomic)NSMutableArray *targets;
+@property (strong,nonatomic)NSMutableArray *y_names;
+
 
 @end
 
@@ -18,7 +27,7 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     
-    [self creatTextView];
+//    [self creatTextView];
 
     // Do any additional setup after loading the view.
 }
@@ -33,6 +42,51 @@
     CGSize  titleSize = [textLab.text  boundingRectWithSize: CGSizeMake(UIScreenW - 24, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin  attributes: @{NSFontAttributeName: AdaptedFontSize(32)} context: nil].size;
     textLab.frame = CGRectMake(12, 20, titleSize.width, titleSize.height);
 }
+
+-(void)loadMainTableData:(NSString *)type isPull:(BOOL)isPull{
+    self.currentType = type;
+    NSLog(@"%@",type);
+    
+    //1.初始化
+    _bezierView = [[BezierLineView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 250)];
+    [self.view addSubview:_bezierView];
+    
+    //直线
+    [_bezierView drawLineChartViewWithX_Value_Names:self.x_names Y_Value_Names:self.y_names TargetValues:self.targets LineType:LineType_Straight];
+    
+}
+
+
+/**
+ *  X轴值
+ */
+-(NSMutableArray *)x_names{
+    if (!_x_names) {
+        _x_names = [NSMutableArray arrayWithArray:@[@"1/6",@"2/6",@"3/6",@"4/6",@"5/6",@"6/6",@"7/6"]];
+    }
+    return _x_names;
+}
+/**
+ *  y轴值
+ */
+-(NSMutableArray *)y_names{
+    if (!_y_names) {
+        _y_names = [NSMutableArray arrayWithArray:@[@"-2",@"0",@"2",@"4",@"6"]];
+    }
+    return _y_names;
+}
+
+
+/**
+ *  Y轴值
+ */
+-(NSMutableArray *)targets{
+    if (!_targets) {
+        _targets = [NSMutableArray arrayWithArray:@[@1,@-2,@2,@5,@3,@2,@0]];
+    }
+    return _targets;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

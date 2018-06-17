@@ -111,22 +111,18 @@
             }];
             
             _contentCell.viewControllers = contentVCs;
-            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH - 64) childVCs:contentVCs parentVC:self delegate:self];
+            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH  -LL_TabbarHeight) childVCs:contentVCs parentVC:self delegate:self];
             [_contentCell.contentView addSubview:_contentCell.pageContentView];
         }
         return _contentCell;
     }
     if (indexPath.row == 0) {
         IndexCellCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"IndexCellCell"  forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }else{
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell"];
-//        if (!cell) {
-//            cell = [[GraphCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"GraphCell"];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        }
         return cell;
     }
     return nil;
@@ -135,8 +131,6 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
-    self.titleView.itemMargin = 0;
-    self.titleView.indicatorExtension = 0;
     self.titleView.backgroundColor = [UIColor lightGrayColor];
     return self.titleView;
 }

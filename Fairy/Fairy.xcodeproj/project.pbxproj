@@ -13,8 +13,6 @@
 		0406C66820D0BAE7008F6A26 /* MessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0406C66620D0BAE7008F6A26 /* MessageCell.xib */; };
 		0406C66B20D0C21F008F6A26 /* PriceCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0406C66A20D0C21F008F6A26 /* PriceCenterVC.m */; };
 		0406C66E20D0C709008F6A26 /* WarnCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0406C66D20D0C709008F6A26 /* WarnCenterVC.m */; };
-		04204F7E20CE3F78007BD075 /* BezierCurveView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04204F7B20CE3F78007BD075 /* BezierCurveView.xib */; };
-		04204F7F20CE3F78007BD075 /* BezierCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204F7D20CE3F78007BD075 /* BezierCurveView.m */; };
 		04204F8D20CE4B9D007BD075 /* PriceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204F8320CE4B9D007BD075 /* PriceVC.m */; };
 		04204F8E20CE4B9D007BD075 /* PriceCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204F8720CE4B9D007BD075 /* PriceCell.m */; };
 		04204F8F20CE4B9D007BD075 /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04204F8820CE4B9D007BD075 /* PriceCell.xib */; };
@@ -39,6 +37,10 @@
 		04B218DB20D10B8F000D661F /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DA20D10B8F000D661F /* ShareVC.m */; };
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
+		7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A255F20D66BE30061D98B /* SwiftTest.swift */; };
+		7E75221720D40BFD007E1489 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E75221620D40BFD007E1489 /* GraphCell.m */; };
+		7EB12A0020D4BEB000C8CB6E /* BezierCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB129FE20D4BEB000C8CB6E /* BezierCurveView.m */; };
+		7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */; };
 		7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3210920CEC4A50093DBAB /* SSSearchBar.m */; };
 		7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E24220CCAD40004BFAE2 /* AppDelegate.m */; };
 		7EB5E25220CCAD40004BFAE2 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E24420CCAD40004BFAE2 /* MainNavigationController.m */; };
@@ -65,7 +67,6 @@
 		7EB5E29F20CD01FF004BFAE2 /* FSBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29D20CD01FF004BFAE2 /* FSBaseTableView.m */; };
 		7EB5E2A220CD0545004BFAE2 /* FSBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E2A120CD0545004BFAE2 /* FSBottomTableViewCell.m */; };
 		7EB5E2A520CD057F004BFAE2 /* HomeSubVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E2A420CD057F004BFAE2 /* HomeSubVC.m */; };
-		7EB5E2AB20CD0696004BFAE2 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E2AA20CD0696004BFAE2 /* GraphCell.m */; };
 		7EB5E2AF20CD0C82004BFAE2 /* IndexCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E2AD20CD0C82004BFAE2 /* IndexCellCell.m */; };
 		7EB5E2B020CD0C82004BFAE2 /* IndexCellCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7EB5E2AE20CD0C82004BFAE2 /* IndexCellCell.xib */; };
 		7ED981C020D00C6A00749D14 /* PersionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED981BF20D00C6A00749D14 /* PersionDetailVC.m */; };
@@ -87,9 +88,6 @@
 		0406C66A20D0C21F008F6A26 /* PriceCenterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceCenterVC.m; sourceTree = "<group>"; };
 		0406C66C20D0C709008F6A26 /* WarnCenterVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WarnCenterVC.h; sourceTree = "<group>"; };
 		0406C66D20D0C709008F6A26 /* WarnCenterVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WarnCenterVC.m; sourceTree = "<group>"; };
-		04204F7B20CE3F78007BD075 /* BezierCurveView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BezierCurveView.xib; sourceTree = "<group>"; };
-		04204F7C20CE3F78007BD075 /* BezierCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierCurveView.h; sourceTree = "<group>"; };
-		04204F7D20CE3F78007BD075 /* BezierCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierCurveView.m; sourceTree = "<group>"; };
 		04204F8220CE4B9D007BD075 /* PriceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceVC.h; sourceTree = "<group>"; };
 		04204F8320CE4B9D007BD075 /* PriceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceVC.m; sourceTree = "<group>"; };
 		04204F8620CE4B9D007BD075 /* PriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCell.h; sourceTree = "<group>"; };
@@ -135,6 +133,14 @@
 		04B218E320D11867000D661F /* UIView+BorderLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BorderLine.m"; sourceTree = "<group>"; };
 		35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.release.xcconfig"; sourceTree = "<group>"; };
 		78493D73EEE62E43218BE701 /* Pods_Fairy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fairy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E1A255E20D66BE20061D98B /* Fairy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fairy-Bridging-Header.h"; sourceTree = "<group>"; };
+		7E1A255F20D66BE30061D98B /* SwiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTest.swift; sourceTree = "<group>"; };
+		7E75221520D40BFD007E1489 /* GraphCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphCell.h; sourceTree = "<group>"; };
+		7E75221620D40BFD007E1489 /* GraphCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphCell.m; sourceTree = "<group>"; };
+		7EB129FE20D4BEB000C8CB6E /* BezierCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierCurveView.m; sourceTree = "<group>"; };
+		7EB129FF20D4BEB000C8CB6E /* BezierCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierCurveView.h; sourceTree = "<group>"; };
+		7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
+		7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezierLineView.m; sourceTree = "<group>"; };
 		7EB3210820CEC4A50093DBAB /* SSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSearchBar.h; sourceTree = "<group>"; };
 		7EB3210920CEC4A50093DBAB /* SSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSearchBar.m; sourceTree = "<group>"; };
 		7EB5E21120CCA6FF004BFAE2 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -190,8 +196,6 @@
 		7EB5E2A120CD0545004BFAE2 /* FSBottomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSBottomTableViewCell.m; sourceTree = "<group>"; };
 		7EB5E2A320CD057F004BFAE2 /* HomeSubVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HomeSubVC.h; sourceTree = "<group>"; };
 		7EB5E2A420CD057F004BFAE2 /* HomeSubVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeSubVC.m; sourceTree = "<group>"; };
-		7EB5E2A920CD0696004BFAE2 /* GraphCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphCell.h; sourceTree = "<group>"; };
-		7EB5E2AA20CD0696004BFAE2 /* GraphCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphCell.m; sourceTree = "<group>"; };
 		7EB5E2AC20CD0C82004BFAE2 /* IndexCellCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexCellCell.h; sourceTree = "<group>"; };
 		7EB5E2AD20CD0C82004BFAE2 /* IndexCellCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexCellCell.m; sourceTree = "<group>"; };
 		7EB5E2AE20CD0C82004BFAE2 /* IndexCellCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexCellCell.xib; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 				04204FA420CE6E75007BD075 /* IndexView.xib */,
 				04204F9E20CE63A6007BD075 /* BaseTypeView.h */,
 				04204F9F20CE63A6007BD075 /* BaseTypeView.m */,
+				7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */,
+				7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -427,11 +433,10 @@
 				7EB5E2AC20CD0C82004BFAE2 /* IndexCellCell.h */,
 				7EB5E2AD20CD0C82004BFAE2 /* IndexCellCell.m */,
 				7EB5E2AE20CD0C82004BFAE2 /* IndexCellCell.xib */,
-				7EB5E2A920CD0696004BFAE2 /* GraphCell.h */,
-				7EB5E2AA20CD0696004BFAE2 /* GraphCell.m */,
-				04204F7C20CE3F78007BD075 /* BezierCurveView.h */,
-				04204F7D20CE3F78007BD075 /* BezierCurveView.m */,
-				04204F7B20CE3F78007BD075 /* BezierCurveView.xib */,
+				7E75221520D40BFD007E1489 /* GraphCell.h */,
+				7E75221620D40BFD007E1489 /* GraphCell.m */,
+				7EB129FF20D4BEB000C8CB6E /* BezierCurveView.h */,
+				7EB129FE20D4BEB000C8CB6E /* BezierCurveView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -667,7 +672,9 @@
 				7EFBA35D20CC2F050059090B /* LaunchScreen.storyboard */,
 				7EFBA36020CC2F050059090B /* Info.plist */,
 				7EB5E21120CCA6FF004BFAE2 /* PrefixHeader.pch */,
+				7E1A255F20D66BE30061D98B /* SwiftTest.swift */,
 				7EFBA36120CC2F050059090B /* main.m */,
+				7E1A255E20D66BE20061D98B /* Fairy-Bridging-Header.h */,
 			);
 			path = Fairy;
 			sourceTree = "<group>";
@@ -714,6 +721,7 @@
 				TargetAttributes = {
 					7EFBA34E20CC2F050059090B = {
 						CreatedOnToolsVersion = 9.1;
+						LastSwiftMigration = 0930;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -743,7 +751,6 @@
 			files = (
 				0445DBE120CFD277009BA6BF /* HeadCell.xib in Resources */,
 				7EFBA35F20CC2F050059090B /* LaunchScreen.storyboard in Resources */,
-				04204F7E20CE3F78007BD075 /* BezierCurveView.xib in Resources */,
 				0406C66820D0BAE7008F6A26 /* MessageCell.xib in Resources */,
 				0445DBCF20CFA9AD009BA6BF /* InformationCell.xib in Resources */,
 				7EFBA35C20CC2F050059090B /* Assets.xcassets in Resources */,
@@ -823,7 +830,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -839,11 +846,9 @@
 				7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */,
 				7EB5E2A520CD057F004BFAE2 /* HomeSubVC.m in Sources */,
 				7EB5E29B20CD00F0004BFAE2 /* FSPageContentView.m in Sources */,
-				04204F7F20CE3F78007BD075 /* BezierCurveView.m in Sources */,
 				0406C66B20D0C21F008F6A26 /* PriceCenterVC.m in Sources */,
 				0445DBCE20CFA9AD009BA6BF /* InformationCell.m in Sources */,
 				7EB5E2A220CD0545004BFAE2 /* FSBottomTableViewCell.m in Sources */,
-				7EB5E2AB20CD0696004BFAE2 /* GraphCell.m in Sources */,
 				0445DBD620CFBD70009BA6BF /* CurrencySelectVC.m in Sources */,
 				0406C66220D0B147008F6A26 /* PhotoSetCell.m in Sources */,
 				7EB5E26020CCADFC004BFAE2 /* MonitorNetwork.m in Sources */,
@@ -860,10 +865,12 @@
 				04204FA020CE63A6007BD075 /* BaseTypeView.m in Sources */,
 				7EB5E28B20CCB60A004BFAE2 /* RegisterVC.m in Sources */,
 				7EFBA36220CC2F050059090B /* main.m in Sources */,
+				7EB12A0020D4BEB000C8CB6E /* BezierCurveView.m in Sources */,
 				7EB5E25320CCAD40004BFAE2 /* MainTabBarController.m in Sources */,
 				0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */,
 				04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */,
 				04204F8D20CE4B9D007BD075 /* PriceVC.m in Sources */,
+				7E75221720D40BFD007E1489 /* GraphCell.m in Sources */,
 				04204F9220CE4BBD007BD075 /* PriceDetailedVC.m in Sources */,
 				0445DBDC20CFCE0C009BA6BF /* TrendSubVC.m in Sources */,
 				7EB5E25A20CCADF2004BFAE2 /* Tool.m in Sources */,
@@ -877,8 +884,10 @@
 				7EB5E27120CCAE09004BFAE2 /* UIBarButtonItem+GFBarButtonItem.m in Sources */,
 				04204FA320CE6E65007BD075 /* IndexView.m in Sources */,
 				7EB5E27F20CCB13D004BFAE2 /* HomeVC.m in Sources */,
+				7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */,
 				7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */,
 				0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */,
+				7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */,
 				7EB5E27420CCAE09004BFAE2 /* NSDate+Extension.m in Sources */,
 				7EB5E27620CCAE09004BFAE2 /* UIViewController+SLHUD.m in Sources */,
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
@@ -1021,6 +1030,7 @@
 			baseConfigurationReference = FE3B6BC3057507CD425B9D57 /* Pods-Fairy.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
@@ -1028,6 +1038,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-23.Fairy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fairy/Fairy-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1037,6 +1050,7 @@
 			baseConfigurationReference = 35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
@@ -1044,6 +1058,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-23.Fairy";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Fairy/Fairy-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

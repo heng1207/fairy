@@ -127,6 +127,7 @@
 }
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
     PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
+    [vc loadMainTableData:self.flagArray[index] isPull:NO];
     return vc;
 }
 

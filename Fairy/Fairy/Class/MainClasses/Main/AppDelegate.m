@@ -42,26 +42,11 @@
     [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
     
     
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    BOOL isfirest = [defaults boolForKey:(@"isfirst")];
-//    if (!isfirest) {
-//
-//        //保存BOOL
-//        [defaults setBool:YES forKey:(@"isfirst")];
-//        //立即保存
-//        [defaults synchronize];
-//
-//        welcomeViewController *vc=[welcomeViewController new];
-//        self.window.rootViewController = vc;
-//
-//    }else{
-    
     MainTabBarController *homeVC=[MainTabBarController new];
     self.window.rootViewController = homeVC;
 //    UINavigationController *nav =  [[UINavigationController alloc]initWithRootViewController:[LoginVC new]];
 //    self.window.rootViewController = nav;
     
-//    }
     
     // Override point for customization after application launch.
     return YES;
