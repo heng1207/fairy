@@ -75,24 +75,36 @@
             totalBtnWidth += itemBtnWidth;
         }
     }
-    if (totalBtnWidth <= CGRectGetWidth(self.bounds)) {//不能滑动
-//        CGFloat itemBtnWidth = CGRectGetWidth(self.bounds)/self.itemBtnArr.count;
-        CGFloat itemBtnWidth = CGRectGetWidth(self.bounds)/5;
+    
+    
+    CGFloat currentX = 0;
+    for (int idx = 0; idx < self.titlesArr.count; idx++) {
+        UIButton *btn = self.itemBtnArr[idx];
+        titleFont = btn.isSelected?_titleSelectFont:_titleFont;
+        CGFloat itemBtnWidth = [FSSegmentTitleView getWidthWithString:self.titlesArr[idx] font:titleFont] + self.itemMargin;
         CGFloat itemBtnHeight = CGRectGetHeight(self.bounds);
-        [self.itemBtnArr enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            obj.frame = CGRectMake(idx * itemBtnWidth, 0, itemBtnWidth, itemBtnHeight);
-        }];
+        btn.frame = CGRectMake(currentX, 0, itemBtnWidth, itemBtnHeight);
+        currentX += itemBtnWidth;
+    }
+    
+    
+    if (totalBtnWidth <= CGRectGetWidth(self.bounds)) {//不能滑动
+        //        CGFloat itemBtnWidth = CGRectGetWidth(self.bounds)/self.itemBtnArr.count;
+        //        CGFloat itemBtnHeight = CGRectGetHeight(self.bounds);
+        //        [self.itemBtnArr enumerateObjectsUsingBlock:^(UIButton * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        //            obj.frame = CGRectMake(idx * itemBtnWidth, 0, itemBtnWidth, itemBtnHeight);
+        //        }];
         self.scrollView.contentSize = CGSizeMake(CGRectGetWidth(self.bounds), CGRectGetHeight(self.scrollView.bounds));
     }else{//超出屏幕 可以滑动
-        CGFloat currentX = 0;
-        for (int idx = 0; idx < self.titlesArr.count; idx++) {
-            UIButton *btn = self.itemBtnArr[idx];
-            titleFont = btn.isSelected?_titleSelectFont:_titleFont;
-            CGFloat itemBtnWidth = [FSSegmentTitleView getWidthWithString:self.titlesArr[idx] font:titleFont] + self.itemMargin;
-            CGFloat itemBtnHeight = CGRectGetHeight(self.bounds);
-            btn.frame = CGRectMake(currentX, 0, itemBtnWidth, itemBtnHeight);
-            currentX += itemBtnWidth;
-        }
+        //        CGFloat currentX = 0;
+        //        for (int idx = 0; idx < self.titlesArr.count; idx++) {
+        //            UIButton *btn = self.itemBtnArr[idx];
+        //            titleFont = btn.isSelected?_titleSelectFont:_titleFont;
+        //            CGFloat itemBtnWidth = [FSSegmentTitleView getWidthWithString:self.titlesArr[idx] font:titleFont] + self.itemMargin;
+        //            CGFloat itemBtnHeight = CGRectGetHeight(self.bounds);
+        //            btn.frame = CGRectMake(currentX, 0, itemBtnWidth, itemBtnHeight);
+        //            currentX += itemBtnWidth;
+        //        }
         self.scrollView.contentSize = CGSizeMake(currentX, CGRectGetHeight(self.scrollView.bounds));
     }
     [self moveIndicatorView:YES];
