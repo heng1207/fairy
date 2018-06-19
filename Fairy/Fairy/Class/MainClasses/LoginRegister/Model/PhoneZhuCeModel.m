@@ -21,7 +21,6 @@
     [aCoder encodeObject:self.mobile forKey:@"mobile"];
     [aCoder encodeObject:self.pwd forKey:@"pwd"];
     [aCoder encodeObject:self.profile forKey:@"profile"];
-    [aCoder encodeObject:self.coupons forKey:@"coupons"];
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -32,7 +31,6 @@
         self.mobile =[aDecoder decodeObjectForKey:@"mobile"];
         self.pwd =[aDecoder decodeObjectForKey:@"pwd"];
         self.profile =[aDecoder decodeObjectForKey:@"profile"];
-        self.coupons =[aDecoder decodeObjectForKey:@"coupons"];
     }
     return self;
 }

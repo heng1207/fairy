@@ -22,8 +22,7 @@
 @property (nonatomic, strong) NSString *pwd;
 //头像
 @property (nonatomic,strong)  NSString *profile;
-//优惠券
-@property (nonatomic,strong)  NSString *coupons;
+
 
 
 @end

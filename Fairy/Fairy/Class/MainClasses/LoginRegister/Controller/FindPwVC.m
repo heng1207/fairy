@@ -8,6 +8,8 @@
 
 #import "FindPwVC.h"
 
+#import "PhoneZhuCeModel.h"
+#import "MainTabBarController.h"
 
 @interface FindPwVC ()
 @property(nonatomic,strong)UITextField *phoneTF;
@@ -203,7 +205,59 @@
     
 }
 
+-(void)sendCodeClick{
+    if ( ![Tool checkTel:self.phoneTF.text]){
+        return;
+    }
+    [NetworkManage  Get:GetLoginMessage(self.phoneTF.text)  andParams:nil success:^(id responseObject) {
+        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+        NSLog(@"%@",responseObject);
+        if ([dic[@"code"] integerValue] ==200 ) {
+            [self showHint:dic[@"message"]];
+        }else{
+            [self showHint:@"验证码获取失败"];
+        }
+    } failure:^(NSError *error) {
+        [self showHint:@"网络有问题"];
+        NSLog(@"%@",error);
+    }];
+}
+
 -(void)LoginClick{
+    if ( ![Tool checkTel:self.phoneTF.text]){
+        return;
+    }
+    //    if ( ![Tool checkPassWord:self.passwordTF.text]){
+    //        return;
+    //    }
+    if ([Tool isBlankString:self.codeTF.text]) {
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"验证码不能为空" message:@"请键入验证码" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    dict[@"loginName"] = self.phoneTF.text;
+    dict[@"phoneNumbe"] = self.phoneTF.text;
+    dict[@"checkCode"] = self.codeTF.text;
+    dict[@"password"] = self.passwordTF.text;
+    [NetworkManage Post:@"http://47.75.145.77:8080/interface/consumer/update" andParams:dict success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+        if ([dic[@"code"] integerValue] ==200 ) {
+            
+            PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:@""];
+            // 归档存储模型数据
+            [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            
+            MainTabBarController *homeVC=[MainTabBarController new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+        }else{
+            [self showHint:@"注册失败"];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
     
 }
 -(void)registerClick{
