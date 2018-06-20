@@ -11,6 +11,8 @@
 #import "IndexView.h"
 #import "BaseTypeView.h"
 
+#import "CurrencySelectVC.h"
+
 @interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
@@ -30,8 +32,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"一台";
     self.view.backgroundColor =[UIColor whiteColor];
+    [self initNavtionBar];
     
     [self creatPriceView];
     [self creatZheXianView];
@@ -44,6 +46,35 @@
     [self reloadData];
     // Do any additional setup after loading the view.
 }
+
+-(void)initNavtionBar{
+    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    ItemLab.text = @"行情详情";
+    ItemLab.textColor=[UIColor whiteColor];
+    ItemLab.font = [UIFont systemFontOfSize:18];
+    self.navigationItem.titleView = ItemLab;
+    
+    UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+    [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
+    
+    UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+    [finish setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
+    
+}
+
+-(void)backClick{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)finishClick{
+    CurrencySelectVC *vc=[CurrencySelectVC new];
+//        TrendVC *vc=[TrendVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 -(void)creatPriceView{
     IndexView *indexView =[[IndexView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 60)];

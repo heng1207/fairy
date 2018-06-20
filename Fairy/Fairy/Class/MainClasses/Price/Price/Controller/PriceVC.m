@@ -74,10 +74,6 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     PriceDetailedVC *vc=[PriceDetailedVC new];
-    
-//    CurrencySelectVC *vc=[CurrencySelectVC new];
-//    TrendVC *vc=[TrendVC new];
-    
     vc.hidesBottomBarWhenPushed =YES;
     [self.navigationController pushViewController:vc animated:YES];
 }

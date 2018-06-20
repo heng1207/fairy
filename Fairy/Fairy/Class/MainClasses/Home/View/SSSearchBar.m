@@ -36,7 +36,7 @@ static CGFloat const placeHolderFont = 15.0;
         //设置文本框背景
         [self setSearchFieldBackgroundImage:searchBarBg forState:UIControlStateNormal];
         //调整textFile的偏移量
-        self.searchTextPositionAdjustment = UIOffsetMake(25, 0);
+        self.searchTextPositionAdjustment = UIOffsetMake(20, 0);
     }
     return self;
 }

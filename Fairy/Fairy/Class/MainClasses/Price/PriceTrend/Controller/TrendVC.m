@@ -25,15 +25,31 @@
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.view.backgroundColor =[UIColor whiteColor];
-    self.title = @"全网 ETH";
-    
+  
+    [self initNavtionBar];
     [self addTabPageBar];
     [self addPagerController];
     [self reloadData];
     
     // Do any additional setup after loading the view.
+}
+
+
+-(void)initNavtionBar{
+    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    ItemLab.text = @"全网 ETH";
+    ItemLab.textColor=[UIColor whiteColor];
+    ItemLab.font = [UIFont systemFontOfSize:18];
+    self.navigationItem.titleView = ItemLab;
+    
+    UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+    [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
+}
+-(void)backClick{
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)addTabPageBar {

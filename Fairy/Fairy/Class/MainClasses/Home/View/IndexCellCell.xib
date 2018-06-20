@@ -28,7 +28,7 @@
                                     <constraint firstAttribute="height" constant="1" id="DvH-5R-Dme"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationIM" translatesAutoresizingMaskIntoConstraints="NO" id="gwX-wa-NKY">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nightMode" translatesAutoresizingMaskIntoConstraints="NO" id="gwX-wa-NKY">
                                 <rect key="frame" x="7" y="14" width="22" height="22"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="22" id="UJA-p0-OTc"/>
@@ -67,7 +67,7 @@
                                     <constraint firstAttribute="width" constant="1" id="Wf3-ud-qQh"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationIM" translatesAutoresizingMaskIntoConstraints="NO" id="bd8-qW-2ZQ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nightMode" translatesAutoresizingMaskIntoConstraints="NO" id="bd8-qW-2ZQ">
                                 <rect key="frame" x="35.5" y="12" width="35" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="4ag-Lc-3Y0"/>
@@ -130,7 +130,7 @@
                                     <constraint firstAttribute="width" constant="1" id="End-fa-FCC"/>
                                 </constraints>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationIM" translatesAutoresizingMaskIntoConstraints="NO" id="1W1-XA-6ge">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nightMode" translatesAutoresizingMaskIntoConstraints="NO" id="1W1-XA-6ge">
                                 <rect key="frame" x="36.5" y="12" width="35" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="6EJ-YA-Agf"/>
@@ -186,7 +186,7 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P4j-ct-alj">
                         <rect key="frame" x="213.5" y="50" width="106.5" height="107.5"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navigationIM" translatesAutoresizingMaskIntoConstraints="NO" id="FV1-Yf-Zot">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nightMode" translatesAutoresizingMaskIntoConstraints="NO" id="FV1-Yf-Zot">
                                 <rect key="frame" x="35.5" y="12" width="35" height="14"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="14" id="peq-De-1WX"/>
@@ -263,6 +263,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="navigationIM" width="720" height="99"/>
+        <image name="nightMode" width="19" height="20"/>
     </resources>
 </document>

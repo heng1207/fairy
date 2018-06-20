@@ -7,26 +7,28 @@
 //
 
 #import "CurrencySelectVC.h"
+#import "TrendVC.h"
 
 @interface CurrencySelectVC ()
 @property (nonatomic,strong) NSMutableArray *flagArray;
 @property(nonatomic,strong)NSMutableArray *btnArr;
 @end
 
-#define margin 6
+#define margin 7
 #define space 18
 
 @implementation CurrencySelectVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.title = @"币种选择";
-    self.view.backgroundColor =[UIColor darkGrayColor];
+
+    self.view.backgroundColor =[UIColor colorWithHex:@"#e9eff8"];
+    [self initNavtionBar];
     
     UILabel *hintLab =[UILabel new];
     hintLab.text= @"最多只能选择两个币种进行对比";
-    hintLab.textColor = [UIColor grayColor];
-    hintLab.font =[UIFont systemFontOfSize:18];
+    hintLab.textColor = [UIColor colorWithHex:@"#828587"];
+    hintLab.font =AdaptedFontSize(25);
     [self.view addSubview:hintLab];
     hintLab.frame = CGRectMake(AdaptedWidth(24), AdaptedWidth(24), UIScreenW-AdaptedWidth(48), AdaptedWidth(40));
     
@@ -34,6 +36,34 @@
     
     // Do any additional setup after loading the view.
 }
+
+-(void)initNavtionBar{
+    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    ItemLab.text = @"币种选择";
+    ItemLab.textColor=[UIColor whiteColor];
+    ItemLab.font = [UIFont systemFontOfSize:18];
+    self.navigationItem.titleView = ItemLab;
+    
+    UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+    [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
+    
+    UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+    [finish setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
+    
+}
+
+-(void)backClick{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+-(void)finishClick{
+    TrendVC *vc=[TrendVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
 
 -(void)creatBtnView{
     
@@ -61,9 +91,9 @@
             [btn setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [btn setBackgroundColor:[UIColor blueColor] forState:UIControlStateSelected];
         }else{
-            [btn setBackgroundColor:[UIColor grayColor] forState:UIControlStateNormal];
+            [btn setBackgroundColor:[UIColor colorWithHex:@"#828587"] forState:UIControlStateNormal];
             [btn setBackgroundColor:[UIColor blueColor] forState:UIControlStateSelected];
-            btn.layer.borderColor = [UIColor blackColor].CGColor;
+            btn.layer.borderColor = [UIColor grayColor].CGColor;
         }
         
         [backView addSubview:btn];
