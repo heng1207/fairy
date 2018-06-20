@@ -29,13 +29,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    
+      
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self creatSearchBar];
     [self setupSubViews];
-    
-    
-    
+
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
     
     // Do any additional setup after loading the view.
@@ -45,7 +44,10 @@
     SSSearchBar *searchBar = [[SSSearchBar alloc] initWithFrame:CGRectMake(0, 0, 260, 34)];
     searchBar.placeholder = @"搜索 平台/币种/资讯";
     UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 260, 34)];
-    view.backgroundColor =[UIColor clearColor];
+//    view.backgroundColor =[UIColor grayColor];
+//    view.alpha = 0.5;
+//    view.layer.cornerRadius = 17;
+//    view.layer.masksToBounds = YES;
     [view addSubview:searchBar];
     self.navigationItem.titleView = view;
 }
@@ -130,8 +132,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 50) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
-    self.titleView.backgroundColor = [UIColor lightGrayColor];
+    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+    self.titleView.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
+    self.titleView.titleSelectFont = AdaptedFontSize(33);
+    self.titleView.titleSelectColor = [UIColor colorWithHex:@"#0e5f9f"];
+    self.titleView.titleNormalColor = [UIColor colorWithHex:@"#000000"];
+    self.titleView.indicatorColor = [UIColor colorWithHex:@"#0e5f9f"];
+    self.titleView.indicatorExtension = 10;
     return self.titleView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -139,7 +146,7 @@
     if (section == 0) {
         return 0;
     }
-    return 50;
+    return 26;
 }
 
 #pragma mark FSSegmentTitleViewDelegate

@@ -47,7 +47,7 @@
 - (UITableView *)myTableView {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.backgroundColor =[UIColor grayColor];
+        _myTableView.backgroundColor =[UIColor colorWithHex:@"#eaeef9"];
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -76,7 +76,6 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     if ( (indexPath.row == 0 && indexPath.section==0) || (indexPath.row == 0 && indexPath.section==2) )
     {
         cell.lineView.hidden = NO;
@@ -91,32 +90,27 @@
         {
             cell.TitleLab.text = @"通用";
             cell.DetailsLab.text = @"";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
         }
         else if (indexPath.row == 1)
         {
             cell.TitleLab.text = @"隐私";
             cell.DetailsLab.text = @"";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
         }
     }
     else if (indexPath.section==1){
         cell.TitleLab.text = @"清理缓存";
         cell.DetailsLab.text = @"234.34 MB";
-        cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
     }
     else if (indexPath.section==2){
         if (indexPath.row ==0)
         {
             cell.TitleLab.text = @"关于我们";
             cell.DetailsLab.text = @"";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
         }
         else if (indexPath.row == 1)
         {
             cell.TitleLab.text = @"检查更新";
             cell.DetailsLab.text = @"";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
         }
     }
 
@@ -128,7 +122,7 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
-    view.backgroundColor =[UIColor grayColor];
+    view.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
     return view;
 }
 

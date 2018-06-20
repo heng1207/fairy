@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -19,20 +19,20 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="头像" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tIh-5P-EKU">
-                        <rect key="frame" x="8" y="25.5" width="41" height="24"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                        <nil key="textColor"/>
+                        <rect key="frame" x="12" y="25" width="43" height="25.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youJianTou" translatesAutoresizingMaskIntoConstraints="NO" id="2Ax-qx-Ssx">
-                        <rect key="frame" x="297" y="28" width="15" height="20"/>
+                        <rect key="frame" x="299" y="29.5" width="9" height="17"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="20" id="HFe-fB-8LS"/>
-                            <constraint firstAttribute="width" constant="15" id="OD3-r9-61e"/>
+                            <constraint firstAttribute="height" constant="17" id="HFe-fB-8LS"/>
+                            <constraint firstAttribute="width" constant="9" id="OD3-r9-61e"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo" translatesAutoresizingMaskIntoConstraints="NO" id="2vO-yx-HER">
-                        <rect key="frame" x="242" y="13.5" width="50" height="50"/>
+                        <rect key="frame" x="244" y="13.5" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="50" id="J0V-hF-g7u"/>
                             <constraint firstAttribute="width" constant="50" id="K38-IE-5fc"/>
@@ -40,6 +40,7 @@
                     </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sXL-2t-lNM">
                         <rect key="frame" x="0.0" y="74" width="320" height="1"/>
+                        <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="RnQ-cl-f8e"/>
                         </constraints>
@@ -48,19 +49,19 @@
                 <constraints>
                     <constraint firstItem="2Ax-qx-Ssx" firstAttribute="leading" secondItem="2vO-yx-HER" secondAttribute="trailing" constant="5" id="6wA-DR-KXk"/>
                     <constraint firstItem="2Ax-qx-Ssx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="7jb-XN-WvT"/>
-                    <constraint firstItem="tIh-5P-EKU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GUX-Yu-U3b"/>
+                    <constraint firstItem="tIh-5P-EKU" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="GUX-Yu-U3b"/>
                     <constraint firstItem="2vO-yx-HER" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="WbV-ao-VsE"/>
                     <constraint firstItem="sXL-2t-lNM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="fyl-QT-L0M"/>
                     <constraint firstItem="tIh-5P-EKU" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="j06-za-rdI"/>
                     <constraint firstAttribute="trailing" secondItem="sXL-2t-lNM" secondAttribute="trailing" id="oi2-nW-fw7"/>
                     <constraint firstAttribute="bottom" secondItem="sXL-2t-lNM" secondAttribute="bottom" id="okt-e6-WOt"/>
-                    <constraint firstAttribute="trailing" secondItem="2Ax-qx-Ssx" secondAttribute="trailing" constant="8" id="sV2-Cw-aXo"/>
+                    <constraint firstAttribute="trailing" secondItem="2Ax-qx-Ssx" secondAttribute="trailing" constant="12" id="sV2-Cw-aXo"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="lineView" destination="sXL-2t-lNM" id="Vfm-Rw-DHs"/>
                 <outlet property="photoIM" destination="2vO-yx-HER" id="U4H-uK-68A"/>
             </connections>
+            <point key="canvasLocation" x="-92" y="50"/>
         </tableViewCell>
     </objects>
     <resources>

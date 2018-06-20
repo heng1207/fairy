@@ -38,12 +38,7 @@
 
 -(void)creatSubViews{
     
-    UIImageView *backIM=[UIImageView new];
-    backIM.frame = self.view.frame;
-    [self.view addSubview:backIM];
-    backIM.image =[UIImage imageNamed:@"share_background"];
-    
-    
+
     UIView *backView =[[UIView alloc]initWithFrame:CGRectMake(0, UIScreenH-AdaptedHeight(190)- AdaptedHeight(88)-LL_TabbarSafeBottomMargin, UIScreenW, AdaptedHeight(190))];
     backView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:backView];
@@ -83,6 +78,12 @@
     [cancleBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [cancleBtn addTarget:self action:@selector(cancleClick) forControlEvents:UIControlEventTouchUpInside];
     [cancleBtn borderForColor:[UIColor colorWithHex:@"#cccccc"] borderWidth:1 borderType:UIBorderSideTypeTop];
+    
+    
+    UIImageView *backIM=[UIImageView new];
+    [self.view addSubview:backIM];
+    backIM.image =[UIImage imageNamed:@"share_background"];
+    backIM.frame =CGRectMake(0, 0, UIScreenW, UIScreenH-AdaptedHeight(190)- AdaptedHeight(88)-LL_TabbarSafeBottomMargin);
     
 }
 -(void)cancleClick{

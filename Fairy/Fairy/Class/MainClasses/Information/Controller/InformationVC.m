@@ -19,7 +19,7 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    _tabBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 44);
+    _tabBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30);
     _pagerController.view.frame = CGRectMake(0, CGRectGetMaxY(_tabBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- CGRectGetMaxY(_tabBar.frame)-LL_StatusBarHeight);
 }
 - (void)viewDidLoad {
@@ -43,18 +43,18 @@
 
 - (void)addTabPageBar {
     TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]init];
-    tabBar.backgroundColor = [UIColor grayColor];
+    tabBar.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
     tabBar.layout.barStyle = TYPagerBarStyleProgressElasticView;
     tabBar.layout.progressWidth = 50;
     tabBar.layout.progressHeight = 2;
-    tabBar.layout.progressColor = [UIColor colorWithHex:@"#0080d9"];
-    tabBar.layout.normalTextColor = [UIColor blackColor];
-    tabBar.layout.selectedTextColor = [UIColor blueColor];
+    tabBar.layout.progressColor = [UIColor colorWithHex:@"#1161a0"];
+    tabBar.layout.normalTextColor = [UIColor colorWithHex:@"#848484"];
+    tabBar.layout.selectedTextColor = [UIColor colorWithHex:@"#1161a0"];
     tabBar.layout.cellSpacing = 0;
     tabBar.layout.cellEdging = 0;
     tabBar.layout.cellWidth = SCREEN_WIDTH/2;
-    tabBar.layout.normalTextFont = [UIFont boldSystemFontOfSize:13];
-    tabBar.layout.selectedTextFont = [UIFont boldSystemFontOfSize:14];
+    tabBar.layout.normalTextFont = AdaptedFontSize(29);
+    tabBar.layout.selectedTextFont = AdaptedFontSize(29);
     tabBar.dataSource = self;
     tabBar.delegate = self;
     [tabBar registerClass:[TYTabPagerBarCell class] forCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier]];

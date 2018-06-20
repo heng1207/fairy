@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor =[UIColor grayColor];
+    self.view.backgroundColor =[UIColor whiteColor];
     [self initNavtionBar];
     [self.view addSubview:self.myTableView];
     
@@ -46,7 +46,7 @@
 - (UITableView *)myTableView {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.backgroundColor =[UIColor grayColor];
+        _myTableView.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -80,12 +80,12 @@
             UILabel  *lable = [[UILabel alloc]init];
             lable.text = @"红涨绿跌";
             lable.backgroundColor = [UIColor whiteColor];
-            lable.font = [UIFont systemFontOfSize:20];
-            lable.textColor = [UIColor blackColor];
+            lable.font = [UIFont systemFontOfSize:21];
+            lable.textColor = [UIColor colorWithHex:@"#000000"];
             lable.textAlignment = NSTextAlignmentLeft;
             [cell.contentView addSubview:lable];
             [lable mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(8);
+                make.left.mas_equalTo(12);
                 make.width.mas_equalTo(120);
                 make.height.mas_equalTo(22);
                 make.centerY.mas_equalTo(cell.contentView);
@@ -99,7 +99,7 @@
             [pricesBtn addTarget:self action:@selector(pricesBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:pricesBtn];
             [pricesBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(-10);
+                make.right.mas_equalTo(-12);
                 make.width.mas_equalTo(40);
                 make.height.mas_equalTo(24);
                 make.centerY.mas_equalTo(cell.contentView);
@@ -120,7 +120,6 @@
     else {
         MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
         if (indexPath.row == 2)
         {
             cell.lineView.hidden = YES;
@@ -132,7 +131,7 @@
         //箭头
         cell.JianTouIM.image = [UIImage imageNamed:@"prices_down"];
         [cell.JianTouIM mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.right.mas_equalTo(-8);
+            make.right.mas_equalTo(-12);
             make.width.mas_equalTo(8);
             make.height.mas_equalTo(5);
             make.centerY.mas_equalTo(cell.contentView);
@@ -154,6 +153,16 @@
         return cell;
     }
 }
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
+    view.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
+    return view;
+}
+
+
 
 -(void)pricesBtnClick:(UIButton*)btn{
     btn.selected = !btn.selected;

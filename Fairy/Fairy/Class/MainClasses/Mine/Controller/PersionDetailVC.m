@@ -47,7 +47,7 @@
 - (UITableView *)myTableView {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.backgroundColor =[UIColor grayColor];
+        _myTableView.backgroundColor =[UIColor colorWithHex:@"#e8f0f3"];
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -84,7 +84,6 @@
         cell.photoIM.layer.cornerRadius =  cell.photoIM.width/2;
         cell.photoIM.layer.masksToBounds =YES;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
         return cell;
     }
 //    else if (indexPath.row==1){
@@ -105,7 +104,6 @@
     else if (indexPath.row==1||indexPath.row==2||indexPath.row==3||indexPath.row==4||indexPath.row==5){
         MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
         if (indexPath.row == 5)
         {
             cell.lineView.hidden = YES;
@@ -119,35 +117,30 @@
         {
             cell.TitleLab.text = @"FairyCoinID";
             cell.DetailsLab.text = @"273970";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             cell.JianTouIM.hidden = YES;
         }
         else if (indexPath.row == 2)
         {
             cell.TitleLab.text = @"登陆账号";
             cell.DetailsLab.text = @"未设置";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             cell.JianTouIM.hidden = NO;
         }
         else if (indexPath.row == 3)
         {
             cell.TitleLab.text = @"昵称";
             cell.DetailsLab.text = @"ID123456";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             cell.JianTouIM.hidden = NO;
         }
         else if (indexPath.row == 4)
         {
             cell.TitleLab.text = @"个人简介";
             cell.DetailsLab.text = @"未设置";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             cell.JianTouIM.hidden = NO;
         }
         else if (indexPath.row == 5)
         {
             cell.TitleLab.text = @"手机号码";
             cell.DetailsLab.text = @"未设置";
-            cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             cell.JianTouIM.hidden = NO;
         }
   

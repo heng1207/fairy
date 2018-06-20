@@ -48,7 +48,7 @@
 - (UITableView *)myTableView {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.backgroundColor =[UIColor grayColor];
+        _myTableView.backgroundColor =[UIColor colorWithHex:@"#eaeef9"];
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -74,7 +74,6 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     SettingCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"SettingCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     if (indexPath.row == 2)
     {
         cell.lineView.hidden = YES;
@@ -88,24 +87,29 @@
         cell.logoIM.image = [UIImage imageNamed:@"ReDian"];
         cell.nameLab.text = @"热点快讯";
         cell.detailLab.text = @"未开通";
-        cell.detailLab.textColor =[UIColor colorWithHex:@"#cccccc"];
     }
     else if (indexPath.row == 1)
     {
         cell.logoIM.image = [UIImage imageNamed:@"JiLu"];
         cell.nameLab.text = @"买卖记录";
         cell.detailLab.text = @"长期有效";
-        cell.detailLab.textColor =[UIColor colorWithHex:@"#cccccc"];
     }
     else if (indexPath.row == 2)
     {
         cell.logoIM.image = [UIImage imageNamed:@"kXian"];
         cell.nameLab.text = @"组合K线";
         cell.detailLab.text = @"长期有效";
-        cell.detailLab.textColor =[UIColor colorWithHex:@"#cccccc"];
     }
         
         return cell;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    return 10;
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
+    view.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
+    return view;
 }
 
 

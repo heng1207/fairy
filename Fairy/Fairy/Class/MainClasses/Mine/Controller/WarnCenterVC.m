@@ -48,7 +48,7 @@
 - (UITableView *)myTableView {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStylePlain];
-        _myTableView.backgroundColor =[UIColor grayColor];
+        _myTableView.backgroundColor =[UIColor colorWithHex:@"#eaeef9"];
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -82,12 +82,12 @@
             UILabel  *lable = [[UILabel alloc]init];
             lable.text = @"红涨绿跌";
             lable.backgroundColor = [UIColor whiteColor];
-            lable.font = [UIFont systemFontOfSize:20];
-            lable.textColor = [UIColor blackColor];
+            lable.font = [UIFont systemFontOfSize:21];
+            lable.textColor = [UIColor colorWithHex:@"#000000"];
             lable.textAlignment = NSTextAlignmentLeft;
             [cell.contentView addSubview:lable];
             [lable mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(8);
+                make.left.mas_equalTo(12);
                 make.width.mas_equalTo(120);
                 make.height.mas_equalTo(22);
                 make.centerY.mas_equalTo(cell.contentView);
@@ -101,7 +101,7 @@
             [nightModelBtn setImage:[UIImage imageNamed:@"nightMode_open"] forState:UIControlStateSelected];
             [nightModelBtn addTarget:self action:@selector(nightModeClick:) forControlEvents:UIControlEventTouchUpInside];
             [nightModelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(-10);
+                make.right.mas_equalTo(-12);
                 make.width.mas_equalTo(40);
                 make.height.mas_equalTo(24);
                 make.centerY.mas_equalTo(cell.contentView);
@@ -121,7 +121,6 @@
     else {
         MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
         if (indexPath.row == 2)
         {
             cell.lineView.hidden = YES;
@@ -136,13 +135,11 @@
             {
                 cell.TitleLab.text = @"剧烈波动预警";
                 cell.DetailsLab.text = @"开";
-                cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             }
             else if (indexPath.row == 2)
             {
                 cell.TitleLab.text = @"预警模式";
                 cell.DetailsLab.text = @"铃声+震动";
-                cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             }
         }
         
@@ -151,19 +148,16 @@
             {
                 cell.TitleLab.text = @"未触发预警";
                 cell.DetailsLab.text = @"0条";
-                cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             }
             else if (indexPath.row == 1)
             {
                 cell.TitleLab.text = @"历史预警";
                 cell.DetailsLab.text = @"0条";
-                cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             }
             else if (indexPath.row == 2)
             {
                 cell.TitleLab.text = @"剧烈波动预警记录";
                 cell.DetailsLab.text = @"";
-                cell.DetailsLab.textColor =[UIColor colorWithHex:@"#cccccc"];
             }
             
         }
@@ -177,7 +171,7 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
-    view.backgroundColor =[UIColor grayColor];
+    view.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
     return view;
 }
 

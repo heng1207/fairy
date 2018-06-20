@@ -49,7 +49,7 @@
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         [_myTableView registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:@"PriceCell"];
-//        self.automaticallyAdjustsScrollViewInsets = NO;//解决tableview头部预留64像素的办法
+//        self.automaticallyAdjustsScrollViewInsets = YES;//解决tableview头部预留64像素的办法
     }
     return _myTableView;
 }

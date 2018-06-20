@@ -40,10 +40,11 @@
 }
 - (UITableView *)myTableView {
     if (!_myTableView) {
-        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, SCREEN_HEIGHT-LL_TabbarHeight + 20) style:UITableViewStylePlain];
+        _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, -LL_StatusBarHeight, SCREEN_WIDTH, SCREEN_HEIGHT-LL_TabbarHeight + LL_StatusBarHeight) style:UITableViewStylePlain];
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+        _myTableView.backgroundColor =[UIColor colorWithHex:@"#f1f2f4"];
         [_myTableView registerNib:[UINib nibWithNibName:@"HeadCell" bundle:nil] forCellReuseIdentifier:@"HeadCell"];
         [_myTableView registerNib:[UINib nibWithNibName:@"SettingCell" bundle:nil] forCellReuseIdentifier:@"SettingCell"];
         //        self.automaticallyAdjustsScrollViewInsets = NO;//解决tableview头部预留64像素的办法
@@ -65,7 +66,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        return 163;
+        return 165+LL_StatusBarHeight;
     }
     return 50;
 }
@@ -86,7 +87,7 @@
             [cell.contentView addSubview:logoIM];
             logoIM.image=[UIImage imageNamed:@"nightMode"];
             [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(8);
+                make.left.mas_equalTo(12);
                 make.width.mas_equalTo(25);
                 make.height.mas_equalTo(25);
                 make.centerY.mas_equalTo(cell.contentView);
@@ -100,7 +101,7 @@
             titleLab.textColor = [UIColor blackColor];
             titleLab.textAlignment = NSTextAlignmentLeft;
             [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(logoIM.mas_right).offset(6);
+                make.left.mas_equalTo(logoIM.mas_right).offset(12);
                 make.width.mas_equalTo(120);
                 make.height.mas_equalTo(22);
                 make.centerY.mas_equalTo(cell.contentView);
@@ -114,8 +115,8 @@
             [nightModelBtn setImage:[UIImage imageNamed:@"nightMode_open"] forState:UIControlStateSelected];
             [nightModelBtn addTarget:self action:@selector(nightModeClick:) forControlEvents:UIControlEventTouchUpInside];
             [nightModelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(-10);
-                make.width.mas_equalTo(40);
+                make.right.mas_equalTo(-15);
+                make.width.mas_equalTo(50);
                 make.height.mas_equalTo(24);
                 make.centerY.mas_equalTo(cell.contentView);
             }];
@@ -228,7 +229,9 @@
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 40)];
     view.backgroundColor =[UIColor whiteColor];
     
-    UILabel *lab=[[UILabel alloc]initWithFrame:CGRectMake(8, 0, 100, 40)];
+    UILabel *lab=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, 100, 40)];
+    lab.textColor =[UIColor colorWithHex:@"#000000"];
+    lab.font =[UIFont systemFontOfSize:22];
     if (section==1) {
         lab.text=@"个人设置";
     }else if (section==2){
@@ -245,7 +248,7 @@
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
-    view.backgroundColor =[UIColor grayColor];
+    view.backgroundColor =[UIColor colorWithHex:@"#f2f2f2"];
     return view;
 }
 
