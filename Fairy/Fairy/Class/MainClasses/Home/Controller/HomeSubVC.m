@@ -27,8 +27,12 @@
     [_tableView registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:@"PriceCell"];
     [self.view addSubview:_tableView];
     
-    
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"%@",self.headType);
 }
 
 - (void)insertRowAtTop

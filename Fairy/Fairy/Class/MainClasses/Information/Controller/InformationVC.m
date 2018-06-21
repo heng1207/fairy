@@ -103,6 +103,7 @@
 }
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
     InformationSubVC *vc = [[InformationSubVC alloc]init];
+    vc.headType = self.flagArray[index];
     return vc;
 }
 
@@ -119,10 +120,10 @@
     _tabBar.layout.cellWidth = SCREEN_WIDTH/5;
     [_tabBar reloadData];
     [_pagerController reloadData];
-    if (self.flagArray.count > 1) {
-        _currentIndex = 1;
-        [_pagerController scrollToControllerAtIndex:1 animate:NO];
-    }
+//    if (self.flagArray.count > 1) {
+//        _currentIndex = 1;
+//        [_pagerController scrollToControllerAtIndex:1 animate:NO];
+//    }
 }
 
 - (NSMutableArray *)flagArray

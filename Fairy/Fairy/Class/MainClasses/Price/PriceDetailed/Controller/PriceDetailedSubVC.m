@@ -27,11 +27,30 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     
-//    [self creatTextView];
-
+    //@"币地址检测",@"交易量预警",@"换手量预警",@"分析",@"币地址检测",@"交易量预警",@"换手量预警",@"分析",
+    if ([self.headType isEqualToString:@"币地址检测"]) {
+        
+    }
+    else if ([self.headType isEqualToString:@"交易量预警"]){
+        
+    }
+    else if ([self.headType isEqualToString:@"换手量预警"]){
+        
+    }
+    else if ([self.headType isEqualToString:@"分析"]){
+        
+    }
+    else if ([self.headType isEqualToString:@"币地址检测"]){
+        
+    }
+    
+    
     // Do any additional setup after loading the view.
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"%@",self.headType);
+}
 -(void)creatTextView{
     UILabel *textLab =[UILabel new];
     textLab.text = @"打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！";

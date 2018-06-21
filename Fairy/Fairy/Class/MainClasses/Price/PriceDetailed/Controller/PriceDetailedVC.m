@@ -16,7 +16,10 @@
 @interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
-@property(nonatomic,strong)UIView *zheXianView;
+@property (nonatomic, strong)LineChartView *lineChartView;
+@property (nonatomic, strong) NSArray *turnovers;
+@property (nonatomic, strong) NSArray *Yturnovers;
+
 @property(nonatomic,strong)BaseTypeView *baseTypeView;
 
 @property (nonatomic,strong) NSMutableArray *flagArray;
@@ -36,7 +39,7 @@
     [self initNavtionBar];
     
     [self creatPriceView];
-    [self creatZheXianView];
+    [self creatChartView];
     [self creatBaseTypeView];
 
     [self addTabPageBar];
@@ -71,7 +74,6 @@
 }
 -(void)finishClick{
     CurrencySelectVC *vc=[CurrencySelectVC new];
-//        TrendVC *vc=[TrendVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -82,15 +84,139 @@
     indexView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:indexView];
 }
--(void)creatZheXianView{
-    UIView *zheXianView =[[UIView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180)];
-    self.zheXianView = zheXianView;
-    zheXianView.backgroundColor =[UIColor grayColor];
-    [self.view addSubview:zheXianView];
+-(void)creatChartView{
+
+    LineChartView *lineChartView = [[LineChartView alloc] initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW-6, 180)];
+    [self.view addSubview:lineChartView];
+    self.lineChartView = lineChartView;
+    
+    lineChartView.doubleTapToZoomEnabled = NO;//禁止双击缩放 有需要可以设置为YES
+    lineChartView.gridBackgroundColor = [UIColor blueColor];//表框以及表内线条的颜色以及隐藏设置 根据自己需要调整
+    lineChartView.borderColor = [UIColor grayColor];
+    lineChartView.drawGridBackgroundEnabled = NO;
+    lineChartView.drawBordersEnabled = NO;
+    //    lineChartView.descriptionText = @"XXX";//该表格的描述名称
+    //    lineChartView.descriptionTextColor = [UIColor whiteColor];//描述字体颜色
+    
+    lineChartView.legend.enabled = YES;//是否显示折线的名称以及对应颜色 多条折线时必须开启 否则无法分辨
+    lineChartView.legend.textColor = [UIColor redColor];//折线名称字体颜色
+    
+    //设置动画时间
+    [lineChartView animateWithXAxisDuration:1];
+    
+    //    设置纵轴坐标显示在左边而非右边
+    self.lineChartView.leftAxis.enabled = NO;//不绘制左边轴
+    
+    ChartYAxis *rightAxis = self.lineChartView.rightAxis;//获取左边Y轴
+    rightAxis.drawGridLinesEnabled = NO;//不绘制网格线
+    rightAxis.labelTextColor = [UIColor blueColor];
+    rightAxis.axisLineColor = [UIColor whiteColor];//Y轴颜色
+    
+    //设置横轴坐标显示在下方 默认显示是在顶部
+    ChartXAxis *xAxis = lineChartView.xAxis;
+    xAxis.labelPosition = XAxisLabelPositionBottom;
+    xAxis.labelTextColor = [UIColor blueColor];
+    xAxis.labelCount = 3;
+    xAxis.drawGridLinesEnabled = NO;//不绘制网格线
+    
+    //用于存放多个折线数据的数组
+    NSMutableArray *sets = [NSMutableArray array];
+    
+    //turnovers是用于存放模型的数组
+    //模型数组 这里是使用的随机生成的模型数据
+    self.turnovers = @[
+                       @{
+                           @"name" : @"10",
+                           @"icon" : @"15"
+                           },
+                       @{
+                           @"name" : @"20",
+                           @"icon" : @"30"
+                           },
+                       @{
+                           @"name" : @"30",
+                           @"icon" : @"15"
+                           },
+                       @{
+                           @"name" : @"40",
+                           @"icon" : @"30"
+                           },
+                       @{
+                           @"name" : @"50",
+                           @"icon" : @"15"
+                           }
+                       ];
+    self.turnovers = @[@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12",@"13",];
+    self.Yturnovers = @[@"15",@"20",@"15",@"40",@"60",@"80",@"15",@"40",@"60",@"80",@"15",@"33",@"70",];
+    
+    //横轴数据
+    NSMutableArray *xValues = [NSMutableArray array];
+    for (int i = 0; i < self.turnovers.count; i ++) {
+        
+        //取出模型数据
+        //        ChartsModel *model = self.turnovers[i];
+        //        [xValues addObject:model.enterDate];
+        NSDictionary *dict= self.turnovers[i];
+        [xValues addObject:self.turnovers[i]];
+    }
+    
+    //设置横轴数据给chartview
+    self.lineChartView.xAxis.valueFormatter = [[ChartIndexAxisValueFormatter alloc] initWithValues:xValues];
+    
+    
+    
+    //纵轴数据
+    NSMutableArray *yValues1 = [NSMutableArray array];
+    for (int i = 0; i < self.Yturnovers.count; i ++) {
+        
+        //        ChartsModel *model = self.turnovers[i];
+        //        NSDictionary *dict= self.Yturnovers[i];
+        double y = [self.Yturnovers[i] doubleValue];
+        ChartDataEntry *entry = [[ChartDataEntry alloc]initWithX:i y:y];
+        [yValues1 addObject:entry];
+        
+        //        [yValues1 addObject:dict[@"icon"]];
+    }
+    
+    
+    //创建LineChartDataSet对象
+    LineChartDataSet *set1 = [[LineChartDataSet alloc] initWithValues:yValues1 label:@"成交额"];
+    
+    set1.circleRadius = 1.0;
+    set1.circleHoleRadius = 0.5;
+    [set1 setColor:[UIColor redColor]];
+    set1.fillColor = UIColor.blueColor;
+    set1.fillAlpha = 1.f;
+    set1.mode = LineChartModeCubicBezier;
+    set1.drawValuesEnabled = NO;
+    set1.fillAlpha = 1.f;
+    set1.drawFilledEnabled =YES;
+    //sets内存放所有折线的数据 多个折线创建多个LineChartDataSet对象即可
+    [sets addObject:set1];
+    
+    LineChartData *data = [[LineChartData alloc] initWithDataSets:sets];
+    
+    self.lineChartView.data = data;
+    
+    
+    
+    UILabel *titleLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 200, 10)];
+    titleLab.text =@"数据来源于www.baidu.com";
+    titleLab.textColor =[UIColor redColor];
+    titleLab.font =[UIFont systemFontOfSize:14];
+    [self.lineChartView addSubview:titleLab];
+    
+    
+    UIButton *compareBtn = [[UIButton alloc]initWithFrame:CGRectMake(self.lineChartView.frame.size.width-30, 0, 30, 20)];
+    [compareBtn setTitle:@"对比" forState:UIControlStateNormal];
+    [compareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    compareBtn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [self.lineChartView addSubview:compareBtn];
+
 }
 
 -(void)creatBaseTypeView{
-    BaseTypeView *baseTypeView =[[BaseTypeView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.zheXianView.frame), UIScreenW, 35)];
+    BaseTypeView *baseTypeView =[[BaseTypeView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChartView.frame), UIScreenW, 35)];
     self.baseTypeView = baseTypeView;
     baseTypeView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:baseTypeView];
@@ -175,10 +301,6 @@
     _tabBar.layout.cellWidth = SCREEN_WIDTH/3;
     [_tabBar reloadData];
     [_pagerController reloadData];
-    if (self.flagArray.count > 1) {
-        _currentIndex = 1;
-        [_pagerController scrollToControllerAtIndex:1 animate:NO];
-    }
 }
 
 - (NSMutableArray *)flagArray

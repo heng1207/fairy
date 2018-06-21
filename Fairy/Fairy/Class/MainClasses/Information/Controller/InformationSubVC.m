@@ -21,9 +21,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    
     [self.view addSubview:self.myTableView];
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    NSLog(@"%@",self.headType);
 }
 - (UITableView *)myTableView {
     if (!_myTableView) {

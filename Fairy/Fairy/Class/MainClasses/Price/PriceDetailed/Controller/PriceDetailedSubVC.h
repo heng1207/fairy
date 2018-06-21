@@ -10,6 +10,8 @@
 
 @interface PriceDetailedSubVC : UIViewController
 
+@property(nonatomic,strong) NSString *headType;
+
 - (void)loadMainTableData:(NSString *)type isPull:(BOOL)isPull;
 
 @end

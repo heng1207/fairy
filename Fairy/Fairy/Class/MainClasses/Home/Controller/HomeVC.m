@@ -108,7 +108,7 @@
             [titles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 HomeSubVC*vc = [[HomeSubVC alloc]init];
                 vc.title = obj;
-//                vc.str = obj;
+                vc.headType = obj;
                 [contentVCs addObject:vc];
             }];
             

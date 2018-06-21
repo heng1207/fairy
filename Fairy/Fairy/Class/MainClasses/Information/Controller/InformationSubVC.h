@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface InformationSubVC : UIViewController
+@property(nonatomic,strong) NSString *headType;
 
 @end
