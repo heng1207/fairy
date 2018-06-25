@@ -62,7 +62,8 @@
     [btnReply setTitle:@"分析" forState:UIControlStateNormal];
     [btnReply setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btnReply.titleLabel.font =[UIFont fontWithName:CHINESE_FONT_NAME size:13];
-    [btnReply setImage:[UIImage imageNamed:@"pengyouquan_xihuan"] forState:UIControlStateNormal];
+    [btnReply setImage:[UIImage imageNamed:@"icon_fenxihui_tab"] forState:UIControlStateNormal];
+    [btnReply setImage:[UIImage imageNamed:@"icon_fenxi_tab"] forState:UIControlStateSelected];
     btnReply.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [btnReply addTarget:self action:@selector(btnReplyClick:) forControlEvents:UIControlEventTouchUpInside];
     btnReply.frame = CGRectMake(0, fltBtnY, fltBtnW, fltBtnH);
@@ -75,7 +76,8 @@
      [btnDianLiang setTitle:@"预测" forState:UIControlStateNormal];
     [btnDianLiang setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btnDianLiang.titleLabel.font = [UIFont fontWithName:CHINESE_FONT_NAME size:13];
-    [btnDianLiang setImage:[UIImage imageNamed:@"pengyouquan_xihuan"] forState:UIControlStateNormal];
+    [btnDianLiang setImage:[UIImage imageNamed:@"icon_yucehui_tab"] forState:UIControlStateNormal];
+    [btnDianLiang setImage:[UIImage imageNamed:@"icon_yuce_tab"] forState:UIControlStateSelected];
     btnDianLiang.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [btnDianLiang addTarget:self action:@selector(btnDianLiangClick:) forControlEvents:UIControlEventTouchUpInside];
     btnDianLiang.frame = CGRectMake(fltBtnW, fltBtnY, fltBtnW, fltBtnH);
@@ -88,7 +90,8 @@
     [btnZhuanFa setTitle:@"预警" forState:UIControlStateNormal];
     [btnZhuanFa setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     btnZhuanFa.titleLabel.font =[UIFont fontWithName:CHINESE_FONT_NAME size:13];
-    [btnZhuanFa setImage:[UIImage imageNamed:@"pengyouquan_xihuan"] forState:UIControlStateNormal];
+    [btnZhuanFa setImage:[UIImage imageNamed:@"icon_yujinghui_tab"] forState:UIControlStateNormal];
+    [btnZhuanFa setImage:[UIImage imageNamed:@"icon_yujing_tab"] forState:UIControlStateSelected];
     btnZhuanFa.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [btnZhuanFa addTarget:self action:@selector(btnZhuanFaClick:) forControlEvents:UIControlEventTouchUpInside];
     btnZhuanFa.frame = CGRectMake(fltBtnW * 2, fltBtnY, fltBtnW, fltBtnH);

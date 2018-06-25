@@ -97,7 +97,7 @@
 
 
 /**
- *  Y轴值
+ *  值
  */
 -(NSMutableArray *)targets{
     if (!_targets) {
