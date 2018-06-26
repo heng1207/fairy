@@ -97,8 +97,8 @@
             [cell.contentView addSubview:titleLab];
             titleLab.text = @"夜间模式";
             titleLab.backgroundColor = [UIColor whiteColor];
-            titleLab.font = [UIFont systemFontOfSize:20];
-            titleLab.textColor = [UIColor blackColor];
+            titleLab.font = AdaptedFontSize(30);
+            titleLab.textColor = [UIColor colorWithHex:@"#000000"];
             titleLab.textAlignment = NSTextAlignmentLeft;
             [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(logoIM.mas_right).offset(12);
@@ -231,7 +231,7 @@
     
     UILabel *lab=[[UILabel alloc]initWithFrame:CGRectMake(12, 0, 100, 40)];
     lab.textColor =[UIColor colorWithHex:@"#000000"];
-    lab.font =[UIFont systemFontOfSize:22];
+    lab.font =AdaptedFontSize(30);
     if (section==1) {
         lab.text=@"个人设置";
     }else if (section==2){

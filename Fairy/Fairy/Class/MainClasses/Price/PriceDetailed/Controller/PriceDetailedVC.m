@@ -13,7 +13,7 @@
 
 #import "CurrencySelectVC.h"
 
-@interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
+@interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate,BaseTypeViewDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
 @property (nonatomic, strong)LineChartView *lineChartView;
@@ -29,13 +29,14 @@
 - (void)viewWillLayoutSubviews
 {
     [super viewWillLayoutSubviews];
-    _tabBar.frame = CGRectMake(0, CGRectGetMaxY(self.baseTypeView.frame), CGRectGetWidth(self.view.frame), 36);
+    _tabBar.frame = CGRectMake(0, CGRectGetMaxY(self.baseTypeView.frame), CGRectGetWidth(self.view.frame), 30);
     _pagerController.view.frame = CGRectMake(0, CGRectGetMaxY(_tabBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- CGRectGetMaxY(_tabBar.frame));
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
+    
     [self initNavtionBar];
     
     [self creatPriceView];
@@ -44,9 +45,10 @@
 
     [self addTabPageBar];
     [self addPagerController];
-
-
+    
+    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
     [self reloadData];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -83,6 +85,7 @@
     self.indexView = indexView;
     indexView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:indexView];
+    
 }
 -(void)creatChartView{
 
@@ -218,24 +221,24 @@
 -(void)creatBaseTypeView{
     BaseTypeView *baseTypeView =[[BaseTypeView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChartView.frame), UIScreenW, 35)];
     self.baseTypeView = baseTypeView;
-    baseTypeView.backgroundColor =[UIColor whiteColor];
+    baseTypeView.delegate = self;
     [self.view addSubview:baseTypeView];
 }
 
 - (void)addTabPageBar {
     TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]init];
-    tabBar.backgroundColor =[UIColor whiteColor];
+    tabBar.backgroundColor = [UIColor whiteColor];
     tabBar.layout.barStyle = TYPagerBarStyleProgressElasticView;
     tabBar.layout.progressWidth = 80;
     tabBar.layout.progressHeight = 2;
-    tabBar.layout.progressColor = [UIColor blueColor];
-    tabBar.layout.normalTextColor = [UIColor blackColor];
-    tabBar.layout.selectedTextColor = [UIColor blueColor];
+    tabBar.layout.progressColor = [UIColor colorWithHex:@"#1161a0"];
+    tabBar.layout.normalTextColor = [UIColor colorWithHex:@"#848484"];
+    tabBar.layout.selectedTextColor = [UIColor colorWithHex:@"#1161a0"];
     tabBar.layout.cellSpacing = 0;
     tabBar.layout.cellEdging = 0;
     tabBar.layout.cellWidth = SCREEN_WIDTH/2;
-    tabBar.layout.normalTextFont = [UIFont boldSystemFontOfSize:15];
-    tabBar.layout.selectedTextFont = [UIFont boldSystemFontOfSize:16];
+    tabBar.layout.normalTextFont = AdaptedFontSize(26);
+    tabBar.layout.selectedTextFont = AdaptedFontSize(26);
     tabBar.dataSource = self;
     tabBar.delegate = self;
     [tabBar registerClass:[TYTabPagerBarCell class] forCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier]];
@@ -298,18 +301,27 @@
 }
 
 - (void)reloadData {
-    _tabBar.layout.cellWidth = SCREEN_WIDTH/3;
+    _tabBar.layout.cellWidth = SCREEN_WIDTH/4;
     [_tabBar reloadData];
     [_pagerController reloadData];
 }
 
-- (NSMutableArray *)flagArray
-{
-    if (_flagArray == nil) {
-        _flagArray = [NSMutableArray arrayWithObjects:@"币地址检测",@"交易量预警",@"换手量预警",@"分析",@"币地址检测",@"交易量预警",@"换手量预警",@"分析", nil];
-    }
-    return _flagArray;
+#pragma mark BaseTypeViewDelegate
+-(void)gmdOpFenXiClick{
+    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
+    [self reloadData];
 }
+-(void)gmdOpYuCeClick{
+    self.flagArray = [NSMutableArray arrayWithObjects:@"短期预测",@"长期预测", nil];
+    [self reloadData];
+}
+-(void)gmdOpYuJingClick{
+    self.flagArray = [NSMutableArray arrayWithObjects:@"币地址检测",@"交易量预警",@"换手量预警", nil];
+    [self reloadData];
+    
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

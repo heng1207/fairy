@@ -82,7 +82,7 @@
             UILabel  *lable = [[UILabel alloc]init];
             lable.text = @"红涨绿跌";
             lable.backgroundColor = [UIColor whiteColor];
-            lable.font = [UIFont systemFontOfSize:21];
+            lable.font = AdaptedFontSize(28);
             lable.textColor = [UIColor colorWithHex:@"#000000"];
             lable.textAlignment = NSTextAlignmentLeft;
             [cell.contentView addSubview:lable];

@@ -12,6 +12,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.photoLab.font = AdaptedFontSize(28);
+    self.photoLab.textColor =[UIColor colorWithHex:@"#000000"];
+    
     // Initialization code
 }
 

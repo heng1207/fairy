@@ -24,6 +24,7 @@
 #import "MJRefresh.h"
 #import "TYTabPagerBar.h"
 #import "TYPagerController.h"
+#import "YCXMenu.h"
 
 
 #import "UIBarButtonItem+GFBarButtonItem.h"

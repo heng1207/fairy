@@ -20,13 +20,14 @@ PODS:
   - IQKeyboardManager (6.0.4)
   - Masonry (1.1.0)
   - MBProgressHUD (1.1.0)
-  - MJExtension (3.0.15)
+  - MJExtension (3.0.15.1)
   - MJRefresh (3.1.15.3)
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
   - SVProgressHUD (2.2.5)
   - TYPagerController (2.1.2)
+  - YCXMenu (0.0.11)
 
 DEPENDENCIES:
   - AFNetworking
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - SDWebImage
   - SVProgressHUD
   - TYPagerController
+  - YCXMenu
 
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
@@ -46,12 +48,13 @@ SPEC CHECKSUMS:
   IQKeyboardManager: 29514134ef0334a6fa33cf4eee11c36c064baeaf
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
-  MJExtension: 3f039575db1b135a20699ad298713b26acec1528
+  MJExtension: 19bc33ce2eee2d319760f5622562cf581a6ff756
   MJRefresh: b48380ae2b927b46c4ef000de9adb8dc748e1df7
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TYPagerController: 262556ecef99986d26ed77fb1288a198ed42f4af
+  YCXMenu: 6003bcd20d8ac72e3eb3c442c97ed21948c6dc1f
 
-PODFILE CHECKSUM: ab62720822976a037034eb2a1988707b71e41f62
+PODFILE CHECKSUM: 4c4ea0550a9235beae1c3a605f7c362c41721688
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.4.0

@@ -7,7 +7,6 @@
 //
 
 
-
 /*
  UIBezierPath ：画贝塞尔曲线的path类
  UIBezierPath定义 ： 贝赛尔曲线的每一个顶点都有两个控制点，用于控制在该顶点两侧的曲线的弧度。
@@ -54,29 +53,15 @@
 
 #import <UIKit/UIKit.h>
 
-
-#define MARGIN            30   // 坐标轴与画布间距(Y轴)
-#define MARGIN_X          15   // 坐标轴与画布间距(X轴)
-
-
-// 颜色RGB
-#define XYQColor(r, g, b)  [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
-#define XYQColorRGBA(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:a]
-
-// 随机色
-#define XYQRandomColor  XYQColor(arc4random_uniform(256), arc4random_uniform(256), arc4random_uniform(256))
-
 // 线条类型
-typedef NS_ENUM(NSInteger, LineType) {
-    LineType_Straight, // 折线
-    LineType_Curve     // 曲线
+typedef NS_ENUM(NSInteger, LineTypes) {
+    LineType_zhexian, // 折线
+    LineType_quxian     // 曲线
 };
-
-
 
 @interface BezierCurveView : UIView
 
-
+@property(nonatomic,assign)float space_x; //X轴宽当前间隔
 
 /**
  *  画折线图
@@ -84,24 +69,7 @@ typedef NS_ENUM(NSInteger, LineType) {
  *  @param targetValues 所有目标值
  *  @param lineType     直线类型
  */
--(void)drawLineChartViewWithX_Value_Names:(NSMutableArray *)x_names TargetValues:(NSMutableArray *)targetValues LineType:(LineType) lineType;
 
-
-/**
- *  画柱状图
- *  @param x_names      x轴值的所有值名称
- *  @param targetValues 所有目标值
- */
--(void)drawBarChartViewWithX_Value_Names:(NSMutableArray *)x_names TargetValues:(NSMutableArray *)targetValues;
-
-
-/**
- *  画饼状图
- *  @param x_names      x轴值的所有值名称
- *  @param targetValues 所有目标值
- */
--(void)drawPieChartViewWithX_Value_Names:(NSMutableArray *)x_names TargetValues:(NSMutableArray *)targetValues;
-
-
+-(instancetype)initWithFrame:(CGRect)frame WithX_Value_Names:(NSMutableArray *)x_names Y_Value_Names:(NSMutableArray *)y_names TargetValues:(NSMutableArray *)targetValues LineType:(LineTypes) lineType Space_x:(float)space_x;
 
 @end

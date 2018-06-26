@@ -80,7 +80,7 @@
             UILabel  *lable = [[UILabel alloc]init];
             lable.text = @"红涨绿跌";
             lable.backgroundColor = [UIColor whiteColor];
-            lable.font = [UIFont systemFontOfSize:21];
+            lable.font = AdaptedFontSize(28);
             lable.textColor = [UIColor colorWithHex:@"#000000"];
             lable.textAlignment = NSTextAlignmentLeft;
             [cell.contentView addSubview:lable];
@@ -162,7 +162,47 @@
     return view;
 }
 
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.row ==0 || indexPath.row ==2) {
+        [self getCellLocationOnView:indexPath];
+    }
+}
 
+-(void)getCellLocationOnView:(NSIndexPath*)indexPath{
+    //通过点击按钮获取index
+//     NSIndexPath *indexPath = [joinTable indexPathForCell:(JoinTableCell *)sender.superview.superview];
+    CGRect rectInTableView = [self.myTableView rectForRowAtIndexPath:indexPath];
+    CGRect rect = [self.myTableView convertRect:rectInTableView toView:[self.myTableView superview]];
+    
+    
+    NSArray *items = @[
+                       [YCXMenuItem menuItem:@"中币"
+                                       image:nil
+                                         tag:100
+                                    userInfo:@{@"title":@"Menu"}],
+                       [YCXMenuItem menuItem:@"美币"
+                                       image:nil
+                                         tag:102
+                                    userInfo:@{@"title":@"Menu"}],
+                       [YCXMenuItem menuItem:@"俄币"
+                                       image:nil
+                                         tag:102
+                                    userInfo:@{@"title":@"Menu"}],
+                       [YCXMenuItem menuItem:@"英币"
+                                       image:nil
+                                         tag:102
+                                    userInfo:@{@"title":@"Menu"}],
+                       [YCXMenuItem menuItem:@"法币"
+                                       image:nil
+                                         tag:102
+                                    userInfo:@{@"title":@"Menu"}],
+                       ];
+    
+    [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
+        NSLog(@"%@",item);
+    }];
+
+}
 
 -(void)pricesBtnClick:(UIButton*)btn{
     btn.selected = !btn.selected;

@@ -20,6 +20,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor =[UIColor whiteColor];
         [self creatSubView];
     }
     return self;
@@ -31,51 +32,54 @@
     UIView *viewDivider = [[UIView alloc] init];
     viewDivider.backgroundColor =[UIColor grayColor];
     viewDivider.alpha = 0.6;
-    viewDivider.frame = CGRectMake(0, 0, UIScreenW, 0.5);
+    viewDivider.frame = CGRectMake(0, 0, self.frame.size.width, 0.5);
     [self addSubview:viewDivider];
     
     UIView *viewDivider1 = [[UIView alloc] init];
     viewDivider1.backgroundColor = [UIColor grayColor];
     viewDivider1.alpha = 0.6;
-    viewDivider1.frame = CGRectMake(UIScreenW / 3.0, 0, 0.5, 39);
+    viewDivider1.frame = CGRectMake(self.frame.size.width/ 3.0, 0, 0.5, self.frame.size.height);
     [self addSubview:viewDivider1];
     
     UIView *viewDivider2 = [[UIView alloc] init];
     viewDivider2.backgroundColor = [UIColor grayColor];
     viewDivider2.alpha = 0.6;
-    viewDivider2.frame = CGRectMake(UIScreenW / 3.0 * 2, 0, 0.5, 39);
+    viewDivider2.frame = CGRectMake(self.frame.size.width/ 3.0 * 2, 0, 0.5, self.frame.size.height);
     [self addSubview:viewDivider2];
     
     UIView *viewDividerBom = [[UIView alloc] init];
     viewDividerBom.backgroundColor = [UIColor grayColor];
     viewDividerBom.alpha = 0.6;
-    viewDividerBom.frame = CGRectMake(0, 39 - 0.5, UIScreenW, 0.5);
+    viewDividerBom.frame = CGRectMake(0, self.frame.size.height - 0.5, self.frame.size.width, 0.5);
     [self addSubview:viewDividerBom];
     
     
-    CGFloat fltBtnW = UIScreenW / 3;
+    CGFloat fltBtnW = self.frame.size.width / 3;
     CGFloat fltBtnY = CGRectGetMaxY(viewDivider.frame);
-    CGFloat fltBtnH = self.height - fltBtnY;
+    CGFloat fltBtnH = self.frame.size.height - 2*fltBtnY;
     
     // 分析
     UIButton *btnReply = [[UIButton alloc] init];
     [btnReply setTitle:@"分析" forState:UIControlStateNormal];
     [btnReply setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnReply.titleLabel.font =[UIFont fontWithName:CHINESE_FONT_NAME size:13];
+    btnReply.titleLabel.font = AdaptedFontSize(36);
     [btnReply setImage:[UIImage imageNamed:@"icon_fenxihui_tab"] forState:UIControlStateNormal];
     [btnReply setImage:[UIImage imageNamed:@"icon_fenxi_tab"] forState:UIControlStateSelected];
     btnReply.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
     [btnReply addTarget:self action:@selector(btnReplyClick:) forControlEvents:UIControlEventTouchUpInside];
     btnReply.frame = CGRectMake(0, fltBtnY, fltBtnW, fltBtnH);
     _btnReply = btnReply;
-    btnReply.selected =YES;
+    btnReply.titleEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 0);
+    btnReply.selected = YES;
     [self addSubview:btnReply];
+ 
+    
     
     // 预测
     UIButton *btnDianLiang = [[UIButton alloc] init];
      [btnDianLiang setTitle:@"预测" forState:UIControlStateNormal];
     [btnDianLiang setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnDianLiang.titleLabel.font = [UIFont fontWithName:CHINESE_FONT_NAME size:13];
+    btnDianLiang.titleLabel.font = AdaptedFontSize(36);
     [btnDianLiang setImage:[UIImage imageNamed:@"icon_yucehui_tab"] forState:UIControlStateNormal];
     [btnDianLiang setImage:[UIImage imageNamed:@"icon_yuce_tab"] forState:UIControlStateSelected];
     btnDianLiang.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -83,13 +87,15 @@
     btnDianLiang.frame = CGRectMake(fltBtnW, fltBtnY, fltBtnW, fltBtnH);
     btnDianLiang.selected = NO;
     _btnDianLiang = btnDianLiang;
+    //button标题的偏移量，这个偏移量是相对于图片的
+    btnDianLiang.titleEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 0);
     [self addSubview:btnDianLiang];
     
     // 预警
     UIButton *btnZhuanFa = [[UIButton alloc] init];
     [btnZhuanFa setTitle:@"预警" forState:UIControlStateNormal];
     [btnZhuanFa setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnZhuanFa.titleLabel.font =[UIFont fontWithName:CHINESE_FONT_NAME size:13];
+    btnZhuanFa.titleLabel.font = AdaptedFontSize(36);
     [btnZhuanFa setImage:[UIImage imageNamed:@"icon_yujinghui_tab"] forState:UIControlStateNormal];
     [btnZhuanFa setImage:[UIImage imageNamed:@"icon_yujing_tab"] forState:UIControlStateSelected];
     btnZhuanFa.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -97,7 +103,9 @@
     btnZhuanFa.frame = CGRectMake(fltBtnW * 2, fltBtnY, fltBtnW, fltBtnH);
     btnZhuanFa.selected = NO;
     _btnZhuanFa = btnZhuanFa;
+    btnZhuanFa.titleEdgeInsets = UIEdgeInsetsMake(0, 12, 0, 0);
     [self addSubview:btnZhuanFa];
+    
 }
 
 

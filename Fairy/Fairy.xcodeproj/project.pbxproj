@@ -19,8 +19,13 @@
 		04204F9220CE4BBD007BD075 /* PriceDetailedVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204F9120CE4BBD007BD075 /* PriceDetailedVC.m */; };
 		04204F9A20CE5C38007BD075 /* PriceDetailedSubVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204F9920CE5C38007BD075 /* PriceDetailedSubVC.m */; };
 		04204FA020CE63A6007BD075 /* BaseTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204F9F20CE63A6007BD075 /* BaseTypeView.m */; };
-		04204FA320CE6E65007BD075 /* IndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04204FA220CE6E65007BD075 /* IndexView.m */; };
-		04204FA520CE6E75007BD075 /* IndexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04204FA420CE6E75007BD075 /* IndexView.xib */; };
+		0430253220E1DB6B00094314 /* BezierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430252D20E1DB6B00094314 /* BezierView.m */; };
+		0430253320E1DB6B00094314 /* TargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430252F20E1DB6B00094314 /* TargetView.m */; };
+		0430253420E1DB6B00094314 /* BezierCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430253120E1DB6B00094314 /* BezierCurveView.m */; };
+		0430254720E20B7F00094314 /* ClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430254620E20B7F00094314 /* ClassView.m */; };
+		0430254920E20B8B00094314 /* ClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430254820E20B8B00094314 /* ClassView.xib */; };
+		0430255220E213A900094314 /* IndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430254F20E213A800094314 /* IndexView.m */; };
+		0430255320E213A900094314 /* IndexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430255120E213A900094314 /* IndexView.xib */; };
 		0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBC620CFA618009BA6BF /* InformationSubVC.m */; };
 		0445DBCE20CFA9AD009BA6BF /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBCC20CFA9AD009BA6BF /* InformationCell.m */; };
 		0445DBCF20CFA9AD009BA6BF /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0445DBCD20CFA9AD009BA6BF /* InformationCell.xib */; };
@@ -39,7 +44,6 @@
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
 		7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A255F20D66BE30061D98B /* SwiftTest.swift */; };
 		7E75221720D40BFD007E1489 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E75221620D40BFD007E1489 /* GraphCell.m */; };
-		7EB12A0020D4BEB000C8CB6E /* BezierCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB129FE20D4BEB000C8CB6E /* BezierCurveView.m */; };
 		7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */; };
 		7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3210920CEC4A50093DBAB /* SSSearchBar.m */; };
 		7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E24220CCAD40004BFAE2 /* AppDelegate.m */; };
@@ -99,9 +103,18 @@
 		04204F9920CE5C38007BD075 /* PriceDetailedSubVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceDetailedSubVC.m; sourceTree = "<group>"; };
 		04204F9E20CE63A6007BD075 /* BaseTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BaseTypeView.h; sourceTree = "<group>"; };
 		04204F9F20CE63A6007BD075 /* BaseTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BaseTypeView.m; sourceTree = "<group>"; };
-		04204FA120CE6E65007BD075 /* IndexView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexView.h; sourceTree = "<group>"; };
-		04204FA220CE6E65007BD075 /* IndexView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexView.m; sourceTree = "<group>"; };
-		04204FA420CE6E75007BD075 /* IndexView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = IndexView.xib; sourceTree = "<group>"; };
+		0430252C20E1DB6B00094314 /* BezierCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierCurveView.h; sourceTree = "<group>"; };
+		0430252D20E1DB6B00094314 /* BezierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierView.m; sourceTree = "<group>"; };
+		0430252E20E1DB6B00094314 /* TargetView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TargetView.h; sourceTree = "<group>"; };
+		0430252F20E1DB6B00094314 /* TargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetView.m; sourceTree = "<group>"; };
+		0430253020E1DB6B00094314 /* BezierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierView.h; sourceTree = "<group>"; };
+		0430253120E1DB6B00094314 /* BezierCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierCurveView.m; sourceTree = "<group>"; };
+		0430254520E20B7F00094314 /* ClassView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassView.h; sourceTree = "<group>"; };
+		0430254620E20B7F00094314 /* ClassView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassView.m; sourceTree = "<group>"; };
+		0430254820E20B8B00094314 /* ClassView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassView.xib; sourceTree = "<group>"; };
+		0430254F20E213A800094314 /* IndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexView.m; sourceTree = "<group>"; };
+		0430255020E213A900094314 /* IndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexView.h; sourceTree = "<group>"; };
+		0430255120E213A900094314 /* IndexView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexView.xib; sourceTree = "<group>"; };
 		0445DBC520CFA618009BA6BF /* InformationSubVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationSubVC.h; sourceTree = "<group>"; };
 		0445DBC620CFA618009BA6BF /* InformationSubVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationSubVC.m; sourceTree = "<group>"; };
 		0445DBCB20CFA9AD009BA6BF /* InformationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
@@ -137,8 +150,6 @@
 		7E1A255F20D66BE30061D98B /* SwiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTest.swift; sourceTree = "<group>"; };
 		7E75221520D40BFD007E1489 /* GraphCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphCell.h; sourceTree = "<group>"; };
 		7E75221620D40BFD007E1489 /* GraphCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphCell.m; sourceTree = "<group>"; };
-		7EB129FE20D4BEB000C8CB6E /* BezierCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierCurveView.m; sourceTree = "<group>"; };
-		7EB129FF20D4BEB000C8CB6E /* BezierCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierCurveView.h; sourceTree = "<group>"; };
 		7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
 		7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezierLineView.m; sourceTree = "<group>"; };
 		7EB3210820CEC4A50093DBAB /* SSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSearchBar.h; sourceTree = "<group>"; };
@@ -289,15 +300,28 @@
 		04204F8C20CE4B9D007BD075 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				04204FA120CE6E65007BD075 /* IndexView.h */,
-				04204FA220CE6E65007BD075 /* IndexView.m */,
-				04204FA420CE6E75007BD075 /* IndexView.xib */,
+				0430255020E213A900094314 /* IndexView.h */,
+				0430254F20E213A800094314 /* IndexView.m */,
+				0430255120E213A900094314 /* IndexView.xib */,
 				04204F9E20CE63A6007BD075 /* BaseTypeView.h */,
 				04204F9F20CE63A6007BD075 /* BaseTypeView.m */,
 				7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */,
 				7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		0430252B20E1DB6B00094314 /* BezierView */ = {
+			isa = PBXGroup;
+			children = (
+				0430253020E1DB6B00094314 /* BezierView.h */,
+				0430252D20E1DB6B00094314 /* BezierView.m */,
+				0430252C20E1DB6B00094314 /* BezierCurveView.h */,
+				0430253120E1DB6B00094314 /* BezierCurveView.m */,
+				0430252E20E1DB6B00094314 /* TargetView.h */,
+				0430252F20E1DB6B00094314 /* TargetView.m */,
+			);
+			path = BezierView;
 			sourceTree = "<group>";
 		};
 		0445DBD020CFBCE1009BA6BF /* PriceTrend */ = {
@@ -435,8 +459,10 @@
 				7EB5E2AE20CD0C82004BFAE2 /* IndexCellCell.xib */,
 				7E75221520D40BFD007E1489 /* GraphCell.h */,
 				7E75221620D40BFD007E1489 /* GraphCell.m */,
-				7EB129FF20D4BEB000C8CB6E /* BezierCurveView.h */,
-				7EB129FE20D4BEB000C8CB6E /* BezierCurveView.m */,
+				0430254520E20B7F00094314 /* ClassView.h */,
+				0430254620E20B7F00094314 /* ClassView.m */,
+				0430254820E20B8B00094314 /* ClassView.xib */,
+				0430252B20E1DB6B00094314 /* BezierView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -756,9 +782,10 @@
 				7EFBA35C20CC2F050059090B /* Assets.xcassets in Resources */,
 				7EB5E2B020CD0C82004BFAE2 /* IndexCellCell.xib in Resources */,
 				0445DBE620CFD550009BA6BF /* SettingCell.xib in Resources */,
+				0430254920E20B8B00094314 /* ClassView.xib in Resources */,
 				7EFBA35A20CC2F050059090B /* Main.storyboard in Resources */,
+				0430255320E213A900094314 /* IndexView.xib in Resources */,
 				04204F8F20CE4B9D007BD075 /* PriceCell.xib in Resources */,
-				04204FA520CE6E75007BD075 /* IndexView.xib in Resources */,
 				0406C66320D0B147008F6A26 /* PhotoSetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -774,6 +801,7 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Fairy/Pods-Fairy-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
@@ -782,10 +810,12 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/TYPagerController/TYPagerController.framework",
+				"${BUILT_PRODUCTS_DIR}/YCXMenu/YCXMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
@@ -794,6 +824,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TYPagerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YCXMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -830,7 +861,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -841,6 +872,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04204F8E20CE4B9D007BD075 /* PriceCell.m in Sources */,
+				0430255220E213A900094314 /* IndexView.m in Sources */,
 				7EB5E27220CCAE09004BFAE2 /* UIView+Addition.m in Sources */,
 				0445DBD920CFCDF3009BA6BF /* TrendVC.m in Sources */,
 				7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */,
@@ -865,7 +897,6 @@
 				04204FA020CE63A6007BD075 /* BaseTypeView.m in Sources */,
 				7EB5E28B20CCB60A004BFAE2 /* RegisterVC.m in Sources */,
 				7EFBA36220CC2F050059090B /* main.m in Sources */,
-				7EB12A0020D4BEB000C8CB6E /* BezierCurveView.m in Sources */,
 				7EB5E25320CCAD40004BFAE2 /* MainTabBarController.m in Sources */,
 				0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */,
 				04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */,
@@ -874,16 +905,18 @@
 				04204F9220CE4BBD007BD075 /* PriceDetailedVC.m in Sources */,
 				0445DBDC20CFCE0C009BA6BF /* TrendSubVC.m in Sources */,
 				7EB5E25A20CCADF2004BFAE2 /* Tool.m in Sources */,
+				0430254720E20B7F00094314 /* ClassView.m in Sources */,
 				04B218DB20D10B8F000D661F /* ShareVC.m in Sources */,
 				7EB5E25220CCAD40004BFAE2 /* MainNavigationController.m in Sources */,
 				7EB5E29120CCB673004BFAE2 /* FindPwVC.m in Sources */,
+				0430253320E1DB6B00094314 /* TargetView.m in Sources */,
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
 				04B218DE20D10CCE000D661F /* shareBtn.m in Sources */,
 				0406C66720D0BAE7008F6A26 /* MessageCell.m in Sources */,
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,
 				7EB5E27120CCAE09004BFAE2 /* UIBarButtonItem+GFBarButtonItem.m in Sources */,
-				04204FA320CE6E65007BD075 /* IndexView.m in Sources */,
 				7EB5E27F20CCB13D004BFAE2 /* HomeVC.m in Sources */,
+				0430253220E1DB6B00094314 /* BezierView.m in Sources */,
 				7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */,
 				7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */,
 				0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */,
@@ -896,6 +929,7 @@
 				04204F9A20CE5C38007BD075 /* PriceDetailedSubVC.m in Sources */,
 				0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */,
 				0445DBE020CFD277009BA6BF /* HeadCell.m in Sources */,
+				0430253420E1DB6B00094314 /* BezierCurveView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

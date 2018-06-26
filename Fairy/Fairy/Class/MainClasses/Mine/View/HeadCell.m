@@ -9,7 +9,6 @@
 #import "HeadCell.h"
 @interface HeadCell()
 @property (weak, nonatomic) IBOutlet UIImageView *headIM;
-
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
 
 @end
@@ -17,6 +16,7 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
+    self.nameLab.font = AdaptedFontSize(27);
     // Initialization code
 }
 

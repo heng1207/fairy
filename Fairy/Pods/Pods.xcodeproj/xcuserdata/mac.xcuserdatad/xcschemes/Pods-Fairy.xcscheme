@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "648F48AAF21FA59E5B983AD36ED5D2FF"
+               BlueprintIdentifier = "4B9C8F90E844753681651F647B4ACE02"
                BuildableName = "Pods_Fairy.framework"
                BlueprintName = "Pods-Fairy"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -26,7 +26,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
@@ -37,7 +36,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -47,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "648F48AAF21FA59E5B983AD36ED5D2FF"
+            BlueprintIdentifier = "4B9C8F90E844753681651F647B4ACE02"
             BuildableName = "Pods_Fairy.framework"
             BlueprintName = "Pods-Fairy"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -12,8 +12,10 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-  
-    
+    self.nameLab.font = AdaptedFontSize(30);
+    self.nameLab.textColor =[UIColor colorWithHex:@"#000000"];
+    self.detailLab.font = AdaptedFontSize(27);
+    self.detailLab.textColor =[UIColor colorWithHex:@"#b7c0c5"];
     // Initialization code
 }
 

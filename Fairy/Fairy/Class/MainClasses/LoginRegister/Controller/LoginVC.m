@@ -13,8 +13,10 @@
 
 @interface LoginVC ()
 
+@property(nonatomic,strong)UILabel *phoneLab;
 @property(nonatomic,strong)UITextField *phoneTF;
 @property(nonatomic,strong)UITextField *passwordTF;
+@property(nonatomic,strong)UIButton *selectLoginBtn;
 
 @property(nonatomic,strong)NSArray *logoArr;
 @end
@@ -23,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     self.view.backgroundColor=[UIColor whiteColor];
+    self.view.backgroundColor=[UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:YES];
     
     self.logoArr= @[@"WeiBo",@"WechatFriend",@"WechatCircle"];
@@ -46,7 +48,8 @@
     
     //手机号
     UILabel *phoneLab =[UILabel new];
-    phoneLab.text=@"手机号";
+    self.phoneLab =phoneLab;
+    phoneLab.text=@"用户名";
     phoneLab.font=[UIFont systemFontOfSize:15];
     phoneLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLab];
@@ -62,7 +65,7 @@
     UITextField *phoneTF =[UITextField new];
     self.phoneTF= phoneTF;
     phoneTF.keyboardType = UIKeyboardTypeNumberPad;
-    phoneTF.placeholder=@"请输入手机号";
+    phoneTF.placeholder=@"请输入用户名";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
@@ -136,7 +139,7 @@
     
     
 
-    //登录注册
+    //登录
     UIButton *LoginBtn =[UIButton new];
     LoginBtn.backgroundColor =[UIColor blueColor];
     [LoginBtn setTitle:@"登录" forState:UIControlStateNormal];
@@ -151,18 +154,41 @@
         make.height.mas_equalTo(AdaptedHeight(76));
     }];
 
+    
+    //注册
     UIButton *registerBtn =[UIButton new];
-//    registerBtn.backgroundColor =[UIColor blueColor];
+    //    registerBtn.backgroundColor =[UIColor blueColor];
     [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
     [registerBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
-//    registerBtn.layer.cornerRadius = AdaptedHeight(25);
-//    registerBtn.layer.masksToBounds = YES;
+    //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
+    //    registerBtn.layer.masksToBounds = YES;
     [self.view addSubview:registerBtn];
     [registerBtn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    float centerX= self.view.centerX;
     [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(20));
-        make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(AdaptedHeight(180));
+        make.left.mas_equalTo(centerX-AdaptedWidth(180 + 20));
+        make.width.mas_equalTo(AdaptedWidth(180));
+        make.height.mas_equalTo(AdaptedHeight(40));
+    }];
+
+    
+    //验证码登陆or用户名登陆
+    UIButton *selectLoginBtn =[UIButton new];
+    self.selectLoginBtn = selectLoginBtn;
+//    registerBtn.backgroundColor =[UIColor blueColor];
+    [selectLoginBtn setTitle:@"验证码登陆" forState:UIControlStateNormal];
+    [selectLoginBtn setTitle:@"用户名登陆" forState:UIControlStateSelected];
+    selectLoginBtn.selected = NO;
+    [selectLoginBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+//    registerBtn.layer.cornerRadius = AdaptedHeight(25);
+//    registerBtn.layer.masksToBounds = YES;
+    [self.view addSubview:selectLoginBtn];
+    [selectLoginBtn addTarget:self action:@selector(selectLoginClick:) forControlEvents:UIControlEventTouchUpInside];
+    [selectLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(20));
+                 make.left.mas_equalTo(centerX+AdaptedWidth(20));
+        make.width.mas_equalTo(AdaptedWidth(200));
         make.height.mas_equalTo(AdaptedHeight(40));
     }];
     
@@ -264,8 +290,17 @@
         NSLog(@"%@",error);
     }];
 
-    
-    
+}
+
+-(void)selectLoginClick:(UIButton*)btn{
+    btn.selected = !btn.selected;
+    if (btn.selected) {
+        self.phoneTF.placeholder=@"请输入手机号";
+        self.phoneLab.text=@"手机号";
+    }else{
+        self.phoneTF.placeholder=@"请输入用户名";
+        self.phoneLab.text=@"用户名";
+    }
 }
 
 #pragma mark 三方登陆

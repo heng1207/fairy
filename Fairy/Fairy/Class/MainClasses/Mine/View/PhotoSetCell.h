@@ -10,5 +10,6 @@
 
 @interface PhotoSetCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *photoIM;
+@property (weak, nonatomic) IBOutlet UILabel *photoLab;
 
 @end
