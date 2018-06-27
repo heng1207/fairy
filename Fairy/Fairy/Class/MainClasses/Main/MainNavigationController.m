@@ -20,7 +20,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationBar.backgroundColor = [UIColor blackColor];
+    
     self.navigationBar.barTintColor = [UIColor blackColor];
     [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBar_background"]forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[UIImage new]];//隐藏灰线条

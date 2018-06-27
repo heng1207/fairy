@@ -88,8 +88,8 @@
             logoIM.image=[UIImage imageNamed:@"nightMode"];
             [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.left.mas_equalTo(12);
-                make.width.mas_equalTo(25);
-                make.height.mas_equalTo(25);
+                make.width.mas_equalTo(20);
+                make.height.mas_equalTo(20);
                 make.centerY.mas_equalTo(cell.contentView);
             }];
             

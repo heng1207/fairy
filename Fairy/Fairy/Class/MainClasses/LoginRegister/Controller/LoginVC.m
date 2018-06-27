@@ -37,12 +37,13 @@
 -(void)creatSubViews{
     
     UIImageView *logoIM=[UIImageView new];
+    logoIM.image =[UIImage imageNamed:@"loginLogo"];
     [self.view addSubview:logoIM];
     [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(AdaptedHeight(114));
+        make.top.mas_equalTo(AdaptedHeight(110));
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(AdaptedWidth(356));
-        make.height.mas_equalTo(AdaptedHeight(182));
+        make.width.mas_equalTo(AdaptedWidth(436));
+        make.height.mas_equalTo(AdaptedHeight(230));
     }];
     
     
@@ -50,12 +51,12 @@
     UILabel *phoneLab =[UILabel new];
     self.phoneLab =phoneLab;
     phoneLab.text=@"用户名";
-    phoneLab.font=[UIFont systemFontOfSize:15];
+    phoneLab.font= AdaptedFontSize(34);
     phoneLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLab];
 
     [phoneLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
         make.left.mas_equalTo(AdaptedWidth(50));
         make.width.mas_equalTo(AdaptedWidth(116));
         make.height.mas_equalTo(AdaptedHeight(70));
@@ -64,12 +65,13 @@
 
     UITextField *phoneTF =[UITextField new];
     self.phoneTF= phoneTF;
+    phoneTF.font= AdaptedFontSize(34);
     phoneTF.keyboardType = UIKeyboardTypeNumberPad;
     phoneTF.placeholder=@"请输入用户名";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
-        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(20));
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
+        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
@@ -88,7 +90,7 @@
     //密码
     UILabel *passwordLab =[UILabel new];
     passwordLab.text=@"密码";
-    passwordLab.font=[UIFont systemFontOfSize:15];
+    passwordLab.font = AdaptedFontSize(34);
     passwordLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:passwordLab];
     
@@ -103,10 +105,11 @@
     UITextField *passwordTF =[UITextField new];
     passwordTF.placeholder=@"请输入密码";
     self.passwordTF = passwordTF;
+    passwordTF.font= AdaptedFontSize(34);
     [self.view addSubview:passwordTF];
     [passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(passwordLab.mas_right).offset(AdaptedWidth(20));
+        make.left.mas_equalTo(passwordLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
@@ -114,6 +117,9 @@
     
     UIButton *findPWBtn =[UIButton new];
     [findPWBtn setTitle:@"找回密码" forState:UIControlStateNormal];
+    findPWBtn.backgroundColor = [UIColor colorWithHex:@"#6876be"];
+    findPWBtn.titleLabel.font = AdaptedFontSize(28);
+    findPWBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
     findPWBtn.layer.cornerRadius = AdaptedHeight(25);
     findPWBtn.layer.masksToBounds = YES;
     findPWBtn.backgroundColor =[UIColor blueColor];
@@ -122,7 +128,7 @@
     [findPWBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(28));
         make.right.mas_equalTo(-AdaptedWidth(38));
-        make.width.mas_equalTo(AdaptedWidth(200));
+        make.width.mas_equalTo(AdaptedWidth(184));
         make.height.mas_equalTo(AdaptedHeight(50));
     }];
     
@@ -141,14 +147,16 @@
 
     //登录
     UIButton *LoginBtn =[UIButton new];
-    LoginBtn.backgroundColor =[UIColor blueColor];
+    LoginBtn.backgroundColor =[UIColor colorWithHex:@"#031b92"];
     [LoginBtn setTitle:@"登录" forState:UIControlStateNormal];
+    LoginBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
+    LoginBtn.titleLabel.font = AdaptedFontSize(28);
     LoginBtn.layer.cornerRadius = AdaptedHeight(25);
     LoginBtn.layer.masksToBounds = YES;
     [self.view addSubview:LoginBtn];
     [LoginBtn addTarget:self action:@selector(LoginClick) forControlEvents:UIControlEventTouchUpInside];
     [LoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(50));
+        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(56));
         make.left.mas_equalTo(AdaptedWidth(64));
         make.right.mas_equalTo(-AdaptedWidth(64));
         make.height.mas_equalTo(AdaptedHeight(76));
@@ -158,15 +166,17 @@
     //注册
     UIButton *registerBtn =[UIButton new];
     //    registerBtn.backgroundColor =[UIColor blueColor];
+    registerBtn.titleLabel.font = AdaptedFontSize(28);
     [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
-    [registerBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    
+    [registerBtn setTitleColor:[UIColor colorWithHex:@"#000b81"] forState:UIControlStateNormal];
     //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
     //    registerBtn.layer.masksToBounds = YES;
     [self.view addSubview:registerBtn];
     [registerBtn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
     float centerX= self.view.centerX;
     [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(20));
+        make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(30));
         make.left.mas_equalTo(centerX-AdaptedWidth(180 + 20));
         make.width.mas_equalTo(AdaptedWidth(180));
         make.height.mas_equalTo(AdaptedHeight(40));
@@ -176,17 +186,18 @@
     //验证码登陆or用户名登陆
     UIButton *selectLoginBtn =[UIButton new];
     self.selectLoginBtn = selectLoginBtn;
+    selectLoginBtn.titleLabel.font = AdaptedFontSize(28);
 //    registerBtn.backgroundColor =[UIColor blueColor];
     [selectLoginBtn setTitle:@"验证码登陆" forState:UIControlStateNormal];
     [selectLoginBtn setTitle:@"用户名登陆" forState:UIControlStateSelected];
     selectLoginBtn.selected = NO;
-    [selectLoginBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [selectLoginBtn setTitleColor:[UIColor colorWithHex:@"#000b81"] forState:UIControlStateNormal];
 //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
 //    registerBtn.layer.masksToBounds = YES;
     [self.view addSubview:selectLoginBtn];
     [selectLoginBtn addTarget:self action:@selector(selectLoginClick:) forControlEvents:UIControlEventTouchUpInside];
     [selectLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(20));
+        make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(30));
                  make.left.mas_equalTo(centerX+AdaptedWidth(20));
         make.width.mas_equalTo(AdaptedWidth(200));
         make.height.mas_equalTo(AdaptedHeight(40));
@@ -213,8 +224,8 @@
     
     UILabel *thirdPartyLab= [UILabel new];
     thirdPartyLab.text = @"第三方登录";
-    thirdPartyLab.font = AdaptedFontSize(26);
-    thirdPartyLab.textColor = [UIColor grayColor];
+    thirdPartyLab.font = AdaptedFontSize(28);
+    thirdPartyLab.textColor = [UIColor colorWithHex:@"#a3a3a3"];
     thirdPartyLab.textAlignment =NSTextAlignmentCenter;
     [self.view addSubview:thirdPartyLab];
     

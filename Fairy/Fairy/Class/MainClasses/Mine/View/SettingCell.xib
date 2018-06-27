@@ -19,16 +19,16 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="行情中心" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8IC-Tt-hyN">
-                        <rect key="frame" x="49" y="12" width="89.5" height="26.5"/>
+                        <rect key="frame" x="44" y="12" width="89.5" height="26.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="22"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="VLX-Xe-Jg2">
-                        <rect key="frame" x="12" y="12.5" width="25" height="25"/>
+                        <rect key="frame" x="12" y="15" width="20" height="20"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="DAl-EI-72l"/>
-                            <constraint firstAttribute="width" constant="25" id="FnB-71-rDh"/>
+                            <constraint firstAttribute="height" constant="20" id="DAl-EI-72l"/>
+                            <constraint firstAttribute="width" constant="20" id="FnB-71-rDh"/>
                         </constraints>
                     </imageView>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="youJianTou" translatesAutoresizingMaskIntoConstraints="NO" id="qjn-wc-4Mn">

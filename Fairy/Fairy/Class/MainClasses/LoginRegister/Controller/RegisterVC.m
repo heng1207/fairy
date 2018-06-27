@@ -33,23 +33,24 @@
 -(void)creatSubViews{
     
     UIImageView *logoIM=[UIImageView new];
+    logoIM.image =[UIImage imageNamed:@"loginLogo"];
     [self.view addSubview:logoIM];
     [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(AdaptedHeight(114));
+        make.top.mas_equalTo(AdaptedHeight(110));
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(AdaptedWidth(356));
-        make.height.mas_equalTo(AdaptedHeight(182));
+        make.width.mas_equalTo(AdaptedWidth(436));
+        make.height.mas_equalTo(AdaptedHeight(230));
     }];
     
     //用户名
     UILabel *userNameLab =[UILabel new];
     userNameLab.text=@"用户名";
-    userNameLab.font=[UIFont systemFontOfSize:15];
+    userNameLab.font = AdaptedFontSize(34);
     userNameLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:userNameLab];
     
     [userNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
         make.left.mas_equalTo(AdaptedWidth(50));
         make.width.mas_equalTo(AdaptedWidth(116));
         make.height.mas_equalTo(AdaptedHeight(70));
@@ -58,12 +59,13 @@
     
     UITextField *userNameTF =[UITextField new];
     self.userNameTF = userNameTF;
+    userNameTF.font= AdaptedFontSize(34);
     userNameTF.placeholder=@"请设置用户名";
     userNameTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:userNameTF];
     [userNameTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
-        make.left.mas_equalTo(userNameLab.mas_right).offset(AdaptedWidth(20));
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
+        make.left.mas_equalTo(userNameLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
@@ -82,7 +84,7 @@
     //密码
     UILabel *passwordLab =[UILabel new];
     passwordLab.text=@"密码";
-    passwordLab.font=[UIFont systemFontOfSize:15];
+    passwordLab.font = AdaptedFontSize(34);
     passwordLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:passwordLab];
     
@@ -96,11 +98,12 @@
     
     UITextField *passwordTF =[UITextField new];
     self.passwordTF = passwordTF;
+    passwordTF.font= AdaptedFontSize(34);
     passwordTF.placeholder=@"请输入密码";
     [self.view addSubview:passwordTF];
     [passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(passwordLab.mas_right).offset(AdaptedWidth(20));
+        make.left.mas_equalTo(passwordLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
@@ -122,7 +125,7 @@
     //手机号
     UILabel *phoneLab =[UILabel new];
     phoneLab.text=@"手机号";
-    phoneLab.font=[UIFont systemFontOfSize:15];
+    phoneLab.font= AdaptedFontSize(34);
     phoneLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLab];
     
@@ -136,21 +139,24 @@
     
     UITextField *phoneTF =[UITextField new];
     self.phoneTF = phoneTF;
+    phoneTF.font= AdaptedFontSize(34);
     phoneTF.placeholder=@"请输入手机号";
     phoneTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(20));
+        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
     
     UIButton *sendCodeBtn =[UIButton new];
     [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+    sendCodeBtn.backgroundColor = [UIColor colorWithHex:@"#6876be"];
+    sendCodeBtn.titleLabel.font = AdaptedFontSize(28);
+    sendCodeBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
     sendCodeBtn.layer.cornerRadius = AdaptedHeight(25);
     sendCodeBtn.layer.masksToBounds = YES;
-    sendCodeBtn.backgroundColor =[UIColor blueColor];
     [self.view addSubview:sendCodeBtn];
     [sendCodeBtn addTarget:self action:@selector(sendCodeClick) forControlEvents:UIControlEventTouchUpInside];
     [sendCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -176,7 +182,7 @@
     //验证码
     UILabel *codeLab =[UILabel new];
     codeLab.text=@"验证码";
-    codeLab.font=[UIFont systemFontOfSize:15];
+    codeLab.font= AdaptedFontSize(34);
     codeLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:codeLab];
     
@@ -191,6 +197,7 @@
     UITextField *codeTF =[UITextField new];
     self.codeTF = codeTF;
     codeTF.placeholder=@"请输入验证码";
+    codeTF.font= AdaptedFontSize(34);
     codeTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:codeTF];
     [codeTF mas_makeConstraints:^(MASConstraintMaker *make) {

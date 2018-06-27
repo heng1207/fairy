@@ -33,19 +33,20 @@
 -(void)creatSubViews{
     
     UIImageView *logoIM=[UIImageView new];
+    logoIM.image =[UIImage imageNamed:@"loginLogo"];
     [self.view addSubview:logoIM];
     [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(AdaptedHeight(114));
+        make.top.mas_equalTo(AdaptedHeight(110));
         make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(AdaptedWidth(356));
-        make.height.mas_equalTo(AdaptedHeight(182));
+        make.width.mas_equalTo(AdaptedWidth(436));
+        make.height.mas_equalTo(AdaptedHeight(230));
     }];
     
     
     //手机号
     UILabel *phoneLab =[UILabel new];
     phoneLab.text=@"手机号";
-    phoneLab.font=[UIFont systemFontOfSize:15];
+    phoneLab.font=AdaptedFontSize(34);
     phoneLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLab];
     
@@ -59,6 +60,7 @@
     
     UITextField *phoneTF =[UITextField new];
     self.phoneTF = phoneTF;
+    phoneTF.font=AdaptedFontSize(34);
     phoneTF.placeholder=@"请输入手机号";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {

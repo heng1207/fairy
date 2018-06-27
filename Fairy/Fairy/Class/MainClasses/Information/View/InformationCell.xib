@@ -56,7 +56,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Home_normal" translatesAutoresizingMaskIntoConstraints="NO" id="oE0-L5-JYa">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="liuyan" translatesAutoresizingMaskIntoConstraints="NO" id="oE0-L5-JYa">
                         <rect key="frame" x="325" y="69.5" width="10" height="10"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="t1e-2F-Cdb"/>
@@ -89,5 +89,6 @@
     </objects>
     <resources>
         <image name="Home_normal" width="21" height="20"/>
+        <image name="liuyan" width="17" height="17"/>
     </resources>
 </document>
