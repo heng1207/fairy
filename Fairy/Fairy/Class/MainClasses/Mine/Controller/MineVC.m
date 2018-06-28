@@ -19,7 +19,6 @@
 
 @interface MineVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
-//@property (nonatomic, copy)NSArray *dataArr;
 
 @end
 

@@ -12,10 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PriceCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="80"/>
+            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="79.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OKcoin国际" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0FY-v8-FjJ">
@@ -49,24 +49,24 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+6.88%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tpg-Kf-yPG">
-                        <rect key="frame" x="237" y="25" width="64" height="29"/>
-                        <color key="backgroundColor" red="0.1187700072" green="1" blue="0.2493927303" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <rect key="frame" x="292" y="25" width="64" height="29"/>
+                        <color key="backgroundColor" red="0.097288424118688877" green="0.80000000000000004" blue="0.16865452613059767" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="64" id="BOz-e4-sI1"/>
                             <constraint firstAttribute="height" constant="29" id="ulK-lu-ree"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥138.67" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oq0-vi-ooQ">
-                        <rect key="frame" x="146" y="28" width="83" height="24"/>
+                        <rect key="frame" x="201" y="28" width="83" height="24"/>
                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dje-Ji-gT9">
-                        <rect key="frame" x="10" y="78.5" width="300" height="1"/>
+                        <rect key="frame" x="10" y="78.5" width="355" height="1"/>
                         <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="kgj-gM-LwJ"/>
@@ -89,6 +89,13 @@
                     <constraint firstItem="Tpg-Kf-yPG" firstAttribute="leading" secondItem="Oq0-vi-ooQ" secondAttribute="trailing" constant="8" id="xmB-bI-0Z5"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="fromLab" destination="0FY-v8-FjJ" id="WLy-uX-dGq"/>
+                <outlet property="increaseLab" destination="Tpg-Kf-yPG" id="bgN-lr-0Dr"/>
+                <outlet property="nameLab" destination="jsq-10-W9P" id="K8w-hS-CZM"/>
+                <outlet property="priceLab" destination="Oq0-vi-ooQ" id="5RC-4l-kkM"/>
+                <outlet property="volumeLab" destination="Pxh-Sl-sZT" id="KvV-9h-4ae"/>
+            </connections>
             <point key="canvasLocation" x="-56" y="104"/>
         </tableViewCell>
     </objects>

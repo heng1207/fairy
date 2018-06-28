@@ -11,8 +11,10 @@
 #import "PhotoSetCell.h"
 
 
-@interface PersionDetailVC ()<UITableViewDataSource, UITableViewDelegate>
+@interface PersionDetailVC ()<UITableViewDataSource, UITableViewDelegate,UIAlertViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
+
+@property(nonatomic,strong)UIImageView *photoIM;
 
 @end
 
@@ -83,6 +85,7 @@
         PhotoSetCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"PhotoSetCell" forIndexPath:indexPath];
         cell.photoIM.layer.cornerRadius =  cell.photoIM.width/2;
         cell.photoIM.layer.masksToBounds =YES;
+        self.photoIM= cell.photoIM;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
@@ -182,10 +185,65 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    PersionDetailVC *vc =[PersionDetailVC new];
-//    [self.navigationController pushViewController:vc animated:YES];
+    if (indexPath.row==0) {
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"从手机相册选择",@"拍照", nil];
+        [alert show];
+        
+    }
     
 }
+
+#pragma mark UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex NS_DEPRECATED_IOS(2_0, 9_0){
+    if(buttonIndex ==1){
+        [self openImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary];
+    }
+    else if(buttonIndex ==2){
+        [self openImagePickerController:UIImagePickerControllerSourceTypeCamera];
+    }
+}
+
+/**
+ *  拍照和相册按钮点击的公共方法
+ */
+- (void)openImagePickerController :(UIImagePickerControllerSourceType )type
+{
+    if (![UIImagePickerController isSourceTypeAvailable:type])
+        return;
+    
+    // 创建图片选择器
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc]init];
+    // 设置图片选择器的类型
+    imagePicker.sourceType = type;
+    // 设置图片选择器的代理
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    // modal一个图片选择器
+    [self presentViewController:imagePicker animated:YES completion:^{
+        [UIApplication sharedApplication].statusBarStyle = 0;
+    }];
+    
+}
+
+
+#pragma mark - UIImagePickerControllerDelegate的方法
+- (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    // 选择照片之后dismiss图片控制器
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [UIApplication sharedApplication].statusBarStyle = 1;
+    }];
+    
+    // 获取选中的image图片
+    UIImage *image = info[@"UIImagePickerControllerEditedImage"];
+    self.photoIM.image = image;
+ 
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

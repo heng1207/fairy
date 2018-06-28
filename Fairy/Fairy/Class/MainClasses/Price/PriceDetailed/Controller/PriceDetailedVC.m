@@ -233,12 +233,12 @@
     tabBar.layout.progressHeight = 2;
     tabBar.layout.progressColor = [UIColor colorWithHex:@"#1161a0"];
     tabBar.layout.normalTextColor = [UIColor colorWithHex:@"#848484"];
-    tabBar.layout.selectedTextColor = [UIColor colorWithHex:@"#1161a0"];
+    tabBar.layout.selectedTextColor = [UIColor colorWithHex:@"#0e5f9f"];
     tabBar.layout.cellSpacing = 0;
     tabBar.layout.cellEdging = 0;
     tabBar.layout.cellWidth = SCREEN_WIDTH/2;
-    tabBar.layout.normalTextFont = AdaptedFontSize(26);
-    tabBar.layout.selectedTextFont = AdaptedFontSize(26);
+    tabBar.layout.normalTextFont = AdaptedFontSize(24);
+    tabBar.layout.selectedTextFont = AdaptedFontSize(24);
     tabBar.dataSource = self;
     tabBar.delegate = self;
     [tabBar registerClass:[TYTabPagerBarCell class] forCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier]];

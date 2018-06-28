@@ -65,13 +65,14 @@
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
-        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(20));
+        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
     
     UIButton *sendCodeBtn =[UIButton new];
     [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+    sendCodeBtn.titleLabel.font = AdaptedFontSize(28);
     sendCodeBtn.layer.cornerRadius = AdaptedHeight(25);
     sendCodeBtn.layer.masksToBounds = YES;
     sendCodeBtn.backgroundColor =[UIColor blueColor];
@@ -117,7 +118,7 @@
     [self.view addSubview:codeTF];
     [codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(codeLab.mas_right).offset(AdaptedWidth(20));
+        make.left.mas_equalTo(codeLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
@@ -155,7 +156,7 @@
     [self.view addSubview:passwordTF];
     [passwordTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(passwordLab.mas_right).offset(AdaptedWidth(20));
+        make.left.mas_equalTo(passwordLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
@@ -178,6 +179,7 @@
     UIButton *LoginBtn =[UIButton new];
     LoginBtn.backgroundColor =[UIColor blueColor];
     [LoginBtn setTitle:@"提交" forState:UIControlStateNormal];
+    LoginBtn.titleLabel.font = AdaptedFontSize(28);
     LoginBtn.layer.cornerRadius = AdaptedHeight(25);
     LoginBtn.layer.masksToBounds = YES;
     [self.view addSubview:LoginBtn];
@@ -192,6 +194,7 @@
     UIButton *registerBtn =[UIButton new];
     //    registerBtn.backgroundColor =[UIColor blueColor];
     [registerBtn setTitle:@"立即登录" forState:UIControlStateNormal];
+    registerBtn.titleLabel.font = AdaptedFontSize(28);
     [registerBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
     //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
     //    registerBtn.layer.masksToBounds = YES;

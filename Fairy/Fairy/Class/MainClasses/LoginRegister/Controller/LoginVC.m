@@ -89,7 +89,7 @@
     
     //密码
     UILabel *passwordLab =[UILabel new];
-    passwordLab.text=@"密码";
+    passwordLab.text=@"密   码";
     passwordLab.font = AdaptedFontSize(34);
     passwordLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:passwordLab];

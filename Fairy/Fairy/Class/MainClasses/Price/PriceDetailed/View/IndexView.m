@@ -31,7 +31,8 @@
 -(void)creatSubView{
     UILabel *indexLab =[UILabel new];
     indexLab.text=@"￥117.3800";
-    indexLab.font=AdaptedFontSize(40);
+    indexLab.font=AdaptedFontSize(36);
+    indexLab.textColor =[UIColor colorWithHex:@"#2eaf04"];
     indexLab.textAlignment = NSTextAlignmentLeft;
     indexLab.textColor =[UIColor greenColor];
     [self addSubview:indexLab];
@@ -47,8 +48,8 @@
     
     UILabel *increaseLab=[UILabel new];
     increaseLab.text=@"+0.7600  +0.66%";
-    increaseLab.font=AdaptedFontSize(34);
-    increaseLab.textColor =[UIColor greenColor];
+    increaseLab.font=AdaptedFontSize(24);
+    increaseLab.textColor = [UIColor colorWithHex:@"#2eaf04"];
     increaseLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:increaseLab];
     
@@ -62,7 +63,8 @@
     
     UILabel *currentPriceLab =[UILabel new];
     currentPriceLab.text=@"当前价格:116.7353";
-    currentPriceLab.font=AdaptedFontSize(28);
+    currentPriceLab.textColor = [UIColor colorWithHex:@"#323232"];
+    currentPriceLab.font=AdaptedFontSize(24);
     currentPriceLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:currentPriceLab];
     
@@ -74,13 +76,26 @@
     }];
     
     UILabel *priceRiseLab=[UILabel new];
-    priceRiseLab.text=@"涨幅:+16%";
-    priceRiseLab.font=AdaptedFontSize(28);
+//    priceRiseLab.text=@"涨       幅:+16%";
+    priceRiseLab.font=AdaptedFontSize(24);
+    priceRiseLab.textColor = [UIColor colorWithHex:@"#323232"];
     priceRiseLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:priceRiseLab];
     
+    //设置颜色
+    NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc] initWithString:@"涨       幅:"];
+    [attributedString addAttribute:NSFontAttributeName value:AdaptedFontSize(24) range:NSMakeRange(0, attributedString.length)];//设置字体属性 大小
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#323232"] range:NSMakeRange(0, attributedString.length)];//设置字体颜色
+    
+    NSMutableAttributedString *attributedString2=[[NSMutableAttributedString alloc] initWithString:@"+16%"];
+    [attributedString2 addAttribute:NSFontAttributeName value:AdaptedFontSize(24) range:NSMakeRange(0, attributedString2.length)];//设置字体属性 大小
+    [attributedString2 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#2eaf04"] range:NSMakeRange(0, attributedString2.length)];//设置字体颜色
+    [attributedString appendAttributedString:attributedString2];//拼接字符串
+    priceRiseLab.attributedText= attributedString;
+    
+    
     [priceRiseLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(-AdaptedHeight(28));
+        make.bottom.mas_equalTo(-AdaptedHeight(25));
         make.right.mas_equalTo(-AdaptedWidth(54));
         make.width.mas_equalTo(AdaptedWidth(250));
         make.height.mas_equalTo(AdaptedHeight(22));

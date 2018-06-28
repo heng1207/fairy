@@ -62,7 +62,8 @@
     UIButton *btnReply = [[UIButton alloc] init];
     [btnReply setTitle:@"分析" forState:UIControlStateNormal];
     [btnReply setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnReply.titleLabel.font = AdaptedFontSize(36);
+    [btnReply setTitleColor:[UIColor colorWithHex:@"#0e5f9f"] forState:UIControlStateSelected];
+    btnReply.titleLabel.font = AdaptedFontSize(34);
     [btnReply setImage:[UIImage imageNamed:@"icon_fenxihui_tab"] forState:UIControlStateNormal];
     [btnReply setImage:[UIImage imageNamed:@"icon_fenxi_tab"] forState:UIControlStateSelected];
     btnReply.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -79,7 +80,8 @@
     UIButton *btnDianLiang = [[UIButton alloc] init];
      [btnDianLiang setTitle:@"预测" forState:UIControlStateNormal];
     [btnDianLiang setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnDianLiang.titleLabel.font = AdaptedFontSize(36);
+    [btnDianLiang setTitleColor:[UIColor colorWithHex:@"#0e5f9f"] forState:UIControlStateSelected];
+    btnDianLiang.titleLabel.font = AdaptedFontSize(34);
     [btnDianLiang setImage:[UIImage imageNamed:@"icon_yucehui_tab"] forState:UIControlStateNormal];
     [btnDianLiang setImage:[UIImage imageNamed:@"icon_yuce_tab"] forState:UIControlStateSelected];
     btnDianLiang.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
@@ -95,7 +97,8 @@
     UIButton *btnZhuanFa = [[UIButton alloc] init];
     [btnZhuanFa setTitle:@"预警" forState:UIControlStateNormal];
     [btnZhuanFa setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    btnZhuanFa.titleLabel.font = AdaptedFontSize(36);
+    [btnZhuanFa setTitleColor:[UIColor colorWithHex:@"#0e5f9f"] forState:UIControlStateSelected];
+    btnZhuanFa.titleLabel.font = AdaptedFontSize(34);
     [btnZhuanFa setImage:[UIImage imageNamed:@"icon_yujinghui_tab"] forState:UIControlStateNormal];
     [btnZhuanFa setImage:[UIImage imageNamed:@"icon_yujing_tab"] forState:UIControlStateSelected];
     btnZhuanFa.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;

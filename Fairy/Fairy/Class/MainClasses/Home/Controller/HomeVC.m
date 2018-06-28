@@ -113,7 +113,7 @@
             }];
             
             _contentCell.viewControllers = contentVCs;
-            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH  -LL_TabbarHeight) childVCs:contentVCs parentVC:self delegate:self];
+            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH  - LL_StatusBarAndNavigationBarHeight) childVCs:contentVCs parentVC:self delegate:self];
             [_contentCell.contentView addSubview:_contentCell.pageContentView];
         }
         return _contentCell;
@@ -188,7 +188,7 @@
 - (FSBaseTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[FSBaseTableView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH-LL_TabbarHeight) style:UITableViewStylePlain];
+        _tableView = [[FSBaseTableView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH-LL_TabbarHeight -LL_StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

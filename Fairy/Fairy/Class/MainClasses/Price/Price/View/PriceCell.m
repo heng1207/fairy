@@ -8,10 +8,42 @@
 
 #import "PriceCell.h"
 
+@interface PriceCell()
+
+@property (weak, nonatomic) IBOutlet UILabel *fromLab;
+@property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *volumeLab;
+@property (weak, nonatomic) IBOutlet UILabel *increaseLab;
+@property (weak, nonatomic) IBOutlet UILabel *priceLab;
+
+@end
+
 @implementation PriceCell
 
 - (void)awakeFromNib {
-    [super awakeFromNib];    
+    [super awakeFromNib];
+    
+    self.fromLab.textColor =[UIColor colorWithHex:@"#aeaeae"];
+    self.fromLab.font = AdaptedFontSize(23);
+    
+    self.nameLab.textColor =[UIColor colorWithHex:@"#000000"];
+    self.nameLab.font = AdaptedFontSize(28);
+    
+    self.volumeLab.textColor =[UIColor colorWithHex:@"#aeaeae"];
+    self.volumeLab.font = AdaptedFontSize(23);
+    
+    
+    self.increaseLab.backgroundColor =[UIColor colorWithHex:@"#1cb91c"];
+    self.increaseLab.textColor =[UIColor colorWithHex:@"#ffffff"];
+    self.increaseLab.font = AdaptedFontSize(24);
+    self.increaseLab.textAlignment =NSTextAlignmentCenter;
+    self.increaseLab.layer.cornerRadius = 5;
+    self.increaseLab.layer.masksToBounds = YES;
+    
+    self.priceLab.textColor =[UIColor colorWithHex:@"#000000"];
+    self.priceLab.font = AdaptedFontSize(30);
+
+    
     // Initialization code
 }
 
