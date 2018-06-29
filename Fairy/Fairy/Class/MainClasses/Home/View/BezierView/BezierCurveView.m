@@ -51,7 +51,7 @@
  *  画折线图
  */
 -(void)drawLineSpace_x:(float)space_x{
-
+    
     //1.画坐标轴
     [self drawXLineSpace_x:space_x];
     
@@ -59,7 +59,7 @@
     for (NSInteger i=0; i<self.targetValues.count; i++) {
         [self drawCurrnetPath:self.targetValues[i] CurrentLine:i Space_x:space_x];
     }
-
+    
     
 }
 
@@ -69,7 +69,7 @@
  *  画坐标轴
  */
 -(void)drawXLineSpace_x:(float)space_x{
-
+    
     self.space_y = (CGRectGetHeight(self.myFrame) - MARGIN_Top - MARGIN_Bottom)/ (self.y_names.count-1);
     UIBezierPath *path = [UIBezierPath bezierPath];
     
@@ -79,7 +79,7 @@
     if (isbool) {
         index = [self.y_names indexOfObject:@"0"];
     }
-   
+    
     //1.X轴的直线
     [path moveToPoint:CGPointMake(0, CGRectGetHeight(self.myFrame)-MARGIN_Bottom - index*self.space_y)];
     self.height_X =  CGRectGetHeight(self.myFrame)-MARGIN_Bottom - index*self.space_y;
@@ -114,7 +114,7 @@
         textLabel.textColor = [UIColor blackColor];
         [self addSubview:textLabel];
     }
-
+    
     //5.渲染路径
     CAShapeLayer *shapeLayer2 = [CAShapeLayer layer];
     shapeLayer2.path = path2.CGPath;
@@ -123,9 +123,9 @@
     shapeLayer2.borderWidth = 2.0;
     [self.layer addSublayer:shapeLayer2];
     [self.shapeArr addObject:shapeLayer2];
-
     
-  
+    
+    
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = path.CGPath;
     shapeLayer.strokeColor = [UIColor blueColor].CGColor;
@@ -133,7 +133,7 @@
     shapeLayer.borderWidth = 2.0;
     [self.layer addSublayer:shapeLayer];
     [self.shapeArr addObject:shapeLayer];
-
+    
     
 }
 
@@ -186,7 +186,7 @@
     shapeLayer.borderWidth = 2.0;
     [self.layer addSublayer:shapeLayer];
     [self.shapeArr addObject:shapeLayer];
-
+    
     
     //4.画空心圆
     for (int i =0; i<allPoints.count; i++) {
@@ -249,8 +249,8 @@
 
 -(void)setSpace_x:(float)space_x{
     _space_x = space_x;
-//    NSLog(@"*******%f",space_x);
-
+    //    NSLog(@"*******%f",space_x);
+    
     //移除之前加载的CAShapeLayer
     for (NSInteger i = 0; i<self.shapeArr.count; i++) {
         CAShapeLayer *shape = self.shapeArr[i];

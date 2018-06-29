@@ -36,7 +36,7 @@
 #import "UIDevice+KCHardware.h"
 #import "UIView+BorderLine.h"
 #import "MonitorNetwork.h"// 网络状态监听
-
+#import "LBClearCacheTool.h"
 
 
 
@@ -89,6 +89,9 @@
 
 /// 用户资料存取的沙盒地址
 #define kFilePath [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"account.plist"]
+
+//Caches路径
+#define cachesFilePath [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) lastObject]
 
 /// nil保护，当为nil时，返回@""，避免一些Crash
 #define TL_Str_Protect(str) ((str) ? (str) : (@""))

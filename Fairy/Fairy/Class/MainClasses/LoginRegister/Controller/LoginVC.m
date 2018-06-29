@@ -89,7 +89,8 @@
     
     //密码
     UILabel *passwordLab =[UILabel new];
-    passwordLab.text=@"密   码";
+//    passwordLab.text=@"密   码";
+    passwordLab.text=@"密    码";
     passwordLab.font = AdaptedFontSize(34);
     passwordLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:passwordLab];
@@ -270,36 +271,41 @@
 }
 
 -(void)LoginClick{
-    if ( ![Tool checkTel:self.phoneTF.text]){
-        return;
-    }
-    //    if ( ![Tool checkPassWord:self.passwordTF.text]){
-    //        return;
-    //    }
     
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-//    dict[@"loginName"] = self.phoneTF.text;
-//    dict[@"password"] = self.passwordTF.text;
-    dict[@"loginName"] = @"zhangfeng";
-    dict[@"password"] = @"000000";
-    [NetworkManage Post:@"http://47.75.145.77:8080/interface/login" andParams:dict success:^(id responseObject) {
-        NSLog(@"%@",responseObject);
-        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
-        if ([dic[@"code"] integerValue] ==200 ) {
-       
-//            {
-//                "code": "200",
-//                "message": "登录成功",
-//                "token": "zhangfeng_82f8548fa242415180000f7cd56cd9d2"
-//            }
-            MainTabBarController *homeVC=[MainTabBarController new];
-            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
-        }else{
-            [self showHint:dic[@"message"]];
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    MainTabBarController *homeVC=[MainTabBarController new];
+    [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+    
+    
+//    if ( ![Tool checkTel:self.phoneTF.text]){
+//        return;
+//    }
+//    //    if ( ![Tool checkPassWord:self.passwordTF.text]){
+//    //        return;
+//    //    }
+//
+//    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+////    dict[@"loginName"] = self.phoneTF.text;
+////    dict[@"password"] = self.passwordTF.text;
+//    dict[@"loginName"] = @"zhangfeng";
+//    dict[@"password"] = @"000000";
+//    [NetworkManage Post:@"http://47.75.145.77:8080/interface/login" andParams:dict success:^(id responseObject) {
+//        NSLog(@"%@",responseObject);
+//        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+//        if ([dic[@"code"] integerValue] ==200 ) {
+//
+////            {
+////                "code": "200",
+////                "message": "登录成功",
+////                "token": "zhangfeng_82f8548fa242415180000f7cd56cd9d2"
+////            }
+//            MainTabBarController *homeVC=[MainTabBarController new];
+//            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+//        }else{
+//            [self showHint:dic[@"message"]];
+//        }
+//    } failure:^(NSError *error) {
+//        NSLog(@"%@",error);
+//    }];
 
 }
 

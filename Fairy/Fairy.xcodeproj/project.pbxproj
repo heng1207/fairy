@@ -26,6 +26,7 @@
 		0430254920E20B8B00094314 /* ClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430254820E20B8B00094314 /* ClassView.xib */; };
 		0430255220E213A900094314 /* IndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430254F20E213A800094314 /* IndexView.m */; };
 		0430255320E213A900094314 /* IndexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430255120E213A900094314 /* IndexView.xib */; };
+		043D7C5620E5D6AE00889B5B /* LBClearCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D7C5420E5D6AE00889B5B /* LBClearCacheTool.m */; };
 		0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBC620CFA618009BA6BF /* InformationSubVC.m */; };
 		0445DBCE20CFA9AD009BA6BF /* InformationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBCC20CFA9AD009BA6BF /* InformationCell.m */; };
 		0445DBCF20CFA9AD009BA6BF /* InformationCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0445DBCD20CFA9AD009BA6BF /* InformationCell.xib */; };
@@ -115,6 +116,8 @@
 		0430254F20E213A800094314 /* IndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexView.m; sourceTree = "<group>"; };
 		0430255020E213A900094314 /* IndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexView.h; sourceTree = "<group>"; };
 		0430255120E213A900094314 /* IndexView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexView.xib; sourceTree = "<group>"; };
+		043D7C5420E5D6AE00889B5B /* LBClearCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBClearCacheTool.m; sourceTree = "<group>"; };
+		043D7C5520E5D6AE00889B5B /* LBClearCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBClearCacheTool.h; sourceTree = "<group>"; };
 		0445DBC520CFA618009BA6BF /* InformationSubVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationSubVC.h; sourceTree = "<group>"; };
 		0445DBC620CFA618009BA6BF /* InformationSubVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationSubVC.m; sourceTree = "<group>"; };
 		0445DBCB20CFA9AD009BA6BF /* InformationCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationCell.h; sourceTree = "<group>"; };
@@ -322,6 +325,15 @@
 				0430252F20E1DB6B00094314 /* TargetView.m */,
 			);
 			path = BezierView;
+			sourceTree = "<group>";
+		};
+		043D7C5320E5D6AE00889B5B /* clearCache */ = {
+			isa = PBXGroup;
+			children = (
+				043D7C5420E5D6AE00889B5B /* LBClearCacheTool.m */,
+				043D7C5520E5D6AE00889B5B /* LBClearCacheTool.h */,
+			);
+			path = clearCache;
 			sourceTree = "<group>";
 		};
 		0445DBD020CFBCE1009BA6BF /* PriceTrend */ = {
@@ -629,6 +641,7 @@
 		7EB5E24F20CCAD40004BFAE2 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				043D7C5320E5D6AE00889B5B /* clearCache */,
 				7EB5E29520CD00F0004BFAE2 /* FSScrollContentViewLib */,
 				7EB5E25B20CCADFC004BFAE2 /* MonitorNetwork */,
 			);
@@ -899,6 +912,7 @@
 				7EFBA36220CC2F050059090B /* main.m in Sources */,
 				7EB5E25320CCAD40004BFAE2 /* MainTabBarController.m in Sources */,
 				0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */,
+				043D7C5620E5D6AE00889B5B /* LBClearCacheTool.m in Sources */,
 				04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */,
 				04204F8D20CE4B9D007BD075 /* PriceVC.m in Sources */,
 				7E75221720D40BFD007E1489 /* GraphCell.m in Sources */,
@@ -1066,6 +1080,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7M5DX7QDNW;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1086,6 +1101,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7M5DX7QDNW;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

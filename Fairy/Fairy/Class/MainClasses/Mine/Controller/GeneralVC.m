@@ -99,7 +99,14 @@
     }
     else if (indexPath.section==1){
         cell.TitleLab.text = @"清理缓存";
-        cell.DetailsLab.text = @"234.34 MB";
+//        cell.DetailsLab.text = @"234.34 MB";
+        NSString *fileSize = [LBClearCacheTool getCacheSizeWithFilePath:cachesFilePath];
+        if ([fileSize integerValue] == 0) {
+            cell.DetailsLab.text = @"";
+        }else {
+            cell.DetailsLab.text = [NSString stringWithFormat:@"%@",fileSize];
+        }
+        
     }
     else if (indexPath.section==2){
         if (indexPath.row ==0)
@@ -124,6 +131,68 @@
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
     view.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
     return view;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (indexPath.section==0) {
+        if (indexPath.row ==0)
+        {
+
+        }
+        else if (indexPath.row == 1)
+        {
+
+        }
+    }
+    else if (indexPath.section==1){
+        [self clearCacheIndex:indexPath];
+    }
+    else if (indexPath.section==2){
+        if (indexPath.row ==0)
+        {
+            
+        }
+        else if (indexPath.row == 1)
+        {
+            
+        }
+        
+    }
+
+}
+
+
+
+-(void)clearCacheIndex:(NSIndexPath*)indexPath{
+    
+    UIAlertController *alert=[UIAlertController alertControllerWithTitle:@"确定清除缓存吗?" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    //创建一个取消和一个确定按钮
+    UIAlertAction *actionCancle=[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:nil];
+    //因为需要点击确定按钮后改变文字的值，所以需要在确定按钮这个block里面进行相应的操作
+    UIAlertAction *actionOk=[UIAlertAction actionWithTitle:@"确定" style:UIAlertActionStyleDestructive handler:^(UIAlertAction * _Nonnull action) {
+        
+        //清楚缓存
+        BOOL isSuccess = [LBClearCacheTool clearCacheWithFilePath:cachesFilePath];
+        if (isSuccess) {
+            [self.myTableView reloadRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationNone];
+            [SVProgressHUD setDefaultStyle:SVProgressHUDStyleDark];
+            [SVProgressHUD showSuccessWithStatus:@"清除成功"];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0f * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                [SVProgressHUD dismiss];
+            });
+        }
+        
+        
+        
+    }   ];
+    //将取消和确定按钮添加进弹框控制器
+    [alert addAction:actionCancle];
+    [alert addAction:actionOk];
+    //添加一个文本框到弹框控制器
+    
+    //显示弹框控制器
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {

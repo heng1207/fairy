@@ -195,7 +195,7 @@
     //    registerBtn.backgroundColor =[UIColor blueColor];
     [registerBtn setTitle:@"立即登录" forState:UIControlStateNormal];
     registerBtn.titleLabel.font = AdaptedFontSize(28);
-    [registerBtn setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [registerBtn setTitleColor:[UIColor colorWithHex:@"#000b81"] forState:UIControlStateNormal];
     //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
     //    registerBtn.layer.masksToBounds = YES;
     [self.view addSubview:registerBtn];

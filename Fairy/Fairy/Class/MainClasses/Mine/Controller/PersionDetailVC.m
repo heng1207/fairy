@@ -241,7 +241,9 @@
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [picker dismissViewControllerAnimated:YES completion:nil];
+    [picker dismissViewControllerAnimated:YES completion:^{
+        [UIApplication sharedApplication].statusBarStyle = 1;
+    }];
 }
 
 

@@ -134,9 +134,10 @@
 {
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
     self.titleView.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
+    self.titleView.titleFont = AdaptedFontSize(33);
     self.titleView.titleSelectFont = AdaptedFontSize(33);
-    self.titleView.titleSelectColor = [UIColor colorWithHex:@"#0e5f9f"];
     self.titleView.titleNormalColor = [UIColor colorWithHex:@"#000000"];
+    self.titleView.titleSelectColor = [UIColor colorWithHex:@"#0e5f9f"];
     self.titleView.indicatorColor = [UIColor colorWithHex:@"#0e5f9f"];
     self.titleView.indicatorExtension = 10;
     return self.titleView;
