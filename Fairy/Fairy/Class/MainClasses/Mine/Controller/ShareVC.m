@@ -8,6 +8,10 @@
 
 #import "ShareVC.h"
 #import "shareBtn.h"
+// U-Share核心SDK
+#import <UMShare/UMShare.h>
+// U-Share分享面板SDK，未添加分享面板SDK可将此行去掉
+#import <UShareUI/UShareUI.h>
 
 @interface ShareVC ()
 @property(nonatomic,strong)NSArray *titleArr;
@@ -38,7 +42,7 @@
 
 -(void)creatSubViews{
     
-
+    
     UIView *backView =[[UIView alloc]initWithFrame:CGRectMake(0, UIScreenH-AdaptedHeight(190)- AdaptedHeight(88)-LL_TabbarSafeBottomMargin, UIScreenW, AdaptedHeight(190))];
     backView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:backView];
@@ -69,8 +73,8 @@
         [backView addSubview:button];
         
     }
-
-
+    
+    
     UIButton *cancleBtn =[[UIButton alloc]initWithFrame:CGRectMake(0, UIScreenH - AdaptedHeight(88)-LL_TabbarSafeBottomMargin, UIScreenW, AdaptedHeight(88))];
     [self.view addSubview:cancleBtn];
     cancleBtn.backgroundColor =[UIColor whiteColor];
@@ -90,6 +94,37 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)shareClick:(UIButton*)btn{
+    //QQ空间
+    BOOL  result = [[UMSocialManager defaultManager] isInstall:4];
+
+    //创建分享消息对象
+    UMSocialMessageObject *messageObject = [UMSocialMessageObject messageObject];
+    //创建网页内容对象
+    NSString* thumbURL =  @"https://mobile.umeng.com/images/pic/home/social/img-1.png";
+    UMShareWebpageObject *shareObject = [UMShareWebpageObject shareObjectWithTitle:@"欢迎使用【友盟+】社会化组件U-Share" descr:@"欢迎使用【友盟+】社会化组件U-Share，SDK包最小，集成成本最低，助力您的产品开发、运营与推广！" thumImage:thumbURL];
+    //设置网页地址
+    shareObject.webpageUrl = @"http://mobile.umeng.com/social";
+    
+    //分享消息对象设置分享内容对象
+    messageObject.shareObject = shareObject;
+    
+    //调用分享接口
+    [[UMSocialManager defaultManager] shareToPlatform:4 messageObject:messageObject currentViewController:self completion:^(id data, NSError *error) {
+        if (error) {
+            UMSocialLogInfo(@"************Share fail with error %@*********",error);
+        }else{
+            if ([data isKindOfClass:[UMSocialShareResponse class]]) {
+                UMSocialShareResponse *resp = data;
+                //分享结果消息
+                UMSocialLogInfo(@"response message is %@",resp.message);
+                //第三方原始返回的数据
+                UMSocialLogInfo(@"response originalResponse data is %@",resp.originalResponse);
+                
+            }else{
+                UMSocialLogInfo(@"response data is %@",data);
+            }
+        }
+    }];
     
 }
 
@@ -99,13 +134,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

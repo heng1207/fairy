@@ -62,6 +62,7 @@
     self.phoneTF = phoneTF;
     phoneTF.font=AdaptedFontSize(34);
     phoneTF.placeholder=@"请输入手机号";
+    phoneTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(90));
@@ -115,6 +116,7 @@
     UITextField *codeTF =[UITextField new];
     self.codeTF = codeTF;
     codeTF.placeholder=@"请输入验证码";
+    codeTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:codeTF];
     [codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(18));
@@ -214,13 +216,13 @@
     if ( ![Tool checkTel:self.phoneTF.text]){
         return;
     }
-    [NetworkManage  Get:GetLoginMessage(self.phoneTF.text)  andParams:nil success:^(id responseObject) {
+    [NetworkManage  Get:GetForgetPasswordMessage(self.phoneTF.text)  andParams:nil success:^(id responseObject) {
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
         NSLog(@"%@",responseObject);
         if ([dic[@"code"] integerValue] ==200 ) {
-            [self showHint:dic[@"message"]];
+            [self showHint:dic[@"验证码已经发送到您的手机"]];
         }else{
-            [self showHint:@"验证码获取失败"];
+            [self showHint:dic[@"message"]];
         }
     } failure:^(NSError *error) {
         [self showHint:@"网络有问题"];
@@ -229,23 +231,24 @@
 }
 
 -(void)LoginClick{
-    if ( ![Tool checkTel:self.phoneTF.text]){
+    if (![Tool checkTel:self.phoneTF.text]){
         return;
     }
-    //    if ( ![Tool checkPassWord:self.passwordTF.text]){
-    //        return;
-    //    }
     if ([Tool isBlankString:self.codeTF.text]) {
         UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"验证码不能为空" message:@"请键入验证码" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alertView show];
     }
+    if ( ![Tool checkPassWord:self.passwordTF.text]){
+        return;
+    }
+    
     
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
     dict[@"loginName"] = self.phoneTF.text;
-    dict[@"phoneNumbe"] = self.phoneTF.text;
+//    dict[@"phoneNumbe"] = self.phoneTF.text;
     dict[@"checkCode"] = self.codeTF.text;
     dict[@"password"] = self.passwordTF.text;
-    [NetworkManage Post:@"http://47.75.145.77:8080/interface/consumer/update" andParams:dict success:^(id responseObject) {
+    [NetworkManage Post:setPassword andParams:dict success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
         if ([dic[@"code"] integerValue] ==200 ) {
@@ -257,7 +260,7 @@
             MainTabBarController *homeVC=[MainTabBarController new];
             [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
         }else{
-            [self showHint:@"注册失败"];
+            [self showHint:dic[@"message"]];
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

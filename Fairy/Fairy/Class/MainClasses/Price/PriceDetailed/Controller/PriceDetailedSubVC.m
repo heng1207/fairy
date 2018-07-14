@@ -25,7 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor =[UIColor whiteColor];
+    self.view.backgroundColor =[UIColor colorWithHex:@"#f1f2f4"];
     
     //@"币地址检测",@"交易量预警",@"换手量预警",@"分析",@"币地址检测",@"交易量预警",@"换手量预警",@"分析",
     if ([self.headType isEqualToString:@"币地址检测"]) {

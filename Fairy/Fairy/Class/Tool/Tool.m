@@ -75,12 +75,13 @@
         return NO;
     }
     
-    NSString *regex = @"^(?=.*[a-zA-Z0-9].*)(?=.*[a-zA-Z\\W].*)(?=.*[0-9\\W].*).{8,16}$";
-    NSPredicate *   pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
+    //由字母或数字组成 6-18位密码字符串（正则）
+    NSString * regex = @"^[A-Za-z0-9_]{6,18}$";
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     if ([pred evaluateWithObject:password]) {
         return YES ;
     }else {
-        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入正确的密码" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
+        UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"提示" message:@"请输入由字母或数字组成的6-18位密码" delegate:nil cancelButtonTitle:@"好" otherButtonTitles:nil, nil];
         [alert show];
         return NO;
     }

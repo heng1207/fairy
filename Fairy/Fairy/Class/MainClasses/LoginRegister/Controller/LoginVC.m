@@ -10,6 +10,8 @@
 #import "RegisterVC.h"
 #import "FindPwVC.h"
 #import "MainTabBarController.h"
+#import "PhoneZhuCeModel.h"
+#import <UMShare/UMShare.h>
 
 @interface LoginVC ()
 
@@ -66,7 +68,7 @@
     UITextField *phoneTF =[UITextField new];
     self.phoneTF= phoneTF;
     phoneTF.font= AdaptedFontSize(34);
-    phoneTF.keyboardType = UIKeyboardTypeNumberPad;
+    phoneTF.keyboardType = UIKeyboardTypeDefault;
     phoneTF.placeholder=@"请输入用户名";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -272,49 +274,72 @@
 
 -(void)LoginClick{
     
-    MainTabBarController *homeVC=[MainTabBarController new];
-    [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+    NSString *pathURL;
     
+    if (self.selectLoginBtn.selected) {//验证码登录
+        if ( ![Tool checkTel:self.phoneTF.text]){
+            return;
+        }
+        if ( ![Tool checkPassWord:self.passwordTF.text]){
+            return;
+        }
+        pathURL = CodeLogin;
     
-//    if ( ![Tool checkTel:self.phoneTF.text]){
-//        return;
-//    }
-//    //    if ( ![Tool checkPassWord:self.passwordTF.text]){
-//    //        return;
-//    //    }
-//
-//    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-////    dict[@"loginName"] = self.phoneTF.text;
-////    dict[@"password"] = self.passwordTF.text;
-//    dict[@"loginName"] = @"zhangfeng";
-//    dict[@"password"] = @"000000";
-//    [NetworkManage Post:@"http://47.75.145.77:8080/interface/login" andParams:dict success:^(id responseObject) {
-//        NSLog(@"%@",responseObject);
-//        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
-//        if ([dic[@"code"] integerValue] ==200 ) {
-//
-////            {
-////                "code": "200",
-////                "message": "登录成功",
-////                "token": "zhangfeng_82f8548fa242415180000f7cd56cd9d2"
-////            }
-//            MainTabBarController *homeVC=[MainTabBarController new];
-//            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
-//        }else{
-//            [self showHint:dic[@"message"]];
-//        }
-//    } failure:^(NSError *error) {
-//        NSLog(@"%@",error);
-//    }];
+    }
+    else{//用户名登录
+  
+        if ([Tool isBlankString:self.phoneTF.text]) {
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"用户名不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+        
+        if ([Tool isBlankString:self.passwordTF.text]) {
+            UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+            [alertView show];
+            return;
+        }
+        
+        pathURL = UserNameLogin;
+    }
+    
+
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+//    dict[@"loginName"] = self.phoneTF.text;
+//    dict[@"password"] = self.passwordTF.text;
+    dict[@"loginName"] = @"zhangfeng";
+    dict[@"password"] = @"000000";
+    [NetworkManage Post:pathURL andParams:dict success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            //登陆成功
+            PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:obj[@"data"]];
+            // 归档存储模型数据
+            [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            
+            MainTabBarController *homeVC=[MainTabBarController new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+        }else {
+            [self showHint:obj[@"message"]];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
 
 }
 
 -(void)selectLoginClick:(UIButton*)btn{
     btn.selected = !btn.selected;
     if (btn.selected) {
+        self.phoneTF.keyboardType = UIKeyboardTypeNumberPad;
+        self.phoneTF.text = @"";
         self.phoneTF.placeholder=@"请输入手机号";
         self.phoneLab.text=@"手机号";
     }else{
+        self.phoneTF.keyboardType = UIKeyboardTypeDefault;
+        self.phoneTF.text = @"";
         self.phoneTF.placeholder=@"请输入用户名";
         self.phoneLab.text=@"用户名";
     }
@@ -322,6 +347,28 @@
 
 #pragma mark 三方登陆
 -(void)shareBtn:(UIButton *)btn{
+
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
+        if (error) {
+            
+        } else {
+            UMSocialUserInfoResponse *resp = result;
+            // 授权信息
+            NSLog(@"QQ uid: %@", resp.uid);
+            NSLog(@"QQ openid: %@", resp.openid);
+            NSLog(@"QQ unionid: %@", resp.unionId);
+            NSLog(@"QQ accessToken: %@", resp.accessToken);
+            NSLog(@"QQ expiration: %@", resp.expiration);
+            // 用户信息
+            NSLog(@"QQ name: %@", resp.name);
+            NSLog(@"QQ iconurl: %@", resp.iconurl);
+            NSLog(@"QQ gender: %@", resp.unionGender);
+            // 第三方平台SDK源数据
+            NSLog(@"QQ originalResponse: %@", resp.originalResponse);
+        }
+    }];
+
+    
     
 }
 

@@ -10,18 +10,13 @@
 
 @interface PhoneZhuCeModel : NSObject<NSCoding>
 
-// 用户唯一UID
-@property (nonatomic, strong) NSString *userId;
-// 自动登录密码
-@property (nonatomic, strong) NSString *autoKey;
-// 登录手机号码
-@property (nonatomic, strong) NSString *mobile;
-// 盐
-@property (nonatomic, strong) NSString *salt;
-// 自己设置的登录密码
-@property (nonatomic, strong) NSString *pwd;
-//头像
-@property (nonatomic,strong)  NSString *profile;
+
+
+// token
+@property (nonatomic, strong) NSString *token;
+
+////头像
+//@property (nonatomic,strong)  NSString *profile;
 
 
 

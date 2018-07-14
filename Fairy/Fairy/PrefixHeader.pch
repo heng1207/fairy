@@ -13,7 +13,7 @@
 #import "Tool.h"
 #import "NetworkManage.h"
 #import "HTTPRequestDefine.h"
-
+#import "PhoneZhuCeModel.h"
 
 #import "SVProgressHUD.h"
 #import "MJExtension.h"

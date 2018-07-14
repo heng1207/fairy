@@ -20,7 +20,7 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     
-    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)-LL_StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
+    _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), CGRectGetHeight(self.view.bounds)) style:UITableViewStylePlain];
     
     _tableView.separatorStyle =UITableViewCellSeparatorStyleNone;
     _tableView.delegate = self;

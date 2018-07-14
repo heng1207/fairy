@@ -14,6 +14,8 @@
 #import "IndexCellCell.h"
 #import "GraphCell.h"
 #import "SSSearchBar.h"
+#import "NavView.h"
+
 
 @interface HomeVC ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate>
 
@@ -25,7 +27,14 @@
 @end
 
 @implementation HomeVC
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
@@ -41,15 +50,14 @@
 }
 
 -(void)creatSearchBar{
-    SSSearchBar *searchBar = [[SSSearchBar alloc] initWithFrame:CGRectMake(0, 0, 260, 34)];
-    searchBar.placeholder = @"搜索 平台/币种/资讯";
-    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 260, 34)];
-//    view.backgroundColor =[UIColor grayColor];
-//    view.alpha = 0.5;
-//    view.layer.cornerRadius = 17;
-//    view.layer.masksToBounds = YES;
-    [view addSubview:searchBar];
-    self.navigationItem.titleView = view;
+//    SSSearchBar *searchBar = [[SSSearchBar alloc] initWithFrame:CGRectMake(0, 0, 260, 34)];
+//    searchBar.placeholder = @"搜索 平台/币种/资讯";
+//    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 260, 34)];
+//    [view addSubview:searchBar];
+//    self.navigationItem.titleView = view;
+    
+    NavView *navView =[[NavView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, LL_StatusBarAndNavigationBarHeight)];
+    [self.view addSubview:navView];
 }
 
 - (void)setupSubViews
@@ -113,7 +121,7 @@
             }];
             
             _contentCell.viewControllers = contentVCs;
-            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH  - LL_StatusBarAndNavigationBarHeight) childVCs:contentVCs parentVC:self delegate:self];
+            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH ) childVCs:contentVCs parentVC:self delegate:self];
             [_contentCell.contentView addSubview:_contentCell.pageContentView];
         }
         return _contentCell;
@@ -189,7 +197,7 @@
 - (FSBaseTableView *)tableView
 {
     if (!_tableView) {
-        _tableView = [[FSBaseTableView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH-LL_TabbarHeight -LL_StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
+        _tableView = [[FSBaseTableView alloc]initWithFrame:CGRectMake(0, LL_StatusBarAndNavigationBarHeight, UIScreenW, UIScreenH-LL_TabbarHeight -LL_StatusBarAndNavigationBarHeight) style:UITableViewStylePlain];
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;

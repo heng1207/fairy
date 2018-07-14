@@ -9,7 +9,7 @@
 #import "PersionDetailVC.h"
 #import "MessageCell.h"
 #import "PhotoSetCell.h"
-
+#import "MainTabBarController.h"
 
 @interface PersionDetailVC ()<UITableViewDataSource, UITableViewDelegate,UIAlertViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
@@ -190,7 +190,9 @@
         [alert show];
         
     }
-    
+    else if (indexPath.row==7){//退出登录
+        
+    }
 }
 
 #pragma mark UIAlertViewDelegate
@@ -236,7 +238,7 @@
     // 获取选中的image图片
     UIImage *image = info[@"UIImagePickerControllerEditedImage"];
     self.photoIM.image = image;
- 
+    [self uploadPhotoIM:image];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
@@ -246,6 +248,57 @@
     }];
 }
 
+-(void)uploadPhotoIM:(UIImage*)image{
+    
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"token"]  = userModel.token;
+    
+    NSMutableArray *photoArr=[NSMutableArray array];
+    [photoArr addObject:image];
+    
+    [NetworkManage Post:uploadPhoto andParams:dict andPhotoArr:photoArr success:^(id responseObject) {
+        
+        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+   
+        if ([dic[@"code"] integerValue] ==200 ) {
+            
+        }else {
+            [self showHint:dic[@"message"]];
+        }
+        
+    } failure:^(NSError *error) {
+        [self showHint:@"网络有问题"];
+    }];
+    
+}
+
+-(void)userLogout{
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"token"]  = userModel.token;
+    [NetworkManage Get:logOut andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            //登陆成功
+            PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:obj[@"data"]];
+            userModel.token = @"";
+            // 归档存储模型数据
+            [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            
+            MainTabBarController *homeVC=[MainTabBarController new];
+            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+        }else {
+            [self showHint:obj[@"message"]];
+        }
+        
+        
+    } failure:^(NSError *error) {
+        [self showHint:@"网络有问题"];
+    }];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

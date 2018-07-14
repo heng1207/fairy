@@ -44,6 +44,10 @@
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
 		7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A255F20D66BE30061D98B /* SwiftTest.swift */; };
+		7E35FD5920F9AD7800645870 /* YAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5320F9AD7800645870 /* YAxisView.m */; };
+		7E35FD5A20F9AD7800645870 /* XAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5520F9AD7800645870 /* XAxisView.m */; };
+		7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5720F9AD7800645870 /* WSLineChartView.m */; };
+		7E741ADE20F64588000E7E73 /* NavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E741ADD20F64588000E7E73 /* NavView.m */; };
 		7E75221720D40BFD007E1489 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E75221620D40BFD007E1489 /* GraphCell.m */; };
 		7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */; };
 		7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3210920CEC4A50093DBAB /* SSSearchBar.m */; };
@@ -151,6 +155,14 @@
 		78493D73EEE62E43218BE701 /* Pods_Fairy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fairy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E1A255E20D66BE20061D98B /* Fairy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fairy-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E1A255F20D66BE30061D98B /* SwiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTest.swift; sourceTree = "<group>"; };
+		7E35FD5320F9AD7800645870 /* YAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAxisView.m; sourceTree = "<group>"; };
+		7E35FD5420F9AD7800645870 /* WSLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSLineChartView.h; sourceTree = "<group>"; };
+		7E35FD5520F9AD7800645870 /* XAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XAxisView.m; sourceTree = "<group>"; };
+		7E35FD5620F9AD7800645870 /* YAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YAxisView.h; sourceTree = "<group>"; };
+		7E35FD5720F9AD7800645870 /* WSLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSLineChartView.m; sourceTree = "<group>"; };
+		7E35FD5820F9AD7800645870 /* XAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XAxisView.h; sourceTree = "<group>"; };
+		7E741ADC20F64588000E7E73 /* NavView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NavView.h; sourceTree = "<group>"; };
+		7E741ADD20F64588000E7E73 /* NavView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavView.m; sourceTree = "<group>"; };
 		7E75221520D40BFD007E1489 /* GraphCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphCell.h; sourceTree = "<group>"; };
 		7E75221620D40BFD007E1489 /* GraphCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphCell.m; sourceTree = "<group>"; };
 		7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
@@ -306,6 +318,7 @@
 				0430255020E213A900094314 /* IndexView.h */,
 				0430254F20E213A800094314 /* IndexView.m */,
 				0430255120E213A900094314 /* IndexView.xib */,
+				7E35FD5220F9AD7800645870 /* WSLineChartView */,
 				04204F9E20CE63A6007BD075 /* BaseTypeView.h */,
 				04204F9F20CE63A6007BD075 /* BaseTypeView.m */,
 				7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */,
@@ -380,6 +393,19 @@
 				35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		7E35FD5220F9AD7800645870 /* WSLineChartView */ = {
+			isa = PBXGroup;
+			children = (
+				7E35FD5420F9AD7800645870 /* WSLineChartView.h */,
+				7E35FD5720F9AD7800645870 /* WSLineChartView.m */,
+				7E35FD5820F9AD7800645870 /* XAxisView.h */,
+				7E35FD5520F9AD7800645870 /* XAxisView.m */,
+				7E35FD5620F9AD7800645870 /* YAxisView.h */,
+				7E35FD5320F9AD7800645870 /* YAxisView.m */,
+			);
+			path = WSLineChartView;
 			sourceTree = "<group>";
 		};
 		7EB5E23120CCAD40004BFAE2 /* Class */ = {
@@ -474,6 +500,8 @@
 				0430254520E20B7F00094314 /* ClassView.h */,
 				0430254620E20B7F00094314 /* ClassView.m */,
 				0430254820E20B8B00094314 /* ClassView.xib */,
+				7E741ADC20F64588000E7E73 /* NavView.h */,
+				7E741ADD20F64588000E7E73 /* NavView.m */,
 				0430252B20E1DB6B00094314 /* BezierView */,
 			);
 			path = View;
@@ -874,7 +902,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -887,6 +915,7 @@
 				04204F8E20CE4B9D007BD075 /* PriceCell.m in Sources */,
 				0430255220E213A900094314 /* IndexView.m in Sources */,
 				7EB5E27220CCAE09004BFAE2 /* UIView+Addition.m in Sources */,
+				7E35FD5920F9AD7800645870 /* YAxisView.m in Sources */,
 				0445DBD920CFCDF3009BA6BF /* TrendVC.m in Sources */,
 				7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */,
 				7EB5E2A520CD057F004BFAE2 /* HomeSubVC.m in Sources */,
@@ -925,6 +954,8 @@
 				7EB5E29120CCB673004BFAE2 /* FindPwVC.m in Sources */,
 				0430253320E1DB6B00094314 /* TargetView.m in Sources */,
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
+				7E741ADE20F64588000E7E73 /* NavView.m in Sources */,
+				7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */,
 				04B218DE20D10CCE000D661F /* shareBtn.m in Sources */,
 				0406C66720D0BAE7008F6A26 /* MessageCell.m in Sources */,
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,
@@ -940,6 +971,7 @@
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
 				7EB5E29F20CD01FF004BFAE2 /* FSBaseTableView.m in Sources */,
 				04B218D820D106FD000D661F /* GeneralVC.m in Sources */,
+				7E35FD5A20F9AD7800645870 /* XAxisView.m in Sources */,
 				04204F9A20CE5C38007BD075 /* PriceDetailedSubVC.m in Sources */,
 				0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */,
 				0445DBE020CFD277009BA6BF /* HeadCell.m in Sources */,
@@ -1080,7 +1112,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M5DX7QDNW;
+				DEVELOPMENT_TEAM = 22XG2PMWVV;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1101,7 +1133,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M5DX7QDNW;
+				DEVELOPMENT_TEAM = 22XG2PMWVV;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
