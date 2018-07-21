@@ -73,9 +73,15 @@
         [self creatXAxisView];
         
         
-        // 2. 捏合手势
+        //捏合手势
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
         [self.xAxisView addGestureRecognizer:pinch];
+        
+        
+        //点击手势
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapClick:)];
+        tap.numberOfTapsRequired = 1;
+        [self.xAxisView addGestureRecognizer:tap];
         
         
         //长按手势
@@ -188,6 +194,13 @@
         [self.xAxisView setIsLongPress:NO];
         [self.xAxisView setIsShowLabel:NO];
         
+    }
+}
+
+
+-(void)doTapClick:(UITapGestureRecognizer*)tap{
+    if ([_delegate respondsToSelector:@selector(xAxisViewTapClick)]) {
+        [_delegate xAxisViewTapClick];
     }
 }
 

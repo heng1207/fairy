@@ -7,7 +7,6 @@
 //
 
 #import "CurrencySelectVC.h"
-#import "TrendVC.h"
 
 @interface CurrencySelectVC ()
 @property (nonatomic,strong) NSMutableArray *flagArray;
@@ -50,7 +49,8 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
     
     UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-    [finish setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [finish setTitle:@"完成" forState:UIControlStateNormal];
+    finish.titleLabel.font = [UIFont systemFontOfSize:16];
     [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
     
@@ -60,8 +60,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)finishClick{
-    TrendVC *vc=[TrendVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 

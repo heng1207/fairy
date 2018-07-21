@@ -13,8 +13,9 @@
 #import "WSLineChartView.h"
 
 #import "CurrencySelectVC.h"
+#import "TrendVC.h"
 
-@interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate,BaseTypeViewDelegate>
+@interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate,BaseTypeViewDelegate,WSLineChartViewDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
 @property (nonatomic, strong)WSLineChartView *lineChartView;
@@ -66,7 +67,7 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
     
     UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-    [finish setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
+    [finish setImage:[UIImage imageNamed:@"searchLogo"] forState:UIControlStateNormal];
     [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
     
@@ -101,8 +102,9 @@
     
     WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180) xTitleArray:xArray yValueArray:yArray yMax:30 yMin:20];
     self.lineChartView = wsLine;
+    wsLine.delegate = self;
     [self.view addSubview:wsLine];
-    
+
 }
 
 -(void)creatBaseTypeView{
@@ -208,6 +210,11 @@
     
 }
 
+#pragma mark WSLineChartViewDelegate
+-(void)xAxisViewTapClick{
+    TrendVC *vc=[TrendVC new];
+    [self.navigationController pushViewController:vc animated:YES];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

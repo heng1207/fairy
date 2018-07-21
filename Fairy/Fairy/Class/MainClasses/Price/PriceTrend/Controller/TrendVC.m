@@ -132,8 +132,8 @@
     [_tabBar reloadData];
     [_pagerController reloadData];
     if (self.flagArray.count > 1) {
-        _currentIndex = 1;
-        [_pagerController scrollToControllerAtIndex:1 animate:NO];
+        _currentIndex = 0;
+        [_pagerController scrollToControllerAtIndex:0 animate:NO];
     }
 }
 

@@ -191,7 +191,7 @@
     self.selectLoginBtn = selectLoginBtn;
     selectLoginBtn.titleLabel.font = AdaptedFontSize(28);
 //    registerBtn.backgroundColor =[UIColor blueColor];
-    [selectLoginBtn setTitle:@"验证码登陆" forState:UIControlStateNormal];
+    [selectLoginBtn setTitle:@"手机号登陆" forState:UIControlStateNormal];
     [selectLoginBtn setTitle:@"用户名登陆" forState:UIControlStateSelected];
     selectLoginBtn.selected = NO;
     [selectLoginBtn setTitleColor:[UIColor colorWithHex:@"#000b81"] forState:UIControlStateNormal];
