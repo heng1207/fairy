@@ -35,6 +35,11 @@
 
 
 
+// 交易平台查询
+#define tradingPlatform           (SERVER@"/trade_platform/list_data")
+// 数字货币查询
+#define digitalCash               (SERVER@"/digital_currency/list_data")
+
 
 #define invite                   (SERVER@"/invitation/recommend")                         // 邀请
 #define inviteReward             (SERVER@"/invitation/view")//查看获得到的奖励

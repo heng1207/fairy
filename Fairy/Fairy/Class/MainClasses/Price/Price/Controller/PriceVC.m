@@ -79,6 +79,7 @@
 }
 
 -(void)loadNewData{
+    
     [self.myTableView reloadData];
     [self.myTableView.mj_header endRefreshing];
 }

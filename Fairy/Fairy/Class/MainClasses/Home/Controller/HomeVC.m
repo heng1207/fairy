@@ -211,6 +211,18 @@
 }
 
 -(void)loadNewData{
+    
+    [NetworkManage Get:digitalCash andParams:nil success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            NSArray *arr = obj[@"data"];
+            
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
     [self.tableView.mj_header endRefreshing];
     [self.tableView reloadData];
 }

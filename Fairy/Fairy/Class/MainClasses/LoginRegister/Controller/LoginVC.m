@@ -274,8 +274,9 @@
 
 -(void)LoginClick{
     
-    NSString *pathURL;
     
+    
+    NSString *pathURL;
     if (self.selectLoginBtn.selected) {//验证码登录
         if ( ![Tool checkTel:self.phoneTF.text]){
             return;
