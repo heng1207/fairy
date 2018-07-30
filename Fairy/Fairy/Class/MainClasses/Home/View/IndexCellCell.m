@@ -36,32 +36,32 @@
     self.biHangQingLab.font = AdaptedFontSize(35);
     
     self.nameLab.textColor = [UIColor colorWithHex:@"#000000"];
-    self.nameLab.font = AdaptedFontSize(23);
+    self.nameLab.font = AdaptedFontSize(25);
 
     self.RMBLab.textColor = [UIColor colorWithHex:@"#f63842"];
-    self.RMBLab.font = AdaptedFontSize(40);
+    self.RMBLab.font = AdaptedFontSize(32);
     
     self.USLab.textColor = [UIColor colorWithHex:@"#000000"];
-    self.USLab.font = AdaptedFontSize(18);
+    self.USLab.font = AdaptedFontSize(22);
     
     
     self.nameLab2.textColor = [UIColor colorWithHex:@"#000000"];
-    self.nameLab2.font = AdaptedFontSize(23);
+    self.nameLab2.font = AdaptedFontSize(25);
     
     self.RMBLab2.textColor = [UIColor colorWithHex:@"#f63842"];
-    self.RMBLab2.font = AdaptedFontSize(40);
+    self.RMBLab2.font = AdaptedFontSize(32);
     
     self.USLab2.textColor = [UIColor colorWithHex:@"#000000"];
-    self.USLab2.font = AdaptedFontSize(18);
+    self.USLab2.font = AdaptedFontSize(22);
     
     self.nameLab3.textColor = [UIColor colorWithHex:@"#000000"];
-    self.nameLab3.font = AdaptedFontSize(23);
+    self.nameLab3.font = AdaptedFontSize(25);
     
     self.RMBLab3.textColor = [UIColor colorWithHex:@"#f63842"];
-    self.RMBLab3.font = AdaptedFontSize(40);
+    self.RMBLab3.font = AdaptedFontSize(32);
     
     self.USLab3.textColor = [UIColor colorWithHex:@"#000000"];
-    self.USLab3.font = AdaptedFontSize(18);
+    self.USLab3.font = AdaptedFontSize(22);
     // Initialization code
 }
 

@@ -47,6 +47,17 @@
     // Initialization code
 }
 
+
+-(void)setPriceModel:(PriceModel *)priceModel{
+    _priceModel = priceModel;
+    
+    self.fromLab.text = priceModel.platformCnName;
+    self.nameLab.text =[NSString stringWithFormat:@"%@/%@",priceModel.fsym,priceModel.tsyms];
+    self.volumeLab.text = [NSString stringWithFormat:@"成交量 %@",priceModel.tradingVolume];
+    self.increaseLab.text = priceModel.priceChangeRatio;
+    self.priceLab.text = priceModel.lastPrice;
+}
+
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

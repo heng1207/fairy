@@ -8,11 +8,13 @@
 
 #import "HomeSubVC.h"
 #import "PriceCell.h"
+#import "PriceModel.h"
 
 @interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) BOOL fingerIsTouch;
 
 @property(nonatomic,strong)NSMutableArray *dataArrs;
+
 
 @end
 
@@ -51,7 +53,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 20;
+    return self.dataArrs.count;
     
 }
 
@@ -59,6 +61,7 @@
 {
     PriceCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"PriceCell"  forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.priceModel = self.dataArrs[indexPath.row];
     return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -104,7 +107,8 @@
     [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            NSLog(@"%@",obj[@"data"]);
+//            NSLog(@"%@",obj[@"data"]);
+            self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
             [self.tableView reloadData];
         }
     } failure:^(NSError *error) {

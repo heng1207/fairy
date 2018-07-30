@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PriceModel.h"
 
 @interface PriceCell : UITableViewCell
+
+@property(nonatomic,strong)PriceModel *priceModel;
 
 @end

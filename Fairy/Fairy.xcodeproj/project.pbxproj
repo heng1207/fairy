@@ -43,6 +43,7 @@
 		04B218DB20D10B8F000D661F /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DA20D10B8F000D661F /* ShareVC.m */; };
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
+		7E060399210F540400517F27 /* PriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E060398210F540400517F27 /* PriceModel.m */; };
 		7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A255F20D66BE30061D98B /* SwiftTest.swift */; };
 		7E35FD5920F9AD7800645870 /* YAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5320F9AD7800645870 /* YAxisView.m */; };
 		7E35FD5A20F9AD7800645870 /* XAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5520F9AD7800645870 /* XAxisView.m */; };
@@ -153,6 +154,8 @@
 		04B218E320D11867000D661F /* UIView+BorderLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BorderLine.m"; sourceTree = "<group>"; };
 		35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.release.xcconfig"; sourceTree = "<group>"; };
 		78493D73EEE62E43218BE701 /* Pods_Fairy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fairy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7E060397210F540400517F27 /* PriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceModel.h; sourceTree = "<group>"; };
+		7E060398210F540400517F27 /* PriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceModel.m; sourceTree = "<group>"; };
 		7E1A255E20D66BE20061D98B /* Fairy-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Fairy-Bridging-Header.h"; sourceTree = "<group>"; };
 		7E1A255F20D66BE30061D98B /* SwiftTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftTest.swift; sourceTree = "<group>"; };
 		7E35FD5320F9AD7800645870 /* YAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YAxisView.m; sourceTree = "<group>"; };
@@ -252,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				04204F8120CE4B9D007BD075 /* Controller */,
-				04204F8420CE4B9D007BD075 /* Model */,
+				7E060396210F53E300517F27 /* Model */,
 				04204F8520CE4B9D007BD075 /* View */,
 			);
 			path = Price;
@@ -265,13 +268,6 @@
 				04204F8320CE4B9D007BD075 /* PriceVC.m */,
 			);
 			path = Controller;
-			sourceTree = "<group>";
-		};
-		04204F8420CE4B9D007BD075 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		04204F8520CE4B9D007BD075 /* View */ = {
@@ -394,6 +390,16 @@
 			);
 			name = Pods;
 			sourceTree = "<group>";
+		};
+		7E060396210F53E300517F27 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7E060397210F540400517F27 /* PriceModel.h */,
+				7E060398210F540400517F27 /* PriceModel.m */,
+			);
+			name = Model;
+			path = Fairy/Class/MainClasses/Price/Price/Model;
+			sourceTree = SOURCE_ROOT;
 		};
 		7E35FD5220F9AD7800645870 /* WSLineChartView */ = {
 			isa = PBXGroup;
@@ -963,6 +969,7 @@
 				7EB5E27F20CCB13D004BFAE2 /* HomeVC.m in Sources */,
 				0430253220E1DB6B00094314 /* BezierView.m in Sources */,
 				7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */,
+				7E060399210F540400517F27 /* PriceModel.m in Sources */,
 				7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */,
 				0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */,
 				7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */,

@@ -55,11 +55,25 @@
 }
 
 -(void)initNavtionBar{
-    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    ItemLab.text = @"行情详情";
-    ItemLab.textColor=[UIColor whiteColor];
-    ItemLab.font = [UIFont systemFontOfSize:18];
-    self.navigationItem.titleView = ItemLab;
+    UIView *viewTitle = [[UIView alloc] init];
+    viewTitle.frame = CGRectMake(0, 0, 150, 36);
+
+    UILabel *fromLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 18)];
+    fromLab.font = AdaptedFontSize(30);
+    fromLab.textColor = [UIColor whiteColor];
+    fromLab.textAlignment = NSTextAlignmentCenter;
+    fromLab.text = @"ETC/ETH";
+    [viewTitle addSubview:fromLab];
+    
+    UILabel *nameLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 18, 150, 18)];
+    nameLab.font = AdaptedFontSize(30);
+    nameLab.textColor = [UIColor whiteColor];
+    nameLab.textAlignment = NSTextAlignmentCenter;
+    nameLab.text = @"OKEx 以太经典";
+    [viewTitle addSubview:nameLab];
+    
+    self.navigationItem.titleView =viewTitle;
+
     
     UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
     [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];

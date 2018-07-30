@@ -109,7 +109,7 @@
             HomeSubVC*vc = [[HomeSubVC alloc]init];
             NSDictionary *dict = self.moneyClassData[i];
             vc.title = dict[@"value"];
-            vc.headTypeID = dict[@"dictionaryValueID"];
+            vc.headTypeID = dict[@"code"];
             [contentVCs addObject:vc];
         }
         
@@ -123,13 +123,11 @@
     if (indexPath.row == 0) {
         IndexCellCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"IndexCellCell"  forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor whiteColor];
         cell.globalIndexData = self.globalIndexData;
         return cell;
     }else{
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }
     return nil;

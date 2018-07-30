@@ -10,6 +10,7 @@
 #import "HeadCell.h"
 #import "SettingCell.h"
 
+#import "LoginVC.h"
 #import "PersionDetailVC.h"
 #import "PriceCenterVC.h"
 #import "WarnCenterVC.h"
@@ -65,7 +66,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
-        return 165+LL_StatusBarHeight;
+        return 165;
     }
     return 50;
 }
@@ -185,6 +186,7 @@
     UIViewController *vc;
     if (indexPath.section==0) {
         vc =[PersionDetailVC new];
+//        vc =[LoginVC new];
     }
     else if (indexPath.section==1){
         if (indexPath.row ==0) {
