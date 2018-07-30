@@ -170,38 +170,63 @@
 
 -(void)getCellLocationOnView:(NSIndexPath*)indexPath{
     //通过点击按钮获取index
-//     NSIndexPath *indexPath = [joinTable indexPathForCell:(JoinTableCell *)sender.superview.superview];
     CGRect rectInTableView = [self.myTableView rectForRowAtIndexPath:indexPath];
     CGRect rect = [self.myTableView convertRect:rectInTableView toView:[self.myTableView superview]];
     
+    if (indexPath.row==0) {
+        
+        [NetworkManage Get:tradingPlatform andParams:nil success:^(id responseObject) {
+            NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+            if ([obj[@"code"] integerValue] ==200 ) {
+                NSArray *dataArr = obj[@"data"];
+                
+                NSMutableArray *items = [NSMutableArray array];
+                for (NSInteger i = 0; i<dataArr.count; i++) {
+                    [items addObject:[YCXMenuItem menuItem:dataArr[i][@"platformCnName"] image:nil tag:i userInfo:@{@"title":@"Menu"}]];
+                }
+                
+                
+                [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
+                    NSLog(@"%@",item);
+                    MessageCell *cell =  [_myTableView cellForRowAtIndexPath:indexPath];
+                    cell.DetailsLab.text = item.title;
+                }];
+                
+            }
+            
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
     
-    NSArray *items = @[
-                       [YCXMenuItem menuItem:@"中币"
-                                       image:nil
-                                         tag:100
-                                    userInfo:@{@"title":@"Menu"}],
-                       [YCXMenuItem menuItem:@"美币"
-                                       image:nil
-                                         tag:102
-                                    userInfo:@{@"title":@"Menu"}],
-                       [YCXMenuItem menuItem:@"俄币"
-                                       image:nil
-                                         tag:102
-                                    userInfo:@{@"title":@"Menu"}],
-                       [YCXMenuItem menuItem:@"英币"
-                                       image:nil
-                                         tag:102
-                                    userInfo:@{@"title":@"Menu"}],
-                       [YCXMenuItem menuItem:@"法币"
-                                       image:nil
-                                         tag:102
-                                    userInfo:@{@"title":@"Menu"}],
-                       ];
+  
+    else if (indexPath.row==2){
+        
+        [NetworkManage Get:digitalCash andParams:nil success:^(id responseObject) {
+            NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+            if ([obj[@"code"] integerValue] ==200 ) {
+                NSArray *dataArr = obj[@"data"];
+                
+                NSMutableArray *items = [NSMutableArray array];
+                for (NSInteger i = 0; i<dataArr.count; i++) {
+                    [items addObject:[YCXMenuItem menuItem:dataArr[i][@"currencyCnName"] image:nil tag:i userInfo:@{@"title":@"Menu"}]];
+                }
+                
+           
+                
+                [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
+                    NSLog(@"%@",item);
+                    MessageCell *cell =  [_myTableView cellForRowAtIndexPath:indexPath];
+                    cell.DetailsLab.text = item.title;
+                }];
+                
+            }
+            
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
     
-    [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
-        NSLog(@"%@",item);
-    }];
-
 }
 
 -(void)pricesBtnClick:(UIButton*)btn{

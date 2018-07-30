@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, assign) BOOL isRefresh;
 
-@property(nonatomic,strong) NSString *headType;//标题类型
+@property(nonatomic,strong) NSString *headTypeID;//标题类型ID
 
 
 @end

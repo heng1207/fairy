@@ -53,6 +53,7 @@ static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
         
         UICollectionView * collectionView = [[UICollectionView alloc]initWithFrame:self.bounds collectionViewLayout:flowLayout];
+        collectionView.backgroundColor =[UIColor whiteColor];
         collectionView.showsHorizontalScrollIndicator = NO;
         collectionView.pagingEnabled = YES;
         collectionView.bounces = NO;
@@ -89,6 +90,7 @@ static NSString *collectionCellIdentifier = @"collectionCellIdentifier";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:collectionCellIdentifier forIndexPath:indexPath];
+    cell.backgroundColor =[UIColor whiteColor];
     if (IOS_VERSION < 8.0) {
         [cell.contentView.subviews makeObjectsPerformSelector:@selector(removeFromSuperview)];
         UIViewController *childVC = self.childsVCs[indexPath.item];

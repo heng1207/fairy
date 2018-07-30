@@ -39,7 +39,7 @@
     self.nameLab.font = AdaptedFontSize(23);
 
     self.RMBLab.textColor = [UIColor colorWithHex:@"#f63842"];
-    self.RMBLab.font = AdaptedFontSize(45);
+    self.RMBLab.font = AdaptedFontSize(40);
     
     self.USLab.textColor = [UIColor colorWithHex:@"#000000"];
     self.USLab.font = AdaptedFontSize(18);
@@ -49,7 +49,7 @@
     self.nameLab2.font = AdaptedFontSize(23);
     
     self.RMBLab2.textColor = [UIColor colorWithHex:@"#f63842"];
-    self.RMBLab2.font = AdaptedFontSize(45);
+    self.RMBLab2.font = AdaptedFontSize(40);
     
     self.USLab2.textColor = [UIColor colorWithHex:@"#000000"];
     self.USLab2.font = AdaptedFontSize(18);
@@ -58,13 +58,30 @@
     self.nameLab3.font = AdaptedFontSize(23);
     
     self.RMBLab3.textColor = [UIColor colorWithHex:@"#f63842"];
-    self.RMBLab3.font = AdaptedFontSize(45);
+    self.RMBLab3.font = AdaptedFontSize(40);
     
     self.USLab3.textColor = [UIColor colorWithHex:@"#000000"];
     self.USLab3.font = AdaptedFontSize(18);
     // Initialization code
 }
 
+-(void)setGlobalIndexData:(NSArray *)globalIndexData{
+    _globalIndexData = globalIndexData;
+    
+    self.nameLab.text = globalIndexData[0][@"platformCnName"];
+    self.RMBLab.text = globalIndexData[0][@"rmbPrice"];
+    self.USLab.text = globalIndexData[0][@"lastPrice"];
+    
+    self.nameLab2.text = globalIndexData[1][@"platformCnName"];
+    self.RMBLab2.text = globalIndexData[1][@"rmbPrice"];
+    self.USLab2.text = globalIndexData[1][@"lastPrice"];
+    
+    self.nameLab3.text = globalIndexData[2][@"platformCnName"];
+    self.RMBLab3.text = globalIndexData[2][@"rmbPrice"];
+    self.USLab3.text = globalIndexData[2][@"lastPrice"];
+    
+    
+}
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 

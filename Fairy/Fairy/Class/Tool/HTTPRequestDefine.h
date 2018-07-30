@@ -39,6 +39,14 @@
 #define tradingPlatform           (SERVER@"/trade_platform/list_data")
 // 数字货币查询
 #define digitalCash               (SERVER@"/digital_currency/list_data")
+// 全球指数
+#define globalIndex               (SERVER@"/global_index/list_data")
+// 首页tab分类
+#define moneyClass                (SERVER@"/dictionary/list_currency_type")
+// 首页tab分类内容
+#define moneyClassContent          (SERVER@"/coin_pair/list_data")
+
+
 
 
 #define invite                   (SERVER@"/invitation/recommend")                         // 邀请

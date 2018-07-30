@@ -24,6 +24,9 @@
 @property (nonatomic, strong) FSSegmentTitleView *titleView;
 @property (nonatomic, assign) BOOL canScroll;
 
+@property (nonatomic,strong) NSArray *globalIndexData;
+@property (nonatomic,strong) NSArray* moneyClassData;
+
 @end
 
 @implementation HomeVC
@@ -43,19 +46,11 @@
     [self creatSearchBar];
     [self setupSubViews];
 
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeScrollStatus) name:@"leaveTop" object:nil];
     
     // Do any additional setup after loading the view.
 }
 
--(void)creatSearchBar{
-//    SSSearchBar *searchBar = [[SSSearchBar alloc] initWithFrame:CGRectMake(0, 0, 260, 34)];
-//    searchBar.placeholder = @"搜索 平台/币种/资讯";
-//    UIView *view =[[UIView alloc]initWithFrame:CGRectMake(0, 0, 260, 34)];
-//    [view addSubview:searchBar];
-//    self.navigationItem.titleView = view;
-    
+-(void)creatSearchBar{    
     NavView *navView =[[NavView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, LL_StatusBarAndNavigationBarHeight)];
     [self.view addSubview:navView];
 }
@@ -64,10 +59,11 @@
 {
     self.canScroll = YES;
     [self.view addSubview:self.tableView];
-
+    [self loadNewData];
+    
 
     //下拉刷新
-    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
+//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
     [self.tableView.mj_header beginRefreshing];
 }
 
@@ -101,38 +97,39 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
-        _contentCell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+        _contentCell = [tableView dequeueReusableCellWithIdentifier:@"tabCell"];
+        _contentCell.backgroundColor = [UIColor whiteColor];
         if (!_contentCell) {
-            _contentCell = [[FSBottomTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-            NSArray *titles = @[@"自选",@"基础链",@"社交通讯"];
-            NSMutableArray *contentVCs = [NSMutableArray array];
-            //            for (NSString *title in titles) {
-            //                FSScrollContentViewController *vc = [[FSScrollContentViewController alloc]init];
-            //                vc.title = title;
-            //                vc.str = title;
-            //                [contentVCs addObject:vc];
-            //            }
-            
-            [titles enumerateObjectsUsingBlock:^(NSString * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                HomeSubVC*vc = [[HomeSubVC alloc]init];
-                vc.title = obj;
-                vc.headType = obj;
-                [contentVCs addObject:vc];
-            }];
-            
-            _contentCell.viewControllers = contentVCs;
-            _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH ) childVCs:contentVCs parentVC:self delegate:self];
-            [_contentCell.contentView addSubview:_contentCell.pageContentView];
+            _contentCell = [[FSBottomTableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"tabCell"];
         }
+    
+        //            NSArray *titles = @[@"自选",@"基础链",@"社交通讯"];
+        NSMutableArray *contentVCs = [NSMutableArray array];
+        for (NSInteger i =0; i<self.moneyClassData.count; i++) {
+            HomeSubVC*vc = [[HomeSubVC alloc]init];
+            NSDictionary *dict = self.moneyClassData[i];
+            vc.title = dict[@"value"];
+            vc.headTypeID = dict[@"dictionaryValueID"];
+            [contentVCs addObject:vc];
+        }
+        
+        _contentCell.viewControllers = contentVCs;
+        _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH ) childVCs:contentVCs parentVC:self delegate:self];
+        _contentCell.pageContentView.backgroundColor = [UIColor whiteColor];
+        [_contentCell.contentView addSubview:_contentCell.pageContentView];
+        
         return _contentCell;
     }
     if (indexPath.row == 0) {
         IndexCellCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"IndexCellCell"  forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor whiteColor];
+        cell.globalIndexData = self.globalIndexData;
         return cell;
     }else{
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor whiteColor];
         return cell;
     }
     return nil;
@@ -140,7 +137,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+    NSMutableArray *items = [NSMutableArray array];
+    for (NSInteger i=0; i<self.moneyClassData.count; i++) {
+        [items addObject:self.moneyClassData[i][@"value"]];
+    }
+    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:items delegate:self indicatorType:FSIndicatorTypeEqualTitle];
+    
+//    self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:@[@"自选",@"基础链",@"社交通讯"] delegate:self indicatorType:FSIndicatorTypeEqualTitle];
     self.titleView.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
     self.titleView.titleFont = AdaptedFontSize(33);
     self.titleView.titleSelectFont = AdaptedFontSize(33);
@@ -167,6 +170,7 @@
 
 - (void)FSSegmentTitleView:(FSSegmentTitleView *)titleView startIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex
 {
+
     self.contentCell.pageContentView.contentViewCurrentIndex = endIndex;
 }
 
@@ -211,20 +215,37 @@
 }
 
 -(void)loadNewData{
-    
-    [NetworkManage Get:digitalCash andParams:nil success:^(id responseObject) {
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    dict[@"tradePlatformID"] = @"1";
+    [NetworkManage Get:globalIndex andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            
-            NSArray *arr = obj[@"data"];
-            
+            self.globalIndexData = obj[@"data"];
+//            [self.tableView.mj_header endRefreshing];
+            [self.tableView reloadData];
         }
-        
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
-    [self.tableView.mj_header endRefreshing];
-    [self.tableView reloadData];
+    
+    
+    
+    [NetworkManage Get:moneyClass andParams:nil success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            self.moneyClassData = obj[@"data"];
+//            [self.tableView.mj_header endRefreshing];
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+    
+    
+    
+//    [self.tableView.mj_header endRefreshing];
+//    [self.tableView reloadData];
 }
 
 

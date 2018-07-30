@@ -12,6 +12,8 @@
 @interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) BOOL fingerIsTouch;
 
+@property(nonatomic,strong)NSMutableArray *dataArrs;
+
 @end
 
 @implementation HomeSubVC
@@ -28,44 +30,19 @@
     [_tableView registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:@"PriceCell"];
     [self.view addSubview:_tableView];
     
+    [self loadDatas];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    NSLog(@"%@",self.headType);
+    NSLog(@"当前类型%@",self.headTypeID);
 }
-
-- (void)insertRowAtTop
-{
-//    for (int i = 0; i<5; i++) {
-//        [self.data insertObject:RandomData atIndex:0];
-//    }
-//    __weak UITableView *tableView = self.tableView;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [tableView reloadData];
-//    });
-}
-
-- (void)insertRowAtBottom
-{
-//    for (int i = 0; i<5; i++) {
-//        [self.data addObject:RandomData];
-//    }
-//    __weak UITableView *tableView = self.tableView;
-//    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        [tableView reloadData];
-//        [tableView.infiniteScrollingView stopAnimating];
-//    });
-}
-
-#pragma mark Setter
+#pragma mark Setter 刷新
 - (void)setIsRefresh:(BOOL)isRefresh
 {
     _isRefresh = isRefresh;
-    [self insertRowAtTop];
 }
-
 #pragma mark UITableViewDataSource&&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -118,6 +95,25 @@
 //    }
 //    self.tableView.showsVerticalScrollIndicator = _vcCanScroll?YES:NO;
 }
+
+
+-(void)loadDatas{
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    dict[@"tradePlatformID"] = @"1";
+    dict[@"coinPairType"] = self.headTypeID;
+    [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            NSLog(@"%@",obj[@"data"]);
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
