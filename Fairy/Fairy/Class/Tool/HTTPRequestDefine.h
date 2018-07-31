@@ -24,9 +24,11 @@
 #define UserNameLogin            (SERVER@"/login")
 // 验证码登录
 #define CodeLogin                (SERVER@"/login_by_checkcode")
+// 修改密码
+#define UpdatePassword           (SERVER@"/student_account/update_password")
 // 忘记密码，获取短信验证码
 #define GetForgetPasswordMessage(phone)   ([NSString stringWithFormat:@"%@/front/get_forget_password_check_code/%@",SERVER,phone])
-// 重置密码
+// 用验证码重置密码
 #define setPassword               (SERVER@"/front/reset_forget_password")
 // 上传头像
 #define uploadPhoto               (SERVER@"/upload_header_portrait")

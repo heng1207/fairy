@@ -10,6 +10,7 @@
 
 @interface PriceModel : NSObject
 
+@property(nonatomic,copy) NSString *coinPairID;
 @property(nonatomic,copy) NSString *fsym;
 @property(nonatomic,copy) NSString *tsyms;
 @property(nonatomic,copy) NSString *platformCnName;

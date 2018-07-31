@@ -44,6 +44,9 @@
     self.priceLab.font = AdaptedFontSize(30);
 
     
+    
+    
+    
     // Initialization code
 }
 

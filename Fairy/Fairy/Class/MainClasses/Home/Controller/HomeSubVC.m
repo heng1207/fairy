@@ -6,6 +6,14 @@
 //  Copyright © 2018年 张恒. All rights reserved.
 //
 
+
+
+//折线图
+//http://47.75.145.77:8080/interface/coinmarketcap/getCoinmarketcapHistoryData?coinPairID=18
+//K线图
+//http://47.75.145.77:8080/kline/get_kline_15m?tradePlatformID=1&coinPairID=18
+
+
 #import "HomeSubVC.h"
 #import "PriceCell.h"
 #import "PriceModel.h"
