@@ -3,7 +3,7 @@
 //  Fairy
 //
 //  Created by mac on 2018/6/11.
-//  Copyright © 2018年 张恒. All rights reserved.
+//  Copyright © 2018年 . All rights reserved.
 //
 
 #import "PriceDetailedVC.h"
@@ -51,6 +51,7 @@
     self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
     [self reloadData];
     
+    
     // Do any additional setup after loading the view.
 }
 
@@ -62,14 +63,14 @@
     fromLab.font = AdaptedFontSize(30);
     fromLab.textColor = [UIColor whiteColor];
     fromLab.textAlignment = NSTextAlignmentCenter;
-    fromLab.text = @"ETC/ETH";
+    fromLab.text = self.priceModel.platformCnName;
     [viewTitle addSubview:fromLab];
     
     UILabel *nameLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 18, 150, 18)];
     nameLab.font = AdaptedFontSize(30);
     nameLab.textColor = [UIColor whiteColor];
     nameLab.textAlignment = NSTextAlignmentCenter;
-    nameLab.text = @"OKEx 以太经典";
+    nameLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
     [viewTitle addSubview:nameLab];
     
     self.navigationItem.titleView =viewTitle;

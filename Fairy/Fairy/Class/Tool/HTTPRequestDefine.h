@@ -46,7 +46,11 @@
 // 首页tab分类
 #define moneyClass                (SERVER@"/dictionary/list_currency_type")
 // 首页tab分类内容
-#define moneyClassContent          (SERVER@"/coin_pair/list_data")
+#define moneyClassContent         (SERVER@"/coin_pair/list_data")
+//加入自选
+#define insertOptional            (SERVER@"/consumer_pair/insert")
+//币种选择
+#define moneyTypeSelect           (SERVER@"/platform_currency/list_data")
 
 
 

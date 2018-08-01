@@ -2,8 +2,8 @@
 //  HomeVC.m
 //  Fairy
 //
-//  Created by 张恒 on 2018/6/10.
-//  Copyright © 2018年 张恒. All rights reserved.
+//  Created by  on 2018/6/10.
+//  Copyright © 2018年 . All rights reserved.
 //
 
 #import "HomeVC.h"
@@ -105,6 +105,10 @@
     
         //            NSArray *titles = @[@"自选",@"基础链",@"社交通讯"];
         NSMutableArray *contentVCs = [NSMutableArray array];
+        HomeSubVC*vc = [[HomeSubVC alloc]init];
+        vc.title = @"自选";
+        vc.headTypeID = @"自选";
+        [contentVCs addObject:vc];
         for (NSInteger i =0; i<self.moneyClassData.count; i++) {
             HomeSubVC*vc = [[HomeSubVC alloc]init];
             NSDictionary *dict = self.moneyClassData[i];
@@ -136,6 +140,7 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     NSMutableArray *items = [NSMutableArray array];
+    [items addObject: @"自选"];
     for (NSInteger i=0; i<self.moneyClassData.count; i++) {
         [items addObject:self.moneyClassData[i][@"value"]];
     }

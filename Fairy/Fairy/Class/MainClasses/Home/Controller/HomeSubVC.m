@@ -2,8 +2,8 @@
 //  HomeSubVC.m
 //  Fairy
 //
-//  Created by 张恒 on 2018/6/10.
-//  Copyright © 2018年 张恒. All rights reserved.
+//  Created by  on 2018/6/10.
+//  Copyright © 2018年 . All rights reserved.
 //
 
 
@@ -17,6 +17,9 @@
 #import "HomeSubVC.h"
 #import "PriceCell.h"
 #import "PriceModel.h"
+#import "PriceDetailedVC.h"
+#import "HomeVC.h"
+
 
 @interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource>
 @property (nonatomic, assign) BOOL fingerIsTouch;
@@ -40,13 +43,13 @@
     [_tableView registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:@"PriceCell"];
     [self.view addSubview:_tableView];
     
-    [self loadDatas];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     NSLog(@"当前类型%@",self.headTypeID);
+    [self loadDatas];
 }
 #pragma mark Setter 刷新
 - (void)setIsRefresh:(BOOL)isRefresh
@@ -71,6 +74,12 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.priceModel = self.dataArrs[indexPath.row];
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
+    PriceDetailedVC *vc =[PriceDetailedVC new];
+    vc.priceModel = self.dataArrs[indexPath.row];
+    vc.hidesBottomBarWhenPushed = YES;
+    [[Tool getCurrentVC].navigationController pushViewController:vc animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -107,21 +116,27 @@
 //    self.tableView.showsVerticalScrollIndicator = _vcCanScroll?YES:NO;
 }
 
-
 -(void)loadDatas{
-    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-    dict[@"tradePlatformID"] = @"1";
-    dict[@"coinPairType"] = self.headTypeID;
-    [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
-        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
-        if ([obj[@"code"] integerValue] ==200 ) {
-//            NSLog(@"%@",obj[@"data"]);
-            self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
-            [self.tableView reloadData];
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    
+    if ([self.headTypeID isEqualToString:@"自选"]) {
+        
+    }
+    else{
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        dict[@"tradePlatformID"] = @"1";
+        dict[@"coinPairType"] = self.headTypeID;
+        [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
+            NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+            if ([obj[@"code"] integerValue] ==200 ) {
+                // NSLog(@"%@",obj[@"data"]);
+                self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
+                [self.tableView reloadData];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+
+    }
     
 }
 
