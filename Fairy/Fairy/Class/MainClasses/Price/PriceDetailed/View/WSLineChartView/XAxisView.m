@@ -372,7 +372,7 @@
             
             // 判断是不是小数
             if ([self isPureFloat:[num floatValue]]) {
-                [[NSString stringWithFormat:@"水位:%.2fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+                [[NSString stringWithFormat:@"水位:%.2fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor blueColor]}];
             }
             else {
                 [[NSString stringWithFormat:@"水位:%.0fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15)withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor blueColor]}];

@@ -42,15 +42,14 @@
     [self initNavtionBar];
     
     [self creatPriceView];
-    [self creatChartView];
-    [self creatBaseTypeView];
-
-    [self addTabPageBar];
-    [self addPagerController];
+//    [self creatChartView];
+//    [self creatBaseTypeView];
+//
+//    [self addTabPageBar];
+//    [self addPagerController];
     
-    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
-    [self reloadData];
     
+    [self requestData];
     
     // Do any additional setup after loading the view.
 }
@@ -230,6 +229,54 @@
     TrendVC *vc=[TrendVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }
+
+-(void)requestData{
+
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPair"] = self.priceModel.fsym;
+    [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+        
+            //获取显示区间最大值，最小值
+            NSMutableArray *price = [NSMutableArray array];
+            for (NSDictionary *item in obj[@"data"] ) {
+                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+            }
+            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+            int maxSection = (maxPrice/10);
+            int minSection = (minPrice/10);
+            int maxPriceSection = maxSection*10+10;
+            int minPriceSection = minSection*10;
+//            NSLog(@"%f---%f",maxPrice,minPrice);
+            
+            NSMutableArray *xArray = [NSMutableArray array];
+            NSMutableArray *yArray = [NSMutableArray array];
+            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [xArray addObject:obj[@"historyDate"]];
+                [yArray addObject:obj[@"closePrice"]];
+            }];
+            
+            WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+            self.lineChartView = wsLine;
+            wsLine.delegate = self;
+            [self.view addSubview:wsLine];
+            
+            
+            [self creatBaseTypeView];
+            [self addTabPageBar];
+            [self addPagerController];
+            self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
+            [self reloadData];
+            
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

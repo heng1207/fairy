@@ -32,6 +32,8 @@
 
 @implementation AppDelegate
 
+//应用简介：让多数人掌握数字资产投资知识
+//应用介绍：币精灵（fairycoin） 通过直观图表展示、通俗易懂的指标描述，降低了投资分析的知识、技术门槛，让多数人更快掌握数字资产投资的相关知识
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
@@ -62,13 +64,14 @@
 - (void)configUSharePlatforms
 {
     /* 设置微信的appKey和appSecret */
+    //wx5bce4b9576c82915
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatSession appKey:@"wxdc1e388c3822c80b" appSecret:@"3baf1193c85774b3fd9d18447d76cab0" redirectURL:@"http://mobile.umeng.com/social"];
     /* 设置分享到QQ互联的appID
      * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
      */
     [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_QQ appKey:@"1106493577"/*设置QQ平台的appID*/  appSecret:nil redirectURL:@"http://mobile.umeng.com/social"];
     /* 设置新浪的appKey和appSecret */
-    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"3921700954"  appSecret:@"04b48b094faeb16683c32669824ebdad" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2492988176"  appSecret:@"a64c95b851f3448794553b37e289fa82" redirectURL:@"https://sns.whalecloud.com/sina2/callback"];
  }
 
 #pragma mark 键盘弹出、隐藏管理

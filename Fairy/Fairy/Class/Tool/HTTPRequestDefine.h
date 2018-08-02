@@ -51,11 +51,13 @@
 #define insertOptional            (SERVER@"/consumer_pair/insert")
 //币种选择
 #define moneyTypeSelect           (SERVER@"/platform_currency/list_data")
+//行情详情折线图
+#define coinmarketcapHistory      (SERVER@"/coinmarketcap/getCoinmarketcapHistoryData")
+//http://47.75.145.77:8080/interface/coinmarketcap/getCoinmarketcapHistoryData?coinPair=eth
 
+//K线图
+#define kline                     (SERVER@"/kline/get_kline_15m")
+//http://47.75.145.77:8080/interface/kline/get_kline_15m?tradePlatform=bitfinex&coinPair=eth_btc&klineDate=20180801
 
-
-
-#define invite                   (SERVER@"/invitation/recommend")                         // 邀请
-#define inviteReward             (SERVER@"/invitation/view")//查看获得到的奖励
 
 #endif /* HTTPRequestDefine_h */

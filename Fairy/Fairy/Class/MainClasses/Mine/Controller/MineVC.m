@@ -185,8 +185,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIViewController *vc;
     if (indexPath.section==0) {
-        vc =[PersionDetailVC new];
-//        vc =[LoginVC new];
+//        vc =[PersionDetailVC new];
+        vc =[LoginVC new];
     }
     else if (indexPath.section==1){
         if (indexPath.row ==0) {
