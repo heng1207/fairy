@@ -35,6 +35,7 @@
     indexLab.textColor =[UIColor colorWithHex:@"#2eaf04"];
     indexLab.textAlignment = NSTextAlignmentLeft;
     indexLab.textColor =[UIColor greenColor];
+    self.indexLab = indexLab;
     [self addSubview:indexLab];
     
     [indexLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -47,6 +48,7 @@
     
     
     UILabel *increaseLab=[UILabel new];
+    self.increaseLab = increaseLab;
     increaseLab.text=@"+0.7600  +0.66%";
     increaseLab.font=AdaptedFontSize(24);
     increaseLab.textColor = [UIColor colorWithHex:@"#2eaf04"];
@@ -77,6 +79,7 @@
     
     UILabel *priceRiseLab=[UILabel new];
 //    priceRiseLab.text=@"涨       幅:+16%";
+    self.priceRiseLab = priceRiseLab;
     priceRiseLab.font=AdaptedFontSize(24);
     priceRiseLab.textColor = [UIColor colorWithHex:@"#323232"];
     priceRiseLab.textAlignment = NSTextAlignmentLeft;
@@ -111,6 +114,14 @@
         make.bottom.mas_equalTo(0);
     }];
     
+}
+
+-(void)setPriceModel:(PriceModel *)priceModel{
+    _priceModel = priceModel;
+    
+    self.indexLab.text = priceModel.lastPrice;
+    self.priceRiseLab.text = priceModel.priceChangeRatio;
+    self.increaseLab.text = priceModel.tradingVolume;
 }
 
 /*

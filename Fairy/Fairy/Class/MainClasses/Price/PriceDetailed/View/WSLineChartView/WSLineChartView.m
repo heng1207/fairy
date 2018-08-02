@@ -89,6 +89,19 @@
         [self.xAxisView addGestureRecognizer:longPress];
         
 
+        UIButton *compareBtn =[[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width-leftMargin, 0, 25, 20)];
+        [compareBtn setImage:[UIImage imageNamed:@"compareDown"] forState:UIControlStateNormal];
+        [compareBtn setTitle:@"对比" forState:UIControlStateNormal];
+        [compareBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        compareBtn.titleLabel.font =[UIFont systemFontOfSize:8];
+        [compareBtn addTarget:self action:@selector(compareClick) forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:compareBtn];
+        compareBtn.contentHorizontalAlignment = UIControlContentHorizontalAlignmentCenter;//使图片和文字水平居中显示
+        [compareBtn setTitleEdgeInsets:UIEdgeInsetsMake(-compareBtn.imageView.frame.size.height ,-compareBtn.imageView.frame.size.width, compareBtn.imageView.frame.size.height,0.0)];//文字距离上边框的距离增加imageView的高度，距离左边框减少imageView的宽度，距离下边框和右边框距离不变
+        [compareBtn setImageEdgeInsets:UIEdgeInsetsMake(compareBtn.titleLabel.frame.size.height, 0.0,0.0, -compareBtn.titleLabel.bounds.size.width)];//图片距离右边框距离减少图片的宽度，其它不边
+        
+
+        
     }
     return self;
 }
@@ -197,6 +210,11 @@
     }
 }
 
+-(void)compareClick{
+    if ([_delegate respondsToSelector:@selector(xAxisViewTapClick)]) {
+        [_delegate xAxisViewCompareClick];
+    }
+}
 
 -(void)doTapClick:(UITapGestureRecognizer*)tap{
     if ([_delegate respondsToSelector:@selector(xAxisViewTapClick)]) {

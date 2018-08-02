@@ -8,7 +8,7 @@
 
 #import "YAxisView.h"
 
-#define topMargin 15   // 为顶部留出的空白
+#define topMargin 25   // 为顶部留出的空白
 #define xAxisTextGap 5 //x轴文字与x轴坐标轴间隙
 #define numberOfYAxisElements 5 // y轴分为几段
 #define kChartLineColor         [UIColor grayColor]
@@ -52,9 +52,6 @@
     
     
     NSDictionary *waterAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
-    CGSize waterLabelSize = [@"水位/m" sizeWithAttributes:waterAttr];
-    CGRect waterRect = CGRectMake( 1 + 5, 0,waterLabelSize.width,waterLabelSize.height);
-    [@"水位/m" drawInRect:waterRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
 
     
     // 横向分割线间隔

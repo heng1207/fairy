@@ -17,4 +17,5 @@
 
 @property (nonatomic,strong) PriceModel *priceModel;
 
+
 @end

@@ -60,7 +60,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)finishClick{
-
+    
 }
 
 
@@ -97,7 +97,11 @@
 }
 
 -(void)selectClick:(UIButton*)btn{
-    btn.selected = !btn.selected ;
+
+    NSMutableDictionary *dict = self.flagArray[btn.tag];
+    self.block(dict[@"currencyShortEnName"]);
+    [self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 -(void)requestDatas{
@@ -106,6 +110,13 @@
         if ([obj[@"code"] integerValue] ==200 ) {
             self.flagArray = obj[@"data"];
             [self creatBtnView];
+            /*
+             @"tsyms" : @"美元"
+             @"digitalCurrencyID" : (long)1
+             @"platformCurrencyID" : (long)1
+             @"tradePlatformID" : (long)1
+             @"currencyShortEnName" : @"ETH"
+             */
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

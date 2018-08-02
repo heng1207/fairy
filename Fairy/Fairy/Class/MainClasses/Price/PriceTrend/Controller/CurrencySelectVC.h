@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^BLOCK) (NSString *content);
+
 @interface CurrencySelectVC : UIViewController
 
+@property(nonatomic,strong)BLOCK block;
 @end

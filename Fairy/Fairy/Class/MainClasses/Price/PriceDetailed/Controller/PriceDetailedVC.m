@@ -18,13 +18,13 @@
 @interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate,BaseTypeViewDelegate,WSLineChartViewDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
-@property (nonatomic, strong)WSLineChartView *lineChartView;
-@property (nonatomic, strong) NSArray *turnovers;
-@property (nonatomic, strong) NSArray *Yturnovers;
-
+@property(nonatomic, strong)WSLineChartView *lineChartView;
 @property(nonatomic,strong)BaseTypeView *baseTypeView;
 
-@property (nonatomic,strong) NSMutableArray *flagArray;
+@property(nonatomic,strong) NSArray *firstDataArr;
+@property(nonatomic,strong) NSArray *secondDataArr;
+
+@property(nonatomic,strong) NSMutableArray *flagArray;
 @end
 
 @implementation PriceDetailedVC
@@ -40,11 +40,11 @@
     self.view.backgroundColor =[UIColor whiteColor];
     
     [self initNavtionBar];
-    
     [self creatPriceView];
+    
+    
 //    [self creatChartView];
 //    [self creatBaseTypeView];
-//
 //    [self addTabPageBar];
 //    [self addPagerController];
     
@@ -80,25 +80,25 @@
     [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
     
-    UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-    [finish setImage:[UIImage imageNamed:@"searchLogo"] forState:UIControlStateNormal];
-    [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
+    UIButton *search = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+    [search setImage:[UIImage imageNamed:@"searchLogo"] forState:UIControlStateNormal];
+    [search addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchDown];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:search];
     
 }
 
 -(void)backClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)finishClick{
-    CurrencySelectVC *vc=[CurrencySelectVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+-(void)searchClick{
+
 }
 
 
 -(void)creatPriceView{
     IndexView *indexView =[[IndexView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 60)];
     self.indexView = indexView;
+    [indexView setPriceModel:self.priceModel];
     indexView.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:indexView];
     
@@ -229,7 +229,13 @@
     TrendVC *vc=[TrendVC new];
     [self.navigationController pushViewController:vc animated:YES];
 }
-
+-(void)xAxisViewCompareClick{
+    CurrencySelectVC *vc=[CurrencySelectVC new];
+    vc.block = ^(NSString *content) {
+        [self requestSelectData:content];
+    };
+    [self.navigationController pushViewController:vc animated:YES];
+}
 -(void)requestData{
 
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
@@ -237,7 +243,8 @@
     [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-        
+            self.firstDataArr = obj[@"data"];
+            
             //获取显示区间最大值，最小值
             NSMutableArray *price = [NSMutableArray array];
             for (NSDictionary *item in obj[@"data"] ) {
@@ -252,13 +259,15 @@
 //            NSLog(@"%f---%f",maxPrice,minPrice);
             
             NSMutableArray *xArray = [NSMutableArray array];
-            NSMutableArray *yArray = [NSMutableArray array];
+            NSMutableArray *yArrays = [NSMutableArray array];
+            NSMutableArray *yArray0 = [NSMutableArray array];
             [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [xArray addObject:obj[@"historyDate"]];
-                [yArray addObject:obj[@"closePrice"]];
+                [yArray0 addObject:obj[@"closePrice"]];
             }];
+            [yArrays addObject:yArray0];
             
-            WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+            WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180) xTitleArray:xArray yValueArray:yArrays yMax:maxPriceSection yMin:minPriceSection];
             self.lineChartView = wsLine;
             wsLine.delegate = self;
             [self.view addSubview:wsLine];
@@ -277,6 +286,68 @@
     }];
 }
 
+-(void)requestSelectData:(NSString*)type{
+    
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPair"] = type;
+    [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            self.secondDataArr = obj[@"data"];
+            
+            //获取显示区间最大值，最小值
+            NSMutableArray *price = [NSMutableArray array];
+            for (NSDictionary *item in obj[@"data"] ) {
+                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+            }
+            for (NSDictionary *item in self.firstDataArr) {
+                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+            }
+            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+            int maxSection = (maxPrice/10);
+            int minSection = (minPrice/10);
+            int maxPriceSection = maxSection*10+10;
+            int minPriceSection = minSection*10;
+            NSLog(@"%f---%f",maxPrice,minPrice);
+            
+            NSMutableArray *xArray = [NSMutableArray array];
+            NSMutableArray *yArrays = [NSMutableArray array];
+            NSMutableArray *yArray0 = [NSMutableArray array];
+            NSMutableArray *yArray1 = [NSMutableArray array];
+            
+            [self.firstDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [xArray addObject:obj[@"historyDate"]];
+                [yArray0 addObject:obj[@"closePrice"]];
+            }];
+            
+            [self.secondDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                [xArray addObject:obj[@"historyDate"]];
+                [yArray1 addObject:obj[@"closePrice"]];
+            }];
+            
+            [yArrays addObject:yArray1];
+            [yArrays addObject:yArray0];
+            
+            
+            
+       
+            [self.lineChartView removeFromSuperview];
+            self.lineChartView = nil;
+            WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180) xTitleArray:xArray yValueArray:yArrays yMax:maxPriceSection yMin:minPriceSection];
+            self.lineChartView = wsLine;
+            wsLine.delegate = self;
+            [self.view addSubview:wsLine];
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+-(void)dealloc{
+    NSLog(@"%@",self);
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

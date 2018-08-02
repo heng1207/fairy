@@ -11,6 +11,7 @@
 
 @protocol WSLineChartViewDelegate <NSObject>
 
+-(void)xAxisViewCompareClick;
 -(void)xAxisViewTapClick;
 @end
 
@@ -19,4 +20,6 @@
 - (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin;
 
 @property(nonatomic,weak)id<WSLineChartViewDelegate> delegate;
+
+
 @end
