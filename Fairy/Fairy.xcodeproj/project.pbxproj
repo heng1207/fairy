@@ -43,6 +43,28 @@
 		04B218DB20D10B8F000D661F /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DA20D10B8F000D661F /* ShareVC.m */; };
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
+		4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */; };
+		4ED1CA282114547700D86411 /* UIColor+Y_StockChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F52114547700D86411 /* UIColor+Y_StockChart.m */; };
+		4ED1CA292114547700D86411 /* Y_StockChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F62114547700D86411 /* Y_StockChartView.m */; };
+		4ED1CA2A2114547700D86411 /* Y_KLineMAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9FA2114547700D86411 /* Y_KLineMAView.m */; };
+		4ED1CA2B2114547700D86411 /* Y_KLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9FB2114547700D86411 /* Y_KLineView.m */; };
+		4ED1CA2C2114547700D86411 /* Y_StockChartRightYView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9FD2114547700D86411 /* Y_StockChartRightYView.m */; };
+		4ED1CA2D2114547700D86411 /* Y_VolumeMAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA012114547700D86411 /* Y_VolumeMAView.m */; };
+		4ED1CA2E2114547700D86411 /* Y_KLineAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA032114547700D86411 /* Y_KLineAccessoryView.m */; };
+		4ED1CA2F2114547700D86411 /* Y_KLineAccessory.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA062114547700D86411 /* Y_KLineAccessory.m */; };
+		4ED1CA302114547700D86411 /* Y_AccessoryMAView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA092114547700D86411 /* Y_AccessoryMAView.m */; };
+		4ED1CA312114547700D86411 /* Y_KLinePositionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA0D2114547700D86411 /* Y_KLinePositionModel.m */; };
+		4ED1CA322114547700D86411 /* Y_KLineModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA122114547700D86411 /* Y_KLineModel.m */; };
+		4ED1CA332114547700D86411 /* Y_KLineGroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA132114547700D86411 /* Y_KLineGroupModel.m */; };
+		4ED1CA342114547700D86411 /* Y_KLineVolumePositionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA142114547700D86411 /* Y_KLineVolumePositionModel.m */; };
+		4ED1CA352114547700D86411 /* Y_KLineVolumeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA172114547700D86411 /* Y_KLineVolumeView.m */; };
+		4ED1CA362114547700D86411 /* Y_KLineVolume.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA192114547700D86411 /* Y_KLineVolume.m */; };
+		4ED1CA372114547700D86411 /* Y_KLineMainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA1D2114547700D86411 /* Y_KLineMainView.m */; };
+		4ED1CA382114547700D86411 /* Y_MALine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA212114547700D86411 /* Y_MALine.m */; };
+		4ED1CA392114547700D86411 /* Y_KLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA222114547700D86411 /* Y_KLine.m */; };
+		4ED1CA3A2114547700D86411 /* Y_StockChartSegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA252114547700D86411 /* Y_StockChartSegmentView.m */; };
+		4ED1CA3F211454D400D86411 /* KLineFullScreenVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA3B211454D400D86411 /* KLineFullScreenVC.m */; };
+		4ED1CA40211454D400D86411 /* Y_StockChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1CA3D211454D400D86411 /* Y_StockChartViewController.m */; };
 		7E060399210F540400517F27 /* PriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E060398210F540400517F27 /* PriceModel.m */; };
 		7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1A255F20D66BE30061D98B /* SwiftTest.swift */; };
 		7E35FD5920F9AD7800645870 /* YAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5320F9AD7800645870 /* YAxisView.m */; };
@@ -153,6 +175,51 @@
 		04B218E220D11867000D661F /* UIView+BorderLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+BorderLine.h"; sourceTree = "<group>"; };
 		04B218E320D11867000D661F /* UIView+BorderLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BorderLine.m"; sourceTree = "<group>"; };
 		35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.release.xcconfig"; sourceTree = "<group>"; };
+		4ED1C9EC2114547700D86411 /* Y_StockChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartView.h; sourceTree = "<group>"; };
+		4ED1C9EF2114547700D86411 /* Y_StockChartGlobalVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartGlobalVariable.h; sourceTree = "<group>"; };
+		4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_StockChartGlobalVariable.m; sourceTree = "<group>"; };
+		4ED1C9F22114547700D86411 /* Y_StockChartConstant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartConstant.h; sourceTree = "<group>"; };
+		4ED1C9F42114547700D86411 /* UIColor+Y_StockChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+Y_StockChart.h"; sourceTree = "<group>"; };
+		4ED1C9F52114547700D86411 /* UIColor+Y_StockChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+Y_StockChart.m"; sourceTree = "<group>"; };
+		4ED1C9F62114547700D86411 /* Y_StockChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_StockChartView.m; sourceTree = "<group>"; };
+		4ED1C9F92114547700D86411 /* Y_KLineMAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineMAView.h; sourceTree = "<group>"; };
+		4ED1C9FA2114547700D86411 /* Y_KLineMAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineMAView.m; sourceTree = "<group>"; };
+		4ED1C9FB2114547700D86411 /* Y_KLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineView.m; sourceTree = "<group>"; };
+		4ED1C9FD2114547700D86411 /* Y_StockChartRightYView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_StockChartRightYView.m; sourceTree = "<group>"; };
+		4ED1C9FE2114547700D86411 /* Y_StockChartRightYView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartRightYView.h; sourceTree = "<group>"; };
+		4ED1CA002114547700D86411 /* Y_VolumeMAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_VolumeMAView.h; sourceTree = "<group>"; };
+		4ED1CA012114547700D86411 /* Y_VolumeMAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_VolumeMAView.m; sourceTree = "<group>"; };
+		4ED1CA032114547700D86411 /* Y_KLineAccessoryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineAccessoryView.m; sourceTree = "<group>"; };
+		4ED1CA052114547700D86411 /* Y_KLineAccessory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineAccessory.h; sourceTree = "<group>"; };
+		4ED1CA062114547700D86411 /* Y_KLineAccessory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineAccessory.m; sourceTree = "<group>"; };
+		4ED1CA072114547700D86411 /* Y_KLineAccessoryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineAccessoryView.h; sourceTree = "<group>"; };
+		4ED1CA092114547700D86411 /* Y_AccessoryMAView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_AccessoryMAView.m; sourceTree = "<group>"; };
+		4ED1CA0A2114547700D86411 /* Y_AccessoryMAView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_AccessoryMAView.h; sourceTree = "<group>"; };
+		4ED1CA0D2114547700D86411 /* Y_KLinePositionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLinePositionModel.m; sourceTree = "<group>"; };
+		4ED1CA0E2114547700D86411 /* Y_KLineModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineModel.h; sourceTree = "<group>"; };
+		4ED1CA0F2114547700D86411 /* Y_KLineGroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineGroupModel.h; sourceTree = "<group>"; };
+		4ED1CA102114547700D86411 /* Y_KLineVolumePositionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineVolumePositionModel.h; sourceTree = "<group>"; };
+		4ED1CA112114547700D86411 /* Y_KLinePositionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLinePositionModel.h; sourceTree = "<group>"; };
+		4ED1CA122114547700D86411 /* Y_KLineModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineModel.m; sourceTree = "<group>"; };
+		4ED1CA132114547700D86411 /* Y_KLineGroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineGroupModel.m; sourceTree = "<group>"; };
+		4ED1CA142114547700D86411 /* Y_KLineVolumePositionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineVolumePositionModel.m; sourceTree = "<group>"; };
+		4ED1CA152114547700D86411 /* Y_KLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineView.h; sourceTree = "<group>"; };
+		4ED1CA172114547700D86411 /* Y_KLineVolumeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineVolumeView.m; sourceTree = "<group>"; };
+		4ED1CA192114547700D86411 /* Y_KLineVolume.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineVolume.m; sourceTree = "<group>"; };
+		4ED1CA1A2114547700D86411 /* Y_KLineVolume.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineVolume.h; sourceTree = "<group>"; };
+		4ED1CA1B2114547700D86411 /* Y_KLineVolumeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineVolumeView.h; sourceTree = "<group>"; };
+		4ED1CA1D2114547700D86411 /* Y_KLineMainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLineMainView.m; sourceTree = "<group>"; };
+		4ED1CA1F2114547700D86411 /* Y_MALine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_MALine.h; sourceTree = "<group>"; };
+		4ED1CA202114547700D86411 /* Y_KLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLine.h; sourceTree = "<group>"; };
+		4ED1CA212114547700D86411 /* Y_MALine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_MALine.m; sourceTree = "<group>"; };
+		4ED1CA222114547700D86411 /* Y_KLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_KLine.m; sourceTree = "<group>"; };
+		4ED1CA232114547700D86411 /* Y_KLineMainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_KLineMainView.h; sourceTree = "<group>"; };
+		4ED1CA252114547700D86411 /* Y_StockChartSegmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_StockChartSegmentView.m; sourceTree = "<group>"; };
+		4ED1CA262114547700D86411 /* Y_StockChartSegmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartSegmentView.h; sourceTree = "<group>"; };
+		4ED1CA3B211454D400D86411 /* KLineFullScreenVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KLineFullScreenVC.m; sourceTree = "<group>"; };
+		4ED1CA3C211454D400D86411 /* KLineFullScreenVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KLineFullScreenVC.h; sourceTree = "<group>"; };
+		4ED1CA3D211454D400D86411 /* Y_StockChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_StockChartViewController.m; sourceTree = "<group>"; };
+		4ED1CA3E211454D400D86411 /* Y_StockChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartViewController.h; sourceTree = "<group>"; };
 		78493D73EEE62E43218BE701 /* Pods_Fairy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fairy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E060397210F540400517F27 /* PriceModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceModel.h; sourceTree = "<group>"; };
 		7E060398210F540400517F27 /* PriceModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceModel.m; sourceTree = "<group>"; };
@@ -348,9 +415,8 @@
 		0445DBD020CFBCE1009BA6BF /* PriceTrend */ = {
 			isa = PBXGroup;
 			children = (
+				4ED1C9EB2114547700D86411 /* BTC_K线图 */,
 				0445DBD120CFBCE1009BA6BF /* Controller */,
-				0445DBD220CFBCE1009BA6BF /* Model */,
-				0445DBD320CFBCE1009BA6BF /* View */,
 			);
 			path = PriceTrend;
 			sourceTree = "<group>";
@@ -364,22 +430,204 @@
 				0445DBD820CFCDF3009BA6BF /* TrendVC.m */,
 				0445DBDA20CFCE0C009BA6BF /* TrendSubVC.h */,
 				0445DBDB20CFCE0C009BA6BF /* TrendSubVC.m */,
+				4ED1CA3E211454D400D86411 /* Y_StockChartViewController.h */,
+				4ED1CA3D211454D400D86411 /* Y_StockChartViewController.m */,
+				4ED1CA3C211454D400D86411 /* KLineFullScreenVC.h */,
+				4ED1CA3B211454D400D86411 /* KLineFullScreenVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		0445DBD220CFBCE1009BA6BF /* Model */ = {
+		4ED1C9EB2114547700D86411 /* BTC_K线图 */ = {
 			isa = PBXGroup;
 			children = (
+				4ED1C9EC2114547700D86411 /* Y_StockChartView.h */,
+				4ED1C9F62114547700D86411 /* Y_StockChartView.m */,
+				4ED1C9ED2114547700D86411 /* Config */,
+				4ED1C9F72114547700D86411 /* KLine */,
+			);
+			path = "BTC_K线图";
+			sourceTree = "<group>";
+		};
+		4ED1C9ED2114547700D86411 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9EE2114547700D86411 /* GlobalVariable */,
+				4ED1C9F12114547700D86411 /* Constant */,
+				4ED1C9F32114547700D86411 /* Theme */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		4ED1C9EE2114547700D86411 /* GlobalVariable */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9EF2114547700D86411 /* Y_StockChartGlobalVariable.h */,
+				4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */,
+			);
+			path = GlobalVariable;
+			sourceTree = "<group>";
+		};
+		4ED1C9F12114547700D86411 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9F22114547700D86411 /* Y_StockChartConstant.h */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
+		4ED1C9F32114547700D86411 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9F42114547700D86411 /* UIColor+Y_StockChart.h */,
+				4ED1C9F52114547700D86411 /* UIColor+Y_StockChart.m */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		4ED1C9F72114547700D86411 /* KLine */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9F82114547700D86411 /* KLine_MAView */,
+				4ED1C9FB2114547700D86411 /* Y_KLineView.m */,
+				4ED1C9FC2114547700D86411 /* PriceView */,
+				4ED1C9FF2114547700D86411 /* Volume_MAView */,
+				4ED1CA022114547700D86411 /* AccessoryView */,
+				4ED1CA082114547700D86411 /* Accessory_MAView */,
+				4ED1CA0B2114547700D86411 /* Model */,
+				4ED1CA152114547700D86411 /* Y_KLineView.h */,
+				4ED1CA162114547700D86411 /* VolumeView */,
+				4ED1CA1C2114547700D86411 /* MainKLineView */,
+				4ED1CA242114547700D86411 /* SegmentView */,
+			);
+			path = KLine;
+			sourceTree = "<group>";
+		};
+		4ED1C9F82114547700D86411 /* KLine_MAView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9F92114547700D86411 /* Y_KLineMAView.h */,
+				4ED1C9FA2114547700D86411 /* Y_KLineMAView.m */,
+			);
+			path = KLine_MAView;
+			sourceTree = "<group>";
+		};
+		4ED1C9FC2114547700D86411 /* PriceView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1C9FD2114547700D86411 /* Y_StockChartRightYView.m */,
+				4ED1C9FE2114547700D86411 /* Y_StockChartRightYView.h */,
+			);
+			path = PriceView;
+			sourceTree = "<group>";
+		};
+		4ED1C9FF2114547700D86411 /* Volume_MAView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA002114547700D86411 /* Y_VolumeMAView.h */,
+				4ED1CA012114547700D86411 /* Y_VolumeMAView.m */,
+			);
+			path = Volume_MAView;
+			sourceTree = "<group>";
+		};
+		4ED1CA022114547700D86411 /* AccessoryView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA032114547700D86411 /* Y_KLineAccessoryView.m */,
+				4ED1CA042114547700D86411 /* Line */,
+				4ED1CA072114547700D86411 /* Y_KLineAccessoryView.h */,
+			);
+			path = AccessoryView;
+			sourceTree = "<group>";
+		};
+		4ED1CA042114547700D86411 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA052114547700D86411 /* Y_KLineAccessory.h */,
+				4ED1CA062114547700D86411 /* Y_KLineAccessory.m */,
+			);
+			path = Line;
+			sourceTree = "<group>";
+		};
+		4ED1CA082114547700D86411 /* Accessory_MAView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA092114547700D86411 /* Y_AccessoryMAView.m */,
+				4ED1CA0A2114547700D86411 /* Y_AccessoryMAView.h */,
+			);
+			path = Accessory_MAView;
+			sourceTree = "<group>";
+		};
+		4ED1CA0B2114547700D86411 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA0C2114547700D86411 /* KLineModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
-		0445DBD320CFBCE1009BA6BF /* View */ = {
+		4ED1CA0C2114547700D86411 /* KLineModel */ = {
 			isa = PBXGroup;
 			children = (
+				4ED1CA0D2114547700D86411 /* Y_KLinePositionModel.m */,
+				4ED1CA0E2114547700D86411 /* Y_KLineModel.h */,
+				4ED1CA0F2114547700D86411 /* Y_KLineGroupModel.h */,
+				4ED1CA102114547700D86411 /* Y_KLineVolumePositionModel.h */,
+				4ED1CA112114547700D86411 /* Y_KLinePositionModel.h */,
+				4ED1CA122114547700D86411 /* Y_KLineModel.m */,
+				4ED1CA132114547700D86411 /* Y_KLineGroupModel.m */,
+				4ED1CA142114547700D86411 /* Y_KLineVolumePositionModel.m */,
 			);
-			path = View;
+			path = KLineModel;
+			sourceTree = "<group>";
+		};
+		4ED1CA162114547700D86411 /* VolumeView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA172114547700D86411 /* Y_KLineVolumeView.m */,
+				4ED1CA182114547700D86411 /* Line */,
+				4ED1CA1B2114547700D86411 /* Y_KLineVolumeView.h */,
+			);
+			path = VolumeView;
+			sourceTree = "<group>";
+		};
+		4ED1CA182114547700D86411 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA192114547700D86411 /* Y_KLineVolume.m */,
+				4ED1CA1A2114547700D86411 /* Y_KLineVolume.h */,
+			);
+			path = Line;
+			sourceTree = "<group>";
+		};
+		4ED1CA1C2114547700D86411 /* MainKLineView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA1D2114547700D86411 /* Y_KLineMainView.m */,
+				4ED1CA1E2114547700D86411 /* Line */,
+				4ED1CA232114547700D86411 /* Y_KLineMainView.h */,
+			);
+			path = MainKLineView;
+			sourceTree = "<group>";
+		};
+		4ED1CA1E2114547700D86411 /* Line */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA1F2114547700D86411 /* Y_MALine.h */,
+				4ED1CA202114547700D86411 /* Y_KLine.h */,
+				4ED1CA212114547700D86411 /* Y_MALine.m */,
+				4ED1CA222114547700D86411 /* Y_KLine.m */,
+			);
+			path = Line;
+			sourceTree = "<group>";
+		};
+		4ED1CA242114547700D86411 /* SegmentView */ = {
+			isa = PBXGroup;
+			children = (
+				4ED1CA252114547700D86411 /* Y_StockChartSegmentView.m */,
+				4ED1CA262114547700D86411 /* Y_StockChartSegmentView.h */,
+			);
+			path = SegmentView;
 			sourceTree = "<group>";
 		};
 		6F00CD3A85E747DC56B616D7 /* Pods */ = {
@@ -923,15 +1171,23 @@
 				7EB5E27220CCAE09004BFAE2 /* UIView+Addition.m in Sources */,
 				7E35FD5920F9AD7800645870 /* YAxisView.m in Sources */,
 				0445DBD920CFCDF3009BA6BF /* TrendVC.m in Sources */,
+				4ED1CA2A2114547700D86411 /* Y_KLineMAView.m in Sources */,
 				7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */,
 				7EB5E2A520CD057F004BFAE2 /* HomeSubVC.m in Sources */,
 				7EB5E29B20CD00F0004BFAE2 /* FSPageContentView.m in Sources */,
 				0406C66B20D0C21F008F6A26 /* PriceCenterVC.m in Sources */,
 				0445DBCE20CFA9AD009BA6BF /* InformationCell.m in Sources */,
+				4ED1CA302114547700D86411 /* Y_AccessoryMAView.m in Sources */,
 				7EB5E2A220CD0545004BFAE2 /* FSBottomTableViewCell.m in Sources */,
+				4ED1CA382114547700D86411 /* Y_MALine.m in Sources */,
 				0445DBD620CFBD70009BA6BF /* CurrencySelectVC.m in Sources */,
+				4ED1CA3F211454D400D86411 /* KLineFullScreenVC.m in Sources */,
+				4ED1CA312114547700D86411 /* Y_KLinePositionModel.m in Sources */,
 				0406C66220D0B147008F6A26 /* PhotoSetCell.m in Sources */,
+				4ED1CA40211454D400D86411 /* Y_StockChartViewController.m in Sources */,
+				4ED1CA2B2114547700D86411 /* Y_KLineView.m in Sources */,
 				7EB5E26020CCADFC004BFAE2 /* MonitorNetwork.m in Sources */,
+				4ED1CA3A2114547700D86411 /* Y_StockChartSegmentView.m in Sources */,
 				04B218D520D1047B000D661F /* MemberVC.m in Sources */,
 				7EB5E2AF20CD0C82004BFAE2 /* IndexCellCell.m in Sources */,
 				7EB5E28220CCB151004BFAE2 /* MineVC.m in Sources */,
@@ -940,9 +1196,15 @@
 				7EB5E27520CCAE09004BFAE2 /* UIButton+BgColorState.m in Sources */,
 				7ED981C020D00C6A00749D14 /* PersionDetailVC.m in Sources */,
 				7EB5E29C20CD00F0004BFAE2 /* FSSegmentTitleView.m in Sources */,
+				4ED1CA2F2114547700D86411 /* Y_KLineAccessory.m in Sources */,
+				4ED1CA2E2114547700D86411 /* Y_KLineAccessoryView.m in Sources */,
 				7EB5E26120CCADFC004BFAE2 /* Reachability.m in Sources */,
+				4ED1CA2C2114547700D86411 /* Y_StockChartRightYView.m in Sources */,
 				0406C66E20D0C709008F6A26 /* WarnCenterVC.m in Sources */,
+				4ED1CA372114547700D86411 /* Y_KLineMainView.m in Sources */,
+				4ED1CA322114547700D86411 /* Y_KLineModel.m in Sources */,
 				04204FA020CE63A6007BD075 /* BaseTypeView.m in Sources */,
+				4ED1CA2D2114547700D86411 /* Y_VolumeMAView.m in Sources */,
 				7EB5E28B20CCB60A004BFAE2 /* RegisterVC.m in Sources */,
 				7EFBA36220CC2F050059090B /* main.m in Sources */,
 				7EB5E25320CCAD40004BFAE2 /* MainTabBarController.m in Sources */,
@@ -954,12 +1216,15 @@
 				04204F9220CE4BBD007BD075 /* PriceDetailedVC.m in Sources */,
 				0445DBDC20CFCE0C009BA6BF /* TrendSubVC.m in Sources */,
 				7EB5E25A20CCADF2004BFAE2 /* Tool.m in Sources */,
+				4ED1CA392114547700D86411 /* Y_KLine.m in Sources */,
 				0430254720E20B7F00094314 /* ClassView.m in Sources */,
 				04B218DB20D10B8F000D661F /* ShareVC.m in Sources */,
 				7EB5E25220CCAD40004BFAE2 /* MainNavigationController.m in Sources */,
 				7EB5E29120CCB673004BFAE2 /* FindPwVC.m in Sources */,
 				0430253320E1DB6B00094314 /* TargetView.m in Sources */,
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
+				4ED1CA292114547700D86411 /* Y_StockChartView.m in Sources */,
+				4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */,
 				7E741ADE20F64588000E7E73 /* NavView.m in Sources */,
 				7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */,
 				04B218DE20D10CCE000D661F /* shareBtn.m in Sources */,
@@ -967,19 +1232,24 @@
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,
 				7EB5E27120CCAE09004BFAE2 /* UIBarButtonItem+GFBarButtonItem.m in Sources */,
 				7EB5E27F20CCB13D004BFAE2 /* HomeVC.m in Sources */,
+				4ED1CA362114547700D86411 /* Y_KLineVolume.m in Sources */,
 				0430253220E1DB6B00094314 /* BezierView.m in Sources */,
 				7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */,
+				4ED1CA342114547700D86411 /* Y_KLineVolumePositionModel.m in Sources */,
 				7E060399210F540400517F27 /* PriceModel.m in Sources */,
 				7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */,
 				0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */,
 				7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */,
 				7EB5E27420CCAE09004BFAE2 /* NSDate+Extension.m in Sources */,
+				4ED1CA332114547700D86411 /* Y_KLineGroupModel.m in Sources */,
+				4ED1CA282114547700D86411 /* UIColor+Y_StockChart.m in Sources */,
 				7EB5E27620CCAE09004BFAE2 /* UIViewController+SLHUD.m in Sources */,
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
 				7EB5E29F20CD01FF004BFAE2 /* FSBaseTableView.m in Sources */,
 				04B218D820D106FD000D661F /* GeneralVC.m in Sources */,
 				7E35FD5A20F9AD7800645870 /* XAxisView.m in Sources */,
 				04204F9A20CE5C38007BD075 /* PriceDetailedSubVC.m in Sources */,
+				4ED1CA352114547700D86411 /* Y_KLineVolumeView.m in Sources */,
 				0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */,
 				0445DBE020CFD277009BA6BF /* HeadCell.m in Sources */,
 				0430253420E1DB6B00094314 /* BezierCurveView.m in Sources */,

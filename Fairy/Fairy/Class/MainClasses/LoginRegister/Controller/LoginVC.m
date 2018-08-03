@@ -30,8 +30,7 @@
     self.view.backgroundColor=[UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:YES];
     
-    self.logoArr= @[@"WeiBo",@"WechatFriend",@"WechatCircle"];
-    
+    self.logoArr= @[@"WechatFriend",@"QQLogo",@"WeiBo"];
     [self creatSubViews];
     // Do any additional setup after loading the view.
 }
@@ -219,7 +218,7 @@
         btn.frame= CGRectMake(leftRightSpace + i*(MidSpace+width), UIScreenH-Y, width, height);
         btn.tag = i;
         [btn setImage:[UIImage imageNamed:self.logoArr[i]] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(shareBtn:) forControlEvents:UIControlEventTouchUpInside];
+        [btn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
         [self.view addSubview:btn];
     }
 
@@ -347,12 +346,21 @@
 }
 
 #pragma mark 三方登陆
--(void)shareBtn:(UIButton *)btn{
+-(void)shareBtnClick:(UIButton *)btn{
+    
+    NSInteger shareType;
+    if (btn.tag==0) {
+        shareType = 1;
+    }
+    else if (btn.tag==1){
+        shareType = 4;
+    }
+    else {
+        shareType = 0;
+    }
 
-    [[UMSocialManager defaultManager] getUserInfoWithPlatform:UMSocialPlatformType_QQ currentViewController:nil completion:^(id result, NSError *error) {
-        if (error) {
-            
-        } else {
+    [[UMSocialManager defaultManager] getUserInfoWithPlatform:shareType currentViewController:nil completion:^(id result, NSError *error) {
+        if (!error) {
             UMSocialUserInfoResponse *resp = result;
             // 授权信息
             NSLog(@"QQ uid: %@", resp.uid);

@@ -8,6 +8,8 @@
 
 #import "TrendVC.h"
 #import "TrendSubVC.h"
+#import "Y_StockChartViewController.h"
+
 
 @interface TrendVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
 
@@ -114,7 +116,13 @@
     return self.flagArray.count;
 }
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
-    TrendSubVC *vc = [[TrendSubVC alloc]init];
+    UIViewController *vc;
+    if (index==0) {
+        vc = [[Y_StockChartViewController alloc]init];
+    }
+    else{
+        vc = [[TrendSubVC alloc]init];
+    }
     return vc;
 }
 

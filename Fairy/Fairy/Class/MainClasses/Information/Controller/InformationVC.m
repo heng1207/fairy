@@ -120,10 +120,10 @@
     _tabBar.layout.cellWidth = SCREEN_WIDTH/5;
     [_tabBar reloadData];
     [_pagerController reloadData];
-//    if (self.flagArray.count > 1) {
-//        _currentIndex = 1;
-//        [_pagerController scrollToControllerAtIndex:1 animate:NO];
-//    }
+    if (self.flagArray.count > 1) {
+        _currentIndex = 0;
+        [_pagerController scrollToControllerAtIndex:0 animate:NO];
+    }
 }
 
 - (NSMutableArray *)flagArray

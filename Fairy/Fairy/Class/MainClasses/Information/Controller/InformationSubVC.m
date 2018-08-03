@@ -8,7 +8,7 @@
 
 #import "InformationSubVC.h"
 #import "InformationCell.h"
-
+#import "MineVC.h"
 
 @interface InformationSubVC ()<UITableViewDataSource, UITableViewDelegate>
 
@@ -57,6 +57,13 @@
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    MineVC *vc =[MineVC new];
+    UIViewController *currentVC = [Tool getCurrentVC];
+    [currentVC presentViewController:vc animated:YES completion:nil];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
