@@ -25,7 +25,6 @@
 		0430254720E20B7F00094314 /* ClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430254620E20B7F00094314 /* ClassView.m */; };
 		0430254920E20B8B00094314 /* ClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430254820E20B8B00094314 /* ClassView.xib */; };
 		0430255220E213A900094314 /* IndexView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0430254F20E213A800094314 /* IndexView.m */; };
-		0430255320E213A900094314 /* IndexView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0430255120E213A900094314 /* IndexView.xib */; };
 		043D7C5620E5D6AE00889B5B /* LBClearCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 043D7C5420E5D6AE00889B5B /* LBClearCacheTool.m */; };
 		0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBC620CFA618009BA6BF /* InformationSubVC.m */; };
 		0445DBD620CFBD70009BA6BF /* CurrencySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBD520CFBD70009BA6BF /* CurrencySelectVC.m */; };
@@ -151,7 +150,6 @@
 		0430254820E20B8B00094314 /* ClassView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClassView.xib; sourceTree = "<group>"; };
 		0430254F20E213A800094314 /* IndexView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexView.m; sourceTree = "<group>"; };
 		0430255020E213A900094314 /* IndexView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexView.h; sourceTree = "<group>"; };
-		0430255120E213A900094314 /* IndexView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexView.xib; sourceTree = "<group>"; };
 		043D7C5420E5D6AE00889B5B /* LBClearCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LBClearCacheTool.m; sourceTree = "<group>"; };
 		043D7C5520E5D6AE00889B5B /* LBClearCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LBClearCacheTool.h; sourceTree = "<group>"; };
 		0445DBC520CFA618009BA6BF /* InformationSubVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationSubVC.h; sourceTree = "<group>"; };
@@ -410,7 +408,6 @@
 			children = (
 				0430255020E213A900094314 /* IndexView.h */,
 				0430254F20E213A800094314 /* IndexView.m */,
-				0430255120E213A900094314 /* IndexView.xib */,
 				7E35FD5220F9AD7800645870 /* WSLineChartView */,
 				04204F9E20CE63A6007BD075 /* BaseTypeView.h */,
 				04204F9F20CE63A6007BD075 /* BaseTypeView.m */,
@@ -1141,7 +1138,6 @@
 				0445DBE620CFD550009BA6BF /* SettingCell.xib in Resources */,
 				0430254920E20B8B00094314 /* ClassView.xib in Resources */,
 				7EFBA35A20CC2F050059090B /* Main.storyboard in Resources */,
-				0430255320E213A900094314 /* IndexView.xib in Resources */,
 				04204F8F20CE4B9D007BD075 /* PriceCell.xib in Resources */,
 				0406C66320D0B147008F6A26 /* PhotoSetCell.xib in Resources */,
 			);

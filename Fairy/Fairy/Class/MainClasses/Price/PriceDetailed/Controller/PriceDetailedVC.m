@@ -112,7 +112,7 @@
 
 - (void)addTabPageBar {
     TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]init];
-    tabBar.backgroundColor = [UIColor whiteColor];
+    tabBar.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
     tabBar.layout.barStyle = TYPagerBarStyleProgressElasticView;
     tabBar.layout.progressWidth = SCREEN_WIDTH/2;
     tabBar.layout.progressHeight = 2;

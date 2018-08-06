@@ -36,6 +36,7 @@
     [_tableView registerNib:[UINib nibWithNibName:@"PriceCell" bundle:nil] forCellReuseIdentifier:@"PriceCell"];
     [self.view addSubview:_tableView];
     
+    
     // Do any additional setup after loading the view.
 }
 
@@ -148,23 +149,29 @@
 
 -(void)addOptional{
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"coinPairID"] = self.selectModel.fsym;
+    dict[@"coinPairID"] = self.selectModel.coinPairID;
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
     dict[@"consumerID"] = userModel.consumerID;
 //    dict[@"token"] = userModel.token;
     NSString *urlPath =[NSString stringWithFormat:@"%@?token=%@",optionalInsert,userModel.token];
     [NetworkManage Post:urlPath andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
-        if ([obj[@"code"] integerValue] ==200 ) {
-            [SVProgressHUD setMinimumDismissTimeInterval:1];
+        
+        
+        int64_t delayInSeconds = 1.0;      // 延迟的时间
+        /*
+         *@parameter 1,时间参照，从此刻开始计时
+         *@parameter 2,延时多久，此处为秒级，还有纳秒等。10ull * NSEC_PER_MSEC
+         */
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            // do something
+            [SVProgressHUD setMinimumDismissTimeInterval:2];
             [SVProgressHUD showSuccessWithStatus:obj[@"message"]];
             [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
-        }
-        else {
-            [SVProgressHUD setMinimumDismissTimeInterval:1];
-            [SVProgressHUD showErrorWithStatus:obj[@"message"]];
-            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
-        }
+        });
+        
+        
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -172,21 +179,34 @@
 }
 -(void)deleteOptional{
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"coinPairID"] = self.selectModel.fsym;
+    dict[@"coinPairID"] = self.selectModel.coinPairID;
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
     dict[@"consumerID"] = userModel.consumerID;
-    [NetworkManage Post:optionalDelete andParams:dict success:^(id responseObject) {
+    
+    NSString *path =[NSString stringWithFormat:@"%@?token=%@",optionalDelete,userModel.token];
+    [NetworkManage Post:path andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
-        if ([obj[@"code"] integerValue] ==200 ) {
-            [SVProgressHUD setMinimumDismissTimeInterval:1];
+        
+        int64_t delayInSeconds = 1.0;      // 延迟的时间
+        /*
+         *@parameter 1,时间参照，从此刻开始计时
+         *@parameter 2,延时多久，此处为秒级，还有纳秒等。10ull * NSEC_PER_MSEC
+         */
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            // do something
+            [SVProgressHUD setMinimumDismissTimeInterval:2];
             [SVProgressHUD showSuccessWithStatus:obj[@"message"]];
             [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+            
+        });
+        
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            [self.dataArrs removeObject:self.selectModel];
+            [self.tableView reloadData];
         }
-        else {
-            [SVProgressHUD setMinimumDismissTimeInterval:1];
-            [SVProgressHUD showErrorWithStatus:obj[@"message"]];
-            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
-        }
+
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -200,7 +220,7 @@
         PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
         dict[@"consumerID"] = userModel.consumerID;
        
-        NSString *path = [NSString stringWithFormat:@"%@/%@",optionalView,userModel.consumerID];
+        NSString *path =[NSString stringWithFormat:@"%@?token=%@",optionalView,userModel.token];
         [NetworkManage Get:path andParams:dict success:^(id responseObject) {
             NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
             if ([obj[@"code"] integerValue] ==200 ) {

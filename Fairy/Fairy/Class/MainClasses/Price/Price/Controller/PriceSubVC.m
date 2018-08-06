@@ -14,7 +14,8 @@
 
 @interface PriceSubVC ()<UITableViewDataSource, UITableViewDelegate,PriceCellDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
-@property (nonatomic, copy)NSArray *dataArrs;
+@property (nonatomic, copy)NSMutableArray *dataArrs;
+@property(nonatomic,strong)PriceModel *selectModel;
 
 
 @end
@@ -24,16 +25,16 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    
     [self.view addSubview:self.myTableView];
+
+    // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     self.myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDatas)];
     [self.myTableView.mj_header beginRefreshing];
-    
-    
-    // Do any additional setup after loading the view.
 }
-
 
 - (UITableView *)myTableView {
     if (!_myTableView) {
@@ -75,9 +76,108 @@
 }
 
 #pragma mark PriceCellDelegate
--(void)cellLongPress:(PriceCell*)priceCell{
+-(void)cellLongPress:(PriceCell *)priceCell{
+    
+    NSIndexPath *index=[self.myTableView indexPathForCell:priceCell];
+    self.selectModel = self.dataArrs[index.row];
+    
+    if ([self.headType isEqualToString:@"自选"]) {
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"确定从自选删除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag =1;
+        [alert show];
+        
+    }else{
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"确定加入自选" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag =2;
+        [alert show];
+    }
+    
     
 }
+
+#pragma mark UIAlertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        //        NSLog(@"取消");
+    }else{
+        
+        if (alertView.tag==1) {//删除自选
+            [self deleteOptional];
+        }
+        else{//添加自选
+            [self addOptional];
+        }
+        
+    }
+}
+
+-(void)addOptional{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPairID"] = self.selectModel.coinPairID;
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    dict[@"consumerID"] = userModel.consumerID;
+    //    dict[@"token"] = userModel.token;
+    NSString *urlPath =[NSString stringWithFormat:@"%@?token=%@",optionalInsert,userModel.token];
+    [NetworkManage Post:urlPath andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        
+        
+        int64_t delayInSeconds = 1.0;      // 延迟的时间
+        /*
+         *@parameter 1,时间参照，从此刻开始计时
+         *@parameter 2,延时多久，此处为秒级，还有纳秒等。10ull * NSEC_PER_MSEC
+         */
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            // do something
+            [SVProgressHUD setMinimumDismissTimeInterval:2];
+            [SVProgressHUD showSuccessWithStatus:obj[@"message"]];
+            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+        });
+        
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+-(void)deleteOptional{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPairID"] = self.selectModel.coinPairID;
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    dict[@"consumerID"] = userModel.consumerID;
+    
+    NSString *path =[NSString stringWithFormat:@"%@?token=%@",optionalDelete,userModel.token];
+    [NetworkManage Post:path andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        
+        int64_t delayInSeconds = 1.0;      // 延迟的时间
+        /*
+         *@parameter 1,时间参照，从此刻开始计时
+         *@parameter 2,延时多久，此处为秒级，还有纳秒等。10ull * NSEC_PER_MSEC
+         */
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            // do something
+            [SVProgressHUD setMinimumDismissTimeInterval:2];
+            [SVProgressHUD showSuccessWithStatus:obj[@"message"]];
+            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+            
+        });
+        
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            [self.dataArrs removeObject:self.selectModel];
+            [self.myTableView reloadData];
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
 
 -(void)loadDatas{
     
@@ -86,7 +186,7 @@
         PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
         dict[@"consumerID"] = userModel.consumerID;
         
-        NSString *path = [NSString stringWithFormat:@"%@/%@",optionalView,userModel.consumerID];
+        NSString *path =[NSString stringWithFormat:@"%@?token=%@",optionalView,userModel.token];
         [NetworkManage Get:path andParams:dict success:^(id responseObject) {
             NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
             if ([obj[@"code"] integerValue] ==200 ) {
