@@ -109,6 +109,7 @@
         minPriceLab.backgroundColor =[UIColor whiteColor];
         self.minPriceLab = minPriceLab;
         [self addSubview:minPriceLab];
+        
     }
     return self;
 }
@@ -132,12 +133,12 @@
     //设置View的背景颜色
     NSMutableArray *kLineColors = @[].mutableCopy;
     CGContextClearRect(context, rect);
-    CGContextSetFillColorWithColor(context, [UIColor backgroundColor].CGColor);
+    CGContextSetFillColorWithColor(context, [UIColor colorWithHex:@"#ffffff"].CGColor);
     CGContextFillRect(context, rect);
     
     //设置显示日期的区域背景颜色
-    CGContextSetFillColorWithColor(context, [UIColor assistBackgroundColor].CGColor);
-    CGContextFillRect(context, CGRectMake(0, Y_StockChartKLineMainViewMaxY, self.frame.size.width, self.frame.size.height - Y_StockChartKLineMainViewMaxY));
+//    CGContextSetFillColorWithColor(context, [UIColor assistBackgroundColor].CGColor);
+//    CGContextFillRect(context, CGRectMake(0, Y_StockChartKLineMainViewMaxY, self.frame.size.width, self.frame.size.height - Y_StockChartKLineMainViewMaxY));
     
     
     
@@ -177,14 +178,14 @@
 //            NSDateFormatter *formatter = [NSDateFormatter new];
 //            formatter.dateFormat = @"HH:mm";
 //            NSString *dateStr = [formatter stringFromDate:date];
-            NSString *dateStr = self.needDrawKLineModels[idx].Date;
+//            NSString *dateStr = self.needDrawKLineModels[idx].Date;
             
             
             CGPoint drawDatePoint = CGPointMake(point.x + 1, Y_StockChartKLineMainViewMaxY + 1.5);
             if(CGPointEqualToPoint(lastDrawDatePoint, CGPointZero) || point.x - lastDrawDatePoint.x > 60 )
             {
-                [dateStr drawAtPoint:drawDatePoint withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11],NSForegroundColorAttributeName : [UIColor assistTextColor]}];
-                lastDrawDatePoint = drawDatePoint;
+//                [dateStr drawAtPoint:drawDatePoint withAttributes:@{NSFontAttributeName : [UIFont systemFontOfSize:11],NSForegroundColorAttributeName : [UIColor assistTextColor]}];
+//                lastDrawDatePoint = drawDatePoint;
             }
         }];
     }

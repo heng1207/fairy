@@ -70,7 +70,6 @@
 +(instancetype)view
 {
     Y_VolumeMAView *MAView = [[Y_VolumeMAView alloc]init];
-    
     return MAView;
 }
 -(void)maProfileWithModel:(Y_KLineModel *)model

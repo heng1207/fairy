@@ -79,18 +79,21 @@
 #pragma mark ma7的颜色
 +(UIColor *)ma7Color
 {
-    return [UIColor colorWithRGBHex:0xff783c];
+//    return [UIColor colorWithRGBHex:0xff783c];
+    return [UIColor colorWithHex:@"#a0a0a0"];
 }
 #pragma mark ma15的颜色
 +(UIColor *)ma15Color
 {
-    return [UIColor yellowColor];
+//    return [UIColor yellowColor];
+     return [UIColor colorWithHex:@"#edab3d"];
 }
 
 #pragma mark ma30颜色
 +(UIColor *)ma30Color
 {
-    return [UIColor colorWithRGBHex:0x49a5ff];
+//    return [UIColor colorWithRGBHex:0x49a5ff];
+     return [UIColor colorWithHex:@"#e55fc2"];
 }
 
 #pragma mark BOLL_MB的颜色

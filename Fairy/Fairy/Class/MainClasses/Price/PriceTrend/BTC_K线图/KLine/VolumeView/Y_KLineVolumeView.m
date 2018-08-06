@@ -44,7 +44,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor backgroundColor];
+        self.backgroundColor = [UIColor colorWithHex:@"#ffffff"];
         self.Volume_MA7Positions = @[].mutableCopy;
         self.Volume_MA15Positions = @[].mutableCopy;
         self.Volume_MA30Positions = @[].mutableCopy;

@@ -19,6 +19,9 @@
     [super awakeFromNib];
     self.nameLab.font = AdaptedFontSize(27);
     self.explainLab.font = AdaptedFontSize(27);
+    self.headIM.userInteractionEnabled = YES;
+    self.nameLab.userInteractionEnabled = YES;
+    self.explainLab.userInteractionEnabled = YES;
     // Initialization code
 }
 

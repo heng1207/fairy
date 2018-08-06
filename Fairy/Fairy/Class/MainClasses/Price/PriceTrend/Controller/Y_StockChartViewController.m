@@ -38,6 +38,7 @@
 #import "Y_KLineGroupModel.h"
 #import "UIColor+Y_StockChart.h"
 
+#import "InTimePriceView.h"
 #import "KLineFullScreenVC.h"
 
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
@@ -59,6 +60,7 @@
 
 @property (nonatomic, copy) NSString *type;
 
+@property (nonatomic,strong)InTimePriceView *inTimePrice;
 @end
 
 @implementation Y_StockChartViewController
@@ -68,8 +70,22 @@
 //}
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.stockChartView.backgroundColor = [UIColor backgroundColor];
+    self.view.backgroundColor =[UIColor colorWithHex:@"#eeeeee"];
+    self.stockChartView.backgroundColor = [UIColor colorWithHex:@"#ffffff"];
     self.currentIndex = -1;
+
+    
+    
+    InTimePriceView *inTimePrice = [[InTimePriceView alloc]init];
+    self.inTimePrice = inTimePrice;
+    [self.view addSubview:inTimePrice];
+    [inTimePrice mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(0);
+        make.left.mas_equalTo(0);
+        make.right.mas_equalTo(0);
+        make.height.mas_equalTo(65);
+    }];
+    
     
     // Do any additional setup after loading the view.
 
@@ -174,7 +190,7 @@
         [self.stockChartView reloadData];
 
     } failure:^(NSError *error) {
-        NSLog(@"%@",error)
+        NSLog(@"%@",error);
     }];
 
 }
@@ -189,15 +205,13 @@
                                        [Y_StockChartViewItemModel itemModelWithTitle:@"1小时" type:Y_StockChartcenterViewTypeKline],
                                        [Y_StockChartViewItemModel itemModelWithTitle:@"1天" type:Y_StockChartcenterViewTypeKline],
                                        ];
-        _stockChartView.backgroundColor = [UIColor orangeColor];
         _stockChartView.dataSource = self;
         [self.view addSubview:_stockChartView];
         [_stockChartView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_equalTo(88);
+            make.top.mas_equalTo(70);
             make.left.mas_equalTo(0);
             make.right.mas_equalTo(0);
-            make.height.mas_equalTo(400);
-    
+            make.bottom.mas_equalTo(-LL_TabbarSafeBottomMargin);
         }];
     }
     return _stockChartView;

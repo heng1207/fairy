@@ -2,37 +2,113 @@
 //  InformationCell.m
 //  Fairy
 //
-//  Created by mac on 2018/6/12.
+//  Created by  on 2018/8/5.
 //  Copyright © 2018年 . All rights reserved.
 //
 
 #import "InformationCell.h"
 
 @interface InformationCell()
-@property (weak, nonatomic) IBOutlet UIImageView *newsIM;
-@property (weak, nonatomic) IBOutlet UILabel *contentLab;
-@property (weak, nonatomic) IBOutlet UILabel *timeLab;
-@property (weak, nonatomic) IBOutlet UILabel *liuYanLab;
-@property (weak, nonatomic) IBOutlet UILabel *seeLab;
+
+@property(nonatomic,strong)UILabel *keyLab;
+@property(nonatomic,strong)UILabel *publishTimeLab;
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)UILabel *urlLab;
+@property(nonatomic,strong)UIView *line;
 
 
 @end
 
-
 @implementation InformationCell
+- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
+    self =[super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        /// 初始化cell的子控件
+        [self initSubViews];
+    }
+    return self;
+}
+
+-(void)initSubViews{
+    /// key
+    UILabel *keyLab = [[UILabel alloc] init];
+    keyLab.textColor = [UIColor blackColor];
+    keyLab.font = [UIFont systemFontOfSize:15];
+    _keyLab = keyLab;
+    [self.contentView addSubview:keyLab];
+    
+    /// publishTime
+    UILabel *publishTimeLab = [[UILabel alloc] init];
+    publishTimeLab.textColor = [UIColor blackColor];
+    publishTimeLab.font = [UIFont systemFontOfSize:15];
+    _publishTimeLab = publishTimeLab;
+    [self.contentView addSubview:publishTimeLab];
+    
+    /// title
+    UILabel *titleLab = [[UILabel alloc] init];
+    titleLab.textColor = [UIColor blackColor];
+    titleLab.font = [UIFont systemFontOfSize:15];
+    titleLab.numberOfLines = 0;
+    _titleLab = titleLab;
+    [self.contentView addSubview:titleLab];
+    
+    /// url
+    UILabel *urlLab = [[UILabel alloc] init];
+    urlLab.textColor = [UIColor blueColor];
+    urlLab.font = [UIFont systemFontOfSize:15];
+    _urlLab = urlLab;
+    _urlLab.numberOfLines = 0;
+    _urlLab.userInteractionEnabled =YES;
+    [self.contentView addSubview:urlLab];
+    
+    UITapGestureRecognizer *tap =[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(urlLabTap:)];
+    [_urlLab addGestureRecognizer:tap];
+    
+    
+    
+    
+    //分割线
+    UIView *line =[UIView new];
+    _line = line;
+    line.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
+    [self.contentView addSubview:line];
+    
+}
+-(void)setInformationFrameModel:(InformationFrameModel *)informationFrameModel{
+    _informationFrameModel = informationFrameModel;
+    _informationModel = informationFrameModel.informationModel;
+    
+    
+    _keyLab.text =_informationModel.key;
+    _keyLab.frame = _informationFrameModel.keyF;
+    
+    _publishTimeLab.text = [Tool createTime:_informationModel.publishTime];
+    _publishTimeLab.frame = _informationFrameModel.publishTimeF;
+    
+    _titleLab.text =_informationModel.title;
+    _titleLab.frame = _informationFrameModel.titleF;
+    
+//    _urlLab.text =_informationModel.url;
+    _urlLab.frame = _informationFrameModel.urlF;
+    NSUInteger length = [_informationModel.url length];
+    NSMutableAttributedString *attri = [[NSMutableAttributedString alloc] initWithString:_informationModel.url];
+    [attri addAttribute:NSUnderlineStyleAttributeName value:@(NSUnderlinePatternSolid | NSUnderlineStyleSingle) range:NSMakeRange(0, length)];
+    [attri addAttribute:NSUnderlineColorAttributeName value:[UIColor blueColor] range:NSMakeRange(0, length)];
+    [_urlLab setAttributedText:attri];
+    
+    
+    _line.frame = _informationFrameModel.lineF;
+}
+
+-(void)urlLabTap:(UITapGestureRecognizer*)urlTap{
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(urlclick:)]) {
+        [_delegate urlclick:self];
+    }
+}
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    
-    self.contentLab.textColor = [UIColor colorWithHex:@"#000000"];
-    self.contentLab.font = AdaptedFontSize(36);
-    self.timeLab.textColor = [UIColor colorWithHex:@"#929292"];
-    self.timeLab.font = AdaptedFontSize(31);
-    self.liuYanLab.textColor = [UIColor colorWithHex:@"#929292"];
-    self.liuYanLab.font = AdaptedFontSize(24);
-    self.seeLab.textColor = [UIColor colorWithHex:@"#929292"];
-    self.seeLab.font = AdaptedFontSize(24);
-    
     // Initialization code
 }
 

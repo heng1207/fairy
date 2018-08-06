@@ -1,53 +1,43 @@
 //
-//  LoginVC.m
+//  CodeLoginVC.m
 //  Fairy
 //
-//  Created by  on 2018/6/10.
+//  Created by  on 2018/8/4.
 //  Copyright © 2018年 . All rights reserved.
 //
 
-#import "LoginVC.h"
 #import "CodeLoginVC.h"
-#import "RegisterVC.h"
-#import "FindPwVC.h"
 #import "PhoneZhuCeModel.h"
 #import <UMShare/UMShare.h>
 
 
-@interface LoginVC ()
+@interface CodeLoginVC ()
 
 @property(nonatomic,strong)UITextField *phoneTF;
 @property(nonatomic,strong)UITextField *passwordTF;
 
+
 @property(nonatomic,strong)NSArray *logoArr;
+
+
 @end
 
-@implementation LoginVC
+@implementation CodeLoginVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.backgroundColor=[UIColor whiteColor];
     [self.navigationController setNavigationBarHidden:YES];
     
     self.logoArr= @[@"WechatFriend",@"QQLogo",@"WeiBo"];
     [self creatSubViews];
+    
+    
     // Do any additional setup after loading the view.
 }
 
 -(void)creatSubViews{
-    
-
-    UIButton *backBtn =[UIButton new];
-    [self.view addSubview:backBtn];
-    [backBtn setImage:[UIImage imageNamed:@"loginBack"] forState:UIControlStateNormal];
-    [backBtn addTarget:self action:@selector(backBtnClick) forControlEvents:UIControlEventTouchUpInside];
-    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(AdaptedHeight(50));
-        make.left.mas_equalTo(AdaptedWidth(60));
-        make.width.mas_equalTo(AdaptedWidth(36));
-        make.height.mas_equalTo(AdaptedHeight(46));
-    }];
-    
     
     UIImageView *logoIM=[UIImageView new];
     logoIM.image =[UIImage imageNamed:@"loginLogo"];
@@ -62,7 +52,7 @@
     
     //手机号
     UILabel *phoneLab =[UILabel new];
-    phoneLab.text=@"用户名";
+    phoneLab.text=@"手机号";
     phoneLab.font= AdaptedFontSize(34);
     phoneLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLab];
@@ -79,7 +69,7 @@
     self.phoneTF= phoneTF;
     phoneTF.font= AdaptedFontSize(34);
     phoneTF.keyboardType = UIKeyboardTypeDefault;
-    phoneTF.placeholder=@"请输入用户名";
+    phoneTF.placeholder=@"请输入手机号";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
@@ -87,6 +77,23 @@
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
+    
+    UIButton *sendCodeBtn =[UIButton new];
+    [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+    sendCodeBtn.backgroundColor = [UIColor colorWithHex:@"#031b92"];
+    sendCodeBtn.titleLabel.font = AdaptedFontSize(28);
+    sendCodeBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
+    sendCodeBtn.layer.cornerRadius = AdaptedHeight(25);
+    sendCodeBtn.layer.masksToBounds = YES;
+    [self.view addSubview:sendCodeBtn];
+    [sendCodeBtn addTarget:self action:@selector(sendCodeClick) forControlEvents:UIControlEventTouchUpInside];
+    [sendCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(76));
+        make.right.mas_equalTo(-AdaptedWidth(38));
+        make.width.mas_equalTo(AdaptedWidth(216));
+        make.height.mas_equalTo(AdaptedHeight(50));
+    }];
+
     
     UIView *line1 =[UIView new];
     line1.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
@@ -99,10 +106,9 @@
     }];
     
     
-    //密码
+    //验证码
     UILabel *passwordLab =[UILabel new];
-    //    passwordLab.text=@"密   码";
-    passwordLab.text=@"密    码";
+    passwordLab.text=@"验证码";
     passwordLab.font = AdaptedFontSize(34);
     passwordLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:passwordLab];
@@ -116,7 +122,7 @@
     
     
     UITextField *passwordTF =[UITextField new];
-    passwordTF.placeholder=@"请输入密码";
+    passwordTF.placeholder=@"请输入验证码";
     self.passwordTF = passwordTF;
     passwordTF.font= AdaptedFontSize(34);
     [self.view addSubview:passwordTF];
@@ -128,22 +134,6 @@
     }];
     
     
-    UIButton *findPWBtn =[UIButton new];
-    [findPWBtn setTitle:@"找回密码" forState:UIControlStateNormal];
-    findPWBtn.backgroundColor = [UIColor colorWithHex:@"#6876be"];
-    findPWBtn.titleLabel.font = AdaptedFontSize(28);
-    findPWBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
-    findPWBtn.layer.cornerRadius = AdaptedHeight(25);
-    findPWBtn.layer.masksToBounds = YES;
-    findPWBtn.backgroundColor =[UIColor blueColor];
-    [self.view addSubview:findPWBtn];
-    [findPWBtn addTarget:self action:@selector(findPWClick) forControlEvents:UIControlEventTouchUpInside];
-    [findPWBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line1.mas_bottom).offset(AdaptedHeight(28));
-        make.right.mas_equalTo(-AdaptedWidth(38));
-        make.width.mas_equalTo(AdaptedWidth(184));
-        make.height.mas_equalTo(AdaptedHeight(50));
-    }];
     
     UIView *line2 =[UIView new];
     line2.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
@@ -180,37 +170,16 @@
     UIButton *registerBtn =[UIButton new];
     //    registerBtn.backgroundColor =[UIColor blueColor];
     registerBtn.titleLabel.font = AdaptedFontSize(28);
-    [registerBtn setTitle:@"立即注册" forState:UIControlStateNormal];
-    
+    [registerBtn setTitle:@"密码登录" forState:UIControlStateNormal];
     [registerBtn setTitleColor:[UIColor colorWithHex:@"#000b81"] forState:UIControlStateNormal];
     //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
     //    registerBtn.layer.masksToBounds = YES;
     [self.view addSubview:registerBtn];
     [registerBtn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
-    float centerX= self.view.centerX;
     [registerBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(30));
-        make.left.mas_equalTo(centerX-AdaptedWidth(180 + 20));
+        make.centerX.mas_equalTo(self.view);
         make.width.mas_equalTo(AdaptedWidth(180));
-        make.height.mas_equalTo(AdaptedHeight(40));
-    }];
-    
-    
-    //验证码登陆or用户名登陆
-    UIButton *selectLoginBtn =[UIButton new];
-    selectLoginBtn.titleLabel.font = AdaptedFontSize(28);
-    //    registerBtn.backgroundColor =[UIColor blueColor];
-    [selectLoginBtn setTitle:@"验证码登陆" forState:UIControlStateNormal];
-    selectLoginBtn.selected = NO;
-    [selectLoginBtn setTitleColor:[UIColor colorWithHex:@"#000b81"] forState:UIControlStateNormal];
-    //    registerBtn.layer.cornerRadius = AdaptedHeight(25);
-    //    registerBtn.layer.masksToBounds = YES;
-    [self.view addSubview:selectLoginBtn];
-    [selectLoginBtn addTarget:self action:@selector(codeLoginClick) forControlEvents:UIControlEventTouchUpInside];
-    [selectLoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(LoginBtn.mas_bottom).offset(AdaptedHeight(30));
-        make.left.mas_equalTo(centerX+AdaptedWidth(20));
-        make.width.mas_equalTo(AdaptedWidth(200));
         make.height.mas_equalTo(AdaptedHeight(40));
     }];
     
@@ -269,64 +238,52 @@
     }];
     
 }
--(void)backBtnClick{
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
-}
+
 
 -(void)registerClick{
-    RegisterVC *vc=[RegisterVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+    [self.navigationController popViewControllerAnimated:YES];
 }
--(void)findPWClick{
-    FindPwVC *vc=[FindPwVC new];
-    [self.navigationController pushViewController:vc animated:YES];
-}
--(void)codeLoginClick{
-    CodeLoginVC *vc=[CodeLoginVC new];
-    [self.navigationController pushViewController:vc animated:YES];
+-(void)sendCodeClick{
+    if ( ![Tool checkTel:self.phoneTF.text]){
+        return;
+    }
+    [NetworkManage  Get:GetLoginMessage(self.phoneTF.text)  andParams:nil success:^(id responseObject) {
+        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+        NSLog(@"%@",responseObject);
+        [self showHint:dic[@"message"]];
+        
+    } failure:^(NSError *error) {
+        [self showHint:@"网络有问题"];
+        NSLog(@"%@",error);
+    }];
 }
 
 -(void)LoginClick{
-    if ([Tool isBlankString:self.phoneTF.text]) {
-        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"用户名不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
-        [alertView show];
+    
+    if ( ![Tool checkTel:self.phoneTF.text]){
         return;
     }
-    
-    if ([Tool isBlankString:self.passwordTF.text]) {
-        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"密码不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+    if ([Tool isBlankString:self.passwordTF.text]){
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"验证码不能为空" message:@"请键入验证码" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alertView show];
         return;
     }
     
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"loginName"] = self.phoneTF.text;
-    dict[@"password"] = self.passwordTF.text;
-//    dict[@"loginName"] = @"zhangfeng";
-//    dict[@"password"] = @"000000";
-//    [0]    (null)    @"token" : @"zhangsan_368373cbd1474f26ac75b70962944f26"
-//    [1]    (null)    @"consumerID" : (long)46    
-    [NetworkManage Post:UserNameLogin andParams:dict success:^(id responseObject) {
+    dict[@"phoneNumber"] = self.phoneTF.text;
+    dict[@"checkCode"] = self.passwordTF.text;
+    [NetworkManage Post:CodeLogin andParams:dict success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            /*
-             {
-             "code": 200,
-             "message": "登录成功",
-             "data": {
-             "consumerID": 1,
-             "token": "zhangfeng_d3675c660af54c7b901c10fb15c3dc91"
-             }
-             }
-             
-             */
             
             //登陆成功
             PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:obj[@"data"]];
             // 归档存储模型数据
             [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            
         }else {
             [self showHint:obj[@"message"]];
         }
@@ -373,19 +330,22 @@
 }
 
 
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
 /*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
 
 @end

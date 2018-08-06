@@ -7,9 +7,6 @@
 //
 
 #import "RegisterVC.h"
-#import "PhoneZhuCeModel.h"
-#import "MainTabBarController.h"
-
 
 @interface RegisterVC ()
 @property(nonatomic,strong)UITextField *userNameTF;
@@ -304,12 +301,8 @@
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
         if ([dic[@"code"] integerValue] ==200 ) {
             
-            PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:dic[@"data"]];
-            // 归档存储模型数据
-            [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            [self.navigationController popViewControllerAnimated:YES];
             
-            MainTabBarController *homeVC=[MainTabBarController new];
-            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
         }else{
             [self showHint:dic[@"message"]];
         }

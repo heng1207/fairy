@@ -11,6 +11,10 @@
 
 @interface InformationVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
 
+@property (nonatomic, weak) TYTabPagerBar *tabBar;
+@property (nonatomic, weak) TYPagerController *pagerController;
+@property (nonatomic,assign) NSInteger currentIndex;
+
 @property (nonatomic,strong) NSMutableArray *flagArray;
 
 @end
@@ -129,7 +133,7 @@
 - (NSMutableArray *)flagArray
 {
     if (_flagArray == nil) {
-        _flagArray = [NSMutableArray arrayWithObjects:@"最新",@"币聊",@"微博",@"其他", nil];
+        _flagArray = [NSMutableArray arrayWithObjects:@"中文",@"英文", nil];
     }
     return _flagArray;
 }

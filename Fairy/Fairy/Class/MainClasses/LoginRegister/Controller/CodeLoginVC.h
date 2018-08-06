@@ -1,14 +1,13 @@
 //
-//  InformationVC.h
+//  CodeLoginVC.h
 //  Fairy
 //
-//  Created by  on 2018/6/10.
+//  Created by  on 2018/8/4.
 //  Copyright © 2018年 . All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface InformationVC : UIViewController
-
+@interface CodeLoginVC : UIViewController
 
 @end

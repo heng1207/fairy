@@ -96,36 +96,11 @@ static AFHTTPSessionManager *_manager;
 }
 
 
-
-+ (void)PostNOJson:(NSString *)Path andParamsNoJson:(NSMutableDictionary *)dic success:(void(^)(id responseObject))success failure:(void(^)(NSError *error))failure{
-    
-    
-    [NetworkManage instance].requestSerializer  = [AFJSONRequestSerializer serializer];
-    [NetworkManage instance].responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [[NetworkManage instance] POST:Path parameters:dic progress:^(NSProgress * _Nonnull uploadProgress) {
-        
-    } success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        if (responseObject) {
-            success(responseObject);
-        }
-    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        if (error) {
-            failure(error);
-        }
-        
-    }];
-    
-    
-    
-}
-
-
-
 +(void)Post:(NSString *)path andParams:(NSMutableDictionary *)dic andPhotoArr:(NSMutableArray *)photoArr success:(void (^)(id))success failure:(void (^)(NSError *))failure{
     
     
     [NetworkManage instance].requestSerializer  = [AFHTTPRequestSerializer serializer];
+    
     [[NetworkManage instance] POST:path parameters:dic constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
         
         NSInteger count =photoArr.count;
@@ -167,82 +142,7 @@ static AFHTTPSessionManager *_manager;
         
     }];
     
-    
-    
-    
-    
 }
-
-
-/**
- * 检查网络连接:使用AFNetworking
- */
-+(void)checkNetworking:(void (^)(BOOL))isNetwork{
-    
-    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
-        NSLog(@"%@",[NSThread currentThread]);
-        // 一共有四种状态
-        switch (status) {
-            case AFNetworkReachabilityStatusNotReachable:
-                NSLog(@"AFNetworkReachability Not Reachable");
-                isNetwork(NO);
-                break;
-            case AFNetworkReachabilityStatusReachableViaWWAN:
-                NSLog(@"AFNetworkReachability Reachable via WWAN");
-                isNetwork(YES);
-                break;
-            case AFNetworkReachabilityStatusReachableViaWiFi:
-                NSLog(@"AFNetworkReachability Reachable via WiFi");
-                isNetwork(YES);
-                break;
-            case AFNetworkReachabilityStatusUnknown:
-                NSLog(@"AFNetworkReachability Unknown");
-                isNetwork(NO);
-                break;
-            default:
-                NSLog(@"AFNetworkReachability Unknown");
-                isNetwork(NO);
-                break;
-        }
-    }];
-    dispatch_async(dispatch_get_global_queue(0, 0), ^{
-        [[AFNetworkReachabilityManager sharedManager] startMonitoring];
-        [[NSRunLoop currentRunLoop] run];
-    });
-    
-}
-
-/**
- * 检查网络连接:使用Reachability
- */
-+(NSString *)checkNetworkingNew{
-    NSString *netconnType = NULL;
-    Reachability* reach = [Reachability reachabilityWithHostName:@"www.baidu.com"];
-    switch ([reach currentReachabilityStatus]) {
-            
-        case NotReachable:
-            
-            netconnType = @"NotReachable";
-            
-            break;
-            
-        case ReachableViaWiFi:
-            
-            netconnType = @"WIFI";
-            
-            break;
-            
-        case ReachableViaWWAN:
-            
-            netconnType = @"WWAN";
-            break;
-            
-    }
-    
-    return netconnType;
-    
-}
-
 
 
 @end

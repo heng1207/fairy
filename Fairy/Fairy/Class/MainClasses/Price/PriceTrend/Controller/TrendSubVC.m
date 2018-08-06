@@ -7,8 +7,12 @@
 //
 
 #import "TrendSubVC.h"
+#import "LDLineChartView.h"
 
 @interface TrendSubVC ()
+@property(nonatomic,strong)NSMutableArray *priceTrendData;
+@property(nonatomic,strong)NSMutableArray *volumeTrendData;
+
 
 @end
 
@@ -16,10 +20,83 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor =[UIColor whiteColor];
+    self.view.backgroundColor =[UIColor colorWithHex:@"#eeeeee"];
 
     
+    
+    [self requestPriceDatas];
+    
+    
     // Do any additional setup after loading the view.
+}
+
+-(void)requestPriceDatas{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"tradePlatform"] = @"bitfinex";
+    dict[@"coinPair"] = @"eth_btc";
+    [NetworkManage Get:PriceTrendChart andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            self.priceTrendData = obj[@"data"];
+            
+            
+            [self requestVolumeDatas];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+-(void)requestVolumeDatas{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"tradePlatform"] = @"bitfinex";
+    dict[@"coinPair"] = @"eth_btc";
+    [NetworkManage Get:VolumeTrendChart andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            self.volumeTrendData = obj[@"data"];
+            
+            
+            
+            //获取 Price 显示区间最大值，最小值
+            NSMutableArray *price = [NSMutableArray array];
+            for (NSDictionary *item in self.priceTrendData ) {
+                [price addObject: [NSNumber numberWithFloat:[item[@"close"] floatValue]]];
+            }
+            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+            
+            NSMutableArray *xArray = [NSMutableArray array];
+            NSMutableArray *yArray = [NSMutableArray array];
+ 
+            [self.priceTrendData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [xArray addObject:obj[@"timestamp"]];
+                [yArray addObject:obj[@"close"]];
+            }];
+            
+            
+            //获取 Volume 显示区间最大值，最小值
+            NSMutableArray *volume = [NSMutableArray array];
+            for (NSDictionary *item in obj[@"data"] ) {
+                [volume addObject: [NSNumber numberWithFloat:[item[@"volume"] floatValue]]];
+            }
+            CGFloat maxVolume = [[volume valueForKeyPath:@"@max.floatValue"] floatValue];
+            CGFloat minVolume = [[volume valueForKeyPath:@"@min.floatValue"] floatValue];
+
+            NSMutableArray *xArrayUnder = [NSMutableArray array];
+            NSMutableArray *yArrayUnder = [NSMutableArray array];
+
+            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [xArrayUnder addObject:obj[@"timestamp"]];
+                [yArrayUnder addObject:obj[@"volume"]];
+            }];
+            
+            LDLineChartView *wsLine = [[LDLineChartView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - LL_StatusBarAndNavigationBarHeight - 30) xTitleArray:xArray yValueArray:yArray yMax:maxPrice yMin:minPrice yValueArrayUnder:yArrayUnder yMaxUnder:maxVolume yMin:minVolume];
+            [self.view addSubview:wsLine];
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

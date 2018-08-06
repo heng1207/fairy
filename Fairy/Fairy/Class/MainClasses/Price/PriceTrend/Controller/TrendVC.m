@@ -118,10 +118,16 @@
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
     UIViewController *vc;
     if (index==0) {
+        vc = [[TrendSubVC alloc]init];
+    }
+    else if (index==1){
         vc = [[Y_StockChartViewController alloc]init];
     }
+    else if (index==2){
+        vc = [[UIViewController alloc]init];
+    }
     else{
-        vc = [[TrendSubVC alloc]init];
+        vc = [[UIViewController alloc]init];
     }
     return vc;
 }
@@ -148,7 +154,7 @@
 - (NSMutableArray *)flagArray
 {
     if (_flagArray == nil) {
-        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",@"币安",@"K线",@"中币", nil];
+        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",@"BTIFINEX",@"中币", nil];
     }
     return _flagArray;
 }

@@ -183,20 +183,28 @@
   
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    UIViewController *vc;
     if (indexPath.section==0) {
 //        vc =[PersionDetailVC new];
-        vc =[LoginVC new];
+        LoginVC *vc =[LoginVC new];
+        UINavigationController *nav =[[UINavigationController alloc]initWithRootViewController:vc];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:nav animated:YES completion:nil];
     }
     else if (indexPath.section==1){
         if (indexPath.row ==0) {
-            vc =[PriceCenterVC new];
+            PriceCenterVC *vc =[PriceCenterVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row==1){
-            vc =[WarnCenterVC new];
+            WarnCenterVC *vc =[WarnCenterVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row==2){
-            vc =[MemberVC new];
+            MemberVC *vc=[MemberVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
     else if (indexPath.section==2){
@@ -204,14 +212,17 @@
             
         }
         else if (indexPath.row==1){
-            vc =[GeneralVC new];
+            GeneralVC *vc =[GeneralVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row==2){
-            vc =[ShareVC new];
+            ShareVC* vc =[ShareVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
         }
     }
-    vc.hidesBottomBarWhenPushed = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{

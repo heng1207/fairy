@@ -7,9 +7,8 @@
 //
 
 #import "FindPwVC.h"
-
 #import "PhoneZhuCeModel.h"
-#import "MainTabBarController.h"
+
 
 @interface FindPwVC ()
 @property(nonatomic,strong)UITextField *phoneTF;
@@ -257,8 +256,8 @@
             // 归档存储模型数据
             [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
             
-            MainTabBarController *homeVC=[MainTabBarController new];
-            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+            
         }else{
             [self showHint:dic[@"message"]];
         }

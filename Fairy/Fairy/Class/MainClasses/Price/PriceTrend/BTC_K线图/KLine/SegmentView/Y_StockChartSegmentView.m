@@ -46,7 +46,7 @@ static NSInteger const Y_StockChartSegmentStartTag = 2000;
     if(self)
     {
         self.clipsToBounds = YES;
-        self.backgroundColor = [UIColor assistBackgroundColor];
+        self.backgroundColor = [UIColor colorWithHex:@"#ffffff"];
     }
     return self;
 }
@@ -138,7 +138,7 @@ static NSInteger const Y_StockChartSegmentStartTag = 2000;
     {
         UIButton *btn = [self private_createButtonWithTitle:title tag:Y_StockChartSegmentStartTag+index];
         UIView *view = [UIView new];
-        view.backgroundColor = [UIColor colorWithRed:52.f/255.f green:56.f/255.f blue:67/255.f alpha:1];
+        view.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
         [self addSubview:btn];
         [self addSubview:view];
         [btn mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -194,7 +194,7 @@ static NSInteger const Y_StockChartSegmentStartTag = 2000;
     //全屏按钮
     UIButton *fullScreenBtn = [UIButton new];
     [self addSubview:fullScreenBtn];
-    [fullScreenBtn setTitleColor:[UIColor mainTextColor] forState:UIControlStateNormal];
+    [fullScreenBtn setTitleColor:[UIColor colorWithHex:@"#000000"] forState:UIControlStateNormal];
     fullScreenBtn.titleLabel.font = [UIFont systemFontOfSize:13];
     fullScreenBtn.tag = Y_StockChartSegmentStartTag+200;
     [fullScreenBtn addTarget:self action:@selector(event_segmentButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
@@ -298,7 +298,7 @@ static NSInteger const Y_StockChartSegmentStartTag = 2000;
 - (UIButton *)private_createButtonWithTitle:(NSString *)title tag:(NSInteger)tag
 {
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [btn setTitleColor:[UIColor mainTextColor] forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor colorWithHex:@"#000000"] forState:UIControlStateNormal];
     [btn setTitleColor:[UIColor ma30Color] forState:UIControlStateSelected];
     btn.titleLabel.font = [UIFont systemFontOfSize:13];
     btn.tag = tag;

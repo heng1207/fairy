@@ -21,7 +21,6 @@
 
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
-#import "LoginVC.h"
 #import <UMShare/UMShare.h>
 
 #define USHARE_DEMO_APPKEY  @"5b49a9398f4a9d5be4000132"
@@ -53,7 +52,6 @@
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
     MainTabBarController *homeVC=[MainTabBarController new];
-//    UINavigationController *nav =  [[UINavigationController alloc]initWithRootViewController:[LoginVC new]];
     self.window.rootViewController = homeVC;
     
     

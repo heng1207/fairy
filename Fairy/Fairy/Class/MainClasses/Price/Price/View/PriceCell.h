@@ -9,9 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "PriceModel.h"
 
+@class PriceCell;
+@protocol PriceCellDelegate <NSObject>
+-(void)cellLongPress:(PriceCell*)priceCell;
+
+@end
+
 @interface PriceCell : UITableViewCell
 
 @property(nonatomic,strong)PriceModel *priceModel;
 
-
+@property(nonatomic,weak)id<PriceCellDelegate> delegate;
 @end

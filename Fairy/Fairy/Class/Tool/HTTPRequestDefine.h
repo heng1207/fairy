@@ -47,8 +47,15 @@
 #define moneyClass                (SERVER@"/dictionary/list_currency_type")
 // 首页tab分类内容
 #define moneyClassContent         (SERVER@"/coin_pair/list_data")
+
+//自选查看
+#define optionalView              (SERVER@"/consumer_pair/view")
 //加入自选
-#define insertOptional            (SERVER@"/consumer_pair/insert")
+#define optionalInsert            (SERVER@"/consumer_pair/insert")
+//删除自选
+#define optionalDelete            (SERVER@"/consumer_pair/delete")
+
+
 //币种选择
 #define moneyTypeSelect           (SERVER@"/platform_currency/list_data")
 //行情详情折线图
@@ -56,8 +63,19 @@
 //http://47.75.145.77:8080/interface/coinmarketcap/getCoinmarketcapHistoryData?coinPair=eth
 
 //K线图
-#define kline                     (SERVER@"/kline/get_kline_15m")
 //http://47.75.145.77:8080/interface/kline/get_kline_15m?tradePlatform=bitfinex&coinPair=eth_btc&klineDate=20180801
+
+//价格趋势图
+#define PriceTrendChart           (SERVER@"/kline/getKPriceListData")
+//http://47.75.145.77:8080/interface/kline/getKPriceListData?tradePlatform=bitfinex&coinPair=eth_btc
+
+//交易量趋势图
+#define VolumeTrendChart          (SERVER@"/kline/getKVolumeListData")
+//http://47.75.145.77:8080/interface/kline/getKVolumeListData?tradePlatform=bitfinex&coinPair=eth_btc
+
+//资讯
+#define Information                (SERVER@"/news/list_data")
+//http://47.75.145.77:8080/interface/news/list_data?lang=cn
 
 
 #endif /* HTTPRequestDefine_h */

@@ -224,7 +224,6 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.globalIndexData = obj[@"data"];
-//            [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
         }
     } failure:^(NSError *error) {
@@ -237,7 +236,6 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.moneyClassData = obj[@"data"];
-//            [self.tableView.mj_header endRefreshing];
             [self.tableView reloadData];
         }
     } failure:^(NSError *error) {

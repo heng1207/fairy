@@ -127,6 +127,7 @@
     if(!_scrollView)
     {
         _scrollView = [UIScrollView new];
+        _scrollView.backgroundColor =[UIColor colorWithHex:@"#eeeeee"];
         _scrollView.showsVerticalScrollIndicator = NO;
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.minimumZoomScale = 1.0f;

@@ -74,7 +74,7 @@
             }
             else{
                 make.right.left.top.equalTo(self);
-                make.height.equalTo(@35);
+                make.height.equalTo(@30);
             }
 
         }];

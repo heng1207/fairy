@@ -10,14 +10,10 @@
 
 @interface PhoneZhuCeModel : NSObject<NSCoding>
 
-
-
 // token
 @property (nonatomic, strong) NSString *token;
-
-////头像
-//@property (nonatomic,strong)  NSString *profile;
-
+//consumerID
+@property (nonatomic, strong) NSString *consumerID;
 
 
 @end

@@ -16,14 +16,14 @@
 -(void)encodeWithCoder:(NSCoder *)aCoder{
 
     [aCoder encodeObject:self.token forKey:@"token"];
-//    [aCoder encodeObject:self.profile forKey:@"profile"];
+    [aCoder encodeObject:self.consumerID forKey:@"consumerID"];
 }
 
 -(instancetype)initWithCoder:(NSCoder *)aDecoder{
     if (self = [super init]) {
    
         self.token =[aDecoder decodeObjectForKey:@"token"];
-//        self.profile =[aDecoder decodeObjectForKey:@"profile"];
+        self.consumerID =[aDecoder decodeObjectForKey:@"consumerID"];
     }
     return self;
 }

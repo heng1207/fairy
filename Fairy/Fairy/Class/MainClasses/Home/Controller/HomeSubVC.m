@@ -13,10 +13,11 @@
 #import "HomeVC.h"
 
 
-@interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource>
+@interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource,PriceCellDelegate>
 @property (nonatomic, assign) BOOL fingerIsTouch;
 
 @property(nonatomic,strong)NSMutableArray *dataArrs;
+@property(nonatomic,strong)PriceModel *selectModel;
 
 
 @end
@@ -65,6 +66,7 @@
     PriceCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"PriceCell"  forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     cell.priceModel = self.dataArrs[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(nonnull NSIndexPath *)indexPath{
@@ -77,7 +79,6 @@
 {
     return 80;
 }
-
 
 #pragma mark UIScrollView
 //判断屏幕触碰状态
@@ -108,9 +109,107 @@
 //    self.tableView.showsVerticalScrollIndicator = _vcCanScroll?YES:NO;
 }
 
+#pragma mark PriceCellDelegate
+-(void)cellLongPress:(PriceCell *)priceCell{
+    
+    NSIndexPath *index=[self.tableView indexPathForCell:priceCell];
+    self.selectModel = self.dataArrs[index.row];
+    
+    if ([self.headTypeID isEqualToString:@"自选"]) {
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"确定从自选删除" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag =1;
+        [alert show];
+
+    }else{
+        UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:@"确定加入自选" delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"确定", nil];
+        alert.tag =2;
+        [alert show];
+    }
+
+    
+}
+
+#pragma mark UIAlertView
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0) {
+        //        NSLog(@"取消");
+    }else{
+        
+        if (alertView.tag==1) {//删除自选
+            [self deleteOptional];
+        }
+        else{//添加自选
+            [self addOptional];
+        }
+        
+    }
+}
+
+-(void)addOptional{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPairID"] = self.selectModel.fsym;
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    dict[@"consumerID"] = userModel.consumerID;
+    dict[@"token"] = userModel.token;
+    [NetworkManage Post:optionalInsert andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            [SVProgressHUD setMinimumDismissTimeInterval:1];
+            [SVProgressHUD showSuccessWithStatus:obj[@"message"]];
+            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+        }
+        else {
+            [SVProgressHUD setMinimumDismissTimeInterval:1];
+            [SVProgressHUD showErrorWithStatus:obj[@"message"]];
+            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+-(void)deleteOptional{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPairID"] = self.selectModel.fsym;
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    dict[@"consumerID"] = userModel.consumerID;
+    [NetworkManage Post:optionalDelete andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            [SVProgressHUD setMinimumDismissTimeInterval:1];
+            [SVProgressHUD showSuccessWithStatus:obj[@"message"]];
+            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+        }
+        else {
+            [SVProgressHUD setMinimumDismissTimeInterval:1];
+            [SVProgressHUD showErrorWithStatus:obj[@"message"]];
+            [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
 -(void)loadDatas{
     
     if ([self.headTypeID isEqualToString:@"自选"]) {
+        NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+        PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+        dict[@"consumerID"] = userModel.consumerID;
+       
+        NSString *path = [NSString stringWithFormat:@"%@/%@",optionalView,userModel.consumerID];
+        [NetworkManage Get:path andParams:dict success:^(id responseObject) {
+            NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+            if ([obj[@"code"] integerValue] ==200 ) {
+                self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
+                [self.tableView reloadData];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
         
     }
     else{

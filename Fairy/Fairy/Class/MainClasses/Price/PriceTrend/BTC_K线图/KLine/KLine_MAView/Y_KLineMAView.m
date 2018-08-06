@@ -66,13 +66,13 @@
         _lowLabel = [self private_createLabel];
         
         
-        _MA7Label.textColor = [UIColor ma7Color];
-        _MA15Label.textColor = [UIColor ma15Color];
-        _MA30Label.textColor = [UIColor ma30Color];
-        _openLabel.textColor = [UIColor whiteColor];
-        _highLabel.textColor = [UIColor whiteColor];
-        _lowLabel.textColor = [UIColor whiteColor];
-        _closeLabel.textColor = [UIColor whiteColor];
+        _MA7Label.textColor = [UIColor colorWithHex:@"#8c8c8c"];
+        _MA15Label.textColor = [UIColor colorWithHex:@"#e9bae2"];
+        _MA30Label.textColor = [UIColor colorWithHex:@"#f13bb2"];
+        _openLabel.textColor = [UIColor assistTextColor];
+        _highLabel.textColor = [UIColor assistTextColor];
+        _lowLabel.textColor = [UIColor assistTextColor];
+        _closeLabel.textColor = [UIColor assistTextColor];
 
         NSNumber *labelWidth = [NSNumber numberWithInt:47];
         
@@ -190,7 +190,7 @@
 +(instancetype)view
 {
     Y_KLineMAView *MAView = [[Y_KLineMAView alloc]init];
-
+    MAView.backgroundColor =[UIColor colorWithHex:@"#f6f6f6"];
     return MAView;
 }
 -(void)maProfileWithModel:(Y_KLineModel *)model

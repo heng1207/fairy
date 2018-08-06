@@ -8,12 +8,20 @@
 
 #import "InformationSubVC.h"
 #import "InformationCell.h"
-#import "MineVC.h"
+#import "InformationModel.h"
+#import "InformationFrameModel.h"
+#import "InformationDetailsVC.h"
 
-@interface InformationSubVC ()<UITableViewDataSource, UITableViewDelegate>
+
+@interface InformationSubVC ()<UITableViewDataSource, UITableViewDelegate,InformationCellDelegate>
 
 @property (nonatomic, strong) UITableView *myTableView;
-@property (nonatomic, copy)NSArray *dataArr;
+@property (nonatomic, strong) NSMutableArray * informationFrameModelArr;
+
+@property(nonatomic,assign)NSInteger allNumber;
+@property(nonatomic,assign)NSInteger currentPage;
+
+
 @end
 
 @implementation InformationSubVC
@@ -22,6 +30,16 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:self.myTableView];
+ 
+    //下拉刷新
+    self.myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
+    [self.myTableView.mj_header beginRefreshing];
+    
+    // 加载更多
+//    self.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+//        [self requestMoreDatas];
+//    }];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -35,8 +53,8 @@
         _myTableView.dataSource = self;
         _myTableView.delegate = self;
         _myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-        [_myTableView registerNib:[UINib nibWithNibName:@"InformationCell" bundle:nil] forCellReuseIdentifier:@"InformationCell"];
-//        self.automaticallyAdjustsScrollViewInsets = NO;//解决tableview头部预留64像素的办法
+        [_myTableView registerClass:[InformationCell class] forCellReuseIdentifier:@"InformationCell"];
+        //        self.automaticallyAdjustsScrollViewInsets = NO;//解决tableview头部预留64像素的办法
     }
     return _myTableView;
 }
@@ -46,23 +64,100 @@
     return 1;
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 20;
+    return self.informationFrameModelArr.count;;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 96;
+    InformationFrameModel *model = self.informationFrameModelArr[indexPath.row];
+    return model.cellHeight;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     InformationCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"InformationCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.informationFrameModel = self.informationFrameModelArr[indexPath.row];
+    cell.delegate = self;
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    MineVC *vc =[MineVC new];
-    UIViewController *currentVC = [Tool getCurrentVC];
-    [currentVC presentViewController:vc animated:YES completion:nil];
+
 }
 
+#pragma mark InformationDelegate
+-(void)urlclick:(InformationCell *)informationCellCell{
+    NSIndexPath *index = [self.myTableView indexPathForCell:informationCellCell];
+    InformationFrameModel *informationFrameModel = self.informationFrameModelArr[index.row];
+    InformationDetailsVC *vc =[InformationDetailsVC new];
+    vc.url = informationFrameModel.informationModel.url;
+    vc.hidesBottomBarWhenPushed = YES;
+    [[Tool getCurrentVC].navigationController pushViewController:vc animated:YES];
+}
+
+
+
+-(void)requestDatas{
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    if ([self.headType isEqualToString:@"中文"]) {
+        dict[@"lang"] = @"cn";
+    }
+    else{
+        dict[@"lang"] = @"en";
+    }
+    
+    /// 发送请求
+    __weak InformationSubVC *weakSelf = self;
+    [NetworkManage Get:Information andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
+        // 将InformationModel数组模型转换成InformationFrameModel数组模型
+        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
+        weakSelf.informationFrameModelArr = informationFrameModelArr;
+        [weakSelf.myTableView.mj_header endRefreshing];
+        [weakSelf.myTableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+}
+
+-(void)requestMoreDatas{
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    if ([self.headType isEqualToString:@"中文"]) {
+        dict[@"lang"] = @"cn";
+    }
+    else{
+        dict[@"lang"] = @"en";
+    }
+    
+    /// 发送请求
+    __weak InformationSubVC *weakSelf = self;
+    [NetworkManage Get:Information andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
+        // 将InformationModel数组模型转换成InformationFrameModel数组模型
+        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
+        weakSelf.informationFrameModelArr = informationFrameModelArr;
+        [weakSelf.myTableView.mj_header endRefreshing];
+        [weakSelf.myTableView reloadData];
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
+
+- (NSMutableArray *)informationFrameModelWithInformationModel :(NSArray *)aryModel
+{
+    NSMutableArray *informationFrameModelArr = [NSMutableArray array];
+    for (InformationModel *informationModel in aryModel) {
+        InformationFrameModel *informationFrameModel = [[InformationFrameModel alloc]init];
+        informationFrameModel.informationModel = informationModel;
+        [informationFrameModelArr addObject:informationFrameModel];
+    }
+    return informationFrameModelArr;
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -70,13 +165,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

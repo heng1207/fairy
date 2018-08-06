@@ -53,7 +53,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    self.stockChartView.backgroundColor = [UIColor backgroundColor];
+    self.stockChartView.backgroundColor = [UIColor colorWithHex:@"#ffffff"];
 
     self.currentIndex = -1;
     //设置屏幕横向
@@ -159,7 +159,7 @@
         [self.stockChartView reloadData];
         
     } failure:^(NSError *error) {
-        NSLog(@"%@",error)
+        NSLog(@"%@",error);
     }];
     
 }
