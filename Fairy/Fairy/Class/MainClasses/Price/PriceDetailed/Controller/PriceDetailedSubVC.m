@@ -7,105 +7,105 @@
 //
 
 #import "PriceDetailedSubVC.h"
-#import "BezierLineView.h"
-
-
+#import "PriceAnalyzeView.h"
 
 @interface PriceDetailedSubVC ()
-@property (nonatomic,strong) NSString *currentType;
-@property (strong,nonatomic)BezierLineView *bezierView;
-@property (strong,nonatomic)NSMutableArray *x_names;
-@property (strong,nonatomic)NSMutableArray *targets;
-@property (strong,nonatomic)NSMutableArray *y_names;
 
-
+@property(nonatomic,strong)PriceAnalyzeView *analyzeView;
+@property(nonatomic,strong)NSArray *typeDataArr;
 @end
 
 @implementation PriceDetailedSubVC
-
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor colorWithHex:@"#f1f2f4"];
     
-    //@"币地址检测",@"交易量预警",@"换手量预警",@"分析",@"币地址检测",@"交易量预警",@"换手量预警",@"分析",
-    if ([self.headType isEqualToString:@"币地址检测"]) {
-        
-    }
-    else if ([self.headType isEqualToString:@"交易量预警"]){
-        
-    }
-    else if ([self.headType isEqualToString:@"换手量预警"]){
-        
-    }
-    else if ([self.headType isEqualToString:@"分析"]){
-        
-    }
-    else if ([self.headType isEqualToString:@"币地址检测"]){
-        
-    }
-    
-    
     // Do any additional setup after loading the view.
 }
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    NSLog(@"%@",self.headType);
-}
--(void)creatTextView{
-    UILabel *textLab =[UILabel new];
-    textLab.text = @"打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！打到小日本，解放全中国！！！";
-    [self.view addSubview:textLab];
-    textLab.numberOfLines = 0 ;
-    textLab.textColor =[UIColor blackColor];
-    textLab.font = AdaptedFontSize(32);
-    CGSize  titleSize = [textLab.text  boundingRectWithSize: CGSizeMake(UIScreenW - 24, MAXFLOAT) options: NSStringDrawingUsesLineFragmentOrigin  attributes: @{NSFontAttributeName: AdaptedFontSize(32)} context: nil].size;
-    textLab.frame = CGRectMake(12, 20, titleSize.width, titleSize.height);
-}
-
--(void)loadMainTableData:(NSString *)type isPull:(BOOL)isPull{
-    self.currentType = type;
-    NSLog(@"%@",type);
+-(void)loadMainTableData:(NSInteger )type isPull:(BOOL)isPull{
+    NSLog(@"%ld",(long)type);
     
-    //1.初始化
-    _bezierView = [[BezierLineView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 250)];
-    [self.view addSubview:_bezierView];
+    //60 +180 +10 + 35 + 30
+    NSInteger height = SCREEN_HEIGHT - LL_TabbarSafeBottomMargin - LL_StatusBarAndNavigationBarHeight - 315;
+    if (type==0) {
+        PriceAnalyzeView *view =[[PriceAnalyzeView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) FenXi:@""];
+        self.analyzeView = view;
+        [self.view addSubview:view];
+    }
+    else{
+        NSDictionary *dict = self.typeDataArr[type-1];
+        PriceAnalyzeView *view =[[PriceAnalyzeView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) FenXi:dict[@"content"]];
+        self.analyzeView = view;
+        [self.view addSubview:view];
+        
+    }
+
+    if (type==0) {
+        [self requestJieShao];
+    }
+    else{
+        [self requestDatas:type];
+    }
+
+}
+-(void)requestJieShao{
+    NSString *path = @"http://47.75.145.77:8080/interface/digital_currency/viewByshortEnName/btc";
+    [NetworkManage Get:path andParams:nil success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            NSArray *dataDic= obj[@"data"];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+-(void)requestDatas:(NSInteger)type{
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    dict[@"coin"] = @"btc";
+    dict[@"type"] = self.typeDataArr[type-1][@"type"];
     
-    //直线
-    [_bezierView drawLineChartViewWithX_Value_Names:self.x_names Y_Value_Names:self.y_names TargetValues:self.targets LineType:LineType_Straight];
-    
+    [NetworkManage Get:statistics andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+         
+            [self.analyzeView setDataDic:obj[@"data"]];
+            /*
+             {
+             "code": 200,
+             "message": "操作成功",
+             "data": {
+             "image": "/image/statistics/Statistics_googlevscoin_btc.png",
+             "data": {
+             "date": "2018-08-01",
+             "btc": "0.04923597542130377",
+             "close": "0.3657735939366355"
+             }
+             }
+             }
+             */
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
 }
 
-
-/**
- *  X轴值
- */
--(NSMutableArray *)x_names{
-    if (!_x_names) {
-        _x_names = [NSMutableArray arrayWithArray:@[@"1/6",@"2/6",@"3/6",@"4/6",@"5/6",@"6/6",@"7/6"]];
+-(NSArray*)typeDataArr{
+    if (!_typeDataArr) {
+        _typeDataArr = @[@{@"type":@"coincorelation",@"content":@"用协整分析法分析各点和位点之间的相互关系"},
+  @{@"type":@"coinvscoin",@"content":@"在两个币之间进行币的对比"},
+  @{@"type":@"coinchgvscoinchg",@"content":@"在币变化之间进行对比"},
+  @{@"type":@"googlevscoin",@"content":@"google关注度的增长与币价格的对比"},
+  @{@"type":@"metalvscoin",@"content":@"贵重金属与币价格变化的百分比之间的关系"},
+  @{@"type":@"orilvscoin",@"content":@"原油与币价格变化的百分比之间的关系"},
+  @{@"type":@"redditvscoin",@"content":@"reddit关注度与币价格之间的关系"},
+  @{@"type":@"exchangeratevscoin",@"content":@"汇率与币价格之间的关系"},
+                         ];
     }
-    return _x_names;
+    return _typeDataArr;
 }
-/**
- *  y轴值
- */
--(NSMutableArray *)y_names{
-    if (!_y_names) {
-        _y_names = [NSMutableArray arrayWithArray:@[@"-2",@"0",@"2",@"4",@"6"]];
-    }
-    return _y_names;
-}
-
-
-/**
- *  值
- */
--(NSMutableArray *)targets{
-    if (!_targets) {
-        _targets = [NSMutableArray arrayWithArray:@[@1,@-2,@2,@5,@3,@2,@0]];
-    }
-    return _targets;
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

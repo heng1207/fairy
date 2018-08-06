@@ -2,8 +2,8 @@
 //  PriceSubVC.m
 //  Fairy
 //
-//  Created by 张恒 on 2018/8/5.
-//  Copyright © 2018年 张恒. All rights reserved.
+//  Created by  on 2018/8/5.
+//  Copyright © 2018年 . All rights reserved.
 //
 
 #import "PriceSubVC.h"
@@ -95,6 +95,7 @@
                 [self.myTableView reloadData];
             }
         } failure:^(NSError *error) {
+            [self.myTableView.mj_header endRefreshing];
             NSLog(@"%@",error);
         }];
         
@@ -113,6 +114,7 @@
                 [self.myTableView reloadData];
             }
         } failure:^(NSError *error) {
+            [self.myTableView.mj_header endRefreshing];
             NSLog(@"%@",error);
         }];
         

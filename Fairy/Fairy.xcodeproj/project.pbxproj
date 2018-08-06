@@ -41,6 +41,8 @@
 		04B218DB20D10B8F000D661F /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DA20D10B8F000D661F /* ShareVC.m */; };
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
+		4EC579362118259F00868549 /* PriceAnalyzeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC579352118259F00868549 /* PriceAnalyzeView.m */; };
+		4EC5793921184F3000868549 /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5793821184F3000868549 /* BezierLineView.m */; };
 		4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */; };
 		4ED1CA282114547700D86411 /* UIColor+Y_StockChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F52114547700D86411 /* UIColor+Y_StockChart.m */; };
 		4ED1CA292114547700D86411 /* Y_StockChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F62114547700D86411 /* Y_StockChartView.m */; };
@@ -75,7 +77,6 @@
 		7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E35FD5720F9AD7800645870 /* WSLineChartView.m */; };
 		7E741ADE20F64588000E7E73 /* NavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E741ADD20F64588000E7E73 /* NavView.m */; };
 		7E75221720D40BFD007E1489 /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E75221620D40BFD007E1489 /* GraphCell.m */; };
-		7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */; };
 		7EB3210A20CEC4A50093DBAB /* SSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB3210920CEC4A50093DBAB /* SSSearchBar.m */; };
 		7EB5E25120CCAD40004BFAE2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E24220CCAD40004BFAE2 /* AppDelegate.m */; };
 		7EB5E25220CCAD40004BFAE2 /* MainNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E24420CCAD40004BFAE2 /* MainNavigationController.m */; };
@@ -180,6 +181,10 @@
 		04B218E220D11867000D661F /* UIView+BorderLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+BorderLine.h"; sourceTree = "<group>"; };
 		04B218E320D11867000D661F /* UIView+BorderLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BorderLine.m"; sourceTree = "<group>"; };
 		35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.release.xcconfig"; sourceTree = "<group>"; };
+		4EC579342118259F00868549 /* PriceAnalyzeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceAnalyzeView.h; sourceTree = "<group>"; };
+		4EC579352118259F00868549 /* PriceAnalyzeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceAnalyzeView.m; sourceTree = "<group>"; };
+		4EC5793721184F3000868549 /* BezierLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
+		4EC5793821184F3000868549 /* BezierLineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierLineView.m; sourceTree = "<group>"; };
 		4ED1C9EC2114547700D86411 /* Y_StockChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartView.h; sourceTree = "<group>"; };
 		4ED1C9EF2114547700D86411 /* Y_StockChartGlobalVariable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Y_StockChartGlobalVariable.h; sourceTree = "<group>"; };
 		4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Y_StockChartGlobalVariable.m; sourceTree = "<group>"; };
@@ -250,8 +255,6 @@
 		7E741ADD20F64588000E7E73 /* NavView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NavView.m; sourceTree = "<group>"; };
 		7E75221520D40BFD007E1489 /* GraphCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GraphCell.h; sourceTree = "<group>"; };
 		7E75221620D40BFD007E1489 /* GraphCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GraphCell.m; sourceTree = "<group>"; };
-		7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
-		7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BezierLineView.m; sourceTree = "<group>"; };
 		7EB3210820CEC4A50093DBAB /* SSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSearchBar.h; sourceTree = "<group>"; };
 		7EB3210920CEC4A50093DBAB /* SSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSearchBar.m; sourceTree = "<group>"; };
 		7EB5E21120CCA6FF004BFAE2 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -411,8 +414,10 @@
 				7E35FD5220F9AD7800645870 /* WSLineChartView */,
 				04204F9E20CE63A6007BD075 /* BaseTypeView.h */,
 				04204F9F20CE63A6007BD075 /* BaseTypeView.m */,
-				7EB12A0120D4FB6B00C8CB6E /* BezierLineView.h */,
-				7EB12A0220D4FB6B00C8CB6E /* BezierLineView.m */,
+				4EC579342118259F00868549 /* PriceAnalyzeView.h */,
+				4EC579352118259F00868549 /* PriceAnalyzeView.m */,
+				4EC5793721184F3000868549 /* BezierLineView.h */,
+				4EC5793821184F3000868549 /* BezierLineView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1292,13 +1297,14 @@
 				7E741ADE20F64588000E7E73 /* NavView.m in Sources */,
 				7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */,
 				04B218DE20D10CCE000D661F /* shareBtn.m in Sources */,
+				4EC5793921184F3000868549 /* BezierLineView.m in Sources */,
 				0406C66720D0BAE7008F6A26 /* MessageCell.m in Sources */,
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,
 				7EB5E27120CCAE09004BFAE2 /* UIBarButtonItem+GFBarButtonItem.m in Sources */,
 				7EB5E27F20CCB13D004BFAE2 /* HomeVC.m in Sources */,
+				4EC579362118259F00868549 /* PriceAnalyzeView.m in Sources */,
 				4ED1CA362114547700D86411 /* Y_KLineVolume.m in Sources */,
 				0430253220E1DB6B00094314 /* BezierView.m in Sources */,
-				7EB12A0320D4FB6B00C8CB6E /* BezierLineView.m in Sources */,
 				4ED1CA342114547700D86411 /* Y_KLineVolumePositionModel.m in Sources */,
 				7E0B97E82116999B0054014C /* InformationCell.m in Sources */,
 				7E060399210F540400517F27 /* PriceModel.m in Sources */,

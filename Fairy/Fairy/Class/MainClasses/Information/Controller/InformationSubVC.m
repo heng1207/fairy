@@ -115,6 +115,7 @@
         [weakSelf.myTableView.mj_header endRefreshing];
         [weakSelf.myTableView reloadData];
     } failure:^(NSError *error) {
+        [weakSelf.myTableView.mj_header endRefreshing];
         NSLog(@"%@",error);
     }];
 

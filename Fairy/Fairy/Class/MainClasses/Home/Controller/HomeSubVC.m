@@ -151,8 +151,9 @@
     dict[@"coinPairID"] = self.selectModel.fsym;
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
     dict[@"consumerID"] = userModel.consumerID;
-    dict[@"token"] = userModel.token;
-    [NetworkManage Post:optionalInsert andParams:dict success:^(id responseObject) {
+//    dict[@"token"] = userModel.token;
+    NSString *urlPath =[NSString stringWithFormat:@"%@?token=%@",optionalInsert,userModel.token];
+    [NetworkManage Post:urlPath andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             [SVProgressHUD setMinimumDismissTimeInterval:1];

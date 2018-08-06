@@ -41,13 +41,12 @@
     
     [self initNavtionBar];
     [self creatPriceView];
-    
-    
-//    [self creatChartView];
+  
+
 //    [self creatBaseTypeView];
 //    [self addTabPageBar];
 //    [self addPagerController];
-    
+
     
     [self requestData];
     
@@ -103,23 +102,6 @@
     [self.view addSubview:indexView];
     
 }
--(void)creatChartView{
-
-    NSMutableArray *xArray = [NSMutableArray array];
-    NSMutableArray *yArray = [NSMutableArray array];
-    for (NSInteger i = 0; i < 20; i++) {
-        
-        [xArray addObject:[NSString stringWithFormat:@"%.1f",3+0.1*i]];
-        [yArray addObject:[NSString stringWithFormat:@"%.2lf",20.0+arc4random_uniform(10)]];
-        
-    }
-    
-    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.indexView.frame), UIScreenW, 180) xTitleArray:xArray yValueArray:yArray yMax:30 yMin:20];
-    self.lineChartView = wsLine;
-    wsLine.delegate = self;
-    [self.view addSubview:wsLine];
-
-}
 
 -(void)creatBaseTypeView{
     BaseTypeView *baseTypeView =[[BaseTypeView alloc]initWithFrame:CGRectMake(0, CGRectGetMaxY(self.lineChartView.frame)+10, UIScreenW, 35)];
@@ -132,7 +114,7 @@
     TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]init];
     tabBar.backgroundColor = [UIColor whiteColor];
     tabBar.layout.barStyle = TYPagerBarStyleProgressElasticView;
-    tabBar.layout.progressWidth = 80;
+    tabBar.layout.progressWidth = SCREEN_WIDTH/2;
     tabBar.layout.progressHeight = 2;
     tabBar.layout.progressColor = [UIColor colorWithHex:@"#1161a0"];
     tabBar.layout.normalTextColor = [UIColor colorWithHex:@"#848484"];
@@ -175,7 +157,7 @@
 
 #pragma mark - TYTabPagerBarDelegate
 - (CGFloat)pagerTabBar:(TYTabPagerBar *)pagerTabBar widthForItemAtIndex:(NSInteger)index {
-    return SCREEN_WIDTH/3;
+    return SCREEN_WIDTH/2;
 }
 
 - (void)pagerTabBar:(TYTabPagerBar *)pagerTabBar didSelectItemAtIndex:(NSInteger)index {
@@ -190,7 +172,7 @@
 }
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
     PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
-    [vc loadMainTableData:self.flagArray[index] isPull:NO];
+    [vc loadMainTableData:index isPull:NO];
     return vc;
 }
 
@@ -204,16 +186,21 @@
 }
 
 - (void)reloadData {
-    _tabBar.layout.cellWidth = SCREEN_WIDTH/4;
+    _tabBar.layout.cellWidth = SCREEN_WIDTH/2;
     [_tabBar reloadData];
     [_pagerController reloadData];
 }
 
 #pragma mark BaseTypeViewDelegate
 -(void)gmdOpFenXiClick{
-    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
+    [self fenXiData];
+}
+
+-(void)fenXiData{
+    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"协整分析",@"币币比较",@"币变化对比",@"google关注与比价格关系",@"原油与币价格的关系",@"reddit关注度与币价格关系",@"汇率与币价格关系", nil];
     [self reloadData];
 }
+
 -(void)gmdOpYuCeClick{
     self.flagArray = [NSMutableArray arrayWithObjects:@"短期预测",@"长期预测", nil];
     [self reloadData];
@@ -271,12 +258,12 @@
             self.lineChartView = wsLine;
             wsLine.delegate = self;
             [self.view addSubview:wsLine];
-            
-            
+    
             [self creatBaseTypeView];
             [self addTabPageBar];
             [self addPagerController];
-            self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"资金净流入",@"换手率",@"持币地址变化率",@"社区活跃度",@"市场表现", nil];
+            
+            [self fenXiData];
             [self reloadData];
             
             

@@ -62,6 +62,10 @@
 #define coinmarketcapHistory      (SERVER@"/coinmarketcap/getCoinmarketcapHistoryData")
 //http://47.75.145.77:8080/interface/coinmarketcap/getCoinmarketcapHistoryData?coinPair=eth
 
+//行情分析
+#define statistics                (SERVER@"/statistics/search")
+//http://47.75.145.77:8080/interface/statistics/search?coin=btc&type=googlevscoin
+
 //K线图
 //http://47.75.145.77:8080/interface/kline/get_kline_15m?tradePlatform=bitfinex&coinPair=eth_btc&klineDate=20180801
 
