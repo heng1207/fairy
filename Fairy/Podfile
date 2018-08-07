@@ -26,7 +26,9 @@ pod 'MBProgressHUD'
 pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'TYPagerController'
-#pod 'WMPageController', '~> 2.4.0'  
+pod 'WMPageController', '~> 2.4.0'  
 # pod 'Charts'
 pod 'YCXMenu' ## 菜单选择栏
+
+
 end

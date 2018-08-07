@@ -15,7 +15,7 @@
 #import "CurrencySelectVC.h"
 #import "TrendVC.h"
 
-@interface PriceDetailedVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate,BaseTypeViewDelegate,WSLineChartViewDelegate>
+@interface PriceDetailedVC ()<BaseTypeViewDelegate,WSLineChartViewDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
 @property(nonatomic, strong)WSLineChartView *lineChartView;
@@ -25,28 +25,40 @@
 @property(nonatomic,strong) NSArray *secondDataArr;
 
 @property(nonatomic,strong) NSMutableArray *flagArray;
+@property (nonatomic, strong) NSMutableArray *titleItemLengths;
 @end
 
 @implementation PriceDetailedVC
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    _tabBar.frame = CGRectMake(0, CGRectGetMaxY(self.baseTypeView.frame), CGRectGetWidth(self.view.frame), 30);
-    _pagerController.view.frame = CGRectMake(0, CGRectGetMaxY(_tabBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- CGRectGetMaxY(_tabBar.frame));
-}
 
 - (void)viewDidLoad {
+    
+    self.menuViewStyle = WMMenuViewStyleLine;
+    self.progressColor =[UIColor colorWithHex:@"#1161a0"];
+    self.progressHeight = 1;
+    self.flagArray =[NSMutableArray array];
+    self.titleItemLengths =[NSMutableArray array];
+    for (NSInteger i =0; i<self.flagArray.count; i++) {
+        CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
+        NSNumber *width = [NSNumber numberWithFloat:size.width];
+        [self.titleItemLengths addObject:width];
+    }
+    self.progressViewWidths = self.titleItemLengths;
+    self.itemsWidths = self.titleItemLengths;
+    self.itemMargin = 20;
+    self.progressViewBottomSpace=2;
+    self.menuViewLayoutMode = WMMenuViewLayoutModeCenter;
+    self.titleSizeNormal = 15;
+    self.titleSizeSelected = 15;
+    self.titleColorNormal = [UIColor colorWithHex:@"#848484"];
+    self.titleColorSelected = [UIColor colorWithHex:@"#0e5f9f"];
+    
+    
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    
     [self initNavtionBar];
     [self creatPriceView];
-  
-
-//    [self creatBaseTypeView];
-//    [self addTabPageBar];
-//    [self addPagerController];
-
+    
+    self.menuView.scrollView.backgroundColor =[UIColor grayColor];
     
     [self requestData];
     
@@ -110,86 +122,34 @@
     [self.view addSubview:baseTypeView];
 }
 
-- (void)addTabPageBar {
-    TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]init];
-    tabBar.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
-    tabBar.layout.barStyle = TYPagerBarStyleProgressElasticView;
-    tabBar.layout.progressWidth = SCREEN_WIDTH/2;
-    tabBar.layout.progressHeight = 2;
-    tabBar.layout.progressColor = [UIColor colorWithHex:@"#1161a0"];
-    tabBar.layout.normalTextColor = [UIColor colorWithHex:@"#848484"];
-    tabBar.layout.selectedTextColor = [UIColor colorWithHex:@"#0e5f9f"];
-    tabBar.layout.cellSpacing = 0;
-    tabBar.layout.cellEdging = 0;
-    tabBar.layout.cellWidth = SCREEN_WIDTH/2;
-    tabBar.layout.normalTextFont = AdaptedFontSize(24);
-    tabBar.layout.selectedTextFont = AdaptedFontSize(24);
-    tabBar.dataSource = self;
-    tabBar.delegate = self;
-    [tabBar registerClass:[TYTabPagerBarCell class] forCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier]];
-    [self.view addSubview:tabBar];
-    _tabBar = tabBar;
-
-}
-- (void)addPagerController {
-    TYPagerController *pagerController = [[TYPagerController alloc]init];
-    pagerController.layout.prefetchItemCount = 1;
-    //pagerController.layout.autoMemoryCache = NO;
-    // 只有当scroll滚动动画停止时才加载pagerview，用于优化滚动时性能
-
-    pagerController.layout.addVisibleItemOnlyWhenScrollAnimatedEnd = YES;
-    pagerController.dataSource = self;
-    pagerController.delegate = self;
-    [self addChildViewController:pagerController];
-    [self.view addSubview:pagerController.view];
-    _pagerController = pagerController;
-}
-
-#pragma mark - TYTabPagerBarDataSource
-- (NSInteger)numberOfItemsInPagerTabBar {
+#pragma mark - Datasource & Delegate
+#pragma mark 返回子页面的个数
+-(NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
     return self.flagArray.count;
 }
-- (UICollectionViewCell<TYTabPagerBarCellProtocol> *)pagerTabBar:(TYTabPagerBar *)pagerTabBar cellForItemAtIndex:(NSInteger)index {
-    UICollectionViewCell<TYTabPagerBarCellProtocol> *cell = [pagerTabBar dequeueReusableCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier] forIndex:index];
-    cell.titleLabel.text = self.flagArray[index];
-    return cell;
-}
 
-#pragma mark - TYTabPagerBarDelegate
-- (CGFloat)pagerTabBar:(TYTabPagerBar *)pagerTabBar widthForItemAtIndex:(NSInteger)index {
-    return SCREEN_WIDTH/2;
-}
-
-- (void)pagerTabBar:(TYTabPagerBar *)pagerTabBar didSelectItemAtIndex:(NSInteger)index {
-    _currentIndex = index;
-    [_pagerController scrollToControllerAtIndex:index animate:YES];
-}
-
-
-#pragma mark - TYPagerControllerDataSource
-- (NSInteger)numberOfControllersInPagerController {
-    return self.flagArray.count;
-}
-- (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
+#pragma mark 返回某个index对应的页面
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
     [vc loadMainTableData:index isPull:NO];
     return vc;
 }
-
-- (void)pagerController:(TYPagerController *)pagerController transitionFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex animated:(BOOL)animated {
-    _currentIndex = toIndex;
-    [_tabBar scrollToItemFromIndex:fromIndex toIndex:toIndex animate:animated];
+#pragma mark 返回index对应的标题
+- (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+    return self.flagArray[index];
+}
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView{
+    return  CGRectMake(0, CGRectGetMaxY(self.baseTypeView.frame), SCREEN_WIDTH, 30);
+}
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
+    return  CGRectMake(0, CGRectGetMaxY(self.baseTypeView.frame)+30, SCREEN_WIDTH, CGRectGetHeight(self.view.frame)- CGRectGetMaxY(self.baseTypeView.frame)-30 );
 }
 
--(void)pagerController:(TYPagerController *)pagerController transitionFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress {
-    [_tabBar scrollToItemFromIndex:fromIndex toIndex:toIndex progress:progress];
-}
-
-- (void)reloadData {
-    _tabBar.layout.cellWidth = SCREEN_WIDTH/2;
-    [_tabBar reloadData];
-    [_pagerController reloadData];
-}
+//- (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
+//    PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
+//    [vc loadMainTableData:index isPull:NO];
+//    return vc;
+//}
 
 #pragma mark BaseTypeViewDelegate
 -(void)gmdOpFenXiClick{
@@ -197,16 +157,45 @@
 }
 
 -(void)fenXiData{
+    [self.flagArray removeAllObjects];
+    [self.titleItemLengths  removeAllObjects];
     self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"协整分析",@"币币比较",@"币变化对比",@"google关注与比价格关系",@"原油与币价格的关系",@"reddit关注度与币价格关系",@"汇率与币价格关系", nil];
+    
+    for (NSInteger i =0; i<self.flagArray.count; i++) {
+        CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
+        NSNumber *width = [NSNumber numberWithFloat:size.width];
+        [self.titleItemLengths addObject:width];
+    }
+    self.progressViewWidths = self.titleItemLengths;
+    self.itemsWidths = self.titleItemLengths;
     [self reloadData];
 }
 
 -(void)gmdOpYuCeClick{
+
+    [self.flagArray removeAllObjects];
+    [self.titleItemLengths  removeAllObjects];
     self.flagArray = [NSMutableArray arrayWithObjects:@"短期预测",@"长期预测", nil];
+    for (NSInteger i =0; i<self.flagArray.count; i++) {
+        CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
+        NSNumber *width = [NSNumber numberWithFloat:size.width];
+        [self.titleItemLengths addObject:width];
+    }
+    self.progressViewWidths = self.titleItemLengths;
+    self.itemsWidths = self.titleItemLengths;
     [self reloadData];
 }
 -(void)gmdOpYuJingClick{
+    [self.flagArray removeAllObjects];
+    [self.titleItemLengths  removeAllObjects];
     self.flagArray = [NSMutableArray arrayWithObjects:@"币地址检测",@"交易量预警",@"换手量预警", nil];
+    for (NSInteger i =0; i<self.flagArray.count; i++) {
+        CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
+        NSNumber *width = [NSNumber numberWithFloat:size.width];
+        [self.titleItemLengths addObject:width];
+    }
+    self.progressViewWidths = self.titleItemLengths;
+    self.itemsWidths = self.titleItemLengths;
     [self reloadData];
     
 }
@@ -260,11 +249,8 @@
             [self.view addSubview:wsLine];
     
             [self creatBaseTypeView];
-            [self addTabPageBar];
-            [self addPagerController];
-            
             [self fenXiData];
-            [self reloadData];
+      
             
             
         }
@@ -330,6 +316,11 @@
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
+}
+
+-(CGSize)methodForitleItemLengths:(NSString*)titleStr{
+    CGSize titleSize = [titleStr boundingRectWithSize:CGSizeMake(self.view.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    return titleSize;
 }
 
 -(void)dealloc{

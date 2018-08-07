@@ -30,8 +30,6 @@
 		0445DBD620CFBD70009BA6BF /* CurrencySelectVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBD520CFBD70009BA6BF /* CurrencySelectVC.m */; };
 		0445DBD920CFCDF3009BA6BF /* TrendVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBD820CFCDF3009BA6BF /* TrendVC.m */; };
 		0445DBDC20CFCE0C009BA6BF /* TrendSubVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBDB20CFCE0C009BA6BF /* TrendSubVC.m */; };
-		0445DBE020CFD277009BA6BF /* HeadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBDE20CFD277009BA6BF /* HeadCell.m */; };
-		0445DBE120CFD277009BA6BF /* HeadCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0445DBDF20CFD277009BA6BF /* HeadCell.xib */; };
 		0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0445DBE320CFD550009BA6BF /* SettingCell.m */; };
 		0445DBE620CFD550009BA6BF /* SettingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0445DBE420CFD550009BA6BF /* SettingCell.xib */; };
 		0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0469DFC620D26AF60096C35C /* PhoneZhuCeModel.m */; };
@@ -40,6 +38,7 @@
 		04B218DB20D10B8F000D661F /* ShareVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DA20D10B8F000D661F /* ShareVC.m */; };
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
+		4E01BF2321199CE5001DE371 /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E01BF2221199CE5001DE371 /* HeadView.m */; };
 		4EC579362118259F00868549 /* PriceAnalyzeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC579352118259F00868549 /* PriceAnalyzeView.m */; };
 		4EC5793921184F3000868549 /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5793821184F3000868549 /* BezierLineView.m */; };
 		4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */; };
@@ -160,9 +159,6 @@
 		0445DBD820CFCDF3009BA6BF /* TrendVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrendVC.m; sourceTree = "<group>"; };
 		0445DBDA20CFCE0C009BA6BF /* TrendSubVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TrendSubVC.h; sourceTree = "<group>"; };
 		0445DBDB20CFCE0C009BA6BF /* TrendSubVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TrendSubVC.m; sourceTree = "<group>"; };
-		0445DBDD20CFD277009BA6BF /* HeadCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadCell.h; sourceTree = "<group>"; };
-		0445DBDE20CFD277009BA6BF /* HeadCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadCell.m; sourceTree = "<group>"; };
-		0445DBDF20CFD277009BA6BF /* HeadCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeadCell.xib; sourceTree = "<group>"; };
 		0445DBE220CFD550009BA6BF /* SettingCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingCell.h; sourceTree = "<group>"; };
 		0445DBE320CFD550009BA6BF /* SettingCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingCell.m; sourceTree = "<group>"; };
 		0445DBE420CFD550009BA6BF /* SettingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingCell.xib; sourceTree = "<group>"; };
@@ -179,6 +175,8 @@
 		04B218E220D11867000D661F /* UIView+BorderLine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+BorderLine.h"; sourceTree = "<group>"; };
 		04B218E320D11867000D661F /* UIView+BorderLine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+BorderLine.m"; sourceTree = "<group>"; };
 		35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.release.xcconfig"; sourceTree = "<group>"; };
+		4E01BF2121199CE5001DE371 /* HeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadView.h; sourceTree = "<group>"; };
+		4E01BF2221199CE5001DE371 /* HeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadView.m; sourceTree = "<group>"; };
 		4EC579342118259F00868549 /* PriceAnalyzeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceAnalyzeView.h; sourceTree = "<group>"; };
 		4EC579352118259F00868549 /* PriceAnalyzeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceAnalyzeView.m; sourceTree = "<group>"; };
 		4EC5793721184F3000868549 /* BezierLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
@@ -939,9 +937,8 @@
 		7EB5E24A20CCAD40004BFAE2 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0445DBDD20CFD277009BA6BF /* HeadCell.h */,
-				0445DBDE20CFD277009BA6BF /* HeadCell.m */,
-				0445DBDF20CFD277009BA6BF /* HeadCell.xib */,
+				4E01BF2121199CE5001DE371 /* HeadView.h */,
+				4E01BF2221199CE5001DE371 /* HeadView.m */,
 				0445DBE220CFD550009BA6BF /* SettingCell.h */,
 				0445DBE320CFD550009BA6BF /* SettingCell.m */,
 				0445DBE420CFD550009BA6BF /* SettingCell.xib */,
@@ -1130,7 +1127,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0445DBE120CFD277009BA6BF /* HeadCell.xib in Resources */,
 				7EFBA35F20CC2F050059090B /* LaunchScreen.storyboard in Resources */,
 				0406C66820D0BAE7008F6A26 /* MessageCell.xib in Resources */,
 				7EFBA35C20CC2F050059090B /* Assets.xcassets in Resources */,
@@ -1154,7 +1150,6 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Fairy/Pods-Fairy-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/AFNetworking/AFNetworking.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJExtension/MJExtension.framework",
@@ -1163,12 +1158,12 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/TYPagerController/TYPagerController.framework",
+				"${BUILT_PRODUCTS_DIR}/WMPageController/WMPageController.framework",
 				"${BUILT_PRODUCTS_DIR}/YCXMenu/YCXMenu.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AFNetworking.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJExtension.framework",
@@ -1177,6 +1172,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TYPagerController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/WMPageController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/YCXMenu.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1190,9 +1186,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Fairy/Pods-Fairy-resources.sh",
+				"${PODS_ROOT}/UMCShare/UMShare/UMSocialUI/UMSocialSDKResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/UMSocialSDKResources.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1214,7 +1213,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1312,6 +1311,7 @@
 				4ED1CA332114547700D86411 /* Y_KLineGroupModel.m in Sources */,
 				4ED1CA282114547700D86411 /* UIColor+Y_StockChart.m in Sources */,
 				7EB5E27620CCAE09004BFAE2 /* UIViewController+SLHUD.m in Sources */,
+				4E01BF2321199CE5001DE371 /* HeadView.m in Sources */,
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
 				7EB5E29F20CD01FF004BFAE2 /* FSBaseTableView.m in Sources */,
 				04B218D820D106FD000D661F /* GeneralVC.m in Sources */,
@@ -1319,7 +1319,6 @@
 				04204F9A20CE5C38007BD075 /* PriceDetailedSubVC.m in Sources */,
 				4ED1CA352114547700D86411 /* Y_KLineVolumeView.m in Sources */,
 				0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */,
-				0445DBE020CFD277009BA6BF /* HeadCell.m in Sources */,
 				0430253420E1DB6B00094314 /* BezierCurveView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

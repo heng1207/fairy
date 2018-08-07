@@ -25,6 +25,7 @@
 #import "TYTabPagerBar.h"
 #import "TYPagerController.h"
 #import "YCXMenu.h"
+#import "WMPageController.h"
 
 
 #import "UIBarButtonItem+GFBarButtonItem.h"

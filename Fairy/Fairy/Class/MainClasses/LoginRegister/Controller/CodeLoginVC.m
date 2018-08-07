@@ -43,7 +43,12 @@
     logoIM.image =[UIImage imageNamed:@"loginLogo"];
     [self.view addSubview:logoIM];
     [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(AdaptedHeight(110));
+        if (LL_iPhoneX) {
+             make.top.mas_equalTo(AdaptedHeight(110+44));
+        }
+        else{
+            make.top.mas_equalTo(AdaptedHeight(110));
+        }
         make.centerX.mas_equalTo(self.view);
         make.width.mas_equalTo(AdaptedWidth(436));
         make.height.mas_equalTo(AdaptedHeight(230));

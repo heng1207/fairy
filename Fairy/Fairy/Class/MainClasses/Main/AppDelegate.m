@@ -22,8 +22,9 @@
 #import "AppDelegate.h"
 #import "MainTabBarController.h"
 #import <UMShare/UMShare.h>
+#import <UMCommon/UMCommon.h>
 
-#define USHARE_DEMO_APPKEY  @"5b49a9398f4a9d5be4000132"
+#define USHARE_APPKEY  @"5b49a9398f4a9d5be4000132"
 
 @interface AppDelegate ()<ReachabilityDelegate>
 
@@ -44,7 +45,7 @@
     /* 打开调试日志 */
     [[UMSocialManager defaultManager] openLog:YES];
     /* 设置友盟appkey */
-    [[UMSocialManager defaultManager] setUmSocialAppkey:USHARE_DEMO_APPKEY];
+    [UMConfigure initWithAppkey:USHARE_APPKEY channel:@"App Store"];
     [self configUSharePlatforms];
     
     

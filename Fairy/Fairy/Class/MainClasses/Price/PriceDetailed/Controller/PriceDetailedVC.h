@@ -9,11 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PriceModel.h"
 
-@interface PriceDetailedVC : UIViewController
-@property (nonatomic, weak) TYTabPagerBar *tabBar;
-@property (nonatomic, weak) TYPagerController *pagerController;
-@property (nonatomic,assign) NSInteger currentIndex;
-
+@interface PriceDetailedVC : WMPageController
 
 @property (nonatomic,strong) PriceModel *priceModel;
 
