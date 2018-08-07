@@ -11,7 +11,10 @@
 
 // http://47.75.145.77:8080/interface/swagger-ui.html#/  接口测试链接
 
-#define SERVER        @"http://47.75.145.77:8080/interface"
+//#define SERVER        @"http://47.75.145.77:8080/interface"
+#define SERVER        @"http://47.254.69.147:8080/interface"
+
+
 
 /*
  登陆注册
@@ -70,11 +73,11 @@
 //http://47.75.145.77:8080/interface/kline/get_kline_15m?tradePlatform=bitfinex&coinPair=eth_btc&klineDate=20180801
 
 //价格趋势图
-#define PriceTrendChart           (SERVER@"/kline/getKPriceListData")
+#define PriceTrendChart           (SERVER@"/kline/getPriceListData")
 //http://47.75.145.77:8080/interface/kline/getKPriceListData?tradePlatform=bitfinex&coinPair=eth_btc
 
 //交易量趋势图
-#define VolumeTrendChart          (SERVER@"/kline/getKVolumeListData")
+#define VolumeTrendChart          (SERVER@"/kline/getVolumeListData")
 //http://47.75.145.77:8080/interface/kline/getKVolumeListData?tradePlatform=bitfinex&coinPair=eth_btc
 
 //资讯

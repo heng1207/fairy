@@ -14,8 +14,8 @@
 
 @interface PriceSubVC ()<UITableViewDataSource, UITableViewDelegate,PriceCellDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
-@property (nonatomic, copy)NSMutableArray *dataArrs;
-@property(nonatomic,strong)PriceModel *selectModel;
+@property (nonatomic, strong)NSMutableArray *dataArrs;
+@property (nonatomic, strong)PriceModel *selectModel;
 
 
 @end
@@ -149,8 +149,16 @@
     dict[@"consumerID"] = userModel.consumerID;
     
     NSString *path =[NSString stringWithFormat:@"%@?token=%@",optionalDelete,userModel.token];
+    __weak PriceSubVC *weakSelf = self;
     [NetworkManage Post:path andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            [weakSelf.dataArrs removeObject:self.selectModel];
+            [weakSelf.myTableView reloadData];
+
+        }
         
         int64_t delayInSeconds = 1.0;      // 延迟的时间
         /*
@@ -165,12 +173,7 @@
             [SVProgressHUD setBackgroundColor:[UIColor grayColor]];
             
         });
-        
-        if ([obj[@"code"] integerValue] ==200 ) {
-            
-            [self.dataArrs removeObject:self.selectModel];
-            [self.myTableView reloadData];
-        }
+
         
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
