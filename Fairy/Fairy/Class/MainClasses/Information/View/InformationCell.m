@@ -11,7 +11,7 @@
 @interface InformationCell()
 
 @property(nonatomic,strong)UILabel *keyLab;
-@property(nonatomic,strong)UILabel *publishTimeLab;
+@property(nonatomic,strong)UILabel *sentimentLab;
 @property(nonatomic,strong)UILabel *titleLab;
 @property(nonatomic,strong)UILabel *urlLab;
 @property(nonatomic,strong)UIView *line;
@@ -37,12 +37,12 @@
     _keyLab = keyLab;
     [self.contentView addSubview:keyLab];
     
-    /// publishTime
-    UILabel *publishTimeLab = [[UILabel alloc] init];
-    publishTimeLab.textColor = [UIColor blackColor];
-    publishTimeLab.font = [UIFont systemFontOfSize:15];
-    _publishTimeLab = publishTimeLab;
-    [self.contentView addSubview:publishTimeLab];
+    /// sentiment
+    UILabel *sentimentLab = [[UILabel alloc] init];
+    sentimentLab.textColor = [UIColor blackColor];
+    sentimentLab.font = [UIFont systemFontOfSize:15];
+    _sentimentLab = sentimentLab;
+    [self.contentView addSubview:sentimentLab];
     
     /// title
     UILabel *titleLab = [[UILabel alloc] init];
@@ -82,8 +82,17 @@
     _keyLab.text =_informationModel.key;
     _keyLab.frame = _informationFrameModel.keyF;
     
-    _publishTimeLab.text = [Tool createTime:_informationModel.publishTime];
-    _publishTimeLab.frame = _informationFrameModel.publishTimeF;
+    NSString *sentimentStr;
+    BOOL isInt = [Tool isPureInt:_informationModel.sentiment];
+    if (isInt) {
+        sentimentStr = [NSString stringWithFormat:@"%@.0",_informationModel.sentiment];
+    }
+    else{
+        float change = [_informationModel.sentiment floatValue];
+        sentimentStr = [NSString stringWithFormat:@"%0.3f",change];
+    }
+    _sentimentLab.text = sentimentStr;
+    _sentimentLab.frame = _informationFrameModel.sentimentF;
     
     _titleLab.text =_informationModel.title;
     _titleLab.frame = _informationFrameModel.titleF;

@@ -20,6 +20,7 @@
 @property(nonatomic,strong)IndexView *indexView;
 @property(nonatomic, strong)WSLineChartView *lineChartView;
 @property(nonatomic,strong)BaseTypeView *baseTypeView;
+@property(nonatomic,strong)NSString *selectTpye;
 
 @property(nonatomic,strong) NSArray *firstDataArr;
 @property(nonatomic,strong) NSArray *secondDataArr;
@@ -51,14 +52,13 @@
     self.titleSizeSelected = 15;
     self.titleColorNormal = [UIColor colorWithHex:@"#848484"];
     self.titleColorSelected = [UIColor colorWithHex:@"#0e5f9f"];
-    
+    self.menuView.scrollView.backgroundColor =[UIColor grayColor];
     
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     [self initNavtionBar];
     [self creatPriceView];
     
-    self.menuView.scrollView.backgroundColor =[UIColor grayColor];
     
     [self requestData];
     
@@ -131,7 +131,7 @@
 #pragma mark 返回某个index对应的页面
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
-    [vc loadMainTableData:index isPull:NO];
+    [vc loadMainTableData:self.selectTpye Index:index];
     return vc;
 }
 #pragma mark 返回index对应的标题
@@ -145,18 +145,13 @@
     return  CGRectMake(0, CGRectGetMaxY(self.baseTypeView.frame)+30, SCREEN_WIDTH, CGRectGetHeight(self.view.frame)- CGRectGetMaxY(self.baseTypeView.frame)-30 );
 }
 
-//- (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
-//    PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
-//    [vc loadMainTableData:index isPull:NO];
-//    return vc;
-//}
-
 #pragma mark BaseTypeViewDelegate
 -(void)gmdOpFenXiClick{
     [self fenXiData];
 }
 
 -(void)fenXiData{
+    self.selectTpye = @"分析";
     [self.flagArray removeAllObjects];
     [self.titleItemLengths  removeAllObjects];
     self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"协整分析",@"币币比较",@"币变化对比",@"google关注与比价格关系",@"原油与币价格的关系",@"reddit关注度与币价格关系",@"汇率与币价格关系", nil];
@@ -173,9 +168,10 @@
 
 -(void)gmdOpYuCeClick{
 
+    self.selectTpye = @"预测";
     [self.flagArray removeAllObjects];
     [self.titleItemLengths  removeAllObjects];
-    self.flagArray = [NSMutableArray arrayWithObjects:@"短期预测",@"长期预测", nil];
+    self.flagArray = [NSMutableArray arrayWithObjects:@"短期预测", nil];
     for (NSInteger i =0; i<self.flagArray.count; i++) {
         CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
         NSNumber *width = [NSNumber numberWithFloat:size.width];
@@ -186,6 +182,7 @@
     [self reloadData];
 }
 -(void)gmdOpYuJingClick{
+    self.selectTpye = @"预警";
     [self.flagArray removeAllObjects];
     [self.titleItemLengths  removeAllObjects];
     self.flagArray = [NSMutableArray arrayWithObjects:@"币地址检测",@"交易量预警",@"换手量预警", nil];

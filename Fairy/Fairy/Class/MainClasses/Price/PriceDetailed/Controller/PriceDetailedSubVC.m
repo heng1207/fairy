@@ -8,10 +8,15 @@
 
 #import "PriceDetailedSubVC.h"
 #import "PriceAnalyzeView.h"
+#import "PriceIntroduceView.h"
+#import "PriceForecastView.h"
 
 @interface PriceDetailedSubVC ()
 
 @property(nonatomic,strong)PriceAnalyzeView *analyzeView;
+@property(nonatomic,strong)PriceIntroduceView *introduceView;
+@property(nonatomic,strong)PriceForecastView *forecastView;
+
 @property(nonatomic,strong)NSArray *typeDataArr;
 @end
 
@@ -25,38 +30,47 @@
     
     // Do any additional setup after loading the view.
 }
--(void)loadMainTableData:(NSInteger )type isPull:(BOOL)isPull{
-    NSLog(@"%ld",(long)type);
-    
+-(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index{
+    NSLog(@"%@---%ld",selectType,index);
     //60 +180 +10 + 35 + 30
     NSInteger height = SCREEN_HEIGHT - LL_TabbarSafeBottomMargin - LL_StatusBarAndNavigationBarHeight - 315;
-    if (type==0) {
-        PriceAnalyzeView *view =[[PriceAnalyzeView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) FenXi:@""];
-        self.analyzeView = view;
-        [self.view addSubview:view];
-    }
-    else{
-        NSDictionary *dict = self.typeDataArr[type-1];
-        PriceAnalyzeView *view =[[PriceAnalyzeView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) FenXi:dict[@"content"]];
-        self.analyzeView = view;
-        [self.view addSubview:view];
+    if ([selectType isEqualToString:@"分析"]) {
+        if (index==0) {
+            PriceIntroduceView *view =[[PriceIntroduceView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+            self.introduceView = view;
+            [self.view addSubview:view];
+            
+            [self requestJieShao];
+            
+        }
+        else{
+            NSDictionary *dict = self.typeDataArr[index-1];
+            PriceAnalyzeView *view =[[PriceAnalyzeView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height) FenXi:dict[@"content"]];
+            self.analyzeView = view;
+            [self.view addSubview:view];
+            
+            [self requestDatas:index];
+            
+        }
         
     }
-
-    if (type==0) {
-        [self requestJieShao];
+    else if ([selectType isEqualToString:@"预测"]){
+        PriceForecastView *view =[[PriceForecastView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+        self.forecastView = view;
+        [self.view addSubview:view];
+        [self requestDuanQiYuCe];
     }
-    else{
-        [self requestDatas:type];
+    else{ //预警
+        
     }
 
 }
 -(void)requestJieShao{
-    NSString *path = @"http://47.75.145.77:8080/interface/digital_currency/viewByshortEnName/btc";
+    NSString *path = [NSString stringWithFormat:@"%@btc",PriceIntroduce];
     [NetworkManage Get:path andParams:nil success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            NSArray *dataDic= obj[@"data"];
+            [self.introduceView setDataDic:obj[@"data"]];
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
@@ -67,7 +81,7 @@
     dict[@"coin"] = @"btc";
     dict[@"type"] = self.typeDataArr[type-1][@"type"];
     
-    [NetworkManage Get:statistics andParams:dict success:^(id responseObject) {
+    [NetworkManage Get:PriceAnalyze andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
          
@@ -106,6 +120,20 @@
     }
     return _typeDataArr;
 }
+
+-(void)requestDuanQiYuCe{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coin"] = @"eth";
+    [NetworkManage Get:PriceForecast andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            [self.forecastView setDataDic:obj[@"data"]];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

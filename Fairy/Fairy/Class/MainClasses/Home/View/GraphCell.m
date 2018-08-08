@@ -7,7 +7,9 @@
 //
 
 #import "GraphCell.h"
+#import "IndexTypeView.h"
 #import "BezierView.h"
+#import "CurveLineChartView.h"
 
 @interface GraphCell()
 
@@ -16,6 +18,7 @@
 @property (strong,nonatomic)NSMutableArray *y_names;
 @property (strong,nonatomic)NSMutableArray *targets;
 
+@property (strong,nonatomic)CurveLineChartView *wsLine;
 @end
 
 @implementation GraphCell
@@ -31,13 +34,33 @@
 
 -(void)creatSubView{
     
+    IndexTypeView *typeView = [[IndexTypeView alloc]initWithFrame:CGRectMake(0, 7, UIScreenW, 20)];
+    [self.contentView addSubview:typeView];
+    
+
     //1.初始化
-    _bezierView = [[BezierView alloc]initWithFrame:CGRectMake(0, 7, UIScreenW, 133) WithX_Value_Names:self.x_names Y_Value_Names:self.y_names TargetValues:self.targets Type:Type_quxian];
+    _bezierView = [[BezierView alloc]initWithFrame:CGRectMake(0, 27, UIScreenW, 113) WithX_Value_Names:self.x_names Y_Value_Names:self.y_names TargetValues:self.targets Type:Type_quxian];
     _bezierView.backgroundColor =[UIColor whiteColor];
     [self.contentView addSubview:_bezierView];
     
+    
+    
 }
 
+
+-(void)setDataDic:(NSMutableDictionary *)dataDic{
+    _dataDic = dataDic;
+    
+    if (self.wsLine) {
+        [self.wsLine removeFromSuperview];
+        self.wsLine = nil;
+    }
+    NSString *maxStr = dataDic[@"max"];
+    NSString *minStr = dataDic[@"min"];
+    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(0, 27, UIScreenW, 113) xTitleArray:dataDic[@"xArray"] yValueArray:dataDic[@"targetArray"] yMax:[maxStr floatValue] yMin:[minStr floatValue]];
+    self.wsLine =wsLine;
+    [self.contentView addSubview:wsLine];
+}
 
 /**
  *  X轴值
@@ -68,6 +91,10 @@
     }
     return _targets;
 }
+
+
+
+
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];

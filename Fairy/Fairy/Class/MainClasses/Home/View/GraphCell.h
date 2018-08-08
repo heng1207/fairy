@@ -10,4 +10,6 @@
 
 @interface GraphCell : UITableViewCell
 
+@property(nonatomic,strong)NSMutableDictionary *dataDic;
+
 @end

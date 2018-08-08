@@ -32,8 +32,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    self.myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadDatas)];
-    [self.myTableView.mj_header beginRefreshing];
+    [self loadDatas];
 }
 
 - (UITableView *)myTableView {
@@ -194,11 +193,9 @@
             NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
             if ([obj[@"code"] integerValue] ==200 ) {
                 self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
-                [self.myTableView.mj_header endRefreshing];
                 [self.myTableView reloadData];
             }
         } failure:^(NSError *error) {
-            [self.myTableView.mj_header endRefreshing];
             NSLog(@"%@",error);
         }];
         
@@ -213,11 +210,9 @@
             if ([obj[@"code"] integerValue] ==200 ) {
                 // NSLog(@"%@",obj[@"data"]);
                 self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
-                [self.myTableView.mj_header endRefreshing];
                 [self.myTableView reloadData];
             }
         } failure:^(NSError *error) {
-            [self.myTableView.mj_header endRefreshing];
             NSLog(@"%@",error);
         }];
         

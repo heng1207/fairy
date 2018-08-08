@@ -26,6 +26,7 @@
 
 @property (nonatomic,strong) NSArray *globalIndexData;
 @property (nonatomic,strong) NSArray* moneyClassData;
+@property (nonatomic,strong) NSMutableDictionary *IndexTypeViewDic;
 
 @end
 
@@ -41,7 +42,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-      
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(indexTypeClick:) name:@"indexTypeViewTypeSelect" object:nil];
+
+    self.IndexTypeViewDic = [NSMutableDictionary dictionary];
+    
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self creatSearchBar];
     [self setupSubViews];
@@ -61,10 +66,6 @@
     [self.view addSubview:self.tableView];
     [self loadNewData];
     
-
-    //下拉刷新
-//    self.tableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(loadNewData)];
-    [self.tableView.mj_header beginRefreshing];
 }
 
 #pragma mark UITableViewDataSource&&UITableViewDelegate
@@ -132,6 +133,7 @@
     }else{
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.dataDic = self.IndexTypeViewDic;
         return cell;
     }
     return nil;
@@ -242,13 +244,55 @@
         NSLog(@"%@",error);
     }];
     
-    
-    
-    
-//    [self.tableView.mj_header endRefreshing];
-//    [self.tableView reloadData];
+    [self requestIndexSelectDatas:@"btc"];
 }
 
+#pragma mark 通知
+-(void)indexTypeClick:(NSNotification *)notification{
+    NSDictionary * infoDic = [notification object];
+    NSLog(@"%@",infoDic[@"selectType"]);
+    [self requestIndexSelectDatas:infoDic[@"selectType"]];
+}
+
+-(void)requestIndexSelectDatas:(NSString*)selectType{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"coinPair"] = selectType;
+    [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+//            self.firstDataArr = obj[@"data"];
+            
+            //获取显示区间最大值，最小值
+            NSMutableArray *price = [NSMutableArray array];
+            for (NSDictionary *item in obj[@"data"] ) {
+                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+            }
+            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+            int maxSection = (maxPrice/10);
+            int minSection = (minPrice/10);
+            int maxPriceSection = maxSection*10+10;
+            int minPriceSection = minSection*10;
+        
+            
+            NSMutableArray *xArray = [NSMutableArray array];
+            NSMutableArray *targetArray = [NSMutableArray array];
+            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+                [xArray addObject:obj[@"historyDate"]];
+                [targetArray addObject:obj[@"closePrice"]];
+            }];
+            
+            NSLog(@"%d---%d",maxPriceSection,minPriceSection);
+            self.IndexTypeViewDic[@"max"] = [NSString stringWithFormat:@"%d",maxPriceSection];
+            self.IndexTypeViewDic[@"min"] = [NSString stringWithFormat:@"%d",minPriceSection];
+            self.IndexTypeViewDic[@"xArray"] = xArray;
+            self.IndexTypeViewDic[@"targetArray"] = targetArray;
+//            [self.tableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

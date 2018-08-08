@@ -9,7 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface PriceDetailedSubVC : UIViewController
-
-- (void)loadMainTableData:(NSInteger )type isPull:(BOOL)isPull;
-
+-(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index;
 @end

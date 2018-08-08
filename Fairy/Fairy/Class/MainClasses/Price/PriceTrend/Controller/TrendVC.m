@@ -123,9 +123,6 @@
     else if (index==1){
         vc = [[Y_StockChartViewController alloc]init];
     }
-    else if (index==2){
-        vc = [[UIViewController alloc]init];
-    }
     else{
         vc = [[UIViewController alloc]init];
     }
@@ -154,7 +151,7 @@
 - (NSMutableArray *)flagArray
 {
     if (_flagArray == nil) {
-        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",@"BTIFINEX",@"中币", nil];
+        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",@"BTIFINEX", nil];
     }
     return _flagArray;
 }

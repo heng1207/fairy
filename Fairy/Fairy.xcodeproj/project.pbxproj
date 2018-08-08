@@ -39,6 +39,12 @@
 		04B218DE20D10CCE000D661F /* shareBtn.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218DD20D10CCE000D661F /* shareBtn.m */; };
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
 		4E01BF2321199CE5001DE371 /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E01BF2221199CE5001DE371 /* HeadView.m */; };
+		4E0CFFD3211A8A9E00644290 /* PriceIntroduceView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFD2211A8A9E00644290 /* PriceIntroduceView.m */; };
+		4E0CFFD6211A9B5200644290 /* PriceForecastView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFD5211A9B5200644290 /* PriceForecastView.m */; };
+		4E0CFFD9211AD11A00644290 /* IndexTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFD8211AD11A00644290 /* IndexTypeView.m */; };
+		4E0CFFE1211AED1E00644290 /* CurveYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFDB211AED1E00644290 /* CurveYAxisView.m */; };
+		4E0CFFE2211AED1E00644290 /* CurveXAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFDD211AED1E00644290 /* CurveXAxisView.m */; };
+		4E0CFFE3211AED1E00644290 /* CurveLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFDF211AED1E00644290 /* CurveLineChartView.m */; };
 		4EC579362118259F00868549 /* PriceAnalyzeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC579352118259F00868549 /* PriceAnalyzeView.m */; };
 		4EC5793921184F3000868549 /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5793821184F3000868549 /* BezierLineView.m */; };
 		4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */; };
@@ -177,6 +183,18 @@
 		35A4F6E128F056A68D1D2A7B /* Pods-Fairy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.release.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.release.xcconfig"; sourceTree = "<group>"; };
 		4E01BF2121199CE5001DE371 /* HeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HeadView.h; sourceTree = "<group>"; };
 		4E01BF2221199CE5001DE371 /* HeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HeadView.m; sourceTree = "<group>"; };
+		4E0CFFD1211A8A9E00644290 /* PriceIntroduceView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceIntroduceView.h; sourceTree = "<group>"; };
+		4E0CFFD2211A8A9E00644290 /* PriceIntroduceView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceIntroduceView.m; sourceTree = "<group>"; };
+		4E0CFFD4211A9B5200644290 /* PriceForecastView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceForecastView.h; sourceTree = "<group>"; };
+		4E0CFFD5211A9B5200644290 /* PriceForecastView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceForecastView.m; sourceTree = "<group>"; };
+		4E0CFFD7211AD11A00644290 /* IndexTypeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IndexTypeView.h; sourceTree = "<group>"; };
+		4E0CFFD8211AD11A00644290 /* IndexTypeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IndexTypeView.m; sourceTree = "<group>"; };
+		4E0CFFDB211AED1E00644290 /* CurveYAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveYAxisView.m; sourceTree = "<group>"; };
+		4E0CFFDC211AED1E00644290 /* CurveLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveLineChartView.h; sourceTree = "<group>"; };
+		4E0CFFDD211AED1E00644290 /* CurveXAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveXAxisView.m; sourceTree = "<group>"; };
+		4E0CFFDE211AED1E00644290 /* CurveYAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveYAxisView.h; sourceTree = "<group>"; };
+		4E0CFFDF211AED1E00644290 /* CurveLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveLineChartView.m; sourceTree = "<group>"; };
+		4E0CFFE0211AED1E00644290 /* CurveXAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveXAxisView.h; sourceTree = "<group>"; };
 		4EC579342118259F00868549 /* PriceAnalyzeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceAnalyzeView.h; sourceTree = "<group>"; };
 		4EC579352118259F00868549 /* PriceAnalyzeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceAnalyzeView.m; sourceTree = "<group>"; };
 		4EC5793721184F3000868549 /* BezierLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
@@ -411,6 +429,10 @@
 				04204F9F20CE63A6007BD075 /* BaseTypeView.m */,
 				4EC579342118259F00868549 /* PriceAnalyzeView.h */,
 				4EC579352118259F00868549 /* PriceAnalyzeView.m */,
+				4E0CFFD1211A8A9E00644290 /* PriceIntroduceView.h */,
+				4E0CFFD2211A8A9E00644290 /* PriceIntroduceView.m */,
+				4E0CFFD4211A9B5200644290 /* PriceForecastView.h */,
+				4E0CFFD5211A9B5200644290 /* PriceForecastView.m */,
 				4EC5793721184F3000868549 /* BezierLineView.h */,
 				4EC5793821184F3000868549 /* BezierLineView.m */,
 			);
@@ -464,6 +486,19 @@
 				4ED1CA3B211454D400D86411 /* KLineFullScreenVC.m */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		4E0CFFDA211AED1E00644290 /*  CurveLineChartView */ = {
+			isa = PBXGroup;
+			children = (
+				4E0CFFDC211AED1E00644290 /* CurveLineChartView.h */,
+				4E0CFFDF211AED1E00644290 /* CurveLineChartView.m */,
+				4E0CFFE0211AED1E00644290 /* CurveXAxisView.h */,
+				4E0CFFDD211AED1E00644290 /* CurveXAxisView.m */,
+				4E0CFFDE211AED1E00644290 /* CurveYAxisView.h */,
+				4E0CFFDB211AED1E00644290 /* CurveYAxisView.m */,
+			);
+			path = " CurveLineChartView";
 			sourceTree = "<group>";
 		};
 		4ED1C9EB2114547700D86411 /* BTC_K线图 */ = {
@@ -800,11 +835,14 @@
 				7EB5E2AE20CD0C82004BFAE2 /* IndexCellCell.xib */,
 				7E75221520D40BFD007E1489 /* GraphCell.h */,
 				7E75221620D40BFD007E1489 /* GraphCell.m */,
+				4E0CFFD7211AD11A00644290 /* IndexTypeView.h */,
+				4E0CFFD8211AD11A00644290 /* IndexTypeView.m */,
 				0430254520E20B7F00094314 /* ClassView.h */,
 				0430254620E20B7F00094314 /* ClassView.m */,
 				0430254820E20B8B00094314 /* ClassView.xib */,
 				7E741ADC20F64588000E7E73 /* NavView.h */,
 				7E741ADD20F64588000E7E73 /* NavView.m */,
+				4E0CFFDA211AED1E00644290 /*  CurveLineChartView */,
 				0430252B20E1DB6B00094314 /* BezierView */,
 			);
 			path = View;
@@ -1255,12 +1293,14 @@
 				7ED6F8FF21156CC000C1A2EC /* LDYAxisView.m in Sources */,
 				7ED981C020D00C6A00749D14 /* PersionDetailVC.m in Sources */,
 				7EB5E29C20CD00F0004BFAE2 /* FSSegmentTitleView.m in Sources */,
+				4E0CFFD6211A9B5200644290 /* PriceForecastView.m in Sources */,
 				4ED1CA2F2114547700D86411 /* Y_KLineAccessory.m in Sources */,
 				4ED1CA2E2114547700D86411 /* Y_KLineAccessoryView.m in Sources */,
 				7ED6F9032115A6D400C1A2EC /* CodeLoginVC.m in Sources */,
 				7EB5E26120CCADFC004BFAE2 /* Reachability.m in Sources */,
 				4ED1CA2C2114547700D86411 /* Y_StockChartRightYView.m in Sources */,
 				0406C66E20D0C709008F6A26 /* WarnCenterVC.m in Sources */,
+				4E0CFFE3211AED1E00644290 /* CurveLineChartView.m in Sources */,
 				4ED1CA372114547700D86411 /* Y_KLineMainView.m in Sources */,
 				4ED1CA322114547700D86411 /* Y_KLineModel.m in Sources */,
 				04204FA020CE63A6007BD075 /* BaseTypeView.m in Sources */,
@@ -1274,11 +1314,13 @@
 				043D7C5620E5D6AE00889B5B /* LBClearCacheTool.m in Sources */,
 				04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */,
 				7E0B97E5211691250054014C /* InformationFrameModel.m in Sources */,
+				4E0CFFE2211AED1E00644290 /* CurveXAxisView.m in Sources */,
 				04204F8D20CE4B9D007BD075 /* PriceVC.m in Sources */,
 				7E75221720D40BFD007E1489 /* GraphCell.m in Sources */,
 				04204F9220CE4BBD007BD075 /* PriceDetailedVC.m in Sources */,
 				0445DBDC20CFCE0C009BA6BF /* TrendSubVC.m in Sources */,
 				7EB5E25A20CCADF2004BFAE2 /* Tool.m in Sources */,
+				4E0CFFD3211A8A9E00644290 /* PriceIntroduceView.m in Sources */,
 				4ED1CA392114547700D86411 /* Y_KLine.m in Sources */,
 				0430254720E20B7F00094314 /* ClassView.m in Sources */,
 				04B218DB20D10B8F000D661F /* ShareVC.m in Sources */,
@@ -1291,7 +1333,9 @@
 				4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */,
 				7E741ADE20F64588000E7E73 /* NavView.m in Sources */,
 				7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */,
+				4E0CFFE1211AED1E00644290 /* CurveYAxisView.m in Sources */,
 				04B218DE20D10CCE000D661F /* shareBtn.m in Sources */,
+				4E0CFFD9211AD11A00644290 /* IndexTypeView.m in Sources */,
 				4EC5793921184F3000868549 /* BezierLineView.m in Sources */,
 				0406C66720D0BAE7008F6A26 /* MessageCell.m in Sources */,
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,

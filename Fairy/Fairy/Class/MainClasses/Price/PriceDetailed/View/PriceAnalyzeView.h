@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PriceAnalyzeView : UIView
+@interface PriceAnalyzeView : UIView //行情分析
 
 -(instancetype)initWithFrame:(CGRect)frame FenXi:(NSString *)fenXi;
 @property(nonatomic,strong)NSMutableDictionary *dataDic;

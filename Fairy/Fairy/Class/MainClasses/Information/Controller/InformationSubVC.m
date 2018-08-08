@@ -31,14 +31,15 @@
     self.view.backgroundColor =[UIColor whiteColor];
     [self.view addSubview:self.myTableView];
  
+    self.informationFrameModelArr = [NSMutableArray array];
     //下拉刷新
     self.myTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingTarget:self refreshingAction:@selector(requestDatas)];
     [self.myTableView.mj_header beginRefreshing];
     
     // 加载更多
-//    self.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
-//        [self requestMoreDatas];
-//    }];
+    self.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self requestMoreDatas];
+    }];
     
     // Do any additional setup after loading the view.
 }
@@ -103,15 +104,20 @@
     else{
         dict[@"lang"] = @"en";
     }
+    self.currentPage = 1;
+    dict[@"pager.pageNo"] = [NSString stringWithFormat:@"%ld",(long)self.currentPage];
+    
     
     /// 发送请求
     __weak InformationSubVC *weakSelf = self;
     [NetworkManage Get:Information andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        weakSelf.allNumber = [obj[@"pager.totalRows"] integerValue];
         NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
         // 将InformationModel数组模型转换成InformationFrameModel数组模型
         NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
-        weakSelf.informationFrameModelArr = informationFrameModelArr;
+        [weakSelf.informationFrameModelArr removeAllObjects];
+        [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];
         [weakSelf.myTableView.mj_header endRefreshing];
         [weakSelf.myTableView reloadData];
     } failure:^(NSError *error) {
@@ -123,6 +129,11 @@
 
 -(void)requestMoreDatas{
     
+    if (self.informationFrameModelArr.count >= self.allNumber) {
+        [self.myTableView.mj_footer endRefreshing];
+        return;
+    }
+
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
     if ([self.headType isEqualToString:@"中文"]) {
         dict[@"lang"] = @"cn";
@@ -130,7 +141,9 @@
     else{
         dict[@"lang"] = @"en";
     }
-    
+    self.currentPage++;
+    NSLog(@"%ld",self.currentPage);
+    dict[@"pager.pageNo"] = [NSString stringWithFormat:@"%ld",(long)self.currentPage];
     /// 发送请求
     __weak InformationSubVC *weakSelf = self;
     [NetworkManage Get:Information andParams:dict success:^(id responseObject) {
@@ -138,10 +151,11 @@
         NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
         // 将InformationModel数组模型转换成InformationFrameModel数组模型
         NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
-        weakSelf.informationFrameModelArr = informationFrameModelArr;
-        [weakSelf.myTableView.mj_header endRefreshing];
+        [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];;
+        [weakSelf.myTableView.mj_footer endRefreshing];
         [weakSelf.myTableView reloadData];
     } failure:^(NSError *error) {
+        [self.myTableView.mj_footer endRefreshing];
         NSLog(@"%@",error);
     }];
     

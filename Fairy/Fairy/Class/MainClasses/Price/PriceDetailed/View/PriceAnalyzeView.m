@@ -20,7 +20,7 @@
 
 @end
 
-@implementation PriceAnalyzeView
+@implementation PriceAnalyzeView 
 
 -(instancetype)initWithFrame:(CGRect)frame FenXi:(NSString *)fenXi{
     self = [super initWithFrame:frame];

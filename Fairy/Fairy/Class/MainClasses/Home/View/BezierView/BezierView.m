@@ -9,10 +9,10 @@
 #import "BezierView.h"
 #import "BezierCurveView.h"
 #import "TargetView.h"
-#import "ClassView.h"
 
 
-#define MARGIN_Top        25   //上间隔
+
+#define MARGIN_Top        5   //上间隔
 #define MARGIN            12   // 左右间隔
 #define leftMargin        24   // TargetView宽度
 
@@ -50,11 +50,7 @@
         _minSpace = (self.frame.size.width-2*MARGIN-leftMargin)/13;
         _currentSpace = _defaultSpace;
         
-        ClassView *classView = [[[NSBundle mainBundle] loadNibNamed:@"ClassView" owner:self options:0] objectAtIndex:0];
-        classView.frame = CGRectMake(0, 0, UIScreenW, MARGIN_Top);
-        [self addSubview:classView];
-    
-        
+
         _targetView = [[TargetView alloc]initWithFrame:CGRectMake(MARGIN, MARGIN_Top, leftMargin, self.frame.size.height-MARGIN_Top) WithY_Value_Names:y_names];
         [self addSubview:_targetView];
         

@@ -15,8 +15,8 @@
 
 /// key
 @property (nonatomic, assign) CGRect keyF;
-/// publishTime
-@property (nonatomic, assign) CGRect publishTimeF;
+/// sentiment
+@property (nonatomic, assign) CGRect sentimentF;
 /// title
 @property (nonatomic, assign) CGRect titleF;
 /// url
