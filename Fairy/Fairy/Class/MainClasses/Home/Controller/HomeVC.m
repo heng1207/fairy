@@ -98,6 +98,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 1) {
+    
         _contentCell = [tableView dequeueReusableCellWithIdentifier:@"tabCell"];
         _contentCell.backgroundColor = [UIColor whiteColor];
         if (!_contentCell) {
@@ -119,6 +120,10 @@
         }
         
         _contentCell.viewControllers = contentVCs;
+        if (_contentCell.pageContentView) {
+            [_contentCell.pageContentView removeFromSuperview];
+            _contentCell.pageContentView = nil;
+        }
         _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH ) childVCs:contentVCs parentVC:self delegate:self];
         _contentCell.pageContentView.backgroundColor = [UIColor whiteColor];
         [_contentCell.contentView addSubview:_contentCell.pageContentView];
@@ -133,7 +138,7 @@
     }else{
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.dataDic = self.IndexTypeViewDic;
+        cell.dataDic = self.IndexTypeViewDic;
         return cell;
     }
     return nil;
@@ -226,7 +231,10 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.globalIndexData = obj[@"data"];
-            [self.tableView reloadData];
+            
+            //指定刷新某行cell
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
@@ -260,7 +268,6 @@
     [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-//            self.firstDataArr = obj[@"data"];
             
             //获取显示区间最大值，最小值
             NSMutableArray *price = [NSMutableArray array];
@@ -287,7 +294,12 @@
             self.IndexTypeViewDic[@"min"] = [NSString stringWithFormat:@"%d",minPriceSection];
             self.IndexTypeViewDic[@"xArray"] = xArray;
             self.IndexTypeViewDic[@"targetArray"] = targetArray;
-//            [self.tableView reloadData];
+            
+            
+            //指定刷新某行cell
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

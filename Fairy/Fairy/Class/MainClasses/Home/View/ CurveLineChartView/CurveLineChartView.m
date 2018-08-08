@@ -33,7 +33,7 @@
 
 
 @property (assign, nonatomic) CGFloat defaultSpace;//默认间距，根据数据多少计算
-@property (assign, nonatomic) CGFloat MaxSpace;//最大间隔，当数据小于 minNumbers 时,不能捏合
+@property (assign, nonatomic) CGFloat MinSpace;//最小间隔，当数据小于 minNumbers 时,不能捏合
 
 @property (assign, nonatomic) CGFloat moveDistance;
 
@@ -55,10 +55,10 @@
         self.yMax = yMax;
         self.yMin = yMin;
     
-        
-        _defaultSpace = (self.frame.size.width-leftMargin)/(xTitleArray.count-1);
-        _MaxSpace = (self.frame.size.width-leftMargin)/(minNumbers-1);
 
+
+        _defaultSpace = (self.frame.size.width-leftMargin)/(minNumbers-1);
+        _MinSpace = (self.frame.size.width-leftMargin)/(xTitleArray.count-1);
         
         self.pointGap = _defaultSpace;
         
@@ -79,8 +79,8 @@
         
         
         //长按手势
-//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-//        [self.xAxisView addGestureRecognizer:longPress];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+        [self.xAxisView addGestureRecognizer:longPress];
         
 
     }
@@ -98,11 +98,14 @@
 
 - (void)creatXAxisView {
     
-    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
+//    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
     NSLog(@"%f---%f",self.frame.size.width,self.frame.size.height);
+    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, (self.xTitleArray.count-1) * self.pointGap, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
     [_scrollView addSubview:self.xAxisView];
  
-    _scrollView.contentSize = CGSizeMake(self.xAxisView.frame.size.width, 0);
+
+    _scrollView.contentSize = CGSizeMake((self.xTitleArray.count-1) * self.pointGap, 0);
+    self.scrollView.contentOffset = CGPointMake(0, 0);
     
 }
 
@@ -135,17 +138,16 @@
         NSLog(@"%f",recognizer.scale);
         self.pointGap *= recognizer.scale;
         //            self.pointGap = self.pointGap > _defaultSpace ? _defaultSpace : self.pointGap;
-        if (self.pointGap >= _MaxSpace) {
-            
-            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
-            self.pointGap = _MaxSpace;
+        if (self.pointGap <= _MinSpace) {
+            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
+            self.pointGap = _MinSpace;
             
         }
-        else if (self.pointGap <= _defaultSpace){
-            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
+        else if (self.pointGap >= _defaultSpace){
+            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
             self.pointGap = _defaultSpace;
         }
-         
+        
         self.xAxisView.pointGap = self.pointGap;
         recognizer.scale = 1.0;
         

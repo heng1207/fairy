@@ -3,7 +3,7 @@
 //  Fairy
 //
 //  Created by iOS-Mac on 2018/8/8.
-//  Copyright © 2018年 张恒. All rights reserved.
+//  Copyright © 2018年 . All rights reserved.
 //
 
 #import "IndexTypeView.h"
@@ -91,10 +91,6 @@
         _bchBtn.selected = NO;
         _ethBtn.selected = NO;
         
-        if (_delegate && [_delegate respondsToSelector:@selector(indexTypeViewTypeSelect:)]) {
-            [_delegate indexTypeViewTypeSelect:1];
-        }
-        
         NSMutableDictionary *dict =[NSMutableDictionary dictionary];
         dict[@"selectType"] = @"btc";
         [[NSNotificationCenter defaultCenter] postNotificationName:@"indexTypeViewTypeSelect" object:dict];
@@ -110,10 +106,6 @@
         _btcBtn.selected = NO;
         _ethBtn.selected = NO;
         
-        if (_delegate && [_delegate respondsToSelector:@selector(indexTypeViewTypeSelect:)]) {
-            [_delegate indexTypeViewTypeSelect:2];
-        }
-        
         NSMutableDictionary *dict =[NSMutableDictionary dictionary];
         dict[@"selectType"] = @"bch";
         [[NSNotificationCenter defaultCenter] postNotificationName:@"indexTypeViewTypeSelect" object:dict];
@@ -128,10 +120,6 @@
         btn.selected = YES;
         _btcBtn.selected = NO;
         _bchBtn.selected = NO;
-        
-        if (_delegate && [_delegate respondsToSelector:@selector(indexTypeViewTypeSelect:)]) {
-            [_delegate indexTypeViewTypeSelect:3];
-        }
         
         NSMutableDictionary *dict =[NSMutableDictionary dictionary];
         dict[@"selectType"] = @"eth";

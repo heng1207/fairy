@@ -8,7 +8,8 @@
 
 #import "CurveYAxisView.h"
 
-#define xAxisTextGap 5 //x轴文字与坐标轴间隙
+#define topMargin 5   // 为顶部留出的空白
+#define xAxisTextGap 5 //x轴文字与x轴坐标轴间隙
 #define numberOfYAxisElements 5 // y轴分为几段
 #define kChartLineColor         [UIColor grayColor]
 #define kChartTextColor         [UIColor blackColor]
@@ -45,36 +46,31 @@
     NSDictionary *attr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
     
     CGSize labelSize = [@"x" sizeWithAttributes:attr];
-
+    
     //Y轴坐标
     [self drawLine:context startPoint:CGPointMake(1, 0) endPoint:CGPointMake(1, self.frame.size.height - labelSize.height - xAxisTextGap) lineColor:[UIColor grayColor] lineWidth:1];
     
     
     NSDictionary *waterAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
-    CGSize waterLabelSize = [@"水位/m" sizeWithAttributes:waterAttr];
-    CGRect waterRect = CGRectMake( 1 + 5, 0,waterLabelSize.width,waterLabelSize.height);
-    [@"水位/m" drawInRect:waterRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
-
-    // Label做占据的高度
-    CGFloat allLabelHeight = self.frame.size.height - xAxisTextGap - labelSize.height;
-    // Label之间的间隙
-    CGFloat labelMargin = (allLabelHeight + labelSize.height - (numberOfYAxisElements + 1) * labelSize.height) / numberOfYAxisElements;
-
+    
+    
+    // 横向分割线间隔
+    CGFloat separateMargin = (self.frame.size.height - topMargin - labelSize.height - 5 - 5 * 1) / 5;
     // 添加Label
     for (int i = 0; i < numberOfYAxisElements + 1; i++) {
-
+        
         CGFloat avgValue = (self.yMax - self.yMin) / numberOfYAxisElements;
+        
+        float height = self.frame.size.height - labelSize.height - 5  - i *(separateMargin + 1) - labelSize.height/2;
         
         // 判断是不是小数
         if ([self isPureFloat:self.yMin + avgValue * i]) {
             CGSize yLabelSize = [[NSString stringWithFormat:@"%.2f", self.yMin + avgValue * i] sizeWithAttributes:waterAttr];
-
-            [[NSString stringWithFormat:@"%.2f", self.yMin + avgValue * i] drawInRect:CGRectMake( 1+5, self.frame.size.height - labelSize.height - 5 - labelMargin* i - yLabelSize.height/2, yLabelSize.width, yLabelSize.height) withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+            [[NSString stringWithFormat:@"%.2f", self.yMin + avgValue * i] drawInRect:CGRectMake( 1+5, height , yLabelSize.width, yLabelSize.height) withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
         }
         else {
             CGSize yLabelSize = [[NSString stringWithFormat:@"%.0f", self.yMin + avgValue * i] sizeWithAttributes:waterAttr];
-
-            [[NSString stringWithFormat:@"%.0f", self.yMin + avgValue * i] drawInRect:CGRectMake(1+5 , self.frame.size.height - labelSize.height - 5 - labelMargin* i - yLabelSize.height/2, yLabelSize.width, yLabelSize.height) withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+            [[NSString stringWithFormat:@"%.0f", self.yMin + avgValue * i] drawInRect:CGRectMake(1+5 , height , yLabelSize.width, yLabelSize.height) withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
         }
         
     }
