@@ -31,11 +31,10 @@
 -(void)creatSubViews{
     
     UILabel *indexLab =[UILabel new];
-    indexLab.text=@"￥117.3800";
-    indexLab.font=AdaptedFontSize(36);
-    indexLab.textColor =[UIColor colorWithHex:@"#2eaf04"];
+    indexLab.text=@"开盘价：117.3800";
+    indexLab.font=AdaptedFontSize(24);
+    indexLab.textColor =[UIColor colorWithHex:@"#323232"];
     indexLab.textAlignment = NSTextAlignmentLeft;
-    indexLab.textColor =[UIColor greenColor];
     self.indexLab = indexLab;
     [self addSubview:indexLab];
     
@@ -50,9 +49,9 @@
     
     UILabel *increaseLab=[UILabel new];
     self.increaseLab = increaseLab;
-    increaseLab.text=@"+0.7600  +0.66%";
+    increaseLab.text=@"收盘价：373.12";
     increaseLab.font=AdaptedFontSize(24);
-    increaseLab.textColor = [UIColor colorWithHex:@"#2eaf04"];
+    increaseLab.textColor = [UIColor colorWithHex:@"#323232"];
     increaseLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:increaseLab];
     
@@ -65,7 +64,7 @@
     
     
     UILabel *currentPriceLab =[UILabel new];
-    currentPriceLab.text=@"当前价格:116.7353";
+    currentPriceLab.text=@"最高价：116.7353";
     currentPriceLab.textColor = [UIColor colorWithHex:@"#323232"];
     currentPriceLab.font=AdaptedFontSize(24);
     currentPriceLab.textAlignment = NSTextAlignmentLeft;
@@ -87,13 +86,13 @@
     [self addSubview:priceRiseLab];
     
     //设置颜色
-    NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc] initWithString:@"涨       幅:"];
+    NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc] initWithString:@"最低价："];
     [attributedString addAttribute:NSFontAttributeName value:AdaptedFontSize(24) range:NSMakeRange(0, attributedString.length)];//设置字体属性 大小
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#323232"] range:NSMakeRange(0, attributedString.length)];//设置字体颜色
     
     NSMutableAttributedString *attributedString2=[[NSMutableAttributedString alloc] initWithString:@"+16%"];
     [attributedString2 addAttribute:NSFontAttributeName value:AdaptedFontSize(24) range:NSMakeRange(0, attributedString2.length)];//设置字体属性 大小
-    [attributedString2 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#2eaf04"] range:NSMakeRange(0, attributedString2.length)];//设置字体颜色
+    [attributedString2 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#323232"] range:NSMakeRange(0, attributedString2.length)];//设置字体颜色
     [attributedString appendAttributedString:attributedString2];//拼接字符串
     priceRiseLab.attributedText= attributedString;
     
