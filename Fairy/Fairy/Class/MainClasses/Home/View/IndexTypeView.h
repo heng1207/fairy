@@ -10,4 +10,6 @@
 
 @interface IndexTypeView : UIView
 
+@property(nonatomic,strong)NSString *selectType;
+
 @end

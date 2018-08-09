@@ -83,6 +83,8 @@
     // 只有当scroll滚动动画停止时才加载pagerview，用于优化滚动时性能
     
     pagerController.layout.addVisibleItemOnlyWhenScrollAnimatedEnd = YES;
+    //禁止手动滑动下面页面
+    pagerController.scrollView.scrollEnabled = NO;
     pagerController.dataSource = self;
     pagerController.delegate = self;
     [self addChildViewController:pagerController];

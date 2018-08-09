@@ -25,6 +25,7 @@
 
 @property (assign, nonatomic) CGFloat defaultSpace;
 
+@property (nonatomic,strong)  UIColor *lineColor;
 /**
  *  记录坐标轴的第一个frame
  */
@@ -38,7 +39,7 @@
 
 @implementation CurveXAxisView
 
-- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin PointGap:(CGFloat)pointGap{
+- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin PointGap:(CGFloat)pointGap LineColor:(UIColor *)lineColor{
     
     self = [super initWithFrame:frame];
     if (self) {
@@ -47,7 +48,7 @@
         self.yValueArray = yValueArray;
         self.yMax = yMax;
         self.yMin = yMin;
-        
+        self.lineColor = lineColor;
         self.pointGap = pointGap;
 
     }
@@ -238,8 +239,8 @@
                 CGContextSetLineDash(context,0,normal,0); //画实线
                 
                 //绘制数据（折线）
-                [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor colorWithRed:26/255.0 green:135/255.0 blue:254/255.0 alpha:1] lineWidth:2];
-                
+//                [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor colorWithRed:26/255.0 green:135/255.0 blue:254/255.0 alpha:1] lineWidth:2];
+                [self drawLine:context startPoint:startPoint endPoint:endPoint lineWidth:1];
                 
                 //画点
                 UIColor*aColor = [UIColor blackColor]; //点的颜色
@@ -421,7 +422,19 @@
     CGColorSpaceRelease(Linecolorspace1);
     
 }
-
+- (void)drawLine:(CGContextRef)context startPoint:(CGPoint)startPoint endPoint:(CGPoint)endPoint lineWidth:(CGFloat)width {
+    
+    CGContextSetShouldAntialias(context, YES ); //抗锯齿
+    CGColorSpaceRef Linecolorspace1 = CGColorSpaceCreateDeviceRGB();
+    CGContextSetStrokeColorSpace(context, Linecolorspace1);
+    CGContextSetLineWidth(context, width);
+    CGContextSetStrokeColorWithColor(context, self.lineColor.CGColor);
+    CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+    CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+    CGContextStrokePath(context);
+    CGColorSpaceRelease(Linecolorspace1);
+    
+}
 
 // 判断是小数还是整数
 - (BOOL)isPureFloat:(CGFloat)num {

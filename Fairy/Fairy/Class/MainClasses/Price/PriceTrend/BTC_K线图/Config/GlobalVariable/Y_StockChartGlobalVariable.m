@@ -21,12 +21,12 @@ static CGFloat Y_StockChartKLineGap = 2;
 /**
  *  MainView的高度占比,默认为0.5
  */
-static CGFloat Y_StockChartKLineMainViewRadio = 0.56;
+static CGFloat Y_StockChartKLineMainViewRadio = 0.59;
 
 /**
  *  VolumeView的高度占比,默认为0.2
  */
-static CGFloat Y_StockChartKLineVolumeViewRadio = 0.27;
+static CGFloat Y_StockChartKLineVolumeViewRadio = 0.30;
 
 
 /**

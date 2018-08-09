@@ -190,6 +190,11 @@
                     NSLog(@"%@",item);
                     MessageCell *cell =  [_myTableView cellForRowAtIndexPath:indexPath];
                     cell.DetailsLab.text = item.title;
+                    
+                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                    [defaults setObject:item.title forKey:@"tradingPlatform"];
+                    [defaults synchronize];
+                    
                 }];
                 
             }

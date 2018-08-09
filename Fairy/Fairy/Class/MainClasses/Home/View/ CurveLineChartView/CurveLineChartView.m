@@ -26,7 +26,7 @@
 @property (assign, nonatomic) CGFloat yMin;
 @property (strong, nonatomic) CurveYAxisView *yAxisView;
 @property (strong, nonatomic) CurveXAxisView *xAxisView;
-
+@property (strong, nonatomic) UIColor *lineColor;
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (assign, nonatomic) CGFloat pointGap;
@@ -44,7 +44,7 @@
 
 @implementation CurveLineChartView
 
-- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin {
+- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin LineColor:(UIColor *)lineColor{
     
     self = [super initWithFrame:frame];
     if (self) {
@@ -54,7 +54,7 @@
         self.yValueArray = yValueArray;
         self.yMax = yMax;
         self.yMin = yMin;
-    
+        self.lineColor = lineColor;
 
 
         _defaultSpace = (self.frame.size.width-leftMargin)/(minNumbers-1);
@@ -62,7 +62,7 @@
         
         self.pointGap = _defaultSpace;
         
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height)];
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(leftMargin, 0, self.frame.size.width-leftMargin, self.frame.size.height)];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.bounces = NO;
         [self addSubview:_scrollView];
@@ -79,8 +79,8 @@
         
         
         //长按手势
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-        [self.xAxisView addGestureRecognizer:longPress];
+//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+//        [self.xAxisView addGestureRecognizer:longPress];
         
 
     }
@@ -91,7 +91,7 @@
 
 - (void)creatYAxisView {
     
-    self.yAxisView = [[CurveYAxisView alloc]initWithFrame:CGRectMake(self.frame.size.width-leftMargin, 0, leftMargin, self.frame.size.height) yMax:self.yMax yMin:self.yMin];
+    self.yAxisView = [[CurveYAxisView alloc]initWithFrame:CGRectMake(0, 0, leftMargin, self.frame.size.height) yMax:self.yMax yMin:self.yMin];
     [self addSubview:self.yAxisView];
     
 }
@@ -100,7 +100,7 @@
     
 //    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
     NSLog(@"%f---%f",self.frame.size.width,self.frame.size.height);
-    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, (self.xTitleArray.count-1) * self.pointGap, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
+    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, (self.xTitleArray.count-1) * self.pointGap, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap LineColor:self.lineColor];
     [_scrollView addSubview:self.xAxisView];
  
 

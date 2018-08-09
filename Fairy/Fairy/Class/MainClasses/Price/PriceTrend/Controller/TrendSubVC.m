@@ -90,7 +90,7 @@
                 [yArrayUnder addObject:obj[@"volume"]];
             }];
             
-            LDLineChartView *wsLine = [[LDLineChartView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - LL_StatusBarAndNavigationBarHeight - 30) xTitleArray:xArray yValueArray:yArray yMax:maxPrice yMin:minPrice yValueArrayUnder:yArrayUnder yMaxUnder:maxVolume yMin:minVolume];
+            LDLineChartView *wsLine = [[LDLineChartView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT - LL_StatusBarAndNavigationBarHeight -LL_TabbarSafeBottomMargin - 30) xTitleArray:xArray yValueArray:yArray yMax:maxPrice yMin:minPrice yValueArrayUnder:yArrayUnder yMaxUnder:maxVolume yMin:minVolume];
             [self.view addSubview:wsLine];
             
         }

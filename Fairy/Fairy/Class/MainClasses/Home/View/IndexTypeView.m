@@ -50,7 +50,7 @@
     [btcBtn setTitle:@"btc" forState:UIControlStateNormal];
     [btcBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [btcBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    btcBtn.selected =YES;
+    btcBtn.selected =NO;
     [btcBtn addTarget:self action:@selector(btcClick:) forControlEvents:UIControlEventTouchUpInside];
     
     //bch
@@ -126,6 +126,27 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"indexTypeViewTypeSelect" object:dict];
         
     }
+}
+
+-(void)setSelectType:(NSString *)selectType{
+    _selectType = selectType;
+    
+    if ([selectType isEqualToString:@"btc"]) {
+        self.btcBtn.selected = YES;
+        self.bchBtn.selected = NO;
+        self.ethBtn.selected = NO;
+    }
+    else if ([selectType isEqualToString:@"bch"]){
+        self.bchBtn.selected = YES;
+        self.btcBtn.selected = NO;
+        self.ethBtn.selected = NO;
+    }
+    else{
+        self.ethBtn.selected = YES;
+        self.bchBtn.selected = NO;
+        self.btcBtn.selected = NO;
+    }
+    
 }
 /*
 // Only override drawRect: if you perform custom drawing.

@@ -225,6 +225,8 @@
 }
 
 -(void)loadNewData{
+    
+
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
     dict[@"tradePlatformID"] = @"1";
     [NetworkManage Get:globalIndex andParams:dict success:^(id responseObject) {
@@ -294,7 +296,7 @@
             self.IndexTypeViewDic[@"min"] = [NSString stringWithFormat:@"%d",minPriceSection];
             self.IndexTypeViewDic[@"xArray"] = xArray;
             self.IndexTypeViewDic[@"targetArray"] = targetArray;
-            
+            self.IndexTypeViewDic[@"selectType"] = selectType;
             
             //指定刷新某行cell
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];

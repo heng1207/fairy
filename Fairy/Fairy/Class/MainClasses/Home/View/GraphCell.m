@@ -11,7 +11,7 @@
 #import "CurveLineChartView.h"
 
 @interface GraphCell()
-
+@property (strong,nonatomic)IndexTypeView *typeView;
 @property (strong,nonatomic)CurveLineChartView *wsLine;
 @end
 
@@ -23,6 +23,7 @@
         self.backgroundColor = [UIColor colorWithHex:@"#e8f0f3"];
         
         IndexTypeView *typeView = [[IndexTypeView alloc]initWithFrame:CGRectMake(0, 7, UIScreenW, 20)];
+        self.typeView = typeView;
         [self.contentView addSubview:typeView];
         
     }
@@ -32,13 +33,28 @@
 -(void)setDataDic:(NSMutableDictionary *)dataDic{
     _dataDic = dataDic;
     
+    self.typeView.selectType = dataDic[@"selectType"];
+    
+    
     if (self.wsLine) {
         [self.wsLine removeFromSuperview];
         self.wsLine = nil;
     }
     NSString *maxStr = dataDic[@"max"];
     NSString *minStr = dataDic[@"min"];
-    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(0, 27, UIScreenW, 113) xTitleArray:dataDic[@"xArray"] yValueArray:dataDic[@"targetArray"] yMax:[maxStr floatValue] yMin:[minStr floatValue]];
+    
+    UIColor *lineColor;
+    if ([dataDic[@"selectType"] isEqualToString:@"btc"]) {
+        lineColor = [UIColor redColor];
+    }
+    else if ([dataDic[@"selectType"] isEqualToString:@"bch"]){
+        lineColor = [UIColor greenColor];
+    }
+    else{
+        lineColor = [UIColor blueColor];
+    }
+    
+    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(0, 27, UIScreenW, 113) xTitleArray:dataDic[@"xArray"] yValueArray:dataDic[@"targetArray"] yMax:[maxStr floatValue] yMin:[minStr floatValue] LineColor:lineColor];
     self.wsLine =wsLine;
     [self.contentView addSubview:wsLine];
 }
