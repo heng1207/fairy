@@ -71,7 +71,7 @@
     UIButton *ethBtn =[UIButton new];
     self.ethBtn = ethBtn;
     ethBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-    ethBtn.frame =CGRectMake(CGRectGetMaxX(bchBtn.frame)+7, 5, 30, 10);
+    ethBtn.frame =CGRectMake(CGRectGetMaxX(bchBtn.frame)+7, 5, 20, 10);
     [self addSubview:ethBtn];
     ethBtn.backgroundColor =  [UIColor colorWithHex:@"#e6e6e7"];
     [ethBtn setTitle:@"eth" forState:UIControlStateNormal];

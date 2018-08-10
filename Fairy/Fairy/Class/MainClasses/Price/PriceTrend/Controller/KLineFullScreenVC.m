@@ -125,28 +125,27 @@
     NSString *urlPath;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (self.currentIndex==0) {
-        urlPath = @"http://47.75.145.77:8080/interface/kline/get_kline_15m";
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_15m",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
         param[@"klineDate"] = @"20180801";
     }
     else if (self.currentIndex==1){
-        urlPath = @"http://47.75.145.77:8080/interface/kline/get_kline_30m";
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_30m",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
         param[@"klineDate"] = @"20180801";
     }
     else if (self.currentIndex==2){
-        urlPath = @"http://47.75.145.77:8080/interface/kline/get_kline_1h";
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1h",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
         param[@"klineDate"] = @"20180801";
     }
     else if (self.currentIndex==3){
-        urlPath = @"http://47.75.145.77:8080/interface/kline/get_kline_1d";
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1d",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
-        
     }
     
     [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
