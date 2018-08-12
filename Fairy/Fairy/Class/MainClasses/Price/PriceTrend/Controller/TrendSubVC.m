@@ -37,8 +37,9 @@
     [NetworkManage Get:PriceTrendChart andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            self.priceTrendData = obj[@"data"];
-            
+//            self.priceTrendData = obj[@"data"];
+            NSArray *priceArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
+            self.priceTrendData = [NSMutableArray arrayWithArray:priceArr];
             
             [self requestVolumeDatas];
         }
@@ -53,8 +54,9 @@
     [NetworkManage Get:VolumeTrendChart andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            self.volumeTrendData = obj[@"data"];
-            
+//            self.volumeTrendData = obj[@"data"];
+            NSArray *volumeArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
+            self.volumeTrendData = [NSMutableArray arrayWithArray:volumeArr];
             
             
             //获取 Price 显示区间最大值，最小值
@@ -85,7 +87,7 @@
             NSMutableArray *xArrayUnder = [NSMutableArray array];
             NSMutableArray *yArrayUnder = [NSMutableArray array];
 
-            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            [self.volumeTrendData enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
                 [xArrayUnder addObject:obj[@"timestamp"]];
                 [yArrayUnder addObject:obj[@"volume"]];
             }];

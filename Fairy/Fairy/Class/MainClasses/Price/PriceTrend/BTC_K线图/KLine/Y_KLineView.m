@@ -136,14 +136,16 @@
         _scrollView.delegate = self;
         _scrollView.bounces = NO;
         
+        
         //缩放手势
         UIPinchGestureRecognizer *pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(event_pichMethod:)];
         [_scrollView addGestureRecognizer:pinchGesture];
-        
+
         //长按手势
         UILongPressGestureRecognizer *longPressGesture = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressMethod:)];
         [_scrollView addGestureRecognizer:longPressGesture];
-        
+    
+  
         [self addSubview:_scrollView];
         
         [_scrollView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -677,9 +679,22 @@
 //    self.kLineMainView.minPriceLab.frame = CGRectMake(minPositionModel.LowPoint.x+self.scrollView.contentOffset.x, minPositionModel.LowPoint.y+30, 30, 1);
 }
 
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    NSLog(@"加载更多")
+    if (scrollView.contentOffset.x==0) {
+        if ([_delegate respondsToSelector:@selector(Y_KLineViewLoadMoreData)]) {
+            [_delegate Y_KLineViewLoadMoreData];
+        }
+       
+        
+    }
+    
+}
+
 - (void)dealloc
 {
     [_kLineMainView removeAllObserver];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
+
 @end

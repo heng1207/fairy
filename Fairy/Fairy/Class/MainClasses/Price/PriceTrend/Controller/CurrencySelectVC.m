@@ -48,20 +48,20 @@
     [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
     
-    UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-    [finish setTitle:@"完成" forState:UIControlStateNormal];
-    finish.titleLabel.font = [UIFont systemFontOfSize:16];
-    [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
+//    UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
+//    [finish setTitle:@"完成" forState:UIControlStateNormal];
+//    finish.titleLabel.font = [UIFont systemFontOfSize:16];
+//    [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
     
 }
 
 -(void)backClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)finishClick{
-    
-}
+//-(void)finishClick{
+//
+//}
 
 
 -(void)creatBtnView{

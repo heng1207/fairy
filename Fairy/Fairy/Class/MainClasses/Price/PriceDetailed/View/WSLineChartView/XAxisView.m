@@ -243,7 +243,7 @@
                     
                     
                     //绘制数据（折线）
-                    //                [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor colorWithRed:26/255.0 green:135/255.0 blue:254/255.0 alpha:1] lineWidth:2];
+                    [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor colorWithRed:26/255.0 green:135/255.0 blue:254/255.0 alpha:1] lineWidth:1];
                     
                     
                     //画点
@@ -307,7 +307,7 @@
         
         
         //////  根据数据源画折线与X轴之间的填充色  ///////
-        [self drawCurveLine:self.yValueArray[i] LineNumber:i];
+//        [self drawCurveLine:self.yValueArray[i] LineNumber:i];
         
     }
     

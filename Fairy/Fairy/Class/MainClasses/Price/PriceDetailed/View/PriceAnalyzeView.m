@@ -44,15 +44,15 @@
     
     UILabel *dateLab = [[UILabel alloc] init];
     dateLab.textColor = [UIColor blackColor];
-    dateLab.font = [UIFont systemFontOfSize:15];
+    dateLab.font = [UIFont systemFontOfSize:12];
     dateLab.numberOfLines = 0;
     _dateLab = dateLab;
     [self addSubview:dateLab];
     
 
     UILabel *btcLab = [[UILabel alloc] init];
-    btcLab.textColor = [UIColor blueColor];
-    btcLab.font = [UIFont systemFontOfSize:15];
+    btcLab.textColor = [UIColor blackColor];
+    btcLab.font = [UIFont systemFontOfSize:12];
     _btcLab = btcLab;
     _btcLab.numberOfLines = 0;
     _btcLab.userInteractionEnabled =YES;
@@ -61,7 +61,7 @@
     
     UILabel *closeLab = [[UILabel alloc] init];
     closeLab.textColor = [UIColor blackColor];
-    closeLab.font = [UIFont systemFontOfSize:15];
+    closeLab.font = [UIFont systemFontOfSize:12];
     closeLab.numberOfLines = 0;
     _closeLab = closeLab;
     [self addSubview:closeLab];
@@ -96,20 +96,24 @@
     CGSize describeSize = [self.fenXiStr boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
     _describeLab.frame = CGRectMake(12, 12, describeSize.width, describeSize.height);
     
-    
-    _dateLab.text = dataDic[@"data"][@"date"];
-    CGSize dateSize = [dataDic[@"data"][@"date"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _dateLab.frame = CGRectMake(12, CGRectGetMaxY(_describeLab.frame), dateSize.width, dateSize.height);
-    
-    
-    _btcLab.text = dataDic[@"data"][@"btc"];
-    CGSize btcSize = [dataDic[@"data"][@"btc"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _btcLab.frame = CGRectMake(12, CGRectGetMaxY(_dateLab.frame), btcSize.width, btcSize.height);
+
+    _dateLab.text = [NSString stringWithFormat:@"date:%@",TL_Str_Protect(dataDic[@"data"][@"date"])];
+    CGSize dateSize = [_dateLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    _dateLab.frame = CGRectMake(12, CGRectGetMaxY(_describeLab.frame)+5, dateSize.width, dateSize.height);
     
     
-    _closeLab.text = dataDic[@"data"][@"close"];
-    CGSize closeSize = [dataDic[@"data"][@"close"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _closeLab.frame = CGRectMake(12, CGRectGetMaxY(_btcLab.frame), closeSize.width, closeSize.height);
+    
+    _btcLab.text = [NSString stringWithFormat:@"btc：%@",TL_Str_Protect(dataDic[@"data"][@"btc"])];
+    CGSize btcSize = [_btcLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    _btcLab.frame = CGRectMake(12, CGRectGetMaxY(_dateLab.frame)+5, btcSize.width, btcSize.height);
+    
+    
+    _closeLab.text = [NSString stringWithFormat:@"close：%@",TL_Str_Protect(dataDic[@"data"][@"close"])];
+    CGSize closeSize = [_closeLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12]} context:nil].size;
+    _closeLab.frame = CGRectMake(12, CGRectGetMaxY(_btcLab.frame)+5, closeSize.width, closeSize.height);
+
+
+    
     
     NSString *imageURL = [NSString stringWithFormat:@"%@%@",SERVER,dataDic[@"image"]];
     [_describeIM sd_setImageWithURL:[NSURL URLWithString:imageURL] placeholderImage:[UIImage imageNamed:@""]];

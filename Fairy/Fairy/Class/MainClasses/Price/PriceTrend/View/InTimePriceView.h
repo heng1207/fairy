@@ -10,4 +10,6 @@
 
 @interface InTimePriceView : UIView
 
+@property(nonatomic,strong)NSMutableDictionary *priceDic;
+
 @end

@@ -47,6 +47,7 @@ typedef NS_ENUM(NSInteger, Y_KLineType) {
 
 -(void)fullScreenClick;
 
+-(id) stockDatasWithIndex:(NSInteger)index IsLoadMore:(BOOL)isLoadMore;
 
 @end
 

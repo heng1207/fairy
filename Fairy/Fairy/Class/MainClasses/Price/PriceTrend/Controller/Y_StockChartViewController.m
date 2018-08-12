@@ -61,19 +61,17 @@
 @property (nonatomic, copy) NSString *type;
 
 @property (nonatomic,strong)InTimePriceView *inTimePrice;
+
+@property (nonatomic,assign) NSInteger dateOfNum;
 @end
 
 @implementation Y_StockChartViewController
-//-(void)viewWillAppear:(BOOL)animated{
-//    [super viewWillAppear:animated];
-//    [self.view setNeedsLayout];
-//}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor colorWithHex:@"#eeeeee"];
     self.stockChartView.backgroundColor = [UIColor colorWithHex:@"#ffffff"];
     self.currentIndex = -1;
-
+    self.dateOfNum = 0;
     
     
     InTimePriceView *inTimePrice = [[InTimePriceView alloc]init];
@@ -97,11 +95,6 @@
         _modelsDict = @{}.mutableCopy;
     }
     return _modelsDict;
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of  nmthat can be recreated.
 }
 #pragma mark 全屏点击
 -(void)fullScreenClick{
@@ -144,34 +137,78 @@
     self.type = type;
     if(![self.modelsDict objectForKey:type])
     {
-        [self reloadData];
+        [self reloadLineData];
     } else {
         return [self.modelsDict objectForKey:type].models;
     }
     return nil;
 }
 
-- (void)reloadData
+-(id)stockDatasWithIndex:(NSInteger)index IsLoadMore:(BOOL)isLoadMore{
+    NSLog(@"当前选中的是%ld",(long)index);
+    
+    NSString *type;
+    switch (index) {
+        case 0:
+        {
+            type = @"15min";
+        }
+            break;
+        case 1:
+        {
+            type = @"30min";
+        }
+            break;
+        case 2:
+        {
+            type = @"1hour";
+        }
+            break;
+        case 3:
+        {
+            type = @"1day";
+        }
+            break;
+        default:
+            break;
+    }
+    
+    self.currentIndex = index;
+    self.type = type;
+
+    [self reloadMoreLineData];
+    return nil;
+ 
+}
+
+- (void)reloadLineData
 {
+    //获取当前时间日期
+    NSDate *nowDate=[NSDate date];
+    NSDateFormatter *format1=[[NSDateFormatter alloc] init];
+    [format1 setDateFormat:@"yyyyMMdd"];
+    NSString *dateStr =[format1 stringFromDate:nowDate];
+    NSLog(@"%@",dateStr);
+    
     NSString *urlPath;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
     if (self.currentIndex==0) {
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_15m",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
-        param[@"klineDate"] = @"20180801";
+        param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==1){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_30m",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
-        param[@"klineDate"] = @"20180801";
+        param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==2){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1h",SERVER];
         param[@"tradePlatform"] = @"bitfinex";
         param[@"coinPair"] = @"eth_btc";
-        param[@"klineDate"] = @"20180801";
+        param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==3){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1d",SERVER];
@@ -193,6 +230,65 @@
     }];
 
 }
+
+- (void)reloadMoreLineData
+{
+    self.dateOfNum ++;
+    //获取当前时间日期
+    NSDate *nowDate=[NSDate date];
+    NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+    NSDate *theDate = [nowDate initWithTimeIntervalSinceNow: -oneDay*self.dateOfNum];
+    NSDateFormatter *format1=[[NSDateFormatter alloc] init];
+    [format1 setDateFormat:@"yyyyMMdd"];
+    NSString *dateStr =[format1 stringFromDate:theDate];
+    NSLog(@"%@",dateStr);
+    
+    NSString *urlPath;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    if (self.currentIndex==0) {
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_15m",SERVER];
+        param[@"tradePlatform"] = @"bitfinex";
+        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
+    }
+    else if (self.currentIndex==1){
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_30m",SERVER];
+        param[@"tradePlatform"] = @"bitfinex";
+        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
+    }
+    else if (self.currentIndex==2){
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1h",SERVER];
+        param[@"tradePlatform"] = @"bitfinex";
+        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
+    }
+    else if (self.currentIndex==3){
+//        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1d",SERVER];
+//        param[@"tradePlatform"] = @"bitfinex";
+//        param[@"coinPair"] = @"eth_btc";
+        return;
+    }
+    
+    [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
+        Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
+        self.groupModel = groupModel;
+        
+        Y_KLineGroupModel *nowModel = [self.modelsDict objectForKey:self.type];
+        [nowModel.models addObjectsFromArray:groupModel.models];
+        [self.modelsDict setObject:nowModel forKey:self.type];
+        //        NSLog(@"%@",groupModel);
+        [self.stockChartView reloadData];
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
+
+
 - (Y_StockChartView *)stockChartView
 {
     if(!_stockChartView) {
@@ -214,6 +310,12 @@
         }];
     }
     return _stockChartView;
+}
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of  nmthat can be recreated.
 }
 
 @end

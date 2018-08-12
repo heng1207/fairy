@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Y_KLineModel.h"
 #import "Y_StockChartConstant.h"
+
+
+@protocol Y_KLineViewDelegate <NSObject>
+- (void)Y_KLineViewLoadMoreData;
+@end
+
+
 @interface Y_KLineView : UIView
 
 /**
@@ -41,4 +48,7 @@
  *  Accessory指标种类
  */
 @property (nonatomic, assign) Y_StockChartTargetLineStatus targetLineStatus;
+
+
+@property(nonatomic,weak)id<Y_KLineViewDelegate>delegate;
 @end

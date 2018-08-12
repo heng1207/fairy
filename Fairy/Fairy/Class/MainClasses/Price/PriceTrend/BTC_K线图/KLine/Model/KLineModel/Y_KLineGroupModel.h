@@ -15,7 +15,7 @@
 @interface Y_KLineGroupModel : NSObject
 
 
-@property (nonatomic, copy) NSArray<Y_KLineModel *> *models;
+@property (nonatomic, strong) NSMutableArray<Y_KLineModel *> *models;
 
 //初始化Model
 + (instancetype) objectWithArray:(NSArray *)arr;

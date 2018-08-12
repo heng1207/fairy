@@ -18,7 +18,7 @@
 @interface PriceDetailedVC ()<BaseTypeViewDelegate,WSLineChartViewDelegate>
 
 @property(nonatomic,strong)IndexView *indexView;
-@property(nonatomic, strong)WSLineChartView *lineChartView;
+@property(nonatomic,strong)WSLineChartView *lineChartView;
 @property(nonatomic,strong)BaseTypeView *baseTypeView;
 @property(nonatomic,strong)NSString *selectTpye;
 
@@ -154,7 +154,7 @@
     self.selectTpye = @"分析";
     [self.flagArray removeAllObjects];
     [self.titleItemLengths  removeAllObjects];
-    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"协整分析",@"币币比较",@"币变化对比",@"google关注与比价格关系",@"原油与币价格的关系",@"reddit关注度与币价格关系",@"汇率与币价格关系", nil];
+    self.flagArray = [NSMutableArray arrayWithObjects:@"介绍",@"协整分析",@"币币比较",@"币变化对比",@"google关注与比价格关系",@"贵重金属与币价格关系",@"原油与币价格的关系",@"reddit关注度与币价格关系",@"汇率与币价格关系", nil];
     
     for (NSInteger i =0; i<self.flagArray.count; i++) {
         CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
@@ -200,6 +200,7 @@
 #pragma mark WSLineChartViewDelegate
 -(void)xAxisViewTapClick{
     TrendVC *vc=[TrendVC new];
+    vc.priceModel = self.priceModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 -(void)xAxisViewCompareClick{

@@ -11,7 +11,7 @@
 #import "Masonry.h"
 #import "Y_StockChartSegmentView.h"
 #import "Y_StockChartGlobalVariable.h"
-@interface Y_StockChartView() <Y_StockChartSegmentViewDelegate>
+@interface Y_StockChartView() <Y_StockChartSegmentViewDelegate,Y_KLineViewDelegate>
 
 /**
  *  K线图View
@@ -42,6 +42,7 @@
     if(!_kLineView)
     {
         _kLineView = [Y_KLineView new];
+        _kLineView.delegate = self;
         [self addSubview:_kLineView];
         [_kLineView mas_makeConstraints:^(MASConstraintMaker *make) {
             if (self.isFullScreen) {
@@ -199,6 +200,56 @@
             [self bringSubviewToFront:self.segmentView];
         }
     }
+
+}
+
+-(void)Y_KLineViewLoadMoreData{
+    if(self.dataSource && [self.dataSource respondsToSelector:@selector(stockDatasWithIndex:IsLoadMore:)])
+    {
+        id stockData = [self.dataSource stockDatasWithIndex:self.currentIndex IsLoadMore:YES];
+
+        if(!stockData)
+        {
+            return;
+        }
+
+        Y_StockChartViewItemModel *itemModel = self.itemModels[self.currentIndex];
+
+
+        Y_StockChartCenterViewType type = itemModel.centerViewType;
+
+
+
+        if(type != self.currentCenterViewType)
+        {
+            //移除当前View，设置新的View
+            self.currentCenterViewType = type;
+            switch (type) {
+                case Y_StockChartcenterViewTypeKline:
+                {
+                    self.kLineView.hidden = NO;
+                    //                    [self bringSubviewToFront:self.kLineView];
+                    [self bringSubviewToFront:self.segmentView];
+
+                }
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        if(type == Y_StockChartcenterViewTypeOther)
+        {
+
+        } else {
+            self.kLineView.kLineModels = (NSArray *)stockData;
+            self.kLineView.MainViewType = type;
+            [self.kLineView reDraw];
+        }
+        [self bringSubviewToFront:self.segmentView];
+    }
+
 
 }
 

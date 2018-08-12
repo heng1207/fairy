@@ -40,7 +40,8 @@
 
 -(void)initNavtionBar{
     UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    ItemLab.text = @"全网 ETH";
+//    ItemLab.text = @"全网 ETH";
+    ItemLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
     ItemLab.textColor=[UIColor whiteColor];
     ItemLab.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = ItemLab;

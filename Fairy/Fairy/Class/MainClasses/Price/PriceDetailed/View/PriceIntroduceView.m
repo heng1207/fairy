@@ -73,7 +73,7 @@
     
     
     UILabel *urlLab = [[UILabel alloc] init];
-    urlLab.textColor = [UIColor blueColor];
+    urlLab.textColor = [UIColor blackColor];
     urlLab.font = [UIFont systemFontOfSize:15];
     urlLab.numberOfLines = 0;
     _urlLab = urlLab;
@@ -84,35 +84,34 @@
 -(void)setDataDic:(NSMutableDictionary *)dataDic{
     _dataDic = dataDic;
     
-    _CnNameLab.text = dataDic[@"currencyCnName"];
-    CGSize CnNameSize = [dataDic[@"currencyCnName"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    _CnNameLab.text = [NSString stringWithFormat:@"中文名：%@",dataDic[@"currencyCnName"]];
+    CGSize CnNameSize = [_CnNameLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
     _CnNameLab.frame = CGRectMake(12, 12, CnNameSize.width, CnNameSize.height);
     
     
-    _EnNameLab.text = dataDic[@"currencyEnName"];
-    CGSize EnNameSize = [dataDic[@"currencyEnName"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _EnNameLab.frame = CGRectMake(CGRectGetMaxX(_CnNameLab.frame)+5,12, EnNameSize.width, EnNameSize.height);
+    _EnNameLab.text = [NSString stringWithFormat:@"英文名：%@",dataDic[@"currencyEnName"]];
+    CGSize EnNameSize = [_EnNameLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    _EnNameLab.frame = CGRectMake(12,CGRectGetMaxY(_CnNameLab.frame)+5, EnNameSize.width, EnNameSize.height);
     
     
     NSString *dateStr =[NSString stringWithFormat:@"%@",dataDic[@"issueTime"]];
-    _timeLab.text = [Tool createTimeWithAM:dateStr];
+    _timeLab.text = [NSString stringWithFormat:@"发行时间：%@",[Tool createTimeWithAM:dateStr]];
     CGSize timeSize = [_timeLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _timeLab.frame = CGRectMake(CGRectGetMaxX(_EnNameLab.frame)+5, 12, timeSize.width, timeSize.height);
+    _timeLab.frame = CGRectMake(12, CGRectGetMaxY(_EnNameLab.frame)+5, timeSize.width, timeSize.height);
     
     
-    _numLab.text = dataDic[@"circulateNum"];
-    CGSize numSize = [dataDic[@"circulateNum"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _numLab.frame = CGRectMake(12, CGRectGetMaxY(_CnNameLab.frame), numSize.width, numSize.height);
+    _numLab.text = [NSString stringWithFormat:@"流通量：%@",dataDic[@"circulateNum"]];
+    CGSize numSize = [_numLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    _numLab.frame = CGRectMake(12, CGRectGetMaxY(_timeLab.frame)+5, numSize.width, numSize.height);
+    
+    _introduceLab.text = [NSString stringWithFormat:@"介绍：%@",dataDic[@"projectIntroduce"]];
+    CGSize introduceSize = [_introduceLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    _introduceLab.frame = CGRectMake(12, CGRectGetMaxY(_numLab.frame)+5,  introduceSize.width, introduceSize.height);
     
     
-    _introduceLab.text = dataDic[@"projectIntroduce"];
-    CGSize introduceSize = [dataDic[@"projectIntroduce"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _introduceLab.frame = CGRectMake(12, CGRectGetMaxY(_numLab.frame),  introduceSize.width, introduceSize.height);
-    
-    
-    _urlLab.text = dataDic[@"officialUrl"];
-    CGSize urlSize = [dataDic[@"officialUrl"] boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
-    _urlLab.frame = CGRectMake(12, CGRectGetMaxY(_introduceLab.frame), urlSize.width, urlSize.height);
+    _urlLab.text = [NSString stringWithFormat:@"网址：%@",dataDic[@"officialUrl"]];
+    CGSize urlSize = [_urlLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH-24, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    _urlLab.frame = CGRectMake(12, CGRectGetMaxY(_introduceLab.frame)+5, urlSize.width, urlSize.height);
 }
 
 

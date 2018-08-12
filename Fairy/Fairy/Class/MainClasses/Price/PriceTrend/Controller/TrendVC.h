@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PriceModel.h"
+
 
 @interface TrendVC : UIViewController
 @property (nonatomic, weak) TYTabPagerBar *tabBar;
 @property (nonatomic, weak) TYPagerController *pagerController;
 @property (nonatomic,assign) NSInteger currentIndex;
+
+@property (nonatomic,strong) PriceModel *priceModel;
 
 @end

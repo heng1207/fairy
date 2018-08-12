@@ -107,4 +107,9 @@
     
 }
 
+
+-(void)setPriceDic:(NSMutableDictionary *)priceDic{
+    _priceDic = priceDic;
+}
+
 @end
