@@ -494,6 +494,9 @@
         Y_KLineModel *lastModel = self.kLineModels.lastObject;
         [self.kLineMAView maProfileWithModel:lastModel];
         [self.volumeMAView maProfileWithModel:lastModel];
+        
+    
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CancleLongPressKLineNumberLineModel" object:nil];
 //        [self.accessoryMAView maProfileWithModel:lastModel];
     }
 }
@@ -582,6 +585,14 @@
     //更新ma信息
     [self.kLineMAView maProfileWithModel:kLineModel];
     [self.volumeMAView maProfileWithModel:kLineModel];
+    
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    NSInteger num = [self.kLineModels indexOfObject:kLineModel];
+    dict[@"NumLineModel"] = @(num);
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LongPressKLineNumberLineModel" object:dict];
+    
+    
+    
 //    [self.accessoryMAView maProfileWithModel:kLineModel];
 }
 #pragma mark - UIScrollView代理
@@ -602,7 +613,7 @@
 //    NSLog(@"这是  %f-----%f=====%f",scrollView.contentSize.width,scrollView.contentOffset.x,self.kLineMainView.frame.size.width);
    //NSArray<Y_KLineModel *> *kLineModels
     NSLog(@"偏移量X:%f----偏移量Y:%f",scrollView.contentOffset.x,scrollView.contentOffset.y);
-    NSInteger index =  scrollView.contentOffset.x/6;
+    NSInteger index =  scrollView.contentOffset.x/([Y_StockChartGlobalVariable kLineGap] + [Y_StockChartGlobalVariable kLineWidth]);
     Y_KLineModel *startModel = self.kLineModels[index];
 //    NSDate *startDate = [NSDate dateWithTimeIntervalSince1970:startModel.Date.doubleValue/1000];
 //    NSDateFormatter *formatter = [NSDateFormatter new];
@@ -680,7 +691,7 @@
 }
 
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
-    NSLog(@"加载更多")
+    NSLog(@"加载更多");
     if (scrollView.contentOffset.x==0) {
         if ([_delegate respondsToSelector:@selector(Y_KLineViewLoadMoreData)]) {
             [_delegate Y_KLineViewLoadMoreData];

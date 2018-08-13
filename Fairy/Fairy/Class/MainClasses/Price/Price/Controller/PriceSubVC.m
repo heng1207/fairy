@@ -203,7 +203,9 @@
     }
     else{
         NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-        dict[@"tradePlatformID"] = @"1";
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *tradePlatformID = [defaults objectForKey:@"tradePlatformID"];
+        dict[@"tradePlatformID"] = tradePlatformID;
         dict[@"coinPairType"] = self.headType;
         [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
             NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PriceModel.h"
 
 @interface TrendSubVC : UIViewController
-
+@property (nonatomic,strong) PriceModel *priceModel;
 @end

@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Y_KLineModel.h"
 
 @interface InTimePriceView : UIView
 
-@property(nonatomic,strong)NSMutableDictionary *priceDic;
-
+@property(nonatomic,strong)Y_KLineModel *kLineModel;
 @end

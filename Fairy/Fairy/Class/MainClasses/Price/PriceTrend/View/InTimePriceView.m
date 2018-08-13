@@ -29,7 +29,7 @@
 }
 
 -(void)creatSubViews{
-    
+    //
     UILabel *indexLab =[UILabel new];
     indexLab.text=@"开盘价：117.3800";
     indexLab.font=AdaptedFontSize(24);
@@ -37,7 +37,6 @@
     indexLab.textAlignment = NSTextAlignmentLeft;
     self.indexLab = indexLab;
     [self addSubview:indexLab];
-    
     [indexLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(AdaptedHeight(20));
         make.left.mas_equalTo(AdaptedWidth(54));
@@ -46,15 +45,14 @@
     }];
     
     
-    
+    //
     UILabel *increaseLab=[UILabel new];
     self.increaseLab = increaseLab;
-    increaseLab.text=@"收盘价：373.12";
+//    increaseLab.text=@"收盘价：373.12";
     increaseLab.font=AdaptedFontSize(24);
     increaseLab.textColor = [UIColor colorWithHex:@"#323232"];
     increaseLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:increaseLab];
-    
     [increaseLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-AdaptedHeight(20));
         make.left.mas_equalTo(AdaptedWidth(54));
@@ -63,13 +61,14 @@
     }];
     
     
+    //
     UILabel *currentPriceLab =[UILabel new];
-    currentPriceLab.text=@"最高价：116.7353";
+    self.currentPriceLab = currentPriceLab;
+//    currentPriceLab.text=@"最高价：116.7353";
     currentPriceLab.textColor = [UIColor colorWithHex:@"#323232"];
     currentPriceLab.font=AdaptedFontSize(24);
     currentPriceLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:currentPriceLab];
-    
     [currentPriceLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(AdaptedHeight(20));
         make.right.mas_equalTo(-AdaptedWidth(54));
@@ -77,26 +76,15 @@
         make.height.mas_equalTo(AdaptedHeight(22));
     }];
     
+    
+    //
     UILabel *priceRiseLab=[UILabel new];
-    //    priceRiseLab.text=@"涨       幅:+16%";
+//    priceRiseLab.text=@"最低价：373.12";
     self.priceRiseLab = priceRiseLab;
     priceRiseLab.font=AdaptedFontSize(24);
     priceRiseLab.textColor = [UIColor colorWithHex:@"#323232"];
     priceRiseLab.textAlignment = NSTextAlignmentLeft;
     [self addSubview:priceRiseLab];
-    
-    //设置颜色
-    NSMutableAttributedString *attributedString=[[NSMutableAttributedString alloc] initWithString:@"最低价："];
-    [attributedString addAttribute:NSFontAttributeName value:AdaptedFontSize(24) range:NSMakeRange(0, attributedString.length)];//设置字体属性 大小
-    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#323232"] range:NSMakeRange(0, attributedString.length)];//设置字体颜色
-    
-    NSMutableAttributedString *attributedString2=[[NSMutableAttributedString alloc] initWithString:@"+16%"];
-    [attributedString2 addAttribute:NSFontAttributeName value:AdaptedFontSize(24) range:NSMakeRange(0, attributedString2.length)];//设置字体属性 大小
-    [attributedString2 addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithHex:@"#323232"] range:NSMakeRange(0, attributedString2.length)];//设置字体颜色
-    [attributedString appendAttributedString:attributedString2];//拼接字符串
-    priceRiseLab.attributedText= attributedString;
-    
-    
     [priceRiseLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.mas_equalTo(-AdaptedHeight(25));
         make.right.mas_equalTo(-AdaptedWidth(54));
@@ -108,8 +96,13 @@
 }
 
 
--(void)setPriceDic:(NSMutableDictionary *)priceDic{
-    _priceDic = priceDic;
+-(void)setKLineModel:(Y_KLineModel *)kLineModel
+{
+    _kLineModel = kLineModel;
+    self.indexLab.text= [NSString stringWithFormat:@"开盘价：%@",kLineModel.Open];
+    self.increaseLab.text= [NSString stringWithFormat:@"收盘价：%@",kLineModel.Close];
+    self.currentPriceLab.text =[NSString stringWithFormat:@"最高价：%@",kLineModel.High];
+    self.priceRiseLab.text=[NSString stringWithFormat:@"最低价：%@",kLineModel.Low];
+    
 }
-
 @end

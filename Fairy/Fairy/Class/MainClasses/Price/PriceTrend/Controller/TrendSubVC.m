@@ -32,8 +32,14 @@
 
 -(void)requestPriceDatas{
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"tradePlatform"] = @"bitfinex";
-    dict[@"coinPair"] = @"eth_btc";
+//    dict[@"tradePlatform"] = @"bitfinex";
+//    dict[@"coinPair"] = @"eth_btc";
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    dict[@"tradePlatform"] = [defaults objectForKey:@"platformCnName"];
+    dict[@"coinPair"] = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    
     [NetworkManage Get:PriceTrendChart andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
@@ -49,8 +55,14 @@
 }
 -(void)requestVolumeDatas{
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"tradePlatform"] = @"bitfinex";
-    dict[@"coinPair"] = @"eth_btc";
+//    dict[@"tradePlatform"] = @"bitfinex";
+//    dict[@"coinPair"] = @"eth_btc";
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    dict[@"tradePlatform"] = [defaults objectForKey:@"platformCnName"];
+//    NSString *str1 = [str lowercaseString];
+    dict[@"coinPair"] = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    
     [NetworkManage Get:VolumeTrendChart andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {

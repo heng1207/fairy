@@ -165,7 +165,8 @@
 //用户信息本地持久化
 -(void)userDataPersistence{
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@"Bitfinex" forKey:@"tradingPlatform"];
+    [defaults setObject:@(1) forKey:@"tradePlatformID"];
+    [defaults setObject:@"Bitfinex" forKey:@"platformCnName"];
     [defaults synchronize];
 }
 

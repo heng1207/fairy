@@ -34,6 +34,7 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [self loadNewData];
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -49,8 +50,11 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self creatSearchBar];
-    [self setupSubViews];
-
+    
+    self.canScroll = YES;
+    [self.view addSubview:self.tableView];
+   
+    [self loadNewData];
     
     // Do any additional setup after loading the view.
 }
@@ -58,14 +62,6 @@
 -(void)creatSearchBar{    
     NavView *navView =[[NavView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, LL_StatusBarAndNavigationBarHeight)];
     [self.view addSubview:navView];
-}
-
-- (void)setupSubViews
-{
-    self.canScroll = YES;
-    [self.view addSubview:self.tableView];
-    [self loadNewData];
-    
 }
 
 #pragma mark UITableViewDataSource&&UITableViewDelegate
@@ -228,7 +224,10 @@
     
 
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-    dict[@"tradePlatformID"] = @"1";
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *tradePlatformID = [defaults objectForKey:@"tradePlatformID"];
+    dict[@"tradePlatformID"] = tradePlatformID;
     [NetworkManage Get:globalIndex andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {

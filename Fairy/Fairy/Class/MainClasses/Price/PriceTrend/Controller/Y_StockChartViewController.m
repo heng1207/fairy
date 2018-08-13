@@ -51,14 +51,13 @@
 
 @property (nonatomic, strong) Y_StockChartView *stockChartView;
 
-@property (nonatomic, strong) Y_KLineGroupModel *groupModel;
+@property (nonatomic, strong) NSMutableDictionary <NSString*, Y_KLineGroupModel*> *modelsDict;
 
-@property (nonatomic, copy) NSMutableDictionary <NSString*, Y_KLineGroupModel*> *modelsDict;
-
+@property (nonatomic, strong)Y_KLineGroupModel *groupModel;
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic, strong) NSString *type;
 
 @property (nonatomic,strong)InTimePriceView *inTimePrice;
 
@@ -72,6 +71,9 @@
     self.stockChartView.backgroundColor = [UIColor colorWithHex:@"#ffffff"];
     self.currentIndex = -1;
     self.dateOfNum = 0;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(CancleLongPressClick:) name:@"CancleLongPressKLineNumberLineModel" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(LongPressClick:) name:@"LongPressKLineNumberLineModel" object:nil];
     
     
     InTimePriceView *inTimePrice = [[InTimePriceView alloc]init];
@@ -101,6 +103,7 @@
     KLineFullScreenVC *vc =[KLineFullScreenVC new];
     UIViewController *currentVC = [Tool getCurrentVC];
     [currentVC presentViewController:vc animated:YES completion:nil];
+    
 }
 
 #pragma mark 请求数据
@@ -225,6 +228,7 @@
         //        NSLog(@"%@",groupModel);
         [self.stockChartView reloadData];
 
+        [self.inTimePrice setKLineModel:groupModel.models.lastObject];
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
@@ -270,19 +274,24 @@
         return;
     }
     
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在加载中";
     [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
+        [hud hideAnimated:YES];
         NSLog(@"%@",responseObject);
         NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
         Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
-        self.groupModel = groupModel;
-        
+    
         Y_KLineGroupModel *nowModel = [self.modelsDict objectForKey:self.type];
         [nowModel.models addObjectsFromArray:groupModel.models];
+        self.groupModel = nowModel;
         [self.modelsDict setObject:nowModel forKey:self.type];
         //        NSLog(@"%@",groupModel);
         [self.stockChartView reloadData];
         
+        [self.inTimePrice setKLineModel:nowModel.models.lastObject];
     } failure:^(NSError *error) {
+        [hud hideAnimated:YES];
         NSLog(@"%@",error);
     }];
     
@@ -312,6 +321,17 @@
     return _stockChartView;
 }
 
+#pragma mark 通知
+-(void)LongPressClick:(NSNotification *)notification{
+    NSDictionary * infoDic = [notification object];
+    NSLog(@"%@",infoDic[@"NumLineModel"]);
+    NSInteger num = [infoDic[@"NumLineModel"] integerValue];
+    Y_KLineModel *model =self.groupModel.models[num];
+    [self.inTimePrice setKLineModel:model];
+}
+-(void)CancleLongPressClick:(NSNotification *)notification{
+    [self.inTimePrice setKLineModel:self.groupModel.models.lastObject];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

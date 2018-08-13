@@ -13,7 +13,6 @@
 #import "UIColor+Y_StockChart.h"
 
 
-
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
 #define kScreenWidth [UIScreen mainScreen].bounds.size.width
 #define kScreenHeight [UIScreen mainScreen].bounds.size.height
@@ -26,13 +25,14 @@
 
 @property (nonatomic, strong) Y_KLineGroupModel *groupModel;
 
-@property (nonatomic, copy) NSMutableDictionary <NSString*, Y_KLineGroupModel*> *modelsDict;
+@property (nonatomic, strong) NSMutableDictionary <NSString*, Y_KLineGroupModel*> *modelsDict;
 
 
 @property (nonatomic, assign) NSInteger currentIndex;
 
-@property (nonatomic, copy) NSString *type;
+@property (nonatomic, strong) NSString *type;
 @property(nonatomic,assign) BOOL isFullScreen;
+@property (nonatomic,assign) NSInteger dateOfNum;
 
 @end
 
@@ -58,6 +58,7 @@
     self.currentIndex = -1;
     //设置屏幕横向
     self.isFullScreen = YES;
+    self.dateOfNum = 0;
     
     // Do any additional setup after loading the view.
 }
@@ -78,6 +79,7 @@
     [self dismissViewControllerAnimated:nil completion:^{
 //        self.isFullScreen = NO;
     }];
+    
 }
 #pragma mark 请求数据
 -(id) stockDatasWithIndex:(NSInteger)index
@@ -119,6 +121,44 @@
     }
     return nil;
 }
+
+-(id)stockDatasWithIndex:(NSInteger)index IsLoadMore:(BOOL)isLoadMore{
+    NSLog(@"当前选中的是%ld",(long)index);
+    
+    NSString *type;
+    switch (index) {
+        case 0:
+        {
+            type = @"15min";
+        }
+            break;
+        case 1:
+        {
+            type = @"30min";
+        }
+            break;
+        case 2:
+        {
+            type = @"1hour";
+        }
+            break;
+        case 3:
+        {
+            type = @"1day";
+        }
+            break;
+        default:
+            break;
+    }
+    
+    self.currentIndex = index;
+    self.type = type;
+    
+    [self reloadMoreLineData];
+    return nil;
+    
+}
+
 
 - (void)reloadData
 {
@@ -163,6 +203,68 @@
     
 }
 
+- (void)reloadMoreLineData
+{
+    self.dateOfNum ++;
+    //获取当前时间日期
+    NSDate *nowDate=[NSDate date];
+    NSTimeInterval  oneDay = 24*60*60*1;  //1天的长度
+    NSDate *theDate = [nowDate initWithTimeIntervalSinceNow: -oneDay*self.dateOfNum];
+    NSDateFormatter *format1=[[NSDateFormatter alloc] init];
+    [format1 setDateFormat:@"yyyyMMdd"];
+    NSString *dateStr =[format1 stringFromDate:theDate];
+    NSLog(@"%@",dateStr);
+    
+    NSString *urlPath;
+    NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    if (self.currentIndex==0) {
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_15m",SERVER];
+        param[@"tradePlatform"] = @"bitfinex";
+        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
+    }
+    else if (self.currentIndex==1){
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_30m",SERVER];
+        param[@"tradePlatform"] = @"bitfinex";
+        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
+    }
+    else if (self.currentIndex==2){
+        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1h",SERVER];
+        param[@"tradePlatform"] = @"bitfinex";
+        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
+    }
+    else if (self.currentIndex==3){
+        //        urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1d",SERVER];
+        //        param[@"tradePlatform"] = @"bitfinex";
+        //        param[@"coinPair"] = @"eth_btc";
+        return;
+    }
+    
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    hud.label.text = @"正在加载中";
+    [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
+        [hud hideAnimated:YES];
+        NSLog(@"%@",responseObject);
+        NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
+        Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
+        
+        Y_KLineGroupModel *nowModel = [self.modelsDict objectForKey:self.type];
+        [nowModel.models addObjectsFromArray:groupModel.models];
+        self.groupModel = nowModel;
+        [self.modelsDict setObject:nowModel forKey:self.type];
+        //        NSLog(@"%@",groupModel);
+        [self.stockChartView reloadData];
+        
+    } failure:^(NSError *error) {
+        [hud hideAnimated:YES];
+        NSLog(@"%@",error);
+    }];
+    
+}
+
+
 - (Y_StockChartView *)stockChartView
 {
     if(!_stockChartView) {
@@ -182,12 +284,12 @@
             if (IS_IPHONE_X) {
                 make.top.mas_equalTo(0);
                 make.left.mas_equalTo(44);
-                make.bottom.mas_equalTo(-34);
+                make.bottom.mas_equalTo(-34-10);
                 make.right.mas_equalTo(0);
             } else {
                 make.top.mas_equalTo(0);
                 make.left.mas_equalTo(0);
-                make.bottom.mas_equalTo(0);
+                make.bottom.mas_equalTo(-10);
                 make.right.mas_equalTo(0);
             }
     
@@ -216,7 +318,6 @@
         NSLog(@"%f--竖屏--%f",SCREEN_WIDTH, SCREEN_HEIGHT);//375.000000--竖屏--667.000000
     }
 }
-
 
 #pragma mark - 屏幕旋转相关方法
 #pragma mark 是否支持自动旋转

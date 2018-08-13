@@ -119,17 +119,22 @@
     return self.flagArray.count;
 }
 - (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
-    UIViewController *vc;
+
     if (index==0) {
-        vc = [[TrendSubVC alloc]init];
+        TrendSubVC* vc = [[TrendSubVC alloc]init];
+        vc.priceModel = self.priceModel;
+        return vc;
     }
     else if (index==1){
-        vc = [[Y_StockChartViewController alloc]init];
+        Y_StockChartViewController* vc = [[Y_StockChartViewController alloc]init];
+        vc.priceModel = self.priceModel;
+        return vc;
     }
     else{
-        vc = [[UIViewController alloc]init];
+        UIViewController* vc = [[UIViewController alloc]init];
+        return vc;
     }
-    return vc;
+    return nil;
 }
 
 - (void)pagerController:(TYPagerController *)pagerController transitionFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex animated:(BOOL)animated {
@@ -154,7 +159,9 @@
 - (NSMutableArray *)flagArray
 {
     if (_flagArray == nil) {
-        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",@"BTIFINEX", nil];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *platformCnName = [defaults objectForKey:@"platformCnName"];
+        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",platformCnName, nil];
     }
     return _flagArray;
 }

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PriceModel.h"
 
 @interface Y_StockChartViewController : UIViewController//正常(半屏)显示
+
+@property (nonatomic,strong) PriceModel *priceModel;
 
 @end

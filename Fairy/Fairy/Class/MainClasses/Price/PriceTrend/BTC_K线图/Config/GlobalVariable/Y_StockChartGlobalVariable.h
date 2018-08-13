@@ -11,14 +11,14 @@
 @interface Y_StockChartGlobalVariable : NSObject
 
 /**
- *  K线图的宽度，默认2
+ *  K线图的宽度，默认4
  */
 +(CGFloat)kLineWidth;
 
 +(void)setkLineWith:(CGFloat)kLineWidth;
 
 /**
- *  K线图的间隔，默认1
+ *  K线图的间隔，默认2
  */
 +(CGFloat)kLineGap;
 

@@ -11,7 +11,7 @@
 
 @interface PriceCenterVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
-
+@property (nonatomic, strong)NSArray *tradingPlatformArrs;
 @end
 
 @implementation PriceCenterVC
@@ -21,6 +21,9 @@
     self.view.backgroundColor =[UIColor whiteColor];
     [self initNavtionBar];
     [self.view addSubview:self.myTableView];
+    self.tradingPlatformArrs =[NSArray array];
+    
+    [self requesttradingPlatformData];
     
     // Do any additional setup after loading the view.
 }
@@ -141,7 +144,8 @@
         if (indexPath.row ==0)
         {
             cell.TitleLab.text = @"选择默认交易平台";
-            cell.DetailsLab.text = @"中币";
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            cell.DetailsLab.text = [defaults objectForKey:@"platformCnName"];
             cell.JianTouIM.image = [UIImage imageNamed:@"prices_down"];
         }
         else if (indexPath.row == 2)
@@ -175,36 +179,28 @@
     
     if (indexPath.row==0) {
         
-        [NetworkManage Get:tradingPlatform andParams:nil success:^(id responseObject) {
-            NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
-            if ([obj[@"code"] integerValue] ==200 ) {
-                NSArray *dataArr = obj[@"data"];
-                
-                NSMutableArray *items = [NSMutableArray array];
-                for (NSInteger i = 0; i<dataArr.count; i++) {
-                    [items addObject:[YCXMenuItem menuItem:dataArr[i][@"platformCnName"] image:nil tag:i userInfo:@{@"title":@"Menu"}]];
-                }
-                
-                
-                [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
-                    NSLog(@"%@",item);
-                    MessageCell *cell =  [_myTableView cellForRowAtIndexPath:indexPath];
-                    cell.DetailsLab.text = item.title;
-                    
-                    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                    [defaults setObject:item.title forKey:@"tradingPlatform"];
-                    [defaults synchronize];
-                    
-                }];
-                
-            }
+        NSMutableArray *items = [NSMutableArray array];
+        for (NSInteger i = 0; i<self.tradingPlatformArrs.count; i++) {
+            [items addObject:[YCXMenuItem menuItem:self.tradingPlatformArrs[i][@"platformCnName"] image:nil tag:i userInfo:@{@"title":@"Menu"}]];
+        }
+        
+        [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
+            NSLog(@"%@",item);
+            MessageCell *cell =  [_myTableView cellForRowAtIndexPath:indexPath];
+            cell.DetailsLab.text = item.title;
             
-        } failure:^(NSError *error) {
-            NSLog(@"%@",error);
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSDictionary *dict =self.tradingPlatformArrs[index];
+            [defaults setObject:dict[@"tradePlatformID"] forKey:@"tradePlatformID"];
+            [defaults setObject:dict[@"platformCnName"] forKey:@"platformCnName"];
+            
+            [defaults synchronize];
+            
         }];
+    
     }
     
-  
+    
     else if (indexPath.row==2){
         
         [NetworkManage Get:digitalCash andParams:nil success:^(id responseObject) {
@@ -217,7 +213,7 @@
                     [items addObject:[YCXMenuItem menuItem:dataArr[i][@"currencyCnName"] image:nil tag:i userInfo:@{@"title":@"Menu"}]];
                 }
                 
-           
+                
                 
                 [YCXMenu showMenuInView:self.view fromRect:CGRectMake(UIScreenW-70, rect.origin.y, 50, 50) menuItems:items selected:^(NSInteger index, YCXMenuItem *item) {
                     NSLog(@"%@",item);
@@ -238,6 +234,51 @@
     btn.selected = !btn.selected;
 }
 
+-(void)requesttradingPlatformData{
+    [NetworkManage Get:tradingPlatform andParams:nil success:^(id responseObject) {
+        
+        /*
+         {
+         "code":"200",
+         "data":[
+         {
+         "sequence":1,
+         "platformUrl":"https://www.bitfinex.com/",
+         "isValid":1,
+         "platformShortCnName":"",
+         "tradePlatformID":1,
+         "platformCnName":"Bitfinex",
+         "platformEnName":"Bitfinex",
+         "platformShortEnName":"Bitfinex"
+         },
+         {
+         "sequence":4,
+         "platformUrl":"https://www.bitkk.com/",
+         "isValid":1,
+         "platformShortCnName":"",
+         "tradePlatformID":4,
+         "platformCnName":"中币",
+         "platformEnName":"bitkk",
+         "platformShortEnName":"zb"
+         }
+         ],
+         "pageNo":1,
+         "totalRows":2,
+         "message":"成功"
+         }
+         
+         */
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            self.tradingPlatformArrs = obj[@"data"];
+            [self.myTableView reloadData];
+        }
+        
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -245,13 +286,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

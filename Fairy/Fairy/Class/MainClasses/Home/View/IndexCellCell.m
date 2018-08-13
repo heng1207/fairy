@@ -68,6 +68,10 @@
 -(void)setGlobalIndexData:(NSArray *)globalIndexData{
     _globalIndexData = globalIndexData;
     
+    if (globalIndexData.count==0) {
+        return;
+    }
+    
     self.nameLab.text = globalIndexData[0][@"platformCnName"];
     self.RMBLab.text = globalIndexData[0][@"rmbPrice"];
     self.USLab.text = globalIndexData[0][@"lastPrice"];
