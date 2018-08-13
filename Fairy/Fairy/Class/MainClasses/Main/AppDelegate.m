@@ -49,6 +49,7 @@
     [self configUSharePlatforms];
     
     
+    [self userDataPersistence];
     [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];

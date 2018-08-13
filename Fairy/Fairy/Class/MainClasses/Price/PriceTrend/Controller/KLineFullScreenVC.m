@@ -162,30 +162,43 @@
 
 - (void)reloadData
 {
+    //获取当前时间日期
+    NSDate *nowDate=[NSDate date];
+    NSDateFormatter *format1=[[NSDateFormatter alloc] init];
+    [format1 setDateFormat:@"yyyyMMdd"];
+    NSString *dateStr =[format1 stringFromDate:nowDate];
+    NSLog(@"%@",dateStr);
+    
     NSString *urlPath;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *tradePlatformStr = [defaults objectForKey:@"platformCnName"];
+    param[@"tradePlatform"] = [tradePlatformStr lowercaseString];
+    NSString *coinPairStr = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    param[@"coinPair"] = [coinPairStr lowercaseString];
+    
     if (self.currentIndex==0) {
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_15m",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
-        param[@"klineDate"] = @"20180801";
+        //        param[@"tradePlatform"] = @"bitfinex";
+        //        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==1){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_30m",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
-        param[@"klineDate"] = @"20180801";
+        //        param[@"tradePlatform"] = @"bitfinex";
+        //        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==2){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1h",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
-        param[@"klineDate"] = @"20180801";
+        //        param[@"tradePlatform"] = @"bitfinex";
+        //        param[@"coinPair"] = @"eth_btc";
+        param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==3){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1d",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
+        //        param[@"tradePlatform"] = @"bitfinex";
+        //        param[@"coinPair"] = @"eth_btc";
     }
     
     [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
@@ -217,22 +230,28 @@
     
     NSString *urlPath;
     NSMutableDictionary *param = [NSMutableDictionary dictionary];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *tradePlatformStr = [defaults objectForKey:@"platformCnName"];
+    param[@"tradePlatform"] = [tradePlatformStr lowercaseString];
+    NSString *coinPairStr = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    param[@"coinPair"] = [coinPairStr lowercaseString];
+    
     if (self.currentIndex==0) {
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_15m",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
+//        param[@"tradePlatform"] = @"bitfinex";
+//        param[@"coinPair"] = @"eth_btc";
         param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==1){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_30m",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
+//        param[@"tradePlatform"] = @"bitfinex";
+//        param[@"coinPair"] = @"eth_btc";
         param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==2){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1h",SERVER];
-        param[@"tradePlatform"] = @"bitfinex";
-        param[@"coinPair"] = @"eth_btc";
+//        param[@"tradePlatform"] = @"bitfinex";
+//        param[@"coinPair"] = @"eth_btc";
         param[@"klineDate"] = dateStr;
     }
     else if (self.currentIndex==3){

@@ -131,7 +131,7 @@
 #pragma mark 返回某个index对应的页面
 - (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     PriceDetailedSubVC *vc = [[PriceDetailedSubVC alloc]init];
-    [vc loadMainTableData:self.selectTpye Index:index];
+    [vc loadMainTableData:self.selectTpye Index:index PriceModel:self.priceModel];
     return vc;
 }
 #pragma mark 返回index对应的标题

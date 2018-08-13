@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PriceModel.h"
 
 @interface PriceDetailedSubVC : UIViewController
--(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index;
+
+-(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index  PriceModel:(PriceModel*)priceModel;
 @end

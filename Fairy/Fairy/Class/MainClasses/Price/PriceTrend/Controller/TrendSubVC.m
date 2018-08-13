@@ -37,8 +37,12 @@
     
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    dict[@"tradePlatform"] = [defaults objectForKey:@"platformCnName"];
-    dict[@"coinPair"] = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    NSString *tradePlatformStr = [defaults objectForKey:@"platformCnName"];
+    dict[@"tradePlatform"] = [tradePlatformStr lowercaseString];
+    
+    NSString *coinPairStr = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    dict[@"coinPair"] = [coinPairStr lowercaseString];
+//    dict[@"coinPair"] = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
     
     [NetworkManage Get:PriceTrendChart andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
@@ -59,9 +63,11 @@
 //    dict[@"coinPair"] = @"eth_btc";
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    dict[@"tradePlatform"] = [defaults objectForKey:@"platformCnName"];
-//    NSString *str1 = [str lowercaseString];
-    dict[@"coinPair"] = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    NSString *tradePlatformStr = [defaults objectForKey:@"platformCnName"];
+    dict[@"tradePlatform"] = [tradePlatformStr lowercaseString];
+    
+    NSString *coinPairStr = [NSString stringWithFormat:@"%@_%@", self.priceModel.fsym, self.priceModel.tsyms];
+    dict[@"coinPair"] = [coinPairStr lowercaseString];
     
     [NetworkManage Get:VolumeTrendChart andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;

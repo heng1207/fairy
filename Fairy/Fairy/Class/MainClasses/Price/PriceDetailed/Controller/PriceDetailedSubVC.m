@@ -11,12 +11,14 @@
 #import "PriceIntroduceView.h"
 #import "PriceForecastView.h"
 
+
 @interface PriceDetailedSubVC ()
 
 @property(nonatomic,strong)PriceAnalyzeView *analyzeView;
 @property(nonatomic,strong)PriceIntroduceView *introduceView;
 @property(nonatomic,strong)PriceForecastView *forecastView;
 
+@property (nonatomic,strong) PriceModel *priceModel;
 @property(nonatomic,strong)NSArray *typeDataArr;
 @end
 
@@ -30,8 +32,10 @@
     
     // Do any additional setup after loading the view.
 }
--(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index{
+
+-(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index PriceModel:(PriceModel *)priceModel{
     NSLog(@"%@---%ld",selectType,index);
+    self.priceModel = priceModel;
     //60 +180 +10 + 35 + 30
     NSInteger height = SCREEN_HEIGHT - LL_TabbarSafeBottomMargin - LL_StatusBarAndNavigationBarHeight - 315;
     if ([selectType isEqualToString:@"分析"]) {
@@ -66,7 +70,8 @@
 
 }
 -(void)requestJieShao{
-    NSString *path = [NSString stringWithFormat:@"%@btc",PriceIntroduce];
+    NSString *fsymStr = [self.priceModel.fsym lowercaseString];
+    NSString *path = [NSString stringWithFormat:@"%@%@",PriceIntroduce,fsymStr];
     [NetworkManage Get:path andParams:nil success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
@@ -78,7 +83,8 @@
 }
 -(void)requestDatas:(NSInteger)type{
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-    dict[@"coin"] = @"btc";
+    NSString *fsymStr = [self.priceModel.fsym lowercaseString];
+    dict[@"coin"] = fsymStr;
     dict[@"type"] = self.typeDataArr[type-1][@"type"];
     
     [NetworkManage Get:PriceAnalyze andParams:dict success:^(id responseObject) {
@@ -123,7 +129,8 @@
 
 -(void)requestDuanQiYuCe{
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"coin"] = @"eth";
+    NSString *fsymStr = [self.priceModel.fsym lowercaseString];
+    dict[@"coin"] = fsymStr;
     [NetworkManage Get:PriceForecast andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {

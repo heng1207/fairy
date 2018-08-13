@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PriceModel.h"
 
 @interface KLineFullScreenVC : UIViewController //全屏显示
-
+@property (nonatomic,strong) PriceModel *priceModel;
 @end
