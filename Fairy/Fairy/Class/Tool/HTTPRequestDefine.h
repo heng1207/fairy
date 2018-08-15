@@ -2,8 +2,8 @@
 //  HTTPRequestDefine.h
 //  zhcxuser
 //
-//  Created by orilme on 2017/9/11.
-//  Copyright © 2017年 orilme. All rights reserved.
+//  Created by  on 2017/9/11.
+//  Copyright © 2017年 . All rights reserved.
 //
 
 #ifndef HTTPRequestDefine_h
@@ -33,10 +33,17 @@
 #define GetForgetPasswordMessage(phone)   ([NSString stringWithFormat:@"%@/front/get_forget_password_check_code/%@",SERVER,phone])
 // 用验证码重置密码
 #define setPassword               (SERVER@"/front/reset_forget_password")
-// 上传头像
-#define uploadPhoto               (SERVER@"/upload_header_portrait")
 // 退出
 #define logOut                    (SERVER@"/logout")
+// 上传头像
+#define uploadPhoto               (SERVER@"/upload_header_portrait")
+// 用户信息查看
+#define consumerView               (SERVER@"/consumer/view")
+// 用户信息新增
+#define consumerInsert               (SERVER@"/consumer/insert")
+// 用户信息修改
+#define consumerUpdate               (SERVER@"/consumer/update")
+
 
 
 

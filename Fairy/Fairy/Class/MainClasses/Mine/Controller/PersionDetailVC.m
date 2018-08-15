@@ -9,7 +9,8 @@
 #import "PersionDetailVC.h"
 #import "MessageCell.h"
 #import "PhotoSetCell.h"
-#import "MainTabBarController.h"
+#import "DetailContentVC.h"
+
 
 @interface PersionDetailVC ()<UITableViewDataSource, UITableViewDelegate,UIAlertViewDelegate,UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
@@ -190,8 +191,12 @@
         [alert show];
         
     }
+    else if (indexPath.row==3){//昵称
+        DetailContentVC *vc=[DetailContentVC new];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
     else if (indexPath.row==7){//退出登录
-        
+        [self userLogout];
     }
 }
 
@@ -258,9 +263,7 @@
     [photoArr addObject:image];
     
     [NetworkManage Post:uploadPhoto andParams:dict andPhotoArr:photoArr success:^(id responseObject) {
-        
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
-   
         if ([dic[@"code"] integerValue] ==200 ) {
             
         }else {
@@ -281,14 +284,13 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             
-            //登陆成功
-            PhoneZhuCeModel *userModel= [PhoneZhuCeModel mj_objectWithKeyValues:obj[@"data"]];
-            userModel.token = @"";
-            // 归档存储模型数据
-            [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
+            //退出成功
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"未登录" forKey:@"loginStatus"];
+            [defaults synchronize];
             
-            MainTabBarController *homeVC=[MainTabBarController new];
-            [UIApplication sharedApplication].keyWindow.rootViewController = homeVC;
+            [self.navigationController popViewControllerAnimated:YES];
+            
         }else {
             [self showHint:obj[@"message"]];
         }

@@ -382,8 +382,8 @@
                 //如果按住的位置在屏幕靠右边边并且在屏幕靠上面的地方   那么字就显示在按住位置的左上角40 60位置
                 drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, 80-60);
             }
-            else if(_screenLoc.x >((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
-                drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, self.frame.size.height-20 -60);
+            else if(_screenLoc.x >((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.topViewHeight-20) {
+                drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, self.topViewHeight-20 -60);
             }
             else if(_screenLoc.x >((kScreenWidth-leftMargin)/2)) {
                 //如果按住的位置在屏幕靠右边边   那么字就显示在按住位置的左上角40 60位置
@@ -394,9 +394,9 @@
                 drawPoint = CGPointMake(_currentLoc.x+40, 80-60);
                 
             }
-            else if (_screenLoc.x <= ((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
+            else if (_screenLoc.x <= ((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.topViewHeight-20) {
                 
-                drawPoint = CGPointMake(_currentLoc.x+40, self.frame.size.height-20 -60);
+                drawPoint = CGPointMake(_currentLoc.x+40, self.topViewHeight-20 -60);
                 
             }
             else if(_screenLoc.x  <= ((kScreenWidth-leftMargin)/2)) {
@@ -472,27 +472,29 @@
                 //如果按住的位置在屏幕靠右边边并且在屏幕靠上面的地方   那么字就显示在按住位置的左上角40 60位置
                 drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, 80-60 + self.topViewHeight);
             }
-            else if(_screenLoc.x >((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
-                drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, self.frame.size.height-20 -60 + self.topViewHeight);
+            else if(_screenLoc.x >((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.frame.size.height-self.bottomViewHeight) {
+                //如果按住的位置在屏幕靠右边边并且在屏幕靠下面的地方   那么字就显示在按住位置的左上角40 60位置
+                drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, self.frame.size.height-self.bottomViewHeight);
             }
             else if(_screenLoc.x >((kScreenWidth-leftMargin)/2)) {
                 //如果按住的位置在屏幕靠右边边   那么字就显示在按住位置的左上角40 60位置
-                drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, _currentLoc.y-60 + self.topViewHeight);
+                drawPoint = CGPointMake(_currentLoc.x-40-timeSize.width, _currentLoc.y-60 + self.bottomViewHeight);
             }
             else if (_screenLoc.x <= ((kScreenWidth-leftMargin)/2) && _screenLoc.y < 80) {
                 //如果按住的位置在屏幕靠左边边并且在屏幕靠上面的地方   那么字就显示在按住位置的右上角上角40 40位置
                 drawPoint = CGPointMake(_currentLoc.x+40, 80-60 + self.topViewHeight);
-
+                
             }
-            else if (_screenLoc.x <= ((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.frame.size.height-20) {
-
-                drawPoint = CGPointMake(_currentLoc.x+40, self.frame.size.height-20 -60 + self.topViewHeight);
-
+            else if (_screenLoc.x <= ((kScreenWidth-leftMargin)/2) && _screenLoc.y > self.frame.size.height-self.bottomViewHeight) {
+                
+                drawPoint = CGPointMake(_currentLoc.x+40, self.frame.size.height-self.bottomViewHeight);
+                
             }
             else if(_screenLoc.x  <= ((kScreenWidth-leftMargin)/2)) {
                 //如果按住的位置在屏幕靠左边   那么字就显示在按住位置的右上角40 60位置
-                drawPoint = CGPointMake(_currentLoc.x+40, _currentLoc.y-60 + self.topViewHeight);
+                drawPoint = CGPointMake(_currentLoc.x+40, _currentLoc.y-60 + self.bottomViewHeight);
             }
+
             
             
             // 判断是不是小数

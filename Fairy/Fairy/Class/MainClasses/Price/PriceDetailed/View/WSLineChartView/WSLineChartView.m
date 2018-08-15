@@ -85,8 +85,8 @@
         
         
         //长按手势
-        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-        [self.xAxisView addGestureRecognizer:longPress];
+//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+//        [self.xAxisView addGestureRecognizer:longPress];
         
 
         UIButton *compareBtn =[[UIButton alloc]initWithFrame:CGRectMake(self.frame.size.width-leftMargin, 0, 25, 20)];

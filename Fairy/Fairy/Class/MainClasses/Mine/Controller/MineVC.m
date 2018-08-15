@@ -21,13 +21,18 @@
 
 @interface MineVC ()<UITableViewDataSource,UITableViewDelegate,HeadViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
-
+@property (nonatomic, strong) HeadView *headView;
 @end
 
 @implementation MineVC
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
+    
+    [self requestData];
+    [self.headView updateUserInfo];
+
+    
 }
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
@@ -51,6 +56,7 @@
         //        self.automaticallyAdjustsScrollViewInsets = NO;//解决tableview头部预留64像素的办法
         
         HeadView *headView=[[HeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+        self.headView = headView;
         headView.delegate =self;
         _myTableView.tableHeaderView = headView;
         
@@ -253,16 +259,73 @@
 }
 #define mark HeadViewDelegate
 -(void)headViewLoginTapClick{
-    LoginVC *vc =[LoginVC new];
-    UINavigationController *nav =[[UINavigationController alloc]initWithRootViewController:vc];
-    vc.hidesBottomBarWhenPushed = YES;
-    [self presentViewController:nav animated:YES completion:nil];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+    if ([loginStatus isEqualToString:@"已登录"]) {
+        PersionDetailVC *vc=[PersionDetailVC new];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    else{
+        LoginVC *vc =[LoginVC new];
+        UINavigationController *nav =[[UINavigationController alloc]initWithRootViewController:vc];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:nav animated:YES completion:nil];
+    }
+
 }
 
 
 -(void)nightModeClick:(UIButton*)btn{
     btn.selected = !btn.selected;
 }
+
+-(void)requestData{
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    dict[@"consumerID"] = userModel.consumerID;
+    
+    NSString *path =[NSString stringWithFormat:@"%@?token=%@",consumerView,userModel.token];
+    
+    [NetworkManage Get:path andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            NSLog(@"%@",obj[@"data"]);
+            /*
+             {
+             appVersion = "<null>";
+             birthday = "<null>";
+             checkCode = "<null>";
+             cityID = "<null>";
+             consumerID = 46;
+             consumerName = "<null>";
+             consumerRankID = 1;
+             deviceName = "<null>";
+             deviceNumber = "<null>";
+             email = "<null>";
+             fairycoinID = 9860065;
+             gender = "<null>";
+             headerPic = "<null>";
+             lastLoginTime = 1534328537000;
+             loginName = zhangsan;
+             nickname = "<null>";
+             password = 02C75FB22C75B23DC963C7EB91A062CC;
+             phoneNumber = 18612956645;
+             platform = "<null>";
+             provinceID = "<null>";
+             token = "zhangsan_1382b9838d8442ce94a9b86fa402e25b";
+             userID = "<null>";
+             }
+             */
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"网络有问题");
+    }];
+}
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

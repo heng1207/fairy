@@ -64,7 +64,7 @@
     self.nameLab = nameLab;
     self.nameLab.font = AdaptedFontSize(27);
     self.nameLab.userInteractionEnabled = YES;
-    nameLab.text=@"昵称昵称昵称";
+    nameLab.text=@"昵称";
     nameLab.textColor =[UIColor whiteColor];
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerY.mas_equalTo(headIM);
@@ -96,6 +96,19 @@
     }
 }
 
+-(void)updateUserInfo{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+    if ([loginStatus isEqualToString:@"已登录"]) {
+     
+        self.nameLab.text =@"赵四赵四赵四";
+        self.explainLab.hidden = YES;
+    }
+    else{
+        self.nameLab.text=@"昵称";
+        self.explainLab.hidden = NO;
+    }
+}
 
 
 /*

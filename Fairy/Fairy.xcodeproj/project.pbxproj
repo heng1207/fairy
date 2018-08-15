@@ -45,6 +45,8 @@
 		4E0CFFE1211AED1E00644290 /* CurveYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFDB211AED1E00644290 /* CurveYAxisView.m */; };
 		4E0CFFE2211AED1E00644290 /* CurveXAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFDD211AED1E00644290 /* CurveXAxisView.m */; };
 		4E0CFFE3211AED1E00644290 /* CurveLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0CFFDF211AED1E00644290 /* CurveLineChartView.m */; };
+		4E9AB6F621242D9200BAFB22 /* TLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AB6F421242D9200BAFB22 /* TLTextView.m */; };
+		4E9AB6F921242DC900BAFB22 /* DetailContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AB6F821242DC900BAFB22 /* DetailContentVC.m */; };
 		4EC579362118259F00868549 /* PriceAnalyzeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC579352118259F00868549 /* PriceAnalyzeView.m */; };
 		4EC5793921184F3000868549 /* BezierLineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EC5793821184F3000868549 /* BezierLineView.m */; };
 		4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4ED1C9F02114547700D86411 /* Y_StockChartGlobalVariable.m */; };
@@ -195,6 +197,10 @@
 		4E0CFFDE211AED1E00644290 /* CurveYAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveYAxisView.h; sourceTree = "<group>"; };
 		4E0CFFDF211AED1E00644290 /* CurveLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveLineChartView.m; sourceTree = "<group>"; };
 		4E0CFFE0211AED1E00644290 /* CurveXAxisView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurveXAxisView.h; sourceTree = "<group>"; };
+		4E9AB6F421242D9200BAFB22 /* TLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLTextView.m; sourceTree = "<group>"; };
+		4E9AB6F521242D9200BAFB22 /* TLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTextView.h; sourceTree = "<group>"; };
+		4E9AB6F721242DC900BAFB22 /* DetailContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailContentVC.h; sourceTree = "<group>"; };
+		4E9AB6F821242DC900BAFB22 /* DetailContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailContentVC.m; sourceTree = "<group>"; };
 		4EC579342118259F00868549 /* PriceAnalyzeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PriceAnalyzeView.h; sourceTree = "<group>"; };
 		4EC579352118259F00868549 /* PriceAnalyzeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PriceAnalyzeView.m; sourceTree = "<group>"; };
 		4EC5793721184F3000868549 /* BezierLineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierLineView.h; sourceTree = "<group>"; };
@@ -499,6 +505,15 @@
 				4E0CFFDB211AED1E00644290 /* CurveYAxisView.m */,
 			);
 			path = " CurveLineChartView";
+			sourceTree = "<group>";
+		};
+		4E9AB6F321242D9200BAFB22 /* TLTextView */ = {
+			isa = PBXGroup;
+			children = (
+				4E9AB6F421242D9200BAFB22 /* TLTextView.m */,
+				4E9AB6F521242D9200BAFB22 /* TLTextView.h */,
+			);
+			path = TLTextView;
 			sourceTree = "<group>";
 		};
 		4ED1C9EB2114547700D86411 /* BTC_K线图 */ = {
@@ -951,6 +966,8 @@
 				7EB5E28120CCB151004BFAE2 /* MineVC.m */,
 				7ED981BE20D00C6A00749D14 /* PersionDetailVC.h */,
 				7ED981BF20D00C6A00749D14 /* PersionDetailVC.m */,
+				4E9AB6F721242DC900BAFB22 /* DetailContentVC.h */,
+				4E9AB6F821242DC900BAFB22 /* DetailContentVC.m */,
 				0406C66920D0C21F008F6A26 /* PriceCenterVC.h */,
 				0406C66A20D0C21F008F6A26 /* PriceCenterVC.m */,
 				0406C66C20D0C709008F6A26 /* WarnCenterVC.h */,
@@ -1005,6 +1022,7 @@
 		7EB5E24F20CCAD40004BFAE2 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				4E9AB6F321242D9200BAFB22 /* TLTextView */,
 				043D7C5320E5D6AE00889B5B /* clearCache */,
 				7EB5E29520CD00F0004BFAE2 /* FSScrollContentViewLib */,
 				7EB5E25B20CCADFC004BFAE2 /* MonitorNetwork */,
@@ -1276,6 +1294,7 @@
 				7EB5E2A220CD0545004BFAE2 /* FSBottomTableViewCell.m in Sources */,
 				4ED1CA382114547700D86411 /* Y_MALine.m in Sources */,
 				0445DBD620CFBD70009BA6BF /* CurrencySelectVC.m in Sources */,
+				4E9AB6F621242D9200BAFB22 /* TLTextView.m in Sources */,
 				4ED1CA3F211454D400D86411 /* KLineFullScreenVC.m in Sources */,
 				4ED1CA312114547700D86411 /* Y_KLinePositionModel.m in Sources */,
 				0406C66220D0B147008F6A26 /* PhotoSetCell.m in Sources */,
@@ -1330,6 +1349,7 @@
 				0430253320E1DB6B00094314 /* TargetView.m in Sources */,
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
 				4ED1CA292114547700D86411 /* Y_StockChartView.m in Sources */,
+				4E9AB6F921242DC900BAFB22 /* DetailContentVC.m in Sources */,
 				4ED1CA272114547700D86411 /* Y_StockChartGlobalVariable.m in Sources */,
 				7E741ADE20F64588000E7E73 /* NavView.m in Sources */,
 				7E35FD5B20F9AD7800645870 /* WSLineChartView.m in Sources */,

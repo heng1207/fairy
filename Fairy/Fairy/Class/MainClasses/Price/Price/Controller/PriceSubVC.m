@@ -112,6 +112,13 @@
 }
 
 -(void)addOptional{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+    if ([loginStatus isEqualToString:@"未登录"]) {
+        return;
+    }
+    
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"coinPairID"] = self.selectModel.coinPairID;
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
@@ -142,6 +149,13 @@
     
 }
 -(void)deleteOptional{
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+    if ([loginStatus isEqualToString:@"未登录"]) {
+        return;
+    }
+    
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"coinPairID"] = self.selectModel.coinPairID;
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
@@ -184,6 +198,13 @@
 -(void)loadDatas{
     
     if ([self.headType isEqualToString:@"自选"]) {
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+        if ([loginStatus isEqualToString:@"未登录"]) {
+            return;
+        }
+        
         NSMutableDictionary *dict=[NSMutableDictionary dictionary];
         PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
         dict[@"consumerID"] = userModel.consumerID;

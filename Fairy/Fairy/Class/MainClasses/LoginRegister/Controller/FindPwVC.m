@@ -261,6 +261,10 @@
             // 归档存储模型数据
             [NSKeyedArchiver archiveRootObject:userModel toFile:kFilePath];
             
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            [defaults setObject:@"已登录" forKey:@"loginStatus"];
+            [defaults synchronize];
+            
             [self.navigationController dismissViewControllerAnimated:YES completion:nil];
             
         }else{

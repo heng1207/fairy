@@ -213,7 +213,7 @@
                             
                         }else{
                             
-                            [str drawInRect:strRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//                            [str drawInRect:strRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
                             
                             self.firstStrFrame = strRect;
                         }
@@ -275,7 +275,7 @@
                                 strRect.origin.x = 0;
                             }
                             
-                            [str drawInRect:strRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//                            [str drawInRect:strRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
                         }
                         // 如果点的文字有重叠，那么不绘制
                         CGFloat maxX = CGRectGetMaxX(self.firstStrFrame);
@@ -286,7 +286,7 @@
                                 
                             }else{
                                 
-                                [str drawInRect:strRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//                                [str drawInRect:strRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
                                 
                                 self.firstStrFrame = strRect;
                             }

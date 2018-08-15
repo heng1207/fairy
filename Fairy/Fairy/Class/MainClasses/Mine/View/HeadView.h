@@ -16,4 +16,6 @@
 
 @property(nonatomic,weak)id<HeadViewDelegate> delegate;
 
+-(void)updateUserInfo;
+
 @end
