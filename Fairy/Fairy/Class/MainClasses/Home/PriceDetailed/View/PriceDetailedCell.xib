@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="PriceDetailedCell">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="127.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="irj-ob-lQD">
+                        <rect key="frame" x="12" y="12" width="351" height="103.5"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="中币" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8qI-sb-hI2">
+                        <rect key="frame" x="174" y="26" width="27" height="16"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易量1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feF-L9-zdk">
+                        <rect key="frame" x="44" y="80" width="90.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成交量1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJI-3l-j92">
+                        <rect key="frame" x="240" y="80" width="91" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥123456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGx-mf-jbp">
+                        <rect key="frame" x="149.5" y="46" width="76.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="irj-ob-lQD" secondAttribute="bottom" constant="12" id="1N8-za-xBq"/>
+                    <constraint firstItem="KGx-mf-jbp" firstAttribute="top" secondItem="8qI-sb-hI2" secondAttribute="bottom" constant="4" id="2ef-o0-anz"/>
+                    <constraint firstItem="feF-L9-zdk" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="44" id="7DN-aP-2uU"/>
+                    <constraint firstItem="KGx-mf-jbp" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="FHD-ya-dfF"/>
+                    <constraint firstItem="irj-ob-lQD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="Lxd-RM-IhE"/>
+                    <constraint firstAttribute="bottom" secondItem="DJI-3l-j92" secondAttribute="bottom" constant="26" id="TMK-7I-UKo"/>
+                    <constraint firstAttribute="trailing" secondItem="DJI-3l-j92" secondAttribute="trailing" constant="44" id="Wr7-ky-nNO"/>
+                    <constraint firstItem="8qI-sb-hI2" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="Xdy-so-uxH"/>
+                    <constraint firstItem="irj-ob-lQD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="12" id="bZ3-Ti-ipU"/>
+                    <constraint firstItem="8qI-sb-hI2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="26" id="bd2-1D-Wpt"/>
+                    <constraint firstAttribute="trailing" secondItem="irj-ob-lQD" secondAttribute="trailing" constant="12" id="rOj-NJ-4QD"/>
+                    <constraint firstAttribute="bottom" secondItem="feF-L9-zdk" secondAttribute="bottom" constant="26" id="srS-IR-Y4Y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="253.5" y="37"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="bg" width="353" height="108"/>
+    </resources>
+</document>

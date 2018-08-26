@@ -9,7 +9,7 @@
 #import "MainTabBarController.h"
 #import "MainNavigationController.h"
 #import "HomeVC.h"
-#import "PriceVC.h"
+#import "DepthVC.h"
 #import "InformationVC.h"
 #import "MineVC.h"
 
@@ -30,16 +30,16 @@
 - (void)setActivityViewControllers
 {
     HomeVC *homeVC = [[HomeVC alloc]init];
-    [self setupOneChildViewController:homeVC title:@"自选" image:@"Home_normal" selectedImage:@"Home_select"];
+    [self setupOneChildViewController:homeVC title:@"行情" image:@"icon_quotes_default" selectedImage:@"icon_quotes_select"];
 
-    PriceVC *priceVC = [[PriceVC alloc]init];
-    [self setupOneChildViewController:priceVC title:@"行情" image:@"price_normal" selectedImage:@"price_select"];
+    DepthVC *depthVC = [[DepthVC alloc]init];
+    [self setupOneChildViewController:depthVC title:@"深度" image:@"icon_depth_default" selectedImage:@"icon_depth_select"];
 
     InformationVC * informationVC = [[InformationVC alloc]init];
-    [self setupOneChildViewController:informationVC title:@"资讯" image:@"Information_normal" selectedImage:@"Information_select"];
+    [self setupOneChildViewController:informationVC title:@"资讯" image:@"icon_information_default" selectedImage:@"icon_information_select"];
 
     MineVC * mineVC = [[MineVC alloc]init];
-    [self setupOneChildViewController:mineVC title:@"我的" image:@"Mine_normal" selectedImage:@"Mine_select"];
+    [self setupOneChildViewController:mineVC title:@"我的" image:@"icon_mine_default" selectedImage:@"icon_mine_select"];
 }
 
 - (void)setupOneChildViewController:(UIViewController *)vc title:(NSString *)title image:(NSString *)image selectedImage:(NSString *)selectedImage

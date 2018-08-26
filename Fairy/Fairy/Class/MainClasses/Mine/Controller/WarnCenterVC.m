@@ -60,7 +60,7 @@
 
 #pragma mark UITableViewDataSource&&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -72,7 +72,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == 0 && indexPath.section==0 ) {
+    if (indexPath.row == 0) {
         UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"ExitCell"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ExitCell"];
@@ -129,39 +129,15 @@
             cell.lineView.hidden = NO;
         }
         
-        
-        if (indexPath.section==0) {
-            if (indexPath.row ==1)
-            {
-                cell.TitleLab.text = @"剧烈波动预警";
-                cell.DetailsLab.text = @"开";
-            }
-            else if (indexPath.row == 2)
-            {
-                cell.TitleLab.text = @"预警模式";
-                cell.DetailsLab.text = @"铃声+震动";
-            }
+        if (indexPath.row==1) {
+            cell.TitleLab.text = @"预警模式";
+            cell.DetailsLab.text = @"铃声+震动";
         }
-        
-        else{
-            if (indexPath.row ==0)
-            {
-                cell.TitleLab.text = @"未触发预警";
-                cell.DetailsLab.text = @"0条";
-            }
-            else if (indexPath.row == 1)
-            {
-                cell.TitleLab.text = @"历史预警";
-                cell.DetailsLab.text = @"0条";
-            }
-            else if (indexPath.row == 2)
-            {
-                cell.TitleLab.text = @"剧烈波动预警记录";
-                cell.DetailsLab.text = @"";
-            }
-            
+        else if (indexPath.row == 2){
+            cell.TitleLab.text = @"历史预警";
+            cell.DetailsLab.text = @"0条";
         }
-        
+
         return cell;
     }
 }

@@ -59,14 +59,11 @@
 
 #pragma mark UITableViewDataSource&&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section==1) {
-        return 1;
-    }
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,51 +73,34 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    if ( (indexPath.row == 0 && indexPath.section==0) || (indexPath.row == 0 && indexPath.section==2) )
-    {
-        cell.lineView.hidden = NO;
-    }else
+    if (indexPath.row == 2)
     {
         cell.lineView.hidden = YES;
+    }else
+    {
+        cell.lineView.hidden = NO;
     }
     
     
-    if (indexPath.section==0) {
-        if (indexPath.row ==0)
-        {
-            cell.TitleLab.text = @"通用";
-            cell.DetailsLab.text = @"";
-        }
-        else if (indexPath.row == 1)
-        {
-            cell.TitleLab.text = @"隐私";
-            cell.DetailsLab.text = @"";
-        }
-    }
-    else if (indexPath.section==1){
+    if (indexPath.row==0){
         cell.TitleLab.text = @"清理缓存";
-//        cell.DetailsLab.text = @"234.34 MB";
+        //        cell.DetailsLab.text = @"234.34 MB";
         NSString *fileSize = [LBClearCacheTool getCacheSizeWithFilePath:cachesFilePath];
         if ([fileSize integerValue] == 0) {
-            cell.DetailsLab.text = @"";
+            cell.DetailsLab.text = @"暂无缓冲";
         }else {
             cell.DetailsLab.text = [NSString stringWithFormat:@"%@",fileSize];
         }
         
     }
-    else if (indexPath.section==2){
-        if (indexPath.row ==0)
-        {
-            cell.TitleLab.text = @"关于我们";
-            cell.DetailsLab.text = @"";
-        }
-        else if (indexPath.row == 1)
-        {
-            cell.TitleLab.text = @"检查更新";
-            cell.DetailsLab.text = @"";
-        }
+    else if (indexPath.row==1){
+        cell.TitleLab.text = @"关于我们";
+        cell.DetailsLab.text = @"";
     }
-
+    else if (indexPath.row == 2){
+        cell.TitleLab.text = @"检查更新";
+        cell.DetailsLab.text = @"";
+    }
     return cell;
 }
 
@@ -133,31 +113,11 @@
     return view;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.section==0) {
-        if (indexPath.row ==0)
-        {
-
-        }
-        else if (indexPath.row == 1)
-        {
-
-        }
-    }
-    else if (indexPath.section==1){
+    if (indexPath.row==0){
         [self clearCacheIndex:indexPath];
     }
-    else if (indexPath.section==2){
-        if (indexPath.row ==0)
-        {
-            
-        }
-        else if (indexPath.row == 1)
-        {
-            
-        }
-        
+    else if (indexPath.row==1){
     }
-
 }
 
 
@@ -201,13 +161,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end

@@ -29,8 +29,9 @@
 
 -(void)initNavtionBar{
 
-    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
+    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
     ItemLab.text = @"详情";
+    ItemLab.textAlignment = NSTextAlignmentCenter;
     ItemLab.textColor=[UIColor whiteColor];
     ItemLab.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = ItemLab;

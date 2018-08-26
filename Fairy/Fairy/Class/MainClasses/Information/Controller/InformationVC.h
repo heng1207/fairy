@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface InformationVC : UIViewController
+@interface InformationVC : WMPageController
 
 
 @end

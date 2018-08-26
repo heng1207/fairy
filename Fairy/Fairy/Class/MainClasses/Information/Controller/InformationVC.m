@@ -9,125 +9,78 @@
 #import "InformationVC.h"
 #import "InformationSubVC.h"
 
-@interface InformationVC ()<TYTabPagerBarDataSource,TYTabPagerBarDelegate,TYPagerControllerDataSource,TYPagerControllerDelegate>
-
-@property (nonatomic, weak) TYTabPagerBar *tabBar;
-@property (nonatomic, weak) TYPagerController *pagerController;
-@property (nonatomic,assign) NSInteger currentIndex;
+@interface InformationVC ()
 
 @property (nonatomic,strong) NSMutableArray *flagArray;
+@property (nonatomic, strong) NSMutableArray *titleItemLengths;
 
 @end
 
 @implementation InformationVC
-- (void)viewWillLayoutSubviews
-{
-    [super viewWillLayoutSubviews];
-    _tabBar.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 30);
-    _pagerController.view.frame = CGRectMake(0, CGRectGetMaxY(_tabBar.frame), CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame)- CGRectGetMaxY(_tabBar.frame));
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    self.navigationController.navigationBar.hidden = YES;
+}
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    self.navigationController.navigationBar.hidden = NO;
 }
 - (void)viewDidLoad {
+    
+    self.menuViewStyle = WMMenuViewStyleLine;
+    self.progressColor =[UIColor whiteColor];
+    self.progressHeight = 2;
+    self.titleItemLengths =[NSMutableArray array];
+    for (NSInteger i =0; i<self.flagArray.count; i++) {
+        CGSize size = [self methodForitleItemLengths:self.flagArray[i] ];
+        NSNumber *width = [NSNumber numberWithFloat:size.width];
+        [self.titleItemLengths addObject:width];
+    }
+    self.progressViewWidths = self.titleItemLengths;
+    self.itemsWidths = self.titleItemLengths;
+    self.itemMargin = 30;
+    self.progressViewBottomSpace=3;
+    self.menuViewLayoutMode = WMMenuViewLayoutModeCenter;
+    self.titleSizeNormal = 15;
+    self.titleSizeSelected = 15;
+    self.titleColorNormal = [UIColor blueColor];
+    self.titleColorSelected = [UIColor whiteColor];
+    self.menuView.scrollView.backgroundColor =[UIColor grayColor];
+    [self reloadData];
+    
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
-    [self initNavtionBar];
+ 
+    UIView *statusView =[[UIView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, LL_StatusBarHeight)];
+    statusView.backgroundColor =[UIColor colorWithHex:@"#1296db"];
+    [self.view addSubview:statusView];
     
-    [self addTabPageBar];
-    [self addPagerController];
-    [self reloadData];
     // Do any additional setup after loading the view.
 }
--(void)initNavtionBar{
-    
-    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    ItemLab.text = @"资讯";
-    ItemLab.textColor=[UIColor whiteColor];
-    ItemLab.font = [UIFont systemFontOfSize:18];
-    self.navigationItem.titleView = ItemLab;
-}
 
-- (void)addTabPageBar {
-    TYTabPagerBar *tabBar = [[TYTabPagerBar alloc]init];
-    tabBar.backgroundColor = [UIColor colorWithHex:@"#e6e6e7"];
-    tabBar.layout.barStyle = TYPagerBarStyleProgressElasticView;
-    tabBar.layout.progressWidth = 50;
-    tabBar.layout.progressHeight = 2;
-    tabBar.layout.progressColor = [UIColor colorWithHex:@"#1161a0"];
-    tabBar.layout.normalTextColor = [UIColor colorWithHex:@"#848484"];
-    tabBar.layout.selectedTextColor = [UIColor colorWithHex:@"#1161a0"];
-    tabBar.layout.cellSpacing = 0;
-    tabBar.layout.cellEdging = 0;
-    tabBar.layout.cellWidth = SCREEN_WIDTH/2;
-    tabBar.layout.normalTextFont = AdaptedFontSize(29);
-    tabBar.layout.selectedTextFont = AdaptedFontSize(29);
-    tabBar.dataSource = self;
-    tabBar.delegate = self;
-    [tabBar registerClass:[TYTabPagerBarCell class] forCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier]];
-    [self.view addSubview:tabBar];
-    _tabBar = tabBar;
-    
-}
-- (void)addPagerController {
-    TYPagerController *pagerController = [[TYPagerController alloc]init];
-    pagerController.layout.prefetchItemCount = 1;
-    //pagerController.layout.autoMemoryCache = NO;
-    // 只有当scroll滚动动画停止时才加载pagerview，用于优化滚动时性能
-    
-    pagerController.layout.addVisibleItemOnlyWhenScrollAnimatedEnd = YES;
-    pagerController.dataSource = self;
-    pagerController.delegate = self;
-    [self addChildViewController:pagerController];
-    [self.view addSubview:pagerController.view];
-    _pagerController = pagerController;
-}
-
-#pragma mark - TYTabPagerBarDataSource
-- (NSInteger)numberOfItemsInPagerTabBar {
+#pragma mark - Datasource & Delegate
+#pragma mark 返回子页面的个数
+-(NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
     return self.flagArray.count;
 }
-- (UICollectionViewCell<TYTabPagerBarCellProtocol> *)pagerTabBar:(TYTabPagerBar *)pagerTabBar cellForItemAtIndex:(NSInteger)index {
-    UICollectionViewCell<TYTabPagerBarCellProtocol> *cell = [pagerTabBar dequeueReusableCellWithReuseIdentifier:[TYTabPagerBarCell cellIdentifier] forIndex:index];
-    cell.titleLabel.text = self.flagArray[index];
-    return cell;
-}
 
-#pragma mark - TYTabPagerBarDelegate
-- (CGFloat)pagerTabBar:(TYTabPagerBar *)pagerTabBar widthForItemAtIndex:(NSInteger)index {
-    return SCREEN_WIDTH/self.flagArray.count;
-}
-
-- (void)pagerTabBar:(TYTabPagerBar *)pagerTabBar didSelectItemAtIndex:(NSInteger)index {
-    _currentIndex = index;
-    [_pagerController scrollToControllerAtIndex:index animate:YES];
-}
-
-
-#pragma mark - TYPagerControllerDataSource
-- (NSInteger)numberOfControllersInPagerController {
-    return self.flagArray.count;
-}
-- (UIViewController *)pagerController:(TYPagerController *)pagerController controllerForIndex:(NSInteger)index prefetching:(BOOL)prefetching {
+#pragma mark 返回某个index对应的页面
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
     InformationSubVC *vc = [[InformationSubVC alloc]init];
     vc.headType = self.flagArray[index];
     return vc;
 }
-
-- (void)pagerController:(TYPagerController *)pagerController transitionFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex animated:(BOOL)animated {
-    _currentIndex = toIndex;
-    [_tabBar scrollToItemFromIndex:fromIndex toIndex:toIndex animate:animated];
+#pragma mark 返回index对应的标题
+- (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+    return self.flagArray[index];
 }
-
--(void)pagerController:(TYPagerController *)pagerController transitionFromIndex:(NSInteger)fromIndex toIndex:(NSInteger)toIndex progress:(CGFloat)progress {
-    [_tabBar scrollToItemFromIndex:fromIndex toIndex:toIndex progress:progress];
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForMenuView:(WMMenuView *)menuView{
+    menuView.backgroundColor = [UIColor colorWithHex:@"#1296db"];
+    return  CGRectMake(0, LL_StatusBarHeight, SCREEN_WIDTH, 44);
 }
-
-- (void)reloadData {
-    _tabBar.layout.cellWidth = SCREEN_WIDTH/5;
-    [_tabBar reloadData];
-    [_pagerController reloadData];
-    if (self.flagArray.count > 1) {
-        _currentIndex = 0;
-        [_pagerController scrollToControllerAtIndex:0 animate:NO];
-    }
+- (CGRect)pageController:(WMPageController *)pageController preferredFrameForContentView:(WMScrollView *)contentView {
+    return  CGRectMake(0, LL_StatusBarAndNavigationBarHeight, SCREEN_WIDTH, CGRectGetHeight(self.view.frame)- LL_StatusBarAndNavigationBarHeight );
 }
 
 - (NSMutableArray *)flagArray
@@ -137,6 +90,11 @@
     }
     return _flagArray;
 }
+-(CGSize)methodForitleItemLengths:(NSString*)titleStr{
+    CGSize titleSize = [titleStr boundingRectWithSize:CGSizeMake(self.view.frame.size.width, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil].size;
+    return titleSize;
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

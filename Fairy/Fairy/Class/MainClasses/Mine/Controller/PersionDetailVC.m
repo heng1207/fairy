@@ -64,25 +64,28 @@
 
 #pragma mark UITableViewDataSource&&UITableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 8;
+    if (section==0) {
+        return 3;
+    }
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==0) {
+    if (indexPath.section==0&&indexPath.row==0) {
         return 76;
     }
-    else if (indexPath.row==6){
-        return 100;
+    else if (indexPath.section==1&&indexPath.row==2){
+        return 60;
     }
     return 50;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row ==0 ) {
+    if ( indexPath.section==0&&indexPath.row ==0 ) {
         PhotoSetCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"PhotoSetCell" forIndexPath:indexPath];
         cell.photoIM.layer.cornerRadius =  cell.photoIM.width/2;
         cell.photoIM.layer.masksToBounds =YES;
@@ -90,67 +93,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
-//    else if (indexPath.row==1){
-//        UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"IDcell"];
-//        if (!cell) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"IDcell"];
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
-//            UIView *lineView = [[UIView alloc] init];
-//            lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
-//            [cell.contentView addSubview:lineView];
-//            lineView.frame =CGRectMake(0, CGRectGetMaxY(cell.contentView.frame), UIScreenW, AdaptedHeight(1));
-//        }
-//        cell.textLabel.text=@"FairyCoinID";
-//        cell.detailTextLabel.text =@"273970";
-//        return cell;
-//    }
-    else if (indexPath.row==1||indexPath.row==2||indexPath.row==3||indexPath.row==4||indexPath.row==5){
-        MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (indexPath.row == 5)
-        {
-            cell.lineView.hidden = YES;
-        }else
-        {
-            cell.lineView.hidden = NO;
-        }
-
-
-        if (indexPath.row ==1)
-        {
-            cell.TitleLab.text = @"FairyCoinID";
-            cell.DetailsLab.text = @"273970";
-            cell.JianTouIM.hidden = YES;
-        }
-        else if (indexPath.row == 2)
-        {
-            cell.TitleLab.text = @"登陆账号";
-            cell.DetailsLab.text = @"未设置";
-            cell.JianTouIM.hidden = NO;
-        }
-        else if (indexPath.row == 3)
-        {
-            cell.TitleLab.text = @"昵称";
-            cell.DetailsLab.text = @"ID123456";
-            cell.JianTouIM.hidden = NO;
-        }
-        else if (indexPath.row == 4)
-        {
-            cell.TitleLab.text = @"个人简介";
-            cell.DetailsLab.text = @"未设置";
-            cell.JianTouIM.hidden = NO;
-        }
-        else if (indexPath.row == 5)
-        {
-            cell.TitleLab.text = @"手机号码";
-            cell.DetailsLab.text = @"未设置";
-            cell.JianTouIM.hidden = NO;
-        }
-  
-        return cell;
-    }
-    else if (indexPath.row==6){
+    else if (indexPath.section==1&&indexPath.row==2){
         UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"cell"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
@@ -159,45 +102,93 @@
         cell.backgroundColor = [UIColor clearColor];
         return cell;
     }
-    else if (indexPath.row==7){
+    else if (indexPath.section==1&&indexPath.row==3){
         UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"ExitCell"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ExitCell"];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor =[UIColor whiteColor];
+            cell.backgroundColor =[UIColor clearColor];
             
             UILabel  *lable = [[UILabel alloc]init];
             lable.text = @"退出登录";
-            lable.backgroundColor = [UIColor whiteColor];
+            lable.backgroundColor = [UIColor redColor];
             lable.font = AdaptedFontSize(32);
-            lable.textColor = [UIColor redColor];
+            lable.textColor = [UIColor whiteColor];
             lable.textAlignment = NSTextAlignmentCenter;
+            lable.layer.cornerRadius = 5;
+            lable.layer.masksToBounds = YES;
             [cell addSubview:lable];
             [lable mas_makeConstraints:^(MASConstraintMaker *make) {
                 make.top.bottom.mas_equalTo(0);
-                make.left.mas_equalTo(cell.contentView.mas_left).with.offset(AdaptedWidth(24));
-                make.right.mas_equalTo(cell.contentView.mas_right).with.offset(-AdaptedWidth(24));
+                make.left.mas_equalTo(cell.contentView.mas_left).with.offset(AdaptedWidth(30));
+                make.right.mas_equalTo(cell.contentView.mas_right).with.offset(-AdaptedWidth(30));
             }];
             
         }
         return cell;
     }
-    return nil;
+    else {
+        MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if ( (indexPath.section==0&&indexPath.row ==2) || (indexPath.section==1&&indexPath.row ==1) )
+        {
+            cell.lineView.hidden = YES;
+        }else
+        {
+            cell.lineView.hidden = NO;
+        }
+        
+        
+        if (indexPath.section==0&&indexPath.row ==1)
+        {
+            cell.TitleLab.text = @"ID";
+            cell.DetailsLab.text = @"273970";
+            cell.JianTouIM.hidden = YES;
+        }
+        else if (indexPath.section==0&&indexPath.row == 2)
+        {
+            cell.TitleLab.text = @"登陆账号";
+            cell.DetailsLab.text = @"未设置";
+            cell.JianTouIM.hidden = NO;
+        }
+        else if (indexPath.section==1&&indexPath.row == 0)
+        {
+            cell.TitleLab.text = @"邮箱地址";
+            cell.DetailsLab.text = @"未设置";
+            cell.JianTouIM.hidden = NO;
+        }
+        else if (indexPath.section==1&&indexPath.row == 1)
+        {
+            cell.TitleLab.text = @"手机号码";
+            cell.DetailsLab.text = @"12345678";
+            cell.JianTouIM.hidden = NO;
+        }
+        
+        return cell;
+    }
+
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row==0) {
+    if (indexPath.section==0&&indexPath.row==0) {
         UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"从手机相册选择",@"拍照", nil];
         [alert show];
         
     }
-    else if (indexPath.row==3){//昵称
-        DetailContentVC *vc=[DetailContentVC new];
-        [self.navigationController pushViewController:vc animated:YES];
-    }
-    else if (indexPath.row==7){//退出登录
+    else if (indexPath.section==1&&indexPath.row==3){//退出登录
         [self userLogout];
     }
+}
+-(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
+    UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
+    view.backgroundColor =[UIColor colorWithHex:@"#e9edf8"];
+    return view;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+    if (section==0) {
+        return 10;
+    }
+    return 0;
 }
 
 #pragma mark UIAlertViewDelegate

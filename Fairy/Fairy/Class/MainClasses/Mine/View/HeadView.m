@@ -11,7 +11,7 @@
 @interface HeadView()
 @property(nonatomic,strong) UIImageView *headIM;
 @property(nonatomic,strong) UILabel *nameLab;
-@property(nonatomic,strong) UILabel *explainLab;
+@property(nonatomic,strong) UIButton *loginBtn;
 @end
 
 @implementation HeadView
@@ -25,8 +25,7 @@
         
         UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(loginTapClick)];
         [self addGestureRecognizer:tap];
-        
-        
+    
     }
     return self;
 }
@@ -49,13 +48,13 @@
     UIImageView *headIM =[UIImageView new];
     self.headIM.userInteractionEnabled = YES;
     self.headIM = headIM;
-    [headIM sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"photo"]];
+    [headIM sd_setImageWithURL:[NSURL URLWithString:@""] placeholderImage:[UIImage imageNamed:@"personal_img"]];
     [self addSubview:headIM];
     [headIM mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(self);
-        make.left.mas_equalTo(AdaptedWidth(90));
-        make.width.mas_equalTo(AdaptedWidth(100));
-        make.height.mas_equalTo(AdaptedWidth(100));
+        make.top.mas_equalTo(LL_StatusBarHeight+34);
+        make.centerX.mas_equalTo(self);
+        make.width.mas_equalTo(60);
+        make.height.mas_equalTo(60);
     }];
     
     
@@ -63,29 +62,34 @@
     [self addSubview:nameLab];
     self.nameLab = nameLab;
     self.nameLab.font = AdaptedFontSize(27);
-    self.nameLab.userInteractionEnabled = YES;
+    self.nameLab.textAlignment =NSTextAlignmentCenter;
     nameLab.text=@"昵称";
     nameLab.textColor =[UIColor whiteColor];
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerY.mas_equalTo(headIM);
-        make.left.mas_equalTo(headIM.mas_right).offset(AdaptedWidth(30));
-        make.width.mas_equalTo(AdaptedWidth(400));
-        make.height.mas_equalTo(AdaptedWidth(48));
+        make.top.mas_equalTo(headIM.mas_bottom).offset(10);
+        make.left.right.mas_equalTo(0);
+        make.height.mas_equalTo(15);
     }];
     
     
-    UILabel *explainLab=[UILabel new];
-    [self addSubview:explainLab];
-    self.explainLab = explainLab;
-    explainLab.font = AdaptedFontSize(27);
-    explainLab.textColor =[UIColor whiteColor];
-    explainLab.userInteractionEnabled = YES;
-    explainLab.text=@"登录后可享受更多服务";
-    [explainLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(headIM.mas_bottom).offset(AdaptedWidth(30));
-        make.left.mas_equalTo(AdaptedWidth(90));
-        make.width.mas_equalTo(AdaptedWidth(500));
-        make.height.mas_equalTo(AdaptedWidth(48));
+    
+    UIButton *loginBtn =[[UIButton alloc]init];
+    [self addSubview:loginBtn];
+    self.loginBtn = loginBtn;
+    [loginBtn setTitle:@"登录/注册" forState:UIControlStateNormal];
+    [loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    loginBtn.titleLabel.font = AdaptedFontSize(30);
+    [loginBtn addTarget:self action:@selector(loginTapClick) forControlEvents:UIControlEventTouchUpInside];
+    loginBtn.layer.borderColor = [UIColor whiteColor].CGColor;
+    loginBtn.layer.borderWidth = 1;
+    loginBtn.layer.cornerRadius = 3;
+    loginBtn.layer.masksToBounds = YES;
+    
+    [loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(headIM.mas_bottom).offset(10);
+        make.centerX.mas_equalTo(self);
+        make.width.mas_equalTo(100);
+        make.height.mas_equalTo(32);
     }];
     
 }
@@ -102,11 +106,12 @@
     if ([loginStatus isEqualToString:@"已登录"]) {
      
         self.nameLab.text =@"赵四赵四赵四";
-        self.explainLab.hidden = YES;
+        self.nameLab.hidden=NO;
+        self.loginBtn.hidden = YES;
     }
     else{
-        self.nameLab.text=@"昵称";
-        self.explainLab.hidden = NO;
+        self.nameLab.hidden=YES;
+        self.loginBtn.hidden = NO;
     }
 }
 

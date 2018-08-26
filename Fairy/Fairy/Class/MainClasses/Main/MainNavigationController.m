@@ -21,13 +21,13 @@
     [super viewDidLoad];
     
     
-    self.navigationBar.barTintColor = [UIColor blackColor];
-    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBar_background"]forBarMetrics:UIBarMetricsDefault];
+//    self.navigationBar.barTintColor = [UIColor whiteColor];
+//    [self.navigationBar setBackgroundImage:[UIImage imageNamed:@"navBar_background"]forBarMetrics:UIBarMetricsDefault];
     [self.navigationBar setShadowImage:[UIImage new]];//隐藏灰线条
     NSLog(@"%f----%f",self.navigationBar.frame.size.height,self.navigationBar.frame.size.width);
     
-    //    self.navigationBar.barTintColor=[UIColor blueColor]; //导航栏背景颜色
-    //    self.navigationBar.tintColor = [UIColor redColor]; //导航栏字体颜色(返回按钮)
+    self.navigationBar.barTintColor=[UIColor colorWithHex:@"#1296db"]; //导航栏背景颜色
+    self.navigationBar.tintColor = [UIColor whiteColor]; //导航栏字体颜色(返回按钮)
     
 
     

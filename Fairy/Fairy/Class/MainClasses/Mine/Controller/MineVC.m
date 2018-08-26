@@ -31,7 +31,7 @@
     
     [self requestData];
     [self.headView updateUserInfo];
-
+    
     
 }
 -(void)viewWillDisappear:(BOOL)animated{
@@ -55,7 +55,7 @@
         [_myTableView registerNib:[UINib nibWithNibName:@"SettingCell" bundle:nil] forCellReuseIdentifier:@"SettingCell"];
         //        self.automaticallyAdjustsScrollViewInsets = NO;//解决tableview头部预留64像素的办法
         
-        HeadView *headView=[[HeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 200)];
+        HeadView *headView=[[HeadView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 162+ LL_StatusBarHeight)];
         self.headView = headView;
         headView.delegate =self;
         _myTableView.tableHeaderView = headView;
@@ -70,7 +70,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -78,111 +78,50 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section==1&&indexPath.row==0){
-        UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"ExitCell"];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ExitCell"];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.backgroundColor =[UIColor whiteColor];
-            
-            UIImageView *logoIM=[UIImageView new];
-            [cell.contentView addSubview:logoIM];
-            logoIM.image=[UIImage imageNamed:@"nightMode"];
-            [logoIM mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(12);
-                make.width.mas_equalTo(20);
-                make.height.mas_equalTo(20);
-                make.centerY.mas_equalTo(cell.contentView);
-            }];
-            
-            UILabel *titleLab=[UILabel new];
-            [cell.contentView addSubview:titleLab];
-            titleLab.text = @"夜间模式";
-            titleLab.backgroundColor = [UIColor whiteColor];
-            titleLab.font = AdaptedFontSize(30);
-            titleLab.textColor = [UIColor colorWithHex:@"#000000"];
-            titleLab.textAlignment = NSTextAlignmentLeft;
-            [titleLab mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.left.mas_equalTo(logoIM.mas_right).offset(12);
-                make.width.mas_equalTo(120);
-                make.height.mas_equalTo(22);
-                make.centerY.mas_equalTo(cell.contentView);
-            }];
-            
-            //开关
-            UIButton* nightModelBtn =[UIButton new];
-            [cell.contentView addSubview:nightModelBtn];
-            nightModelBtn.selected = NO;
-            [nightModelBtn setImage:[UIImage imageNamed:@"nightMode_close"] forState:UIControlStateNormal];
-            [nightModelBtn setImage:[UIImage imageNamed:@"nightMode_open"] forState:UIControlStateSelected];
-            [nightModelBtn addTarget:self action:@selector(nightModeClick:) forControlEvents:UIControlEventTouchUpInside];
-            [nightModelBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-                make.right.mas_equalTo(-15);
-                make.width.mas_equalTo(50);
-                make.height.mas_equalTo(24);
-                make.centerY.mas_equalTo(cell.contentView);
-            }];
-            
-            
-            UIView *lineView = [[UIView alloc] init];
-            lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
-            [cell.contentView addSubview:lineView];
-            lineView.frame =CGRectMake(0, CGRectGetMaxY(cell.contentView.frame), UIScreenW, AdaptedHeight(1));
-            
-        }
-        
-        return cell;
+    
+    SettingCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"SettingCell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
+    if (  indexPath.row == 1  )
+    {
+        cell.lineView.hidden = YES;
+    }else
+    {
+        cell.lineView.hidden = NO;
     }
-    else{
-        SettingCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"SettingCell" forIndexPath:indexPath];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.lineView.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
-        if (  indexPath.row == 2  )
+    
+    if (indexPath.section==0) {
+        if (indexPath.row == 0)
         {
-            cell.lineView.hidden = YES;
-        }else
+            cell.logoIM.image = [UIImage imageNamed:@"icon_Quote-center"];
+            cell.nameLab.text = @"行情中心";
+            cell.detailLab.text = @"";
+            
+        }
+        else if (indexPath.row == 1)
         {
-            cell.lineView.hidden = NO;
+            cell.logoIM.image = [UIImage imageNamed:@"icon_Warning"];
+            cell.nameLab.text = @"预警中心";
+            cell.detailLab.text = @"";
         }
-
-        if (indexPath.section==0) {
-            if (indexPath.row == 0)
-            {
-                cell.logoIM.image = [UIImage imageNamed:@"price"];
-                cell.nameLab.text = @"行情中心";
-                cell.detailLab.text = @"";
-        
-            }
-            else if (indexPath.row == 1)
-            {
-                cell.logoIM.image = [UIImage imageNamed:@"warn"];
-                cell.nameLab.text = @"预警中心";
-                cell.detailLab.text = @"";
-            }
-            else if (indexPath.row == 2)
-            {
-                cell.logoIM.image = [UIImage imageNamed:@"member"];
-                cell.nameLab.text = @"会员中心";
-                cell.detailLab.text = @"";
-            }
-        }else if (indexPath.section==1){
-            if (indexPath.row == 1)
-            {
-                cell.logoIM.image = [UIImage imageNamed:@"generalSettings"];
-                cell.nameLab.text = @"通用设置";
-                cell.detailLab.text = @"";
-            }
-            else if (indexPath.row == 2)
-            {
-                cell.logoIM.image = [UIImage imageNamed:@"appShare"];
-                cell.nameLab.text = @"分享应用";
-                cell.detailLab.text = @"";
-            }
+    }else if (indexPath.section==1){
+        if (indexPath.row == 0)
+        {
+            cell.logoIM.image = [UIImage imageNamed:@"icon_General-settings"];
+            cell.nameLab.text = @"通用设置";
+            cell.detailLab.text = @"";
         }
-       
-        return cell;
+        else if (indexPath.row == 1)
+        {
+            cell.logoIM.image = [UIImage imageNamed:@"icon_Share application"];
+            cell.nameLab.text = @"分享应用";
+            cell.detailLab.text = @"";
+        }
     }
-  
+    
+    return cell;
+    
+    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0){
@@ -196,28 +135,20 @@
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row==2){
-            MemberVC *vc=[MemberVC new];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
-        }
     }
     else if (indexPath.section==1){
-        if (indexPath.row ==0) {
-            
-        }
-        else if (indexPath.row==1){
+        if (indexPath.row==0){
             GeneralVC *vc =[GeneralVC new];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
-        else if (indexPath.row==2){
+        else if (indexPath.row==1){
             ShareVC* vc =[ShareVC new];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
-
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -250,7 +181,7 @@
     [view addSubview:lineView];
     
     return view;
-
+    
 }
 -(UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section{
     UIView *view=[[UIView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 10)];
@@ -273,7 +204,7 @@
         vc.hidesBottomBarWhenPushed = YES;
         [self presentViewController:nav animated:YES completion:nil];
     }
-
+    
 }
 
 
@@ -332,13 +263,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
