@@ -22,7 +22,7 @@
     if (self) {
         self.backgroundColor = [UIColor colorWithHex:@"#e8f0f3"];
         
-        IndexTypeView *typeView = [[IndexTypeView alloc]initWithFrame:CGRectMake(0, 7, UIScreenW, 20)];
+        IndexTypeView *typeView = [[IndexTypeView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 25)];
         self.typeView = typeView;
         [self.contentView addSubview:typeView];
         
@@ -54,7 +54,7 @@
         lineColor = [UIColor blueColor];
     }
     
-    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(0, 27, UIScreenW, 113) xTitleArray:dataDic[@"xArray"] yValueArray:dataDic[@"targetArray"] yMax:[maxStr floatValue] yMin:[minStr floatValue] LineColor:lineColor];
+    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(0, 25, UIScreenW, 145) xTitleArray:dataDic[@"xArray"] yValueArray:dataDic[@"targetArray"] yMax:[maxStr floatValue] yMin:[minStr floatValue] LineColor:lineColor];
     self.wsLine =wsLine;
     [self.contentView addSubview:wsLine];
 }

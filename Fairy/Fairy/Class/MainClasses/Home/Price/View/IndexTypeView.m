@@ -32,54 +32,67 @@
 }
 
 -(void)creatSubView{
-    //历史价格:
-    UILabel *historyLab =[UILabel new];
-    [self addSubview:historyLab];
-    historyLab.text = @"历史价格：";
-    historyLab.font = [UIFont systemFontOfSize:10];
-    CGSize historySize = [historyLab.text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:10]} context:nil].size;
-    historyLab.frame =CGRectMake(12, 5, historySize.width, 10);
-    
-    //btc
-    UIButton *btcBtn =[UIButton new];
-    self.btcBtn = btcBtn;
-    btcBtn.frame =CGRectMake(CGRectGetMaxX(historyLab.frame)+7, 5, 22, 10);
-    [self addSubview:btcBtn];
-    btcBtn.backgroundColor =  [UIColor colorWithHex:@"#e6e6e7"];
-    btcBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-    [btcBtn setTitle:@"btc" forState:UIControlStateNormal];
-    [btcBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [btcBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
-    btcBtn.selected =NO;
-    [btcBtn addTarget:self action:@selector(btcClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    //bch
-    UIButton *bchBtn =[UIButton new];
-    self.bchBtn = bchBtn;
-    bchBtn.frame =CGRectMake(CGRectGetMaxX(btcBtn.frame)+7, 5, 22, 10);
-    [self addSubview:bchBtn];
-    bchBtn.backgroundColor =  [UIColor colorWithHex:@"#e6e6e7"];
-    bchBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-    [bchBtn setTitle:@"bch" forState:UIControlStateNormal];
-    [bchBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [bchBtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
-    bchBtn.selected =NO;
-    [bchBtn addTarget:self action:@selector(bchClick:) forControlEvents:UIControlEventTouchUpInside];
-    
+
     
     //eth
     UIButton *ethBtn =[UIButton new];
     self.ethBtn = ethBtn;
     ethBtn.titleLabel.font = [UIFont systemFontOfSize:10];
-    ethBtn.frame =CGRectMake(CGRectGetMaxX(bchBtn.frame)+7, 5, 20, 10);
+    ethBtn.frame =CGRectMake(SCREEN_WIDTH-15-25, 10, 25, 15);
     [self addSubview:ethBtn];
     ethBtn.backgroundColor =  [UIColor colorWithHex:@"#e6e6e7"];
-    [ethBtn setTitle:@"eth" forState:UIControlStateNormal];
+    [ethBtn setTitle:@"ETH" forState:UIControlStateNormal];
     [ethBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [ethBtn setTitleColor:[UIColor blueColor] forState:UIControlStateSelected];
     ethBtn.selected =NO;
     [ethBtn addTarget:self action:@selector(ethClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *ethView=[[UIView alloc]init];
+    ethView.backgroundColor =[UIColor redColor];
+    [self addSubview:ethView];
+    ethView.frame = CGRectMake(CGRectGetMinX(ethBtn.frame)-3-10, ethBtn.centerY-2, 10, 4);
+
     
+    
+    
+    //btc
+    UIButton *btcBtn =[UIButton new];
+    self.btcBtn = btcBtn;
+    btcBtn.frame =CGRectMake(CGRectGetMinX(ethView.frame)-10-25, 10, 25, 15);
+    [self addSubview:btcBtn];
+    btcBtn.backgroundColor =  [UIColor colorWithHex:@"#e6e6e7"];
+    btcBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    [btcBtn setTitle:@"BTC" forState:UIControlStateNormal];
+    [btcBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btcBtn setTitleColor:[UIColor redColor] forState:UIControlStateSelected];
+    btcBtn.selected =NO;
+    [btcBtn addTarget:self action:@selector(btcClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *btcView=[[UIView alloc]init];
+    btcView.backgroundColor =[UIColor blueColor];
+    [self addSubview:btcView];
+    btcView.frame = CGRectMake(CGRectGetMinX(btcBtn.frame)-3-10, btcBtn.centerY-2, 10, 4);
+
+
+
+    //bch
+    UIButton *bchBtn =[UIButton new];
+    self.bchBtn = bchBtn;
+    bchBtn.frame =CGRectMake(CGRectGetMinX(btcView.frame)-10-25, 10, 25, 15);
+    [self addSubview:bchBtn];
+    bchBtn.backgroundColor =  [UIColor colorWithHex:@"#e6e6e7"];
+    bchBtn.titleLabel.font = [UIFont systemFontOfSize:10];
+    [bchBtn setTitle:@"BCH" forState:UIControlStateNormal];
+    [bchBtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [bchBtn setTitleColor:[UIColor greenColor] forState:UIControlStateSelected];
+    bchBtn.selected =NO;
+    [bchBtn addTarget:self action:@selector(bchClick:) forControlEvents:UIControlEventTouchUpInside];
+
+    UIView *bchView=[[UIView alloc]init];
+    bchView.backgroundColor =[UIColor greenColor];
+    [self addSubview:bchView];
+    bchView.frame = CGRectMake(CGRectGetMinX(bchBtn.frame)-3-10, bchBtn.centerY-2, 10, 4);
+
 }
 
 -(void)btcClick:(UIButton*)btn{

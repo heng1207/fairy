@@ -31,38 +31,36 @@
 -(void)setFirstDataArr:(NSMutableArray *)firstDataArr{
     _firstDataArr = firstDataArr;
     
-        //获取显示区间最大值，最小值
-        NSMutableArray *price = [NSMutableArray array];
-        for (NSDictionary *item in firstDataArr ) {
-            [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
-        }
-        CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
-        CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
-        int maxSection = (maxPrice/10);
-        int minSection = (minPrice/10);
-        int maxPriceSection = maxSection*10+10;
-        int minPriceSection = minSection*10;
-        //            NSLog(@"%f---%f",maxPrice,minPrice);
+    //获取显示区间最大值，最小值
+    NSMutableArray *price = [NSMutableArray array];
+    for (NSDictionary *item in firstDataArr ) {
+        [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+    }
+    CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+    CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+    int maxSection = (maxPrice/10);
+    int minSection = (minPrice/10);
+    int maxPriceSection = maxSection*10+10;
+    int minPriceSection = minSection*10;
+    //            NSLog(@"%f---%f",maxPrice,minPrice);
     
-        NSMutableArray *xArray = [NSMutableArray array];
-        NSMutableArray *yArrays = [NSMutableArray array];
-        NSMutableArray *yArray0 = [NSMutableArray array];
-        [firstDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [xArray addObject:obj[@"historyDate"]];
-            [yArray0 addObject:obj[@"closePrice"]];
-        }];
-        [yArrays addObject:yArray0];
+    NSMutableArray *xArray = [NSMutableArray array];
+    NSMutableArray *yArray = [NSMutableArray array];
+    [firstDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [xArray addObject:obj[@"historyDate"]];
+        [yArray addObject:obj[@"closePrice"]];
+    }];
     
-        WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 195) xTitleArray:xArray yValueArray:yArrays yMax:maxPriceSection yMin:minPriceSection];
+    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 195) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
     
-        [self.contentView addSubview:wsLine];
- 
+    [self.contentView addSubview:wsLine];
+    
 }
 
 -(void)setSecondDataArr:(NSMutableArray *)secondDataArr{
     _secondDataArr = secondDataArr;
     if (secondDataArr.count>0) {
-      
+        
         //获取显示区间最大值，最小值
         NSMutableArray *price = [NSMutableArray array];
         for (NSDictionary *item in secondDataArr) {
@@ -77,18 +75,16 @@
         //            NSLog(@"%f---%f",maxPrice,minPrice);
         
         NSMutableArray *xArray = [NSMutableArray array];
-        NSMutableArray *yArrays = [NSMutableArray array];
-        NSMutableArray *yArray0 = [NSMutableArray array];
+        NSMutableArray *yArray = [NSMutableArray array];
         [secondDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             [xArray addObject:obj[@"historyDate"]];
-            [yArray0 addObject:obj[@"closePrice"]];
+            [yArray addObject:obj[@"closePrice"]];
         }];
-        [yArrays addObject:yArray0];
         
-        WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 195, UIScreenW, 195) xTitleArray:xArray yValueArray:yArrays yMax:maxPriceSection yMin:minPriceSection];
+        WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 195, UIScreenW, 195) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
         
         [self.contentView addSubview:wsLine];
-
+        
     }
 }
 

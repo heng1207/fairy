@@ -166,18 +166,16 @@
     
     
     /////////// 根据数据源画折线 //////////
-    for (NSInteger i =0; i<self.yValueArray.count; i++) {
-        NSArray *currentYValueArray = self.yValueArray[i];
-        
-        if (currentYValueArray && currentYValueArray.count > 0) {
+    
+        if (self.yValueArray && self.yValueArray.count > 0) {
             
             //画折线
-            for (NSInteger i = 0; i < currentYValueArray.count; i++) {
+            for (NSInteger i = 0; i < self.yValueArray.count; i++) {
                 
                 //如果是最后一个点
-                if (i == currentYValueArray.count-1) {
+                if (i == self.yValueArray.count-1) {
                     
-                    NSNumber *endValue = currentYValueArray[i];
+                    NSNumber *endValue = self.yValueArray[i];
                     CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
                     //                CGPoint endPoint = CGPointMake((i+1)*self.pointGap, chartHeight -  (endValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
                     CGPoint endPoint = CGPointMake( i*self.pointGap, chartHeight -  (endValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
@@ -228,8 +226,8 @@
                     
                 }else { //不是最后一个点
                     
-                    NSNumber *startValue = currentYValueArray[i];
-                    NSNumber *endValue = currentYValueArray[i+1];
+                    NSNumber *startValue = self.yValueArray[i];
+                    NSNumber *endValue = self.yValueArray[i+1];
                     CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
                     
                     //                CGPoint startPoint = CGPointMake((i+1)*self.pointGap, chartHeight -  (startValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
@@ -308,9 +306,7 @@
         
         //////  根据数据源画折线与X轴之间的填充色  ///////
 //        [self drawCurveLine:self.yValueArray[i] LineNumber:i];
-        
-    }
-    
+
     
     
     

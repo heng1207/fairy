@@ -17,5 +17,7 @@
 @property(nonatomic,copy) NSString *tradingVolume;
 @property(nonatomic,copy) NSString *priceChangeRatio;
 @property(nonatomic,copy) NSString *lastPrice;
+@property(nonatomic,copy) NSString *rmbLastPrice;
+
 
 @end
