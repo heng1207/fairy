@@ -66,6 +66,7 @@
 #define optionalDelete            (SERVER@"/consumer_pair/delete")
 
 
+
 //http://47.254.69.147:8080/interface/coin_pair/list_data?pageNo=1&pageSize=10
 //币种选择
 #define moneyTypeSelect           (SERVER@"/coin_pair/list_data")

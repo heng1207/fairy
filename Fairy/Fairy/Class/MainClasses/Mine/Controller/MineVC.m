@@ -17,6 +17,7 @@
 #import "MemberVC.h"
 #import "GeneralVC.h"
 #import "ShareVC.h"
+#import "MyWalletVC.h"
 
 
 @interface MineVC ()<UITableViewDataSource,UITableViewDelegate,HeadViewDelegate>
@@ -70,7 +71,11 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    if (section == 0) {
+        return 3;
+    }else{
+         return 2;
+    }
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -96,12 +101,19 @@
             cell.logoIM.image = [UIImage imageNamed:@"icon_Quote-center"];
             cell.nameLab.text = @"行情中心";
             cell.detailLab.text = @"";
-            
         }
         else if (indexPath.row == 1)
         {
             cell.logoIM.image = [UIImage imageNamed:@"icon_Warning"];
             cell.nameLab.text = @"预警中心";
+            cell.detailLab.text = @"";
+            cell.lineView.hidden = NO;
+
+        }
+        else if (indexPath.row == 2)
+        {
+            cell.logoIM.image = [UIImage imageNamed:@"icon_Warning"];
+            cell.nameLab.text = @"我的钱包";
             cell.detailLab.text = @"";
         }
     }else if (indexPath.section==1){
@@ -132,6 +144,11 @@
         }
         else if (indexPath.row==1){
             WarnCenterVC *vc =[WarnCenterVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+        else if (indexPath.row==2){
+            MyWalletVC *vc =[MyWalletVC new];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }

@@ -7,15 +7,7 @@
 		<key>Fairy.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>11</integer>
-		</dict>
-	</dict>
-	<key>SuppressBuildableAutocreation</key>
-	<dict>
-		<key>7EFBA34E20CC2F050059090B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
+			<integer>1</integer>
 		</dict>
 	</dict>
 </dict>

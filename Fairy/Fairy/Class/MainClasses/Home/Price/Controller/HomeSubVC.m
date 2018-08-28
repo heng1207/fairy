@@ -9,7 +9,9 @@
 #import "HomeSubVC.h"
 #import "PriceCell.h"
 #import "PriceModel.h"
+#import "NewPriceDetailedVC.h"
 #import "PriceDetailedVC.h"
+
 #import "HomeVC.h"
 
 
@@ -75,6 +77,12 @@
     vc.priceModel = self.dataArrs[indexPath.row];
     vc.hidesBottomBarWhenPushed = YES;
     [[Tool getCurrentVC].navigationController pushViewController:vc animated:YES];
+    
+//    NewPriceDetailedVC *vc =[NewPriceDetailedVC new];
+//    vc.priceModel = self.dataArrs[indexPath.row];
+//    vc.hidesBottomBarWhenPushed = YES;
+//    [[Tool getCurrentVC].navigationController pushViewController:vc animated:YES];
+    
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
