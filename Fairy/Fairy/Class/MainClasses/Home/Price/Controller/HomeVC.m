@@ -25,7 +25,7 @@
 @property (nonatomic, assign) BOOL canScroll;
 
 @property (nonatomic,strong) NSArray *globalIndexData;
-@property (nonatomic,strong) NSArray* moneyClassData;
+@property (nonatomic,strong) NSArray *moneyClassData;
 @property (nonatomic,strong) NSMutableDictionary *IndexTypeViewDic;
 
 @end
@@ -109,9 +109,11 @@
         [contentVCs addObject:vc];
         for (NSInteger i =0; i<self.moneyClassData.count; i++) {
             HomeSubVC*vc = [[HomeSubVC alloc]init];
-            NSDictionary *dict = self.moneyClassData[i];
-            vc.title = dict[@"value"];
-            vc.headTypeID = dict[@"code"];
+//            NSDictionary *dict = self.moneyClassData[i];
+//            vc.title = dict[@"value"];
+//            vc.headTypeID = dict[@"code"];
+            vc.title = self.moneyClassData[i];
+            vc.headTypeID = self.moneyClassData[i];
             [contentVCs addObject:vc];
         }
         
@@ -145,7 +147,8 @@
     NSMutableArray *items = [NSMutableArray array];
     [items addObject: @"自选"];
     for (NSInteger i=0; i<self.moneyClassData.count; i++) {
-        [items addObject:self.moneyClassData[i][@"value"]];
+//        [items addObject:self.moneyClassData[i][@"value"]];
+          [items addObject:self.moneyClassData[i]];
     }
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:items delegate:self indicatorType:FSIndicatorTypeEqualTitle];
     
@@ -220,6 +223,13 @@
     return _tableView;
 }
 
+-(NSArray *)moneyClassData{
+    if (!_moneyClassData) {
+        _moneyClassData =@[@"市值",@"Bitfinex",@"ZB"];
+    }
+    return _moneyClassData;
+}
+
 -(void)loadNewData{
     
 
@@ -243,15 +253,15 @@
     
     
     
-    [NetworkManage Get:moneyClass andParams:nil success:^(id responseObject) {
-        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
-        if ([obj[@"code"] integerValue] ==200 ) {
-            self.moneyClassData = obj[@"data"];
-            [self.tableView reloadData];
-        }
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+//    [NetworkManage Get:moneyClass andParams:nil success:^(id responseObject) {
+//        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+//        if ([obj[@"code"] integerValue] ==200 ) {
+//            self.moneyClassData = obj[@"data"];
+//            [self.tableView reloadData];
+//        }
+//    } failure:^(NSError *error) {
+//        NSLog(@"%@",error);
+//    }];
     
     [self requestIndexSelectDatas:@"btc"];
 }

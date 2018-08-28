@@ -9,12 +9,14 @@
 #import "PriceCell.h"
 
 @interface PriceCell()
-
-@property (weak, nonatomic) IBOutlet UILabel *fromLab;
+@property (weak, nonatomic) IBOutlet UIImageView *logo;
 @property (weak, nonatomic) IBOutlet UILabel *nameLab;
+@property (weak, nonatomic) IBOutlet UILabel *fromLab;
 @property (weak, nonatomic) IBOutlet UILabel *volumeLab;
 @property (weak, nonatomic) IBOutlet UILabel *increaseLab;
+@property (weak, nonatomic) IBOutlet UIImageView *increaseLogo;
 @property (weak, nonatomic) IBOutlet UILabel *priceLab;
+
 
 @end
 
@@ -23,25 +25,24 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     
-    self.fromLab.textColor =[UIColor colorWithHex:@"#aeaeae"];
-    self.fromLab.font = AdaptedFontSize(23);
+    self.nameLab.textColor =[UIColor colorWithHex:@"#333333"];
+    self.nameLab.font = AdaptedFontSize(24);
     
-    self.nameLab.textColor =[UIColor colorWithHex:@"#000000"];
-    self.nameLab.font = AdaptedFontSize(28);
+    self.fromLab.textColor =[UIColor colorWithHex:@"#4b4a4a"];
+    self.fromLab.font = AdaptedFontSize(24);
+
     
-    self.volumeLab.textColor =[UIColor colorWithHex:@"#aeaeae"];
-    self.volumeLab.font = AdaptedFontSize(23);
+    self.volumeLab.textColor =[UIColor colorWithHex:@"#4b4a4a"];
+    self.volumeLab.font = AdaptedFontSize(24);
     
     
-    self.increaseLab.backgroundColor =[UIColor colorWithHex:@"#1cb91c"];
-    self.increaseLab.textColor =[UIColor colorWithHex:@"#ffffff"];
+    self.increaseLab.textColor =[UIColor colorWithHex:@"#ff1515"];
     self.increaseLab.font = AdaptedFontSize(24);
-    self.increaseLab.textAlignment =NSTextAlignmentCenter;
-    self.increaseLab.layer.cornerRadius = 5;
-    self.increaseLab.layer.masksToBounds = YES;
     
-    self.priceLab.textColor =[UIColor colorWithHex:@"#000000"];
-    self.priceLab.font = AdaptedFontSize(30);
+    
+    self.priceLab.textColor =[UIColor colorWithHex:@"#333333"];
+    self.priceLab.font = AdaptedFontSize(24);
+    self.priceLab.numberOfLines=0;
 
     
     //初始化一个长按手势
@@ -55,11 +56,32 @@
 -(void)setPriceModel:(PriceModel *)priceModel{
     _priceModel = priceModel;
     
-    self.fromLab.text = priceModel.platformCnName;
     self.nameLab.text =[NSString stringWithFormat:@"%@/%@",priceModel.fsym,priceModel.tsyms];
-    self.volumeLab.text = [NSString stringWithFormat:@"成交量 %@",priceModel.tradingVolume];
+    self.fromLab.text = priceModel.platformCnName;
+    self.volumeLab.text = [NSString stringWithFormat:@"量 %@",priceModel.tradingVolume];
     self.increaseLab.text = priceModel.priceChangeRatio;
-    self.priceLab.text = priceModel.lastPrice;
+//    self.priceLab.text = [NSString stringWithFormat:@"%@\n≈%@",priceModel.lastPrice,priceModel.rmbLastPrice];
+    if ([priceModel.rmbLastPrice isEqualToString:@"0"]) {
+        self.priceLab.text = [NSString stringWithFormat:@"%@",priceModel.lastPrice];
+    }
+    else{
+        self.priceLab.text = [NSString stringWithFormat:@"%@\n≈%@",priceModel.lastPrice,priceModel.rmbLastPrice];
+    }
+    
+    NSString *increaseType = [priceModel.priceChangeRatio substringToIndex:1];//截取掉下标1之前的字符串
+    if ([increaseType isEqualToString:@"+"]) {
+        self.logo.image =[UIImage imageNamed:@"icon_row-b"];
+        self.increaseLogo.image = [UIImage imageNamed:@"icon_rise"];
+        self.increaseLab.textColor =[UIColor colorWithHex:@"#ff1515"];
+    }
+    else{
+        self.logo.image =[UIImage imageNamed:@"icon_row-box"];
+        self.increaseLogo.image = [UIImage imageNamed:@"icon_row"];
+        self.increaseLab.textColor =[UIColor colorWithHex:@"#1ca012"];
+    }
+    
+    
+    
 }
 
 -(void)longPressView:(UILongPressGestureRecognizer *)longPressGest{

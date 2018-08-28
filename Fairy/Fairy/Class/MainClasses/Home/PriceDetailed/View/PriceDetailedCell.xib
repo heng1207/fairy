@@ -27,6 +27,12 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥123456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGx-mf-jbp">
+                        <rect key="frame" x="149" y="46" width="76.5" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="交易量1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="feF-L9-zdk">
                         <rect key="frame" x="44" y="80" width="90.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -35,12 +41,6 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="成交量1234" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DJI-3l-j92">
                         <rect key="frame" x="240" y="80" width="91" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <nil key="textColor"/>
-                        <nil key="highlightedColor"/>
-                    </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="￥123456" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KGx-mf-jbp">
-                        <rect key="frame" x="149.5" y="46" width="76.5" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -61,6 +61,12 @@
                     <constraint firstAttribute="bottom" secondItem="feF-L9-zdk" secondAttribute="bottom" constant="26" id="srS-IR-Y4Y"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="chengjiaoLab" destination="DJI-3l-j92" id="fAn-BP-141"/>
+                <outlet property="fromeLab" destination="8qI-sb-hI2" id="0ac-az-QzP"/>
+                <outlet property="jiaoyiLab" destination="feF-L9-zdk" id="WqI-AW-mFf"/>
+                <outlet property="priceLab" destination="KGx-mf-jbp" id="aA8-Ll-3PY"/>
+            </connections>
             <point key="canvasLocation" x="253.5" y="37"/>
         </tableViewCell>
     </objects>

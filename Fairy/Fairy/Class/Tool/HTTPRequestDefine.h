@@ -66,8 +66,9 @@
 #define optionalDelete            (SERVER@"/consumer_pair/delete")
 
 
+//http://47.254.69.147:8080/interface/coin_pair/list_data?pageNo=1&pageSize=10
 //币种选择
-#define moneyTypeSelect           (SERVER@"/platform_currency/list_data")
+#define moneyTypeSelect           (SERVER@"/coin_pair/list_data")
 //行情详情折线图
 #define coinmarketcapHistory      (SERVER@"/coinmarketcap/getCoinmarketcapHistoryData")
 //http://47.75.145.77:8080/interface/coinmarketcap/getCoinmarketcapHistoryData?coinPair=eth

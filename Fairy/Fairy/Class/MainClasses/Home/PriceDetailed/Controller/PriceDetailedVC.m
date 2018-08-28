@@ -53,31 +53,14 @@
 }
 
 -(void)initNavtionBar{
-    UIView *viewTitle = [[UIView alloc] init];
-    viewTitle.frame = CGRectMake(0, 0, 150, 36);
-
-    UILabel *fromLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 18)];
-    fromLab.font = AdaptedFontSize(30);
-    fromLab.textColor = [UIColor whiteColor];
-    fromLab.textAlignment = NSTextAlignmentCenter;
-    fromLab.text = self.priceModel.platformCnName;
-    [viewTitle addSubview:fromLab];
     
-    UILabel *nameLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 18, 150, 18)];
-    nameLab.font = AdaptedFontSize(30);
-    nameLab.textColor = [UIColor whiteColor];
-    nameLab.textAlignment = NSTextAlignmentCenter;
-    nameLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
-    [viewTitle addSubview:nameLab];
-    self.navigationItem.titleView =viewTitle;
-
+    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 50, 20)];
+    ItemLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
+    ItemLab.textAlignment = NSTextAlignmentCenter;
+    ItemLab.textColor=[UIColor whiteColor];
+    ItemLab.font = [UIFont systemFontOfSize:18];
+    self.navigationItem.titleView = ItemLab;
     
-    UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 50, 40)];
-    [personalCenter setImage:[UIImage imageNamed:@"navBack"] forState:UIControlStateNormal];
-    [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
-    [personalCenter setTitle:@"返回" forState:UIControlStateNormal];
-    personalCenter.titleLabel.font = AdaptedFontSize(30);
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
     
 //    UIButton *search = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
 //    [search setImage:[UIImage imageNamed:@"searchLogo"] forState:UIControlStateNormal];
@@ -160,6 +143,7 @@
     if (indexPath.row == 0) {
         PriceDetailedCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"PriceDetailedCell"  forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.model = self.priceModel;
         return cell;
     }else if (indexPath.row == 2){
         CompareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompareCell" forIndexPath:indexPath];

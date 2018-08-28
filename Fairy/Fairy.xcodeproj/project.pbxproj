@@ -121,6 +121,8 @@
 		7EB5E29120CCB673004BFAE2 /* FindPwVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29020CCB673004BFAE2 /* FindPwVC.m */; };
 		7EB5E29B20CD00F0004BFAE2 /* FSPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29720CD00F0004BFAE2 /* FSPageContentView.m */; };
 		7EB5E29C20CD00F0004BFAE2 /* FSSegmentTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29A20CD00F0004BFAE2 /* FSSegmentTitleView.m */; };
+		7EBB089E2135A9BD00D88F3B /* MyCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB089D2135A9BD00D88F3B /* MyCollectionViewCell.m */; };
+		7EBB08A12135AD3700D88F3B /* ReusableHeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EBB08A02135AD3700D88F3B /* ReusableHeadView.m */; };
 		7ED6F9032115A6D400C1A2EC /* CodeLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED6F9022115A6D400C1A2EC /* CodeLoginVC.m */; };
 		7ED981C020D00C6A00749D14 /* PersionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED981BF20D00C6A00749D14 /* PersionDetailVC.m */; };
 		7EFBA35A20CC2F050059090B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFBA35820CC2F050059090B /* Main.storyboard */; };
@@ -356,6 +358,10 @@
 		7EB5E29820CD00F0004BFAE2 /* FSScrollContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSScrollContentView.h; sourceTree = "<group>"; };
 		7EB5E29920CD00F0004BFAE2 /* FSSegmentTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSegmentTitleView.h; sourceTree = "<group>"; };
 		7EB5E29A20CD00F0004BFAE2 /* FSSegmentTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentTitleView.m; sourceTree = "<group>"; };
+		7EBB089C2135A9BD00D88F3B /* MyCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewCell.h; sourceTree = "<group>"; };
+		7EBB089D2135A9BD00D88F3B /* MyCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewCell.m; sourceTree = "<group>"; };
+		7EBB089F2135AD3700D88F3B /* ReusableHeadView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReusableHeadView.h; sourceTree = "<group>"; };
+		7EBB08A02135AD3700D88F3B /* ReusableHeadView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReusableHeadView.m; sourceTree = "<group>"; };
 		7ED6F9012115A6D400C1A2EC /* CodeLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeLoginVC.h; sourceTree = "<group>"; };
 		7ED6F9022115A6D400C1A2EC /* CodeLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeLoginVC.m; sourceTree = "<group>"; };
 		7ED981BE20D00C6A00749D14 /* PersionDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersionDetailVC.h; sourceTree = "<group>"; };
@@ -635,15 +641,15 @@
 			isa = PBXGroup;
 			children = (
 				7E5F6CAE21315DFE00AC115E /* TrendVC.h */,
-				7E5F6CAF21315DFE00AC115E /* KLineFullScreenVC.m */,
-				7E5F6CB021315DFE00AC115E /* CurrencySelectVC.m */,
-				7E5F6CB121315DFE00AC115E /* TrendSubVC.m */,
-				7E5F6CB221315DFE00AC115E /* Y_StockChartViewController.h */,
 				7E5F6CB321315DFE00AC115E /* TrendVC.m */,
-				7E5F6CB421315DFE00AC115E /* KLineFullScreenVC.h */,
 				7E5F6CB521315DFE00AC115E /* CurrencySelectVC.h */,
-				7E5F6CB621315DFE00AC115E /* Y_StockChartViewController.m */,
+				7E5F6CB021315DFE00AC115E /* CurrencySelectVC.m */,
 				7E5F6CB721315DFE00AC115E /* TrendSubVC.h */,
+				7E5F6CB121315DFE00AC115E /* TrendSubVC.m */,
+				7E5F6CAF21315DFE00AC115E /* KLineFullScreenVC.m */,
+				7E5F6CB421315DFE00AC115E /* KLineFullScreenVC.h */,
+				7E5F6CB221315DFE00AC115E /* Y_StockChartViewController.h */,
+				7E5F6CB621315DFE00AC115E /* Y_StockChartViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -654,6 +660,10 @@
 				7E5F6CB921315DFE00AC115E /* LDLineChartView */,
 				7E5F6CC021315DFE00AC115E /* InTimePriceView.m */,
 				7E5F6CC121315DFE00AC115E /* InTimePriceView.h */,
+				7EBB089C2135A9BD00D88F3B /* MyCollectionViewCell.h */,
+				7EBB089D2135A9BD00D88F3B /* MyCollectionViewCell.m */,
+				7EBB089F2135AD3700D88F3B /* ReusableHeadView.h */,
+				7EBB08A02135AD3700D88F3B /* ReusableHeadView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1376,6 +1386,7 @@
 				7E5F6D1021315DFF00AC115E /* Y_KLineAccessoryView.m in Sources */,
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
 				4E9AB6F921242DC900BAFB22 /* DetailContentVC.m in Sources */,
+				7EBB089E2135A9BD00D88F3B /* MyCollectionViewCell.m in Sources */,
 				7E5F6D1621315DFF00AC115E /* Y_KLineVolumePositionModel.m in Sources */,
 				7E5F6D2021315DFF00AC115E /* TrendVC.m in Sources */,
 				7E5F6D2621315DFF00AC115E /* PriceDetailedVC.m in Sources */,
@@ -1405,6 +1416,7 @@
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
 				04B218D820D106FD000D661F /* GeneralVC.m in Sources */,
 				0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */,
+				7EBB08A12135AD3700D88F3B /* ReusableHeadView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

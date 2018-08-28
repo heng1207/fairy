@@ -78,7 +78,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 80;
+    return 60;
 }
 
 #pragma mark UIScrollView
@@ -254,24 +254,33 @@
         
         
     }
+    
     else{
         NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *tradePlatformID = [defaults objectForKey:@"tradePlatformID"];
-        dict[@"tradePlatformID"] = tradePlatformID;
-        dict[@"coinPairType"] = self.headTypeID;
+        dict[@"pageNo"] = @1;
+        dict[@"pageSize"] = @10;
+        if ([self.headTypeID isEqualToString:@"币值"]) {
+            
+        }
+        else if ([self.headTypeID isEqualToString:@"Bitfinex"]){
+            dict[@"tradePlatformID"] = @"1";
+        }
+        else if ([self.headTypeID isEqualToString:@"ZB"]){
+            dict[@"tradePlatformID"] = @"4";
+        }
+        
         [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
             NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
             if ([obj[@"code"] integerValue] ==200 ) {
-                // NSLog(@"%@",obj[@"data"]);
                 self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
                 [self.tableView reloadData];
             }
         } failure:^(NSError *error) {
             NSLog(@"%@",error);
         }];
-
     }
+
+    
     
 }
 

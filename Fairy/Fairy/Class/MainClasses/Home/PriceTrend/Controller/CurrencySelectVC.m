@@ -7,14 +7,15 @@
 //
 
 #import "CurrencySelectVC.h"
+#import "PriceModel.h"
+#import "MyCollectionViewCell.h"
 
-@interface CurrencySelectVC ()
+@interface CurrencySelectVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
 @property (nonatomic,strong) NSMutableArray *flagArray;
-@property(nonatomic,strong)NSMutableArray *btnArr;
+@property(nonatomic,strong)UICollectionView *mainCollectionView;
+
 @end
 
-#define margin 7
-#define space 18
 
 @implementation CurrencySelectVC
 
@@ -23,12 +24,23 @@
     self.view.backgroundColor =[UIColor colorWithHex:@"#e9eff8"];
     [self initNavtionBar];
     
-    UILabel *hintLab =[UILabel new];
-    hintLab.text= @"最多只能选择两个币种进行对比";
-    hintLab.textColor = [UIColor colorWithHex:@"#828587"];
-    hintLab.font =AdaptedFontSize(25);
-    [self.view addSubview:hintLab];
-    hintLab.frame = CGRectMake(AdaptedWidth(24), AdaptedWidth(24)+LL_StatusBarAndNavigationBarHeight, UIScreenW-AdaptedWidth(48), AdaptedWidth(30));
+    
+    //1.初始化layout
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    //设置collectionView滚动方向
+    [layout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    //2.初始化collectionView
+    UICollectionView *mainCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
+    self.mainCollectionView = mainCollectionView;
+    [self.view addSubview:mainCollectionView];
+    mainCollectionView.backgroundColor = [UIColor clearColor];
+    //4.设置代理
+    mainCollectionView.delegate = self;
+    mainCollectionView.dataSource = self;
+    [mainCollectionView registerClass:[MyCollectionViewCell class] forCellWithReuseIdentifier:@"cellId"];
+    
+    [mainCollectionView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView"];
     
     [self requestDatas];
   
@@ -47,75 +59,98 @@
     [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
     [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
-    
-//    UIButton *finish = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-//    [finish setTitle:@"完成" forState:UIControlStateNormal];
-//    finish.titleLabel.font = [UIFont systemFontOfSize:16];
-//    [finish addTarget:self action:@selector(finishClick) forControlEvents:UIControlEventTouchDown];
-//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:finish];
-    
+
 }
 
 -(void)backClick{
     [self.navigationController popViewControllerAnimated:YES];
 }
-//-(void)finishClick{
-//
-//}
 
-
--(void)creatBtnView{
-    
-    float width  = (UIScreenW - 2*margin - 3*space)/4;
-    float height = 45;
-    
-    UIView *backView=[[UIView alloc]init];
-    backView.backgroundColor =[UIColor whiteColor];
-    [self.view addSubview:backView];
-    float hangNum = ((self.flagArray.count%4)==/* DISABLES CODE */ (0)) ?(self.flagArray.count/4): ((self.flagArray.count/4)+1);
-    backView.frame = CGRectMake(0,AdaptedWidth(78)+LL_StatusBarAndNavigationBarHeight ,UIScreenW, margin + hangNum*(space+height));
-    
-    
-    self.btnArr =[NSMutableArray array];
-    for (NSInteger i=0; i<self.flagArray.count; i++) {
-
-        UIButton *btn =[UIButton new];
-        btn.frame =CGRectMake(margin + (i%4)*(space+width), margin + (i/4)*(space+height), width, height);
-        btn.tag=i;
-        btn.selected = NO;
-        [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-        [btn setTitle:self.flagArray[i][@"currencyShortEnName"] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(selectClick:) forControlEvents:UIControlEventTouchUpInside];
-        [btn setBackgroundColor:[UIColor colorWithHex:@"#828587"] forState:UIControlStateNormal];
-        [btn setBackgroundColor:[UIColor blueColor] forState:UIControlStateSelected];
-        btn.layer.borderColor = [UIColor grayColor].CGColor;
-     
-        
-        [backView addSubview:btn];
-        [self.btnArr addObject:btn];
-    }
+#pragma mark collectionView代理方法
+//返回section个数
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
 }
 
--(void)selectClick:(UIButton*)btn{
+//每个section的item个数
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return self.flagArray.count;
+}
 
-    NSMutableDictionary *dict = self.flagArray[btn.tag];
-    self.block(dict[@"currencyShortEnName"]);
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    MyCollectionViewCell *cell = (MyCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cellId" forIndexPath:indexPath];
+    cell.model = self.flagArray[indexPath.row];
+    return cell;
+}
+//点击item方法
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PriceModel *model = self.flagArray[indexPath.row];
+    self.block(model.fsym);
     [self.navigationController popViewControllerAnimated:YES];
-    
 }
+//设置每个item的尺寸
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CGSizeMake( (SCREEN_WIDTH-5*12)/6, 45);
+}
+
+//设置每个item的UIEdgeInsets
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(12, 12, 12, 12);
+}
+
+//设置每个item水平间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 12;
+}
+
+
+//设置每个item垂直间距
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 12;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView" forIndexPath:indexPath];
+    headerView.backgroundColor =[UIColor grayColor];
+    UILabel *label = [[UILabel alloc] initWithFrame:headerView.bounds];
+    label.text = @"请选择一个币种进行对比";
+    label.font = [UIFont systemFontOfSize:15];
+    [headerView addSubview:label];
+    return headerView;
+}
+-(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section{
+    return CGSizeMake(SCREEN_WIDTH, 30);
+}
+
 
 -(void)requestDatas{
-    [NetworkManage Get:moneyTypeSelect andParams:nil success:^(id responseObject) {
+    
+    //http://47.254.69.147:8080/interface/coin_pair/list_data?pageNo=1&pageSize=10
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"pageNo"]  = @1;
+    dict[@"pageSize"]  = @200;
+    [NetworkManage Get:moneyTypeSelect andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.flagArray = obj[@"data"];
-            [self creatBtnView];
+            self.flagArray = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
+            [self.mainCollectionView reloadData];
             /*
-             @"tsyms" : @"美元"
-             @"digitalCurrencyID" : (long)1
-             @"platformCurrencyID" : (long)1
-             @"tradePlatformID" : (long)1
-             @"currencyShortEnName" : @"ETH"
+             "fsym":"BCH",
+             "tsyms":"USDT",
+             "platformCnName":"中币",
+             "rmbLastPrice":"￥3789.64005",
+             "tradingVolume":"3472.50800",
+             "priceChangeRatio":"+3.626%",
              */
         }
     } failure:^(NSError *error) {
@@ -123,8 +158,6 @@
     }];
     
 }
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
