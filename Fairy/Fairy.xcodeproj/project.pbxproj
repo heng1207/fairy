@@ -899,11 +899,11 @@
 			isa = PBXGroup;
 			children = (
 				7E5F6CF321315DFE00AC115E /* BezierCurveView.h */,
+				7E5F6CF821315DFE00AC115E /* BezierCurveView.m */,
+				7E5F6CF721315DFE00AC115E /* BezierView.h */,
 				7E5F6CF421315DFE00AC115E /* BezierView.m */,
 				7E5F6CF521315DFE00AC115E /* TargetView.h */,
 				7E5F6CF621315DFE00AC115E /* TargetView.m */,
-				7E5F6CF721315DFE00AC115E /* BezierView.h */,
-				7E5F6CF821315DFE00AC115E /* BezierCurveView.m */,
 			);
 			path = BezierView;
 			sourceTree = "<group>";
@@ -911,12 +911,12 @@
 		7E5F6D0121315DFE00AC115E /*  CurveLineChartView */ = {
 			isa = PBXGroup;
 			children = (
-				7E5F6D0221315DFE00AC115E /* CurveYAxisView.m */,
 				7E5F6D0321315DFE00AC115E /* CurveLineChartView.h */,
-				7E5F6D0421315DFE00AC115E /* CurveXAxisView.m */,
-				7E5F6D0521315DFE00AC115E /* CurveYAxisView.h */,
 				7E5F6D0621315DFE00AC115E /* CurveLineChartView.m */,
 				7E5F6D0721315DFE00AC115E /* CurveXAxisView.h */,
+				7E5F6D0421315DFE00AC115E /* CurveXAxisView.m */,
+				7E5F6D0521315DFE00AC115E /* CurveYAxisView.h */,
+				7E5F6D0221315DFE00AC115E /* CurveYAxisView.m */,
 			);
 			path = " CurveLineChartView";
 			sourceTree = "<group>";

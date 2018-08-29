@@ -18,7 +18,7 @@
 
 
 
-@interface CurveLineChartView ()
+@interface CurveLineChartView ()<UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray *xTitleArray;
 @property (strong, nonatomic) NSArray *yValueArray;
@@ -36,6 +36,9 @@
 @property (assign, nonatomic) CGFloat MinSpace;//最小间隔，当数据小于 minNumbers 时,不能捏合
 
 @property (assign, nonatomic) CGFloat moveDistance;
+
+@property (nonatomic,strong)UILabel *startLab;
+@property (nonatomic,strong)UILabel *endLab;
 
 @end
 
@@ -65,12 +68,28 @@
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(leftMargin, 0, self.frame.size.width-leftMargin, self.frame.size.height)];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.bounces = NO;
+        _scrollView.delegate = self;
         [self addSubview:_scrollView];
         
         
         [self creatYAxisView];
         
         [self creatXAxisView];
+        
+        UILabel *startLab=[[UILabel alloc]initWithFrame:CGRectMake(leftMargin, self.height-10, 35, 10)];
+        self.startLab = startLab;
+        startLab.text = @"8-31";
+        startLab.textAlignment = NSTextAlignmentLeft;
+        startLab.font = [UIFont systemFontOfSize:10];
+        [self addSubview:startLab];
+        
+        UILabel *endLab=[[UILabel alloc]initWithFrame:CGRectMake(self.width-35, self.height-10, 35, 10)];
+        self.endLab = endLab;
+        endLab.text = @"12-31";
+        endLab.textAlignment = NSTextAlignmentCenter;
+        endLab.font = [UIFont systemFontOfSize:10];
+        [self addSubview:endLab];
+        
         
         
         // 2. 捏合手势
@@ -191,6 +210,16 @@
         [self.xAxisView setIsShowLabel:NO];
         
     }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"%f",scrollView.contentOffset.y);
+    int startNum = scrollView.contentOffset.x/self.pointGap;
+    self.startLab.text = self.xTitleArray[startNum];
+    
+    int endNum = startNum + scrollView.width/self.pointGap;
+    self.endLab.text = self.xTitleArray[endNum];
+    
 }
 
 @end

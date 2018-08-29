@@ -13,7 +13,6 @@
 #define kChartTextColor         [UIColor blackColor]
 
 #define leftMargin 45
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
 
 @interface CurveXAxisView ()
@@ -73,74 +72,74 @@
     
     CGContextRef context = UIGraphicsGetCurrentContext();
     
-    ////////////////////// X轴文字 //////////////////////////
-    // 添加坐标轴Label
-    for (int i = 0; i < self.xTitleArray.count; i++) {
-        NSString *title = self.xTitleArray[i];
-        
-        [[UIColor blackColor] set];
-        NSDictionary *attr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
-        CGSize labelSize = [title sizeWithAttributes:attr];
-        
-//        CGRect titleRect = CGRectMake((i + 1) * self.pointGap - labelSize.width / 2,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
-        CGRect titleRect = CGRectMake(i * self.pointGap ,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
-        
-        if (i == 0) {
-            self.firstFrame = titleRect;
-            if (titleRect.origin.x < 0) {
-                titleRect.origin.x = 0;
-            }
-            
-            [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
-            
-            //画垂直X轴的竖线
+//    ////////////////////// X轴文字 //////////////////////////
+//    // 添加坐标轴Label
+//    for (int i = 0; i < self.xTitleArray.count; i++) {
+//        NSString *title = self.xTitleArray[i];
+//        
+//        [[UIColor blackColor] set];
+//        NSDictionary *attr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
+//        CGSize labelSize = [title sizeWithAttributes:attr];
+//        
+////        CGRect titleRect = CGRectMake((i + 1) * self.pointGap - labelSize.width / 2,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
+//        CGRect titleRect = CGRectMake(i * self.pointGap ,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
+//        
+//        if (i == 0) {
+//            self.firstFrame = titleRect;
+//            if (titleRect.origin.x < 0) {
+//                titleRect.origin.x = 0;
+//            }
+//            
+//            [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//            
+//            //画垂直X轴的竖线
+////            [self drawLine:context
+////                startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
+////                  endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
+////                 lineColor:kChartLineColor
+////                 lineWidth:1];
 //            [self drawLine:context
-//                startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
-//                  endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
+//                startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
+//                  endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
 //                 lineColor:kChartLineColor
 //                 lineWidth:1];
-            [self drawLine:context
-                startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
-                  endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
-                 lineColor:kChartLineColor
-                 lineWidth:1];
-        }
-        
-        
-        // 如果Label的文字有重叠，那么不绘制
-        CGFloat maxX = CGRectGetMaxX(self.firstFrame);
-        if (i != 0) {
-            if ((maxX + 3) > titleRect.origin.x) {
-                //不绘制
-                
-            }else{
-                
-                [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
-                //画垂直X轴的竖线
+//        }
+//        
+//        
+//        // 如果Label的文字有重叠，那么不绘制
+//        CGFloat maxX = CGRectGetMaxX(self.firstFrame);
+//        if (i != 0) {
+//            if ((maxX + 3) > titleRect.origin.x) {
+//                //不绘制
+//                
+//            }else{
+//                
+//                [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//                //画垂直X轴的竖线
+////                [self drawLine:context
+////                    startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
+////                      endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
+////                     lineColor:kChartLineColor
+////                     lineWidth:1];
+//                
 //                [self drawLine:context
-//                    startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
-//                      endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
+//                    startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
+//                      endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
 //                     lineColor:kChartLineColor
 //                     lineWidth:1];
-                
-                [self drawLine:context
-                    startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
-                      endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
-                     lineColor:kChartLineColor
-                     lineWidth:1];
-                
-                self.firstFrame = titleRect;
-            }
-        }else {
-            if (self.firstFrame.origin.x < 0) {
-                
-                CGRect frame = self.firstFrame;
-                frame.origin.x = 0;
-                self.firstFrame = frame;
-            }
-        }
-        
-    }
+//                
+//                self.firstFrame = titleRect;
+//            }
+//        }else {
+//            if (self.firstFrame.origin.x < 0) {
+//                
+//                CGRect frame = self.firstFrame;
+//                frame.origin.x = 0;
+//                self.firstFrame = frame;
+//            }
+//        }
+//        
+//    }
     
     //////////////// 画原点上的x轴 ///////////////////////
     NSDictionary *attribute = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
