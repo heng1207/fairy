@@ -95,7 +95,7 @@
                 <outlet property="priceLab" destination="Oq0-vi-ooQ" id="5RC-4l-kkM"/>
                 <outlet property="volumeLab" destination="Pxh-Sl-sZT" id="KvV-9h-4ae"/>
             </connections>
-            <point key="canvasLocation" x="132.5" y="-166"/>
+            <point key="canvasLocation" x="239" y="-184"/>
         </tableViewCell>
     </objects>
     <resources>

@@ -220,9 +220,7 @@
         [_tableView registerClass:[DepthTitleCell class] forCellReuseIdentifier:@"DepthTitleCell"];
         [_tableView registerClass:[DepthBtnCell class] forCellReuseIdentifier:@"DepthBtnCell"];
         [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
-        
-        
-        //        [_tableView registerNib:[UINib nibWithNibName:@"IndexCellCell" bundle:nil] forCellReuseIdentifier:@"IndexCellCell"];
+    
         
     }
     return _tableView;

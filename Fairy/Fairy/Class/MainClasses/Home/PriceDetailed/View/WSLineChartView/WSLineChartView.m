@@ -18,7 +18,7 @@
 
 
 
-@interface WSLineChartView ()
+@interface WSLineChartView ()<UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSArray *xTitleArray;
 @property (strong, nonatomic) NSArray *yValueArray;
@@ -36,6 +36,9 @@
 @property (assign, nonatomic) CGFloat MaxSpace;//最大间隔，当数据小于 minNumbers 时,不能捏合
 
 @property (assign, nonatomic) CGFloat moveDistance;
+
+@property (nonatomic,strong)UILabel *startLab;
+@property (nonatomic,strong)UILabel *endLab;
 
 @end
 
@@ -65,6 +68,7 @@
         _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height)];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.bounces = NO;
+        _scrollView.delegate = self;
         [self addSubview:_scrollView];
         
         
@@ -72,6 +76,20 @@
         
         [self creatXAxisView];
         
+        UILabel *startLab=[[UILabel alloc]initWithFrame:CGRectMake(0, self.height-10, 35, 10)];
+        self.startLab = startLab;
+        startLab.text = xTitleArray.firstObject;
+        startLab.textAlignment = NSTextAlignmentLeft;
+        startLab.font = [UIFont systemFontOfSize:10];
+        [self addSubview:startLab];
+        
+        UILabel *endLab=[[UILabel alloc]initWithFrame:CGRectMake(self.width-leftMargin -35, self.height-10, 35, 10)];
+        self.endLab = endLab;
+        endLab.text =  xTitleArray.lastObject;
+        endLab.textAlignment = NSTextAlignmentCenter;
+        endLab.font = [UIFont systemFontOfSize:10];
+        [self addSubview:endLab];
+
         
         //捏合手势
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
@@ -206,6 +224,19 @@
     if ([_delegate respondsToSelector:@selector(xAxisViewTapClick)]) {
         [_delegate xAxisViewTapClick];
     }
+}
+
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    NSLog(@"%f",scrollView.contentOffset.y);
+    int startNum = scrollView.contentOffset.x/self.pointGap;
+    self.startLab.text = self.xTitleArray[startNum];
+    
+    NSUInteger endNum = startNum + scrollView.width/self.pointGap;
+    if (endNum > self.xTitleArray.count) {
+        endNum = self.xTitleArray.count-1;
+    }
+    self.endLab.text = self.xTitleArray[endNum];
+    
 }
 
 @end

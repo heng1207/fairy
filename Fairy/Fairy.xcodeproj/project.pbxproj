@@ -80,17 +80,13 @@
 		7E5F6D3321315DFF00AC115E /* FSBaseTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CE321315DFE00AC115E /* FSBaseTableView.m */; };
 		7E5F6D3421315DFF00AC115E /* PriceModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CE621315DFE00AC115E /* PriceModel.m */; };
 		7E5F6D3521315DFF00AC115E /* SSSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CE821315DFE00AC115E /* SSSearchBar.m */; };
-		7E5F6D3621315DFF00AC115E /* IndexCellCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CE921315DFE00AC115E /* IndexCellCell.m */; };
 		7E5F6D3721315DFF00AC115E /* PriceCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5F6CEB21315DFE00AC115E /* PriceCell.xib */; };
-		7E5F6D3821315DFF00AC115E /* ClassView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CEC21315DFE00AC115E /* ClassView.m */; };
 		7E5F6D3921315DFF00AC115E /* NavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CED21315DFE00AC115E /* NavView.m */; };
 		7E5F6D3A21315DFF00AC115E /* GraphCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CEE21315DFE00AC115E /* GraphCell.m */; };
 		7E5F6D3B21315DFF00AC115E /* IndexTypeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CEF21315DFE00AC115E /* IndexTypeView.m */; };
-		7E5F6D3C21315DFF00AC115E /* ClassView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5F6CF021315DFE00AC115E /* ClassView.xib */; };
 		7E5F6D3D21315DFF00AC115E /* BezierView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CF421315DFE00AC115E /* BezierView.m */; };
 		7E5F6D3E21315DFF00AC115E /* TargetView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CF621315DFE00AC115E /* TargetView.m */; };
 		7E5F6D3F21315DFF00AC115E /* BezierCurveView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CF821315DFE00AC115E /* BezierCurveView.m */; };
-		7E5F6D4021315DFF00AC115E /* IndexCellCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7E5F6CFB21315DFE00AC115E /* IndexCellCell.xib */; };
 		7E5F6D4121315DFF00AC115E /* FSBottomTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6CFF21315DFE00AC115E /* FSBottomTableViewCell.m */; };
 		7E5F6D4221315DFF00AC115E /* CurveYAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6D0221315DFE00AC115E /* CurveYAxisView.m */; };
 		7E5F6D4321315DFF00AC115E /* CurveXAxisView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5F6D0421315DFE00AC115E /* CurveXAxisView.m */; };
@@ -124,6 +120,8 @@
 		7EB5E29B20CD00F0004BFAE2 /* FSPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29720CD00F0004BFAE2 /* FSPageContentView.m */; };
 		7EB5E29C20CD00F0004BFAE2 /* FSSegmentTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29A20CD00F0004BFAE2 /* FSSegmentTitleView.m */; };
 		7ED6F9032115A6D400C1A2EC /* CodeLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED6F9022115A6D400C1A2EC /* CodeLoginVC.m */; };
+		7ED906FD2138325F003FD8C2 /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED906FC2138325F003FD8C2 /* SearchVC.m */; };
+		7ED90700213834B7003FD8C2 /* HomeNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED906FF213834B7003FD8C2 /* HomeNavView.m */; };
 		7ED981C020D00C6A00749D14 /* PersionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED981BF20D00C6A00749D14 /* PersionDetailVC.m */; };
 		7EFBA35A20CC2F050059090B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7EFBA35820CC2F050059090B /* Main.storyboard */; };
 		7EFBA35C20CC2F050059090B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7EFBA35B20CC2F050059090B /* Assets.xcassets */; };
@@ -301,14 +299,11 @@
 		7E5F6CE521315DFE00AC115E /* PriceModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceModel.h; sourceTree = "<group>"; };
 		7E5F6CE621315DFE00AC115E /* PriceModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceModel.m; sourceTree = "<group>"; };
 		7E5F6CE821315DFE00AC115E /* SSSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SSSearchBar.m; sourceTree = "<group>"; };
-		7E5F6CE921315DFE00AC115E /* IndexCellCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexCellCell.m; sourceTree = "<group>"; };
 		7E5F6CEA21315DFE00AC115E /* FSBottomTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSBottomTableViewCell.h; sourceTree = "<group>"; };
 		7E5F6CEB21315DFE00AC115E /* PriceCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PriceCell.xib; sourceTree = "<group>"; };
-		7E5F6CEC21315DFE00AC115E /* ClassView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassView.m; sourceTree = "<group>"; };
 		7E5F6CED21315DFE00AC115E /* NavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavView.m; sourceTree = "<group>"; };
 		7E5F6CEE21315DFE00AC115E /* GraphCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GraphCell.m; sourceTree = "<group>"; };
 		7E5F6CEF21315DFE00AC115E /* IndexTypeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IndexTypeView.m; sourceTree = "<group>"; };
-		7E5F6CF021315DFE00AC115E /* ClassView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassView.xib; sourceTree = "<group>"; };
 		7E5F6CF121315DFE00AC115E /* PriceCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceCell.h; sourceTree = "<group>"; };
 		7E5F6CF321315DFE00AC115E /* BezierCurveView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierCurveView.h; sourceTree = "<group>"; };
 		7E5F6CF421315DFE00AC115E /* BezierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierView.m; sourceTree = "<group>"; };
@@ -316,12 +311,9 @@
 		7E5F6CF621315DFE00AC115E /* TargetView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TargetView.m; sourceTree = "<group>"; };
 		7E5F6CF721315DFE00AC115E /* BezierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BezierView.h; sourceTree = "<group>"; };
 		7E5F6CF821315DFE00AC115E /* BezierCurveView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BezierCurveView.m; sourceTree = "<group>"; };
-		7E5F6CF921315DFE00AC115E /* IndexCellCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexCellCell.h; sourceTree = "<group>"; };
 		7E5F6CFA21315DFE00AC115E /* SSSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SSSearchBar.h; sourceTree = "<group>"; };
-		7E5F6CFB21315DFE00AC115E /* IndexCellCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = IndexCellCell.xib; sourceTree = "<group>"; };
 		7E5F6CFC21315DFE00AC115E /* GraphCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GraphCell.h; sourceTree = "<group>"; };
 		7E5F6CFD21315DFE00AC115E /* NavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavView.h; sourceTree = "<group>"; };
-		7E5F6CFE21315DFE00AC115E /* ClassView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassView.h; sourceTree = "<group>"; };
 		7E5F6CFF21315DFE00AC115E /* FSBottomTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSBottomTableViewCell.m; sourceTree = "<group>"; };
 		7E5F6D0021315DFE00AC115E /* IndexTypeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IndexTypeView.h; sourceTree = "<group>"; };
 		7E5F6D0221315DFE00AC115E /* CurveYAxisView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurveYAxisView.m; sourceTree = "<group>"; };
@@ -388,6 +380,10 @@
 		7EB5E29A20CD00F0004BFAE2 /* FSSegmentTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentTitleView.m; sourceTree = "<group>"; };
 		7ED6F9012115A6D400C1A2EC /* CodeLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeLoginVC.h; sourceTree = "<group>"; };
 		7ED6F9022115A6D400C1A2EC /* CodeLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeLoginVC.m; sourceTree = "<group>"; };
+		7ED906FB2138325F003FD8C2 /* SearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
+		7ED906FC2138325F003FD8C2 /* SearchVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
+		7ED906FE213834B7003FD8C2 /* HomeNavView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeNavView.h; sourceTree = "<group>"; };
+		7ED906FF213834B7003FD8C2 /* HomeNavView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeNavView.m; sourceTree = "<group>"; };
 		7ED981BE20D00C6A00749D14 /* PersionDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PersionDetailVC.h; sourceTree = "<group>"; };
 		7ED981BF20D00C6A00749D14 /* PersionDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PersionDetailVC.m; sourceTree = "<group>"; };
 		7EFBA34F20CC2F050059090B /* Fairy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Fairy.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -851,6 +847,8 @@
 				7E5F6CE121315DFE00AC115E /* HomeSubVC.m */,
 				7E5F6CDF21315DFE00AC115E /* FSBaseTableView.h */,
 				7E5F6CE321315DFE00AC115E /* FSBaseTableView.m */,
+				7ED906FB2138325F003FD8C2 /* SearchVC.h */,
+				7ED906FC2138325F003FD8C2 /* SearchVC.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -869,17 +867,13 @@
 			children = (
 				7E5F6CFA21315DFE00AC115E /* SSSearchBar.h */,
 				7E5F6CE821315DFE00AC115E /* SSSearchBar.m */,
+				7ED906FE213834B7003FD8C2 /* HomeNavView.h */,
+				7ED906FF213834B7003FD8C2 /* HomeNavView.m */,
 				7E5F6CFD21315DFE00AC115E /* NavView.h */,
 				7E5F6CED21315DFE00AC115E /* NavView.m */,
 				7E5F6CFC21315DFE00AC115E /* GraphCell.h */,
 				7E5F6CEE21315DFE00AC115E /* GraphCell.m */,
-				7E5F6CFE21315DFE00AC115E /* ClassView.h */,
-				7E5F6CEC21315DFE00AC115E /* ClassView.m */,
-				7E5F6CF021315DFE00AC115E /* ClassView.xib */,
 				7E5F6CF221315DFE00AC115E /* BezierView */,
-				7E5F6CF921315DFE00AC115E /* IndexCellCell.h */,
-				7E5F6CE921315DFE00AC115E /* IndexCellCell.m */,
-				7E5F6CFB21315DFE00AC115E /* IndexCellCell.xib */,
 				7E9150C32132732600692FC6 /* IndexCell.h */,
 				7E9150C42132732600692FC6 /* IndexCell.m */,
 				7E9150C52132732600692FC6 /* IndexCell.xib */,
@@ -1357,8 +1351,6 @@
 				0445DBE620CFD550009BA6BF /* SettingCell.xib in Resources */,
 				7E9150C72132732600692FC6 /* IndexCell.xib in Resources */,
 				7EFBA35A20CC2F050059090B /* Main.storyboard in Resources */,
-				7E5F6D4021315DFF00AC115E /* IndexCellCell.xib in Resources */,
-				7E5F6D3C21315DFF00AC115E /* ClassView.xib in Resources */,
 				0406C66320D0B147008F6A26 /* PhotoSetCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1502,7 +1494,6 @@
 				7EB5E26120CCADFC004BFAE2 /* Reachability.m in Sources */,
 				7E5F6D0D21315DFE00AC115E /* Y_KLineView.m in Sources */,
 				0406C66E20D0C709008F6A26 /* WarnCenterVC.m in Sources */,
-				7E5F6D3821315DFF00AC115E /* ClassView.m in Sources */,
 				AA01047F2135A284008EC784 /* PriceDataMiddleCell.m in Sources */,
 				AA01044D2135A168008EC784 /* DVFoodPieModel.m in Sources */,
 				7E4002C92135B92C00D199CA /* PriceDetailedCell.m in Sources */,
@@ -1510,10 +1501,12 @@
 				7E5F6D2B21315DFF00AC115E /* BezierLineView.m in Sources */,
 				AA01044C2135A168008EC784 /* DVPieCenterView.m in Sources */,
 				7E5F6D3A21315DFF00AC115E /* GraphCell.m in Sources */,
+				7ED906FD2138325F003FD8C2 /* SearchVC.m in Sources */,
 				7E5F6D5C213177C700AC115E /* WSLineChartCell.m in Sources */,
 				7E5F6D0E21315DFE00AC115E /* Y_StockChartRightYView.m in Sources */,
 				7E00514A2114A3F100A2CA8F /* InformationModel.m in Sources */,
 				7E5F6D0921315DFE00AC115E /* Y_StockChartGlobalVariable.m in Sources */,
+				7ED90700213834B7003FD8C2 /* HomeNavView.m in Sources */,
 				7EB5E28B20CCB60A004BFAE2 /* RegisterVC.m in Sources */,
 				AA0104672135A200008EC784 /* DepthBtnCell.m in Sources */,
 				7E5F6D3421315DFF00AC115E /* PriceModel.m in Sources */,
@@ -1535,7 +1528,6 @@
 				AA0104862135A3D0008EC784 /* MyWalletCell.m in Sources */,
 				7E5F6D3521315DFF00AC115E /* SSSearchBar.m in Sources */,
 				7E5F6D2321315DFF00AC115E /* LDYAxisView.m in Sources */,
-				7E5F6D3621315DFF00AC115E /* IndexCellCell.m in Sources */,
 				7E5F6D1921315DFF00AC115E /* Y_KLineMainView.m in Sources */,
 				7EB5E25A20CCADF2004BFAE2 /* Tool.m in Sources */,
 				7E5F6D0C21315DFE00AC115E /* Y_KLineMAView.m in Sources */,

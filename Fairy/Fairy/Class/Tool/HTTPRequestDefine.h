@@ -57,7 +57,6 @@
 #define moneyClass                (SERVER@"/dictionary/list_currency_type")
 // 首页tab分类内容
 #define moneyClassContent         (SERVER@"/coin_pair/list_data")
-
 //自选查看
 #define optionalView              (SERVER@"/consumer_pair/view")
 //加入自选

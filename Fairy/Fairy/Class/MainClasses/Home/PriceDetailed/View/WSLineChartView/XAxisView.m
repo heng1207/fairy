@@ -13,7 +13,6 @@
 #define kChartTextColor         [UIColor blackColor]
 
 #define leftMargin 45
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
 
 
 @interface XAxisView ()
@@ -75,72 +74,72 @@
     
     ////////////////////// X轴文字 //////////////////////////
     // 添加坐标轴Label
-    for (int i = 0; i < self.xTitleArray.count; i++) {
-        NSString *title = self.xTitleArray[i];
-        
-        [[UIColor blackColor] set];
-        NSDictionary *attr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
-        CGSize labelSize = [title sizeWithAttributes:attr];
-        
-        //        CGRect titleRect = CGRectMake((i + 1) * self.pointGap - labelSize.width / 2,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
-        CGRect titleRect = CGRectMake(i * self.pointGap ,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
-        
-        if (i == 0) {
-            self.firstFrame = titleRect;
-            if (titleRect.origin.x < 0) {
-                titleRect.origin.x = 0;
-            }
-            
-            [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
-            
-            //画垂直X轴的竖线
-            //            [self drawLine:context
-            //                startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
-            //                  endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
-            //                 lineColor:kChartLineColor
-            //                 lineWidth:1];
-            [self drawLine:context
-                startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
-                  endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
-                 lineColor:kChartLineColor
-                 lineWidth:1];
-        }
-        
-        
-        // 如果Label的文字有重叠，那么不绘制
-        CGFloat maxX = CGRectGetMaxX(self.firstFrame);
-        if (i != 0) {
-            if ((maxX + 3) > titleRect.origin.x) {
-                //不绘制
-                
-            }else{
-                
-                [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
-                //画垂直X轴的竖线
-                //                [self drawLine:context
-                //                    startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
-                //                      endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
-                //                     lineColor:kChartLineColor
-                //                     lineWidth:1];
-                
-                [self drawLine:context
-                    startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
-                      endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
-                     lineColor:kChartLineColor
-                     lineWidth:1];
-                
-                self.firstFrame = titleRect;
-            }
-        }else {
-            if (self.firstFrame.origin.x < 0) {
-                
-                CGRect frame = self.firstFrame;
-                frame.origin.x = 0;
-                self.firstFrame = frame;
-            }
-        }
-        
-    }
+//    for (int i = 0; i < self.xTitleArray.count; i++) {
+//        NSString *title = self.xTitleArray[i];
+//
+//        [[UIColor blackColor] set];
+//        NSDictionary *attr = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
+//        CGSize labelSize = [title sizeWithAttributes:attr];
+//
+//        //        CGRect titleRect = CGRectMake((i + 1) * self.pointGap - labelSize.width / 2,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
+//        CGRect titleRect = CGRectMake(i * self.pointGap ,self.frame.size.height - labelSize.height,labelSize.width,labelSize.height);
+//
+//        if (i == 0) {
+//            self.firstFrame = titleRect;
+//            if (titleRect.origin.x < 0) {
+//                titleRect.origin.x = 0;
+//            }
+//
+//            [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//
+//            //画垂直X轴的竖线
+//            //            [self drawLine:context
+//            //                startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
+//            //                  endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
+//            //                 lineColor:kChartLineColor
+//            //                 lineWidth:1];
+//            [self drawLine:context
+//                startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
+//                  endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
+//                 lineColor:kChartLineColor
+//                 lineWidth:1];
+//        }
+//
+//
+//        // 如果Label的文字有重叠，那么不绘制
+//        CGFloat maxX = CGRectGetMaxX(self.firstFrame);
+//        if (i != 0) {
+//            if ((maxX + 3) > titleRect.origin.x) {
+//                //不绘制
+//
+//            }else{
+//
+//                [title drawInRect:titleRect withAttributes:@{NSFontAttributeName :[UIFont systemFontOfSize:8],NSForegroundColorAttributeName:kChartTextColor}];
+//                //画垂直X轴的竖线
+//                //                [self drawLine:context
+//                //                    startPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-5)
+//                //                      endPoint:CGPointMake(titleRect.origin.x+labelSize.width/2, self.frame.size.height - labelSize.height-10)
+//                //                     lineColor:kChartLineColor
+//                //                     lineWidth:1];
+//
+//                [self drawLine:context
+//                    startPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-5)
+//                      endPoint:CGPointMake(titleRect.origin.x, self.frame.size.height - labelSize.height-10)
+//                     lineColor:kChartLineColor
+//                     lineWidth:1];
+//
+//                self.firstFrame = titleRect;
+//            }
+//        }else {
+//            if (self.firstFrame.origin.x < 0) {
+//
+//                CGRect frame = self.firstFrame;
+//                frame.origin.x = 0;
+//                self.firstFrame = frame;
+//            }
+//        }
+//
+//    }
     
     //////////////// 画原点上的x轴 ///////////////////////
     NSDictionary *attribute = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
@@ -304,18 +303,14 @@
         }
         
         
-        //////  根据数据源画折线与X轴之间的填充色  ///////
-//        [self drawCurveLine:self.yValueArray[i] LineNumber:i];
+    //////  根据数据源画折线与X轴之间的填充色  ///////
+//    [self drawCurveLine];
 
+    [self drawFoldLine];
     
     
     
-    
-    
-    
-    
-    
-    
+
     //长按时进入
     if(self.isLongPress)
     {
@@ -443,8 +438,52 @@
     return result != 0;
 }
 
+////填充曲线和X坐标之间（折线）
+//- (void)drawFoldLine{
+//
+//    if (self.yValueArray.count == 0) {
+//        return;
+//    }
+//
+//    NSDictionary *attribute = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
+//    CGSize textSize = [@"x" sizeWithAttributes:attribute];
+//
+//
+//    NSNumber *startValue = self.yValueArray[0];
+//    CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
+//    CGPoint startPoint = CGPointMake( 0, chartHeight -  (startValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
+//
+//    CGContextRef context = UIGraphicsGetCurrentContext();
+//    CGContextMoveToPoint(context, startPoint.x, startPoint.y);
+//
+//    CGPoint endPoint;
+//    for (NSInteger i = 1; i < self.yValueArray.count; i++) {
+//
+//        NSNumber *endValue = self.yValueArray[i];
+//        CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
+//        endPoint = CGPointMake((i)*self.pointGap, chartHeight -  (endValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
+//        CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+//    }
+//
+//    CGPoint XendPoint = CGPointMake((self.yValueArray.count-1)*self.pointGap, self.frame.size.height - textSize.height - 5);
+//    CGPoint XstartPoint = CGPointMake(0, self.frame.size.height - textSize.height - 5);
+//
+//    CGContextAddLineToPoint(context, XendPoint.x, XendPoint.y);
+//    CGContextAddLineToPoint(context, XstartPoint.x, XstartPoint.y);
+//    CGContextAddLineToPoint(context, startPoint.x, startPoint.y);
+//
+//    [[UIColor orangeColor] setFill];
+//    CGContextFillPath(context); //填充内部
+//    CGContextClosePath(context); //最后关闭它
+//
+//}
+
 //填充曲线和X坐标之间（折线）
-- (void)drawFoldLine:(NSArray *)yValueArray{
+- (void)drawFoldLine{
+    
+    if (self.yValueArray.count == 0) {
+        return;
+    }
     
     NSDictionary *attribute = @{NSFontAttributeName : [UIFont systemFontOfSize:8]};
     CGSize textSize = [@"x" sizeWithAttributes:attribute];
@@ -455,6 +494,11 @@
     CGPoint startPoint = CGPointMake( 0, chartHeight -  (startValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
     
     CGContextRef context = UIGraphicsGetCurrentContext();
+    
+
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:startPoint];
+    
     CGContextMoveToPoint(context, startPoint.x, startPoint.y);
     
     CGPoint endPoint;
@@ -463,26 +507,43 @@
         NSNumber *endValue = self.yValueArray[i];
         CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
         endPoint = CGPointMake((i)*self.pointGap, chartHeight -  (endValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
-        CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
+        
+        
+        [path addLineToPoint:endPoint];
+//        CGContextAddLineToPoint(context, endPoint.x, endPoint.y);
     }
     
     CGPoint XendPoint = CGPointMake((self.yValueArray.count-1)*self.pointGap, self.frame.size.height - textSize.height - 5);
     CGPoint XstartPoint = CGPointMake(0, self.frame.size.height - textSize.height - 5);
     
-    CGContextAddLineToPoint(context, XendPoint.x, XendPoint.y);
-    CGContextAddLineToPoint(context, XstartPoint.x, XstartPoint.y);
-    CGContextAddLineToPoint(context, startPoint.x, startPoint.y);
+//    CGContextAddLineToPoint(context, XendPoint.x, XendPoint.y);
+//    CGContextAddLineToPoint(context, XstartPoint.x, XstartPoint.y);
+//    CGContextAddLineToPoint(context, startPoint.x, startPoint.y);
+//
+//    [[UIColor orangeColor] setFill];
+//    CGContextFillPath(context); //填充内部
+//    CGContextClosePath(context); //最后关闭它
     
-    [[UIColor orangeColor] setFill];
-    CGContextFillPath(context); //填充内部
-    CGContextClosePath(context); //最后关闭它
+    [path addLineToPoint:XendPoint];
+    [path addLineToPoint:XstartPoint];
+    [path addLineToPoint:startPoint];
+    //把路径添加到上下文
+    CGContextAddPath(context, path.CGPath);
+    
+    [[UIColor blueColor] setFill];
+    [[UIColor blueColor] setStroke];
+    
+    //绘制渐变色
+    [self drawLinearGradientWithContext:context path:path.CGPath beginColor:[UIColor blueColor].CGColor endColor:[UIColor whiteColor].CGColor];
+    CGContextDrawPath(context, kCGPathFillStroke);
+    
 }
 
 
 //填充曲线和X坐标之间（曲线）
-- (void)drawCurveLine:(NSArray *)yValueArray LineNumber:(NSInteger)curveLineNumber{
+- (void)drawCurveLine{
     
-    if (yValueArray.count == 0) {
+    if (self.yValueArray.count == 0) {
         return;
     }
     
@@ -498,7 +559,7 @@
     UIBezierPath *path = [UIBezierPath bezierPath];
     CGPoint PrePonit;
     
-    NSNumber *startValue = yValueArray[0];
+    NSNumber *startValue = self.yValueArray[0];
     CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
     
     CGPoint startPoint = CGPointMake( 0, chartHeight -  (startValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
@@ -507,12 +568,12 @@
     PrePonit = startPoint;
     
     
-    for (NSInteger i = 1; i < yValueArray.count; i++) {
+    for (NSInteger i = 1; i < self.yValueArray.count; i++) {
         
-        NSNumber *endValue = yValueArray[i];
-        
+        NSNumber *endValue = self.yValueArray[i];
+
         CGPoint NowPoint = CGPointMake((i)*self.pointGap, chartHeight -  (endValue.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
-        
+
         /*绘制三次贝塞尔曲线
          c:图形上下文
          cp1x:第一个控制点x坐标
@@ -524,11 +585,11 @@
          */
         [path addCurveToPoint:NowPoint controlPoint1:CGPointMake((PrePonit.x+NowPoint.x)/2, PrePonit.y) controlPoint2:CGPointMake((PrePonit.x+NowPoint.x)/2, NowPoint.y)]; //三次曲线
         PrePonit = NowPoint;
-        
+
         
     }
     
-    CGPoint XendPoint = CGPointMake((yValueArray.count-1)*self.pointGap, self.frame.size.height - textSize.height - 5);
+    CGPoint XendPoint = CGPointMake((self.yValueArray.count-1)*self.pointGap, self.frame.size.height - textSize.height - 5);
     CGPoint XstartPoint = CGPointMake(0, self.frame.size.height - textSize.height - 5);
     
     [path addLineToPoint:XendPoint];
@@ -538,17 +599,12 @@
     
     //把路径添加到上下文
     CGContextAddPath(context, path.CGPath);
-    if (curveLineNumber==0) {
-        [[UIColor colorWithHex:@"#e6eff5"] setFill];
-    }
-    else{
-        [[UIColor blueColor] setFill];
-    }
-    //    [[UIColor orangeColor] setFill];
+ 
+    [[UIColor blueColor] setFill];
     [[UIColor blueColor] setStroke];
     
     //绘制渐变色
-    //    [self drawLinearGradientWithContext:context path:path.CGPath beginColor:[UIColor orangeColor].CGColor endColor:[UIColor whiteColor].CGColor];
+    [self drawLinearGradientWithContext:context path:path.CGPath beginColor:[UIColor orangeColor].CGColor endColor:[UIColor whiteColor].CGColor];
     CGContextDrawPath(context, kCGPathFillStroke);
     
 }

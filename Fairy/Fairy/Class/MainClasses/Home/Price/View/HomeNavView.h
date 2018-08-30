@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @protocol navViewDelegate <NSObject>
--(void)navViewSearch:(NSString *)searchStr;
--(void)navViewback;
+-(void)navViewSearch;
+
 @end
 
-@interface NavView : UIView
+
+@interface HomeNavView : UIView
+
+
 @property(nonatomic,weak)id<navViewDelegate> delegate;
+
 @end

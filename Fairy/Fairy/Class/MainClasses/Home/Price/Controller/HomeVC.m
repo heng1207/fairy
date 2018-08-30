@@ -14,10 +14,11 @@
 #import "IndexCell.h"
 #import "GraphCell.h"
 #import "SSSearchBar.h"
-#import "NavView.h"
+#import "HomeNavView.h"
+#import "SearchVC.h"
 
 
-@interface HomeVC ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate>
+@interface HomeVC ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate,navViewDelegate>
 
 @property (nonatomic, strong) FSBaseTableView *tableView;
 @property (nonatomic, strong) FSBottomTableViewCell *contentCell;
@@ -27,6 +28,7 @@
 @property (nonatomic,strong) NSArray *globalIndexData;
 @property (nonatomic,strong) NSArray *moneyClassData;
 @property (nonatomic,strong) NSMutableDictionary *IndexTypeViewDic;
+@property (nonatomic,strong) NSArray *secondDataArr;
 
 @end
 
@@ -60,8 +62,15 @@
 }
 
 -(void)creatSearchBar{    
-    NavView *navView =[[NavView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, LL_StatusBarAndNavigationBarHeight)];
+    HomeNavView *navView =[[HomeNavView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, LL_StatusBarAndNavigationBarHeight)];
+    navView.delegate = self;
     [self.view addSubview:navView];
+}
+#pragma mark navViewSearchDelegate
+-(void)navViewSearch{
+    SearchVC *vc=[SearchVC new];
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark UITableViewDataSource&&UITableViewDelegate
@@ -131,7 +140,8 @@
     if (indexPath.row == 0) {
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.dataDic = self.IndexTypeViewDic;
+//        cell.dataDic = self.IndexTypeViewDic;
+        cell.firstDataArr = self.secondDataArr;
         return cell;
     }else{
         IndexCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"IndexCell"  forIndexPath:indexPath];
@@ -280,32 +290,35 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             
-            //获取显示区间最大值，最小值
-            NSMutableArray *price = [NSMutableArray array];
-            for (NSDictionary *item in obj[@"data"] ) {
-                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
-            }
-            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
-            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
-            int maxSection = (maxPrice/10);
-            int minSection = (minPrice/10);
-            int maxPriceSection = maxSection*10+10;
-            int minPriceSection = minSection*10;
-        
+//            //获取显示区间最大值，最小值
+//            NSMutableArray *price = [NSMutableArray array];
+//            for (NSDictionary *item in obj[@"data"] ) {
+//                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+//            }
+//            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+//            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+//            int maxSection = (maxPrice/10);
+//            int minSection = (minPrice/10);
+//            int maxPriceSection = maxSection*10+10;
+//            int minPriceSection = minSection*10;
+//
+//
+//            NSMutableArray *xArray = [NSMutableArray array];
+//            NSMutableArray *targetArray = [NSMutableArray array];
+//            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//                [xArray addObject:obj[@"historyDate"]];
+//                [targetArray addObject:obj[@"closePrice"]];
+//            }];
+//
+//            NSLog(@"%d---%d",maxPriceSection,minPriceSection);
+//            self.IndexTypeViewDic[@"max"] = [NSString stringWithFormat:@"%d",maxPriceSection];
+//            self.IndexTypeViewDic[@"min"] = [NSString stringWithFormat:@"%d",minPriceSection];
+//            self.IndexTypeViewDic[@"xArray"] = xArray;
+//            self.IndexTypeViewDic[@"targetArray"] = targetArray;
+//            self.IndexTypeViewDic[@"selectType"] = selectType;
             
-            NSMutableArray *xArray = [NSMutableArray array];
-            NSMutableArray *targetArray = [NSMutableArray array];
-            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-                [xArray addObject:obj[@"historyDate"]];
-                [targetArray addObject:obj[@"closePrice"]];
-            }];
             
-            NSLog(@"%d---%d",maxPriceSection,minPriceSection);
-            self.IndexTypeViewDic[@"max"] = [NSString stringWithFormat:@"%d",maxPriceSection];
-            self.IndexTypeViewDic[@"min"] = [NSString stringWithFormat:@"%d",minPriceSection];
-            self.IndexTypeViewDic[@"xArray"] = xArray;
-            self.IndexTypeViewDic[@"targetArray"] = targetArray;
-            self.IndexTypeViewDic[@"selectType"] = selectType;
+            self.secondDataArr = obj[@"data"];
             
             //指定刷新某行cell
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];

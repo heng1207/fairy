@@ -6,14 +6,12 @@
 //  Copyright © 2018年 . All rights reserved.
 //
 
-#import "NavView.h"
+#import "HomeNavView.h"
+@interface HomeNavView ()<UITextFieldDelegate>
 
-@interface NavView ()<UITextFieldDelegate>
-@property(nonatomic,strong)UITextField *contentTF;
 @end
 
-
-@implementation NavView
+@implementation HomeNavView
 
 - (instancetype)initWithFrame:(CGRect)frame
 {
@@ -21,68 +19,34 @@
     if (self) {
         self.backgroundColor=[UIColor colorWithHex:@"#1296db"];
         
-        
-        UIButton *backBtn = [[UIButton alloc]initWithFrame:CGRectMake(11, LL_StatusBarHeight+10, 11, 20)];
-        [backBtn setImage:[UIImage imageNamed:@"navBack"] forState:UIControlStateNormal];
-        [backBtn addTarget:self action:@selector(backclick) forControlEvents:UIControlEventTouchUpInside];
-        [self addSubview:backBtn];
- 
-        
-        //
-        UIButton *searchBtn = [[UIButton alloc]initWithFrame:CGRectMake(SCREEN_WIDTH-12-30, LL_StatusBarHeight+6, 30, 28)];
-        [searchBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [searchBtn setTitle:@"搜索" forState:UIControlStateNormal];
-        [searchBtn addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchUpInside];
-        searchBtn.titleLabel.font = [UIFont systemFontOfSize:12];
-        [self addSubview:searchBtn];
-        
-        
-        
-        UIView *searchBackView = [[UIView alloc]initWithFrame:CGRectMake(CGRectGetMaxX(backBtn.frame)+15, LL_StatusBarHeight+6, SCREEN_WIDTH-22-15-30-12*2, 28)];
+        UIView *searchBackView = [[UIView alloc]initWithFrame:CGRectMake(15, LL_StatusBarHeight+6, SCREEN_WIDTH-30, 28)];
         searchBackView.backgroundColor =[UIColor whiteColor];
         searchBackView.layer.cornerRadius = 3;
         searchBackView.layer.masksToBounds = YES;
         [self addSubview:searchBackView];
 
+        UITapGestureRecognizer *tap=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(searchClick)];
+        [searchBackView addGestureRecognizer:tap];
         
         
         UIImageView *searchLogo = [[UIImageView alloc]initWithFrame:CGRectMake(5, 6, 15, 15)];
         [searchBackView addSubview:searchLogo];
         searchLogo.image =[UIImage imageNamed:@"searchLogo"];
         
-        UITextField *contentTF =[[UITextField alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchLogo.frame)+5, 0, 250, searchBackView.frame.size.height)];
-        self.contentTF = contentTF;
-        contentTF.placeholder = @"搜索币种...";
-        contentTF.textColor = [UIColor grayColor];
-        contentTF.font = AdaptedFontSize(26);
-        //"通过KVC修改占位文字的颜色"
-        [contentTF setValue:[UIColor grayColor] forKeyPath:@"_placeholderLabel.textColor"];
-        //光标颜色
-        contentTF.tintColor = [UIColor blackColor];
-        contentTF.delegate = self;
-        [searchBackView addSubview:contentTF];
-        [searchBackView bringSubviewToFront:contentTF];
+        
+        UILabel *contentlab =[[UILabel alloc]initWithFrame:CGRectMake(CGRectGetMaxX(searchLogo.frame)+5, 0, 250, searchBackView.frame.size.height)];
+        contentlab.text = @"搜索币种...";
+        contentlab.textColor = [UIColor grayColor];
+        contentlab.font = AdaptedFontSize(26);
+        [searchBackView addSubview:contentlab];
         
     }
     return self;
 }
 
-//#pragma mark UITextFiledDelegate
-//- (void)textFieldDidEndEditing:(UITextField *)textField{
-//    NSLog(@"%@",textField.text);
-//}
-
 -(void)searchClick{
-    [self.contentTF endEditing:YES];
-    if (_delegate && [_delegate respondsToSelector:@selector(navViewSearch:)]) {
-        [_delegate navViewSearch:self.contentTF.text];
-    }
-}
-
--(void)backclick{
-    [self.contentTF endEditing:YES];
-    if (_delegate && [_delegate respondsToSelector:@selector(navViewback)]) {
-        [_delegate navViewback];
+    if (_delegate && [_delegate respondsToSelector:@selector(navViewSearch)]) {
+        [_delegate navViewSearch];
     }
 }
 

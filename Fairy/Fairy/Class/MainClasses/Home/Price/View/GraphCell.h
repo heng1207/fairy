@@ -11,5 +11,6 @@
 @interface GraphCell : UITableViewCell
 
 @property(nonatomic,strong)NSMutableDictionary *dataDic;
+@property(nonatomic,strong)NSArray* firstDataArr;
 
 @end

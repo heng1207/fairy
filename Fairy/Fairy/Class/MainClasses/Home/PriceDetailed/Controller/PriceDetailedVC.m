@@ -277,7 +277,6 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.secondDataArr = obj[@"data"];
-            self.secondDataArr = obj[@"data"];
             
             //指定刷新某行cell
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
