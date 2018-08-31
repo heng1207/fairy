@@ -26,6 +26,8 @@
 		4E01BF2321199CE5001DE371 /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E01BF2221199CE5001DE371 /* HeadView.m */; };
 		4E9AB6F621242D9200BAFB22 /* TLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AB6F421242D9200BAFB22 /* TLTextView.m */; };
 		4E9AB6F921242DC900BAFB22 /* DetailContentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AB6F821242DC900BAFB22 /* DetailContentVC.m */; };
+		4EFA7A8A2138E92800462304 /* welcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA7A882138E92800462304 /* welcomeViewController.m */; };
+		4EFA7A8D2138F2C100462304 /* SegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA7A8C2138F2C100462304 /* SegmentView.m */; };
 		7E00514A2114A3F100A2CA8F /* InformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0051492114A3F100A2CA8F /* InformationModel.m */; };
 		7E00514D2114AA5B00A2CA8F /* InformationDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00514C2114AA5B00A2CA8F /* InformationDetailsVC.m */; };
 		7E0B97E5211691250054014C /* InformationFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B97E4211691250054014C /* InformationFrameModel.m */; };
@@ -191,6 +193,10 @@
 		4E9AB6F521242D9200BAFB22 /* TLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLTextView.h; sourceTree = "<group>"; };
 		4E9AB6F721242DC900BAFB22 /* DetailContentVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailContentVC.h; sourceTree = "<group>"; };
 		4E9AB6F821242DC900BAFB22 /* DetailContentVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailContentVC.m; sourceTree = "<group>"; };
+		4EFA7A882138E92800462304 /* welcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = welcomeViewController.m; sourceTree = "<group>"; };
+		4EFA7A892138E92800462304 /* welcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = welcomeViewController.h; sourceTree = "<group>"; };
+		4EFA7A8B2138F2C100462304 /* SegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentView.h; sourceTree = "<group>"; };
+		4EFA7A8C2138F2C100462304 /* SegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentView.m; sourceTree = "<group>"; };
 		78493D73EEE62E43218BE701 /* Pods_Fairy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fairy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0051482114A3F100A2CA8F /* InformationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationModel.h; sourceTree = "<group>"; };
 		7E0051492114A3F100A2CA8F /* InformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationModel.m; sourceTree = "<group>"; };
@@ -811,6 +817,8 @@
 				7E5F6CDA21315DFE00AC115E /* PriceForecastView.m */,
 				7E5F6CDB21315DFE00AC115E /* PriceIntroduceView.h */,
 				7E5F6CCD21315DFE00AC115E /* PriceIntroduceView.m */,
+				4EFA7A8B2138F2C100462304 /* SegmentView.h */,
+				4EFA7A8C2138F2C100462304 /* SegmentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1062,6 +1070,8 @@
 				7EB5E28A20CCB60A004BFAE2 /* RegisterVC.m */,
 				7EB5E28F20CCB673004BFAE2 /* FindPwVC.h */,
 				7EB5E29020CCB673004BFAE2 /* FindPwVC.m */,
+				4EFA7A892138E92800462304 /* welcomeViewController.h */,
+				4EFA7A882138E92800462304 /* welcomeViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1542,6 +1552,7 @@
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
 				4E9AB6F921242DC900BAFB22 /* DetailContentVC.m in Sources */,
 				7E5F6D1621315DFF00AC115E /* Y_KLineVolumePositionModel.m in Sources */,
+				4EFA7A8A2138E92800462304 /* welcomeViewController.m in Sources */,
 				7E5F6D2021315DFF00AC115E /* TrendVC.m in Sources */,
 				7E5F6D2621315DFF00AC115E /* PriceDetailedVC.m in Sources */,
 				7E5F6D4221315DFF00AC115E /* CurveYAxisView.m in Sources */,
@@ -1572,6 +1583,7 @@
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
 				AA0104662135A200008EC784 /* SuperFastTopCell.m in Sources */,
 				04B218D820D106FD000D661F /* GeneralVC.m in Sources */,
+				4EFA7A8D2138F2C100462304 /* SegmentView.m in Sources */,
 				0445DBE520CFD550009BA6BF /* SettingCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

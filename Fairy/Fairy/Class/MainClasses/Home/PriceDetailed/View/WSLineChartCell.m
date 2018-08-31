@@ -8,7 +8,7 @@
 
 #import "WSLineChartCell.h"
 #import "WSLineChartView.h"
-
+#import "SegmentView.h"
 
 @interface  WSLineChartCell()
 
@@ -21,11 +21,6 @@
     self =[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         self.backgroundColor = [UIColor colorWithHex:@"#e8f0f3"];
-        
-        
-        
-        
-        
     }
     return self;
 }
@@ -33,6 +28,10 @@
 
 -(void)setFirstDataArr:(NSMutableArray *)firstDataArr{
     _firstDataArr = firstDataArr;
+    
+    SegmentView *segView=[[SegmentView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 22)];
+    [self.contentView addSubview:segView];
+    
     
     //获取显示区间最大值，最小值
     NSMutableArray *price = [NSMutableArray array];
@@ -54,7 +53,7 @@
         [yArray addObject:obj[@"closePrice"]];
     }];
     
-    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 195) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 22, UIScreenW, 173) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
     
     [self.contentView addSubview:wsLine];
     
@@ -63,6 +62,10 @@
 -(void)setSecondDataArr:(NSMutableArray *)secondDataArr{
     _secondDataArr = secondDataArr;
     if (secondDataArr.count>0) {
+        
+        SegmentView *segView=[[SegmentView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 22)];
+        [self.contentView addSubview:segView];
+        
         
         //获取显示区间最大值，最小值
         NSMutableArray *price = [NSMutableArray array];

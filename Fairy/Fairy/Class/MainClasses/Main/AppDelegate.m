@@ -23,6 +23,7 @@
 #import "MainTabBarController.h"
 #import <UMShare/UMShare.h>
 #import <UMCommon/UMCommon.h>
+#import "welcomeViewController.h"
 
 #define USHARE_APPKEY  @"5b49a9398f4a9d5be4000132"
 
@@ -53,9 +54,26 @@
     [UIApplication sharedApplication].statusBarStyle=UIStatusBarStyleLightContent;
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     [self.window makeKeyAndVisible];
-    MainTabBarController *homeVC=[MainTabBarController new];
-    self.window.rootViewController = homeVC;
+
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    BOOL isfirest = [defaults boolForKey:(@"isfirst")];
+    if (!isfirest) {
+        
+        //保存BOOL
+        [defaults setBool:YES forKey:(@"isfirst")];
+        //立即保存
+        [defaults synchronize];
+        
+        welcomeViewController *vc=[welcomeViewController new];
+        self.window.rootViewController = vc;
+        
+    }else{
+        
+        MainTabBarController *homeVC=[MainTabBarController new];
+        self.window.rootViewController = homeVC;
+        
+    }
     
     // Override point for customization after application launch.
     return YES;

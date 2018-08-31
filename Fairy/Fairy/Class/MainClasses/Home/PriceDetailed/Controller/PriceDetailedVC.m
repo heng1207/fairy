@@ -104,7 +104,7 @@
     if (section == 1) {
         return 1;
     }
-    return 3;
+    return 4;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,14 +113,20 @@
         if (indexPath.row == 0) {
             return 128;
         }
-        else if (indexPath.row == 2){
+        else if (indexPath.row == 3){
             return 60;
+        }
+        else if (indexPath.row == 1){
+            return 195;
         }
         else{
             if (self.secondDataArr.count>0) {
-                return 195*2;
+                return 195;
             }
-            return 195;
+            else{
+                return 0;
+            }
+            
         }
         
     }
@@ -162,7 +168,7 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = self.priceModel;
         return cell;
-    }else if (indexPath.row == 2){
+    }else if (indexPath.row == 3){
         CompareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompareCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
@@ -171,8 +177,12 @@
     else{
         WSLineChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WSLineChartCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.firstDataArr = self.firstDataArr;
-        cell.secondDataArr = self.secondDataArr;
+        if (indexPath.row==1) {
+            cell.firstDataArr = self.firstDataArr;
+        }
+        else{
+            cell.secondDataArr = self.secondDataArr;
+        }
         return cell;
     }
     
@@ -279,7 +289,7 @@
             self.secondDataArr = obj[@"data"];
             
             //指定刷新某行cell
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         }
     } failure:^(NSError *error) {
