@@ -23,6 +23,10 @@
 + (NSString *)createTime:(NSString *)date;
 /// 时间格式带小时
 + (NSString *)createTimeWithAM:(NSString *)date;
++ (NSString *)createHour:(NSString *)date;
++ (NSString *)createDayWith:(NSString *)date;
++ (NSString *)createWeek:(NSString *)date;
+
 
 //获取当前屏幕显示的viewcontroller
 + (UIViewController *)getCurrentVC;

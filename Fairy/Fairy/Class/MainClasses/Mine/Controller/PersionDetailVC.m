@@ -233,7 +233,6 @@
     
     // 获取选中的image图片
     UIImage *image = info[@"UIImagePickerControllerEditedImage"];
-    self.photoIM.image = image;
     [self uploadPhotoIM:image];
 }
 
@@ -248,39 +247,22 @@
     
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    
-    NSString *path =[NSString stringWithFormat:@"%@?token=%@",consumerUpdate,userModel.token];
     dict[@"consumerID"]  = userModel.consumerID;
-    NSData *data = UIImageJPEGRepresentation(image, 1.0f);
-    NSString *encodedImageStr = [data base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-    dict[@"headerPic"] = encodedImageStr;
-    [NetworkManage Post:path andParams:dict success:^(id responseObject) {
+
+    NSMutableArray *photoArr=[NSMutableArray array];
+    [photoArr addObject:image];
+
+    [NetworkManage Post:uploadPhoto andParams:dict andPhotoArr:photoArr success:^(id responseObject) {
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
         if ([dic[@"code"] integerValue] ==200 ) {
-        
-            
+               self.photoIM.image = dic[@"headerPic"];
+        }else {
+            [self showHint:dic[@"message"]];
         }
-        
+
     } failure:^(NSError *error) {
-        NSLog(@"%@",error);
+        [self showHint:@"网络有问题"];
     }];
-    
-    
-    
-//    NSMutableArray *photoArr=[NSMutableArray array];
-//    [photoArr addObject:image];
-//
-//    [NetworkManage Post:consumerUpdate andParams:dict andPhotoArr:photoArr success:^(id responseObject) {
-//        NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
-//        if ([dic[@"code"] integerValue] ==200 ) {
-//
-//        }else {
-//            [self showHint:dic[@"message"]];
-//        }
-//
-//    } failure:^(NSError *error) {
-//        [self showHint:@"网络有问题"];
-//    }];
     
 }
 

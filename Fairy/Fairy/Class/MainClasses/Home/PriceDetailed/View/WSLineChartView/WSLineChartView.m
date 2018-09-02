@@ -160,12 +160,12 @@
         //            self.pointGap = self.pointGap > _defaultSpace ? _defaultSpace : self.pointGap;
         if (self.pointGap >= _MaxSpace) {
             
-            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
+//            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
             self.pointGap = _MaxSpace;
             
         }
         else if (self.pointGap <= _defaultSpace){
-            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
+//            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
             self.pointGap = _defaultSpace;
         }
          

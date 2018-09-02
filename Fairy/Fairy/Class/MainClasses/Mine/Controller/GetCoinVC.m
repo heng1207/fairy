@@ -327,20 +327,23 @@ static const CGFloat KDelay = 2.0f;
 
 - (void)loginAction:(UIButton *)sender
 {
-    if (self.NewPassTF.text.length != 11)
+    if (self.NewPassTF.text.length < 1)
     {
         [SVProgressHUD setMinimumDismissTimeInterval:2];
-        [SVProgressHUD showInfoWithStatus:@"请输入11位手机号码"];
+        [SVProgressHUD showInfoWithStatus:@"请输入地址"];
+        return;
     }
-  
-    else
+    else if ([self.codeTF.text integerValue] > 0)
     {
-        
+        [SVProgressHUD setMinimumDismissTimeInterval:2];
+        [SVProgressHUD showInfoWithStatus:@"请输入数量"];
+        return;
     }
+   
     WS(weakself);
     self.passwordView = [[HQLPasswordView alloc] init];
     [self.passwordView showInView:self.view.window];
-    self.passwordView.title = @"我是标题";
+    self.passwordView.title = @"支付";
     self.passwordView.loadingText = @"正在支付中...";
     self.passwordView.closeBlock = ^{
         NSLog(@"取消支付回调...");
@@ -376,8 +379,8 @@ static const CGFloat KDelay = 2.0f;
                     
                     //提币
                     NSString *str = [NSString stringWithFormat:@"%@?token=%@",sendToAddress, dict[@"token"]];
-                    NSDictionary *dic = @{@"toAddr":@"dadasdasdasdasdas",
-                                          @"amount":self.codeTF,
+                    NSDictionary *dic = @{@"toAddr":weakself.NewPassTF.text,
+                                          @"amount":weakself.codeTF.text,
                                           @"payPassword":password
                                           };
 

@@ -246,9 +246,6 @@
 }
 
 
--(void)nightModeClick:(UIButton*)btn{
-    btn.selected = !btn.selected;
-}
 
 -(void)requestData{
     

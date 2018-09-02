@@ -36,7 +36,7 @@
 // 退出
 #define logOut                    (SERVER@"/logout")
 // 上传头像
-#define uploadPhoto               (SERVER@"/upload_header_portrait")
+#define uploadPhoto               (SERVER@"/consumer/upload_header_pic")
 // 用户信息查看
 #define consumerView               (SERVER@"/consumer/view")
 // 用户信息新增

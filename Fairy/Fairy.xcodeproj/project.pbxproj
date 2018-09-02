@@ -110,6 +110,8 @@
 		7EB5E29120CCB673004BFAE2 /* FindPwVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29020CCB673004BFAE2 /* FindPwVC.m */; };
 		7EB5E29B20CD00F0004BFAE2 /* FSPageContentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29720CD00F0004BFAE2 /* FSPageContentView.m */; };
 		7EB5E29C20CD00F0004BFAE2 /* FSSegmentTitleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EB5E29A20CD00F0004BFAE2 /* FSSegmentTitleView.m */; };
+		7EC51B75213BE9A500C48C9E /* InformationTimeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC51B74213BE9A500C48C9E /* InformationTimeModel.m */; };
+		7EC51B78213C1DE500C48C9E /* ProgresView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7EC51B77213C1DE500C48C9E /* ProgresView.m */; };
 		7ED6F9032115A6D400C1A2EC /* CodeLoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED6F9022115A6D400C1A2EC /* CodeLoginVC.m */; };
 		7ED906FD2138325F003FD8C2 /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED906FC2138325F003FD8C2 /* SearchVC.m */; };
 		7ED90700213834B7003FD8C2 /* HomeNavView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7ED906FF213834B7003FD8C2 /* HomeNavView.m */; };
@@ -175,6 +177,7 @@
 		AA9CCABF213AEC2E0043A0CC /* HeadView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CCAB4213AEC2E0043A0CC /* HeadView.m */; };
 		AA9CCAC0213AEC2E0043A0CC /* PhotoSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CCAB5213AEC2E0043A0CC /* PhotoSetCell.m */; };
 		AA9CCAC3213AEC8D0043A0CC /* MyWalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CCAC1213AEC8C0043A0CC /* MyWalletCell.m */; };
+		AAE30524213C26B0001A9668 /* AbstractView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30523213C26B0001A9668 /* AbstractView.m */; };
 		E4454832EAD5360F49E317BF /* Pods_Fairy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78493D73EEE62E43218BE701 /* Pods_Fairy.framework */; };
 /* End PBXBuildFile section */
 
@@ -387,6 +390,10 @@
 		7EB5E29820CD00F0004BFAE2 /* FSScrollContentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSScrollContentView.h; sourceTree = "<group>"; };
 		7EB5E29920CD00F0004BFAE2 /* FSSegmentTitleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FSSegmentTitleView.h; sourceTree = "<group>"; };
 		7EB5E29A20CD00F0004BFAE2 /* FSSegmentTitleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FSSegmentTitleView.m; sourceTree = "<group>"; };
+		7EC51B73213BE9A500C48C9E /* InformationTimeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationTimeModel.h; sourceTree = "<group>"; };
+		7EC51B74213BE9A500C48C9E /* InformationTimeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationTimeModel.m; sourceTree = "<group>"; };
+		7EC51B76213C1DE500C48C9E /* ProgresView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProgresView.h; sourceTree = "<group>"; };
+		7EC51B77213C1DE500C48C9E /* ProgresView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProgresView.m; sourceTree = "<group>"; };
 		7ED6F9012115A6D400C1A2EC /* CodeLoginVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CodeLoginVC.h; sourceTree = "<group>"; };
 		7ED6F9022115A6D400C1A2EC /* CodeLoginVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CodeLoginVC.m; sourceTree = "<group>"; };
 		7ED906FB2138325F003FD8C2 /* SearchVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
@@ -513,6 +520,8 @@
 		AA9CCAB6213AEC2E0043A0CC /* WallentListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WallentListCell.h; sourceTree = "<group>"; };
 		AA9CCAC1213AEC8C0043A0CC /* MyWalletCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletCell.m; sourceTree = "<group>"; };
 		AA9CCAC2213AEC8D0043A0CC /* MyWalletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletCell.h; sourceTree = "<group>"; };
+		AAE30522213C26B0001A9668 /* AbstractView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractView.h; sourceTree = "<group>"; };
+		AAE30523213C26B0001A9668 /* AbstractView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractView.m; sourceTree = "<group>"; };
 		FE3B6BC3057507CD425B9D57 /* Pods-Fairy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -560,6 +569,8 @@
 			children = (
 				7E0051482114A3F100A2CA8F /* InformationModel.h */,
 				7E0051492114A3F100A2CA8F /* InformationModel.m */,
+				7EC51B73213BE9A500C48C9E /* InformationTimeModel.h */,
+				7EC51B74213BE9A500C48C9E /* InformationTimeModel.m */,
 				7E0B97E3211691250054014C /* InformationFrameModel.h */,
 				7E0B97E4211691250054014C /* InformationFrameModel.m */,
 			);
@@ -856,6 +867,8 @@
 			children = (
 				AA8D8A2A213AD14B000FBD5B /* PriceDetailDataView.h */,
 				AA8D8A29213AD14A000FBD5B /* PriceDetailDataView.m */,
+				AAE30522213C26B0001A9668 /* AbstractView.h */,
+				AAE30523213C26B0001A9668 /* AbstractView.m */,
 				AA01047B2135A284008EC784 /* PriceDataBottomCell.h */,
 				AA0104752135A283008EC784 /* PriceDataBottomCell.m */,
 				AA0104782135A283008EC784 /* PriceDataBottomListCell.h */,
@@ -1128,6 +1141,8 @@
 			children = (
 				7E0B97E62116999B0054014C /* InformationCell.h */,
 				7E0B97E72116999B0054014C /* InformationCell.m */,
+				7EC51B76213C1DE500C48C9E /* ProgresView.h */,
+				7EC51B77213C1DE500C48C9E /* ProgresView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1646,6 +1661,7 @@
 				7E4002C92135B92C00D199CA /* PriceDetailedCell.m in Sources */,
 				7E5F6D1521315DFF00AC115E /* Y_KLineGroupModel.m in Sources */,
 				7E5F6D2B21315DFF00AC115E /* BezierLineView.m in Sources */,
+				AAE30524213C26B0001A9668 /* AbstractView.m in Sources */,
 				AA9CCA74213AE9BD0043A0CC /* CommonTool.m in Sources */,
 				AA01044C2135A168008EC784 /* DVPieCenterView.m in Sources */,
 				7E5F6D3A21315DFF00AC115E /* GraphCell.m in Sources */,
@@ -1683,6 +1699,7 @@
 				04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */,
 				7E0B97E5211691250054014C /* InformationFrameModel.m in Sources */,
 				7E5F6D3521315DFF00AC115E /* SSSearchBar.m in Sources */,
+				7EC51B75213BE9A500C48C9E /* InformationTimeModel.m in Sources */,
 				7E5F6D2321315DFF00AC115E /* LDYAxisView.m in Sources */,
 				7E5F6D1921315DFF00AC115E /* Y_KLineMainView.m in Sources */,
 				7EB5E25A20CCADF2004BFAE2 /* Tool.m in Sources */,
@@ -1702,6 +1719,7 @@
 				7E5F6D2621315DFF00AC115E /* PriceDetailedVC.m in Sources */,
 				AA9CCA5D213AE9540043A0CC /* DetailContentVC.m in Sources */,
 				7E5F6D3321315DFF00AC115E /* FSBaseTableView.m in Sources */,
+				7EC51B78213C1DE500C48C9E /* ProgresView.m in Sources */,
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,
 				7E5F6D1421315DFF00AC115E /* Y_KLineModel.m in Sources */,
 				7E5F6D1321315DFF00AC115E /* Y_KLinePositionModel.m in Sources */,

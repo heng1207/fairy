@@ -150,66 +150,173 @@
     return date;
 }
 
+
+//
+///// 时间格式带小时
+//+ (NSString *)createTimeWithAM:(NSString *)date
+//{
+//    NSDateFormatter *frm = [[NSDateFormatter alloc]init];
+//
+//    // 时间模式本地化
+//    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+//
+//    // 时间的转换格式
+//    frm.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
+//
+//    // 创建日期
+//    //    NSDate *createDate = [frm dateFromString:date];
+//    long long seconds = [date longLongValue] / 1000;
+//    NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+//    // 获取现在的时间
+//    NSDate *now = [NSDate date];
+//
+//    // 创建日历
+//    NSCalendar *calendar = [NSCalendar currentCalendar];
+//    // 比较两个时间的差值
+//    // 设置两个时间的差值要返回哪些值
+//    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond ;
+//    NSDateComponents *cmp = [calendar components:unit fromDate:createDate toDate:now options:0];
+//
+//    // 设置时间显示的几种情况
+//    if ([createDate isThisYear])
+//    {   // 如果是今年
+//        if ([createDate isYestoday]) { // 如果是昨天
+//            frm.dateFormat = @"昨天 hh:mm a";
+//            return [frm stringFromDate:createDate];
+//        }
+//        else if([createDate isToday])  // 如果是今天
+//        {
+//            if (cmp.hour >= 1) { // 如果是1小时以后
+//                return [NSString stringWithFormat:@"%ld小时前",(long)cmp.hour];
+//            }
+//            else if(cmp.minute > 1) { // 如果是一分钟以后
+//                return [NSString stringWithFormat:@"%ld分钟前",(long)cmp.minute];
+//            }
+//            else
+//            {
+//                return @"刚刚";
+//            }
+//        }
+//        else   // 今年的其他日子（既不是今天也不是昨天）
+//        {
+//            frm.dateFormat = @"MM-dd hh:mm a";
+//            return [frm stringFromDate:createDate];
+//        }
+//    }
+//    else  // 非今年
+//    {
+//        frm.dateFormat = @"yyyy-MM-dd hh:mm a";
+//        return [frm stringFromDate:createDate];
+//    }
+//
+//    return date;
+//}
+//
+
+
+
 /// 时间格式带小时
 + (NSString *)createTimeWithAM:(NSString *)date
 {
     NSDateFormatter *frm = [[NSDateFormatter alloc]init];
     
     // 时间模式本地化
-    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+//    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]; //中文
     
     // 时间的转换格式
-    frm.dateFormat = @"EEE MMM dd HH:mm:ss Z yyyy";
+    frm.dateFormat = @"EEE MMM dd HH:mm yyyy";
     
-    // 创建日期
-    //    NSDate *createDate = [frm dateFromString:date];
     long long seconds = [date longLongValue] / 1000;
     NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:seconds];
-    // 获取现在的时间
-    NSDate *now = [NSDate date];
-    
-    // 创建日历
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    // 比较两个时间的差值
-    // 设置两个时间的差值要返回哪些值
-    NSCalendarUnit unit = NSCalendarUnitYear | NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond ;
-    NSDateComponents *cmp = [calendar components:unit fromDate:createDate toDate:now options:0];
     
     // 设置时间显示的几种情况
     if ([createDate isThisYear])
     {   // 如果是今年
         if ([createDate isYestoday]) { // 如果是昨天
-            frm.dateFormat = @"昨天 hh:mm a";
+            frm.dateFormat = @"昨天 M月d号 EEEE";
             return [frm stringFromDate:createDate];
         }
         else if([createDate isToday])  // 如果是今天
         {
-            if (cmp.hour >= 1) { // 如果是1小时以后
-                return [NSString stringWithFormat:@"%ld小时前",(long)cmp.hour];
-            }
-            else if(cmp.minute > 1) { // 如果是一分钟以后
-                return [NSString stringWithFormat:@"%ld分钟前",(long)cmp.minute];
-            }
-            else
-            {
-                return @"刚刚";
-            }
+            
+            frm.dateFormat = @"今天 M月d号 EEEE";
+            return [frm stringFromDate:createDate];
+      
         }
         else   // 今年的其他日子（既不是今天也不是昨天）
         {
-            frm.dateFormat = @"MM-dd hh:mm a";
+            frm.dateFormat = @"M月d号 EEEE";
             return [frm stringFromDate:createDate];
         }
     }
     else  // 非今年
     {
-        frm.dateFormat = @"yyyy-MM-dd hh:mm a";
+        frm.dateFormat = @"yyyy年 M月d号 EEEE";
         return [frm stringFromDate:createDate];
     }
     
-    return date;
 }
 
+
+/// 时间格式带小时
++ (NSString *)createHour:(NSString *)date
+{
+    NSDateFormatter *frm = [[NSDateFormatter alloc]init];
+    
+    // 时间模式本地化
+    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+    
+    
+    // 创建日期
+    long long seconds = [date longLongValue] / 1000;
+    NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+
+    frm.dateFormat = @"HH:mm";
+    return [frm stringFromDate:createDate];
+
+}
+
+
+/// 日期
++ (NSString *)createDayWith:(NSString *)date
+{
+    NSDateFormatter *frm = [[NSDateFormatter alloc]init];
+    
+    // 时间模式本地化
+    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"];
+
+    
+    // 创建日期
+    long long seconds = [date longLongValue] / 1000;
+    NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+    
+
+    frm.dateFormat = @"M月d号";
+    return [frm stringFromDate:createDate];
+}
+
+
+///
++ (NSString *)createWeek:(NSString *)date
+{
+    NSDateFormatter *frm = [[NSDateFormatter alloc]init];
+    
+    // 时间模式本地化
+//    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]; //英文
+    frm.locale = [[NSLocale alloc] initWithLocaleIdentifier:@"zh-Hans"]; //中文
+
+
+    // 创建日期
+    long long seconds = [date longLongValue] / 1000;
+    NSDate *createDate = [NSDate dateWithTimeIntervalSince1970:seconds];
+
+    
+    frm.dateFormat = @"EEEE";
+    return [frm stringFromDate:createDate];
+  
+
+}
 
 
 

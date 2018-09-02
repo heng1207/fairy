@@ -12,8 +12,6 @@
 #import "NewPriceDetailedVC.h"
 #import "PriceDetailedVC.h"
 
-#import "HomeVC.h"
-
 
 @interface HomeSubVC ()<UITableViewDelegate,UITableViewDataSource,PriceCellDelegate>
 @property (nonatomic, assign) BOOL fingerIsTouch;

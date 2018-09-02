@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "InformationFrameModel.h"
+#import "InformationTimeModel.h"
 #import "InformationModel.h"
 
 @class InformationCell;
@@ -20,6 +21,7 @@
 @interface InformationCell : UITableViewCell
 
 @property(nonatomic,strong)InformationFrameModel *informationFrameModel;
+@property(nonatomic,strong)InformationTimeModel *informationTimeModel;
 @property(nonatomic,strong)InformationModel *informationModel;
 
 @property(nonatomic,weak)id<InformationCellDelegate> delegate;

@@ -8,15 +8,27 @@
 
 #import <Foundation/Foundation.h>
 #import "InformationModel.h"
+#import "InformationTimeModel.h"
+
 
 @interface InformationFrameModel : NSObject
 
 @property(nonatomic,strong) InformationModel *informationModel;
 
+@property(nonatomic,strong) InformationTimeModel *informationTimeModel;
+
+@property (nonatomic, assign) CGRect sectionF;
+/// 分区时间
+@property (nonatomic, assign) CGRect allTime;
+
+@property (nonatomic, assign) CGRect hourTime;
 /// key
 @property (nonatomic, assign) CGRect keyF;
 /// sentiment
 @property (nonatomic, assign) CGRect sentimentF;
+
+@property (nonatomic, assign) CGRect progressF;
+
 /// title
 @property (nonatomic, assign) CGRect titleF;
 /// url

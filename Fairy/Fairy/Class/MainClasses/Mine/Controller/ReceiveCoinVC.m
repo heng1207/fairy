@@ -129,8 +129,29 @@
         make.left.equalTo(backView.mas_left).offset(kScreenValue(15));
         make.height.mas_equalTo(kScreenValue(14));
     }];
+    
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [btn setTitle:@"复制收款地址" forState:UIControlStateNormal];
+    [btn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btn addTarget:self action:@selector(copyAddress:) forControlEvents:UIControlEventTouchUpInside];
+    btn.titleLabel.font = [UIFont systemFontOfSize:14];
+    [backView addSubview:btn];
+    [btn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(backView.mas_bottom).offset(- 25);
+        make.right.equalTo(backView.mas_right).offset(kScreenValue(-15));
+        make.left.equalTo(backView.mas_left).offset(kScreenValue(15));
+        make.height.mas_equalTo(kScreenValue(25));
+    }];
+    
+    
 }
+-(void) copyAddress:(UIButton *)sender{
+    [self showHint:@"已复制"];
 
+    UIPasteboard*pasteboard = [UIPasteboard generalPasteboard];
+    
+    pasteboard.string=self.data[@"currencyTokenAddress"];
+}
 - (UIImage *)createNonInterpolatedUIImageFormCIImage:(CIImage *)image withSize:(CGFloat) size {
     
     CGRect extent = CGRectIntegral(image.extent);

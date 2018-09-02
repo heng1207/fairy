@@ -44,6 +44,7 @@
     self.view.backgroundColor =[UIColor grayColor];
     [self initNavtionBar];
     [self createCodeLoginView];
+    [self.view setUserInteractionEnabled: YES];
     self.view.backgroundColor = RGBA(232,239, 245, 1);
     
     // Do any additional setup after loading the view.
@@ -176,7 +177,7 @@
 
     
     
-    [backView addSubview:self.loginBtn];
+    [self.view addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(backView.mas_bottom).offset(kScreenValue(59));
         make.left.equalTo(self.view.mas_left).offset(kScreenValue(14));
@@ -192,15 +193,22 @@
 
 - (void)loginAction:(UIButton *)sender
 {
-  
-        
+    if (self.phoneTF.text.length<6) {
+        return;
+    }
+    if (self.codeTF.text.length<6) {
+        return;
+    }if (self.NewPassTF.text.length<6) {
+        return;
+    }
+    
         PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
         NSMutableDictionary *dict =[NSMutableDictionary dictionary];
         dict[@"token"]  = userModel.token;
         
         NSString *str = [NSString stringWithFormat:@"%@?token=%@", ResetForgetPayPassword,dict[@"token"]];
         NSMutableDictionary *dic = [@{@"checkCode":self.codeTF.text,
-                                     @"payPassword":self.NewPassTF
+                                     @"payPassword":self.NewPassTF.text
                                       } mutableCopy];
         
         [NetworkManage Post:str andParams:dic success:^(id responseObject) {
@@ -243,7 +251,6 @@
         }];
   
     //计时器
-    [self.codeBtn setEnabled:NO];
     self.secondsCountDown = 60;
     // self.senderButton.backgroundColor = [UIColor lightGrayColor];
     self.countDownTimer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countDownTimeWithSeconds:) userInfo:nil repeats:YES];
@@ -254,7 +261,6 @@
 {
     if (self.secondsCountDown == 0)
     {
-        [self.codeBtn setEnabled:YES];
         [self.codeBtn setTitle:@"获取验证码" forState:UIControlStateNormal];
         [self.countDownTimer invalidate];
     }
@@ -272,16 +278,7 @@
 
 - (void)textFieldValueChange
 {
-    if (self.phoneTF.text.length != 0 && self.codeTF.text.length != 0)
-    {
-        self.loginBtn.enabled = YES;
-        self.loginBtn.backgroundColor = [UIColor mainBlueColor];
-    }
-    else
-    {
-        self.loginBtn.enabled = NO;
-        self.loginBtn.backgroundColor = [UIColor mainBlueColorEnable];
-    }
+    
 }
 
 
@@ -357,17 +354,16 @@
 {
     if (!_loginBtn)
     {
-        _loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        _loginBtn = [UIButton buttonWithType:UIButtonTypeSystem];
         [_loginBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [_loginBtn setTitle:@"确定" forState:UIControlStateNormal];
         _loginBtn.backgroundColor = [UIColor mainBlueColorEnable];
         [_loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
-        _loginBtn.layer.cornerRadius = kScreenValue(5);
-        _loginBtn.adjustsImageWhenHighlighted = NO;
-        _loginBtn.enabled = NO;
         _loginBtn.layer.masksToBounds = YES;
         _loginBtn.layer.cornerRadius = 5;
+        [_loginBtn setUserInteractionEnabled:YES];
     }
+    
     return _loginBtn;
 }
 

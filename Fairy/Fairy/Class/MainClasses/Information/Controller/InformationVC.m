@@ -44,7 +44,7 @@
     self.menuViewLayoutMode = WMMenuViewLayoutModeCenter;
     self.titleSizeNormal = 15;
     self.titleSizeSelected = 15;
-    self.titleColorNormal = [UIColor blueColor];
+    self.titleColorNormal = [UIColor colorWithHex:@"#1161a0"];
     self.titleColorSelected = [UIColor whiteColor];
     self.menuView.scrollView.backgroundColor =[UIColor grayColor];
     [self reloadData];

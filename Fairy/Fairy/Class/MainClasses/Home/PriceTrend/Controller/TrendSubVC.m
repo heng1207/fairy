@@ -37,6 +37,7 @@
     [self creatToolBarView];
     
     [self requestPriceDatas];
+    [self requestVolumeDatas];
     
     
     // Do any additional setup after loading the view.
@@ -148,8 +149,7 @@
             self.wsLine =wsLine;
             [self.view addSubview:wsLine];
             
-            
-            [self requestVolumeDatas];
+        
             
         }
     } failure:^(NSError *error) {

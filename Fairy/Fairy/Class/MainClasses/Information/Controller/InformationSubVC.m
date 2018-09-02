@@ -9,6 +9,7 @@
 #import "InformationSubVC.h"
 #import "InformationCell.h"
 #import "InformationModel.h"
+#import "InformationTimeModel.h"
 #import "InformationFrameModel.h"
 #import "InformationDetailsVC.h"
 
@@ -112,14 +113,45 @@
     __weak InformationSubVC *weakSelf = self;
     [NetworkManage Get:Information andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+//        weakSelf.allNumber = [obj[@"pager.totalRows"] integerValue];
+//        NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
+//        // 将InformationModel数组模型转换成InformationFrameModel数组模型
+//        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
+//        [weakSelf.informationFrameModelArr removeAllObjects];
+//        [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];
+//        [weakSelf.myTableView.mj_header endRefreshing];
+//        [weakSelf.myTableView reloadData];
+        
+        
+        
+        
+        
         weakSelf.allNumber = [obj[@"pager.totalRows"] integerValue];
         NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
+ 
+        NSMutableArray *informationTimeModelArr = [weakSelf informationTimeModelWithInformationModel:aryModel];
+     
+        
+        
+        InformationTimeModel *firstModel =informationTimeModelArr[0];
+        firstModel.currentDatyFirstInfo = YES;
+        NSString *currentDaty = firstModel.dayTime;
+        for (NSInteger i =0; i<informationTimeModelArr.count; i++) {
+            InformationTimeModel *model =informationTimeModelArr[i];
+            if (![model.dayTime isEqualToString:currentDaty]) {
+                model.currentDatyFirstInfo = YES;
+                currentDaty = model.dayTime;
+            }
+        }
+    
+        NSLog(@"%@",informationTimeModelArr);
         // 将InformationModel数组模型转换成InformationFrameModel数组模型
-        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
+        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:informationTimeModelArr];
         [weakSelf.informationFrameModelArr removeAllObjects];
         [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];
         [weakSelf.myTableView.mj_header endRefreshing];
         [weakSelf.myTableView reloadData];
+        
     } failure:^(NSError *error) {
         [weakSelf.myTableView.mj_header endRefreshing];
         NSLog(@"%@",error);
@@ -149,11 +181,36 @@
     [NetworkManage Get:Information andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         NSArray *aryModel  = [InformationModel mj_objectArrayWithKeyValuesArray:obj[@"rows"]];
+//        // 将InformationModel数组模型转换成InformationFrameModel数组模型
+//        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
+//        [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];;
+//        [weakSelf.myTableView.mj_footer endRefreshing];
+//        [weakSelf.myTableView reloadData];
+        
+        
+        
+        
+        NSMutableArray *informationTimeModelArr = [weakSelf informationTimeModelWithInformationModel:aryModel];
+        InformationFrameModel *lastFrameModel =self.informationFrameModelArr.lastObject;
+        InformationTimeModel *lastTimeModel =lastFrameModel.informationTimeModel;
+        NSString *currentDaty = lastTimeModel.dayTime;
+        for (NSInteger i =0; i<informationTimeModelArr.count; i++) {
+            InformationTimeModel *model =informationTimeModelArr[i];
+            if (![model.dayTime isEqualToString:currentDaty]) {
+                model.currentDatyFirstInfo = YES;
+                currentDaty = model.dayTime;
+            }
+        }
+        
         // 将InformationModel数组模型转换成InformationFrameModel数组模型
-        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:aryModel];
+        NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:informationTimeModelArr];
         [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];;
         [weakSelf.myTableView.mj_footer endRefreshing];
         [weakSelf.myTableView reloadData];
+        
+        
+        
+        
     } failure:^(NSError *error) {
         [self.myTableView.mj_footer endRefreshing];
         NSLog(@"%@",error);
@@ -161,13 +218,26 @@
     
 }
 
+- (NSMutableArray *)informationTimeModelWithInformationModel :(NSArray *)aryModel
+{
+    NSMutableArray *informationTimeModelArr = [NSMutableArray array];
+    for (InformationModel *informationModel in aryModel) {
+        InformationTimeModel *informationTimeModel = [[InformationTimeModel alloc]init];
+        informationTimeModel.informationModel = informationModel;
+        [informationTimeModelArr addObject:informationTimeModel];
+    }
+    return informationTimeModelArr;
+    
+}
+
 
 - (NSMutableArray *)informationFrameModelWithInformationModel :(NSArray *)aryModel
 {
+    
     NSMutableArray *informationFrameModelArr = [NSMutableArray array];
-    for (InformationModel *informationModel in aryModel) {
+    for (InformationTimeModel *informationTimeModel in aryModel) {
         InformationFrameModel *informationFrameModel = [[InformationFrameModel alloc]init];
-        informationFrameModel.informationModel = informationModel;
+        informationFrameModel.informationTimeModel = informationTimeModel;
         [informationFrameModelArr addObject:informationFrameModel];
     }
     return informationFrameModelArr;

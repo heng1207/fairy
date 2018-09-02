@@ -125,7 +125,7 @@ static AFHTTPSessionManager *_manager;
                 data = UIImageJPEGRepresentation(image, .6);
             }
             //	要上传的图片，仅支持JPEG、GIF、PNG格式，图片大小小于5M。
-            [formData appendPartWithFileData:data name:@"file" fileName:@"i.jpg" mimeType:@"image/jpeg"];
+            [formData appendPartWithFileData:data name:@"headerPic" fileName:@"i.jpg" mimeType:@"image/jpeg"];
             
         }
         

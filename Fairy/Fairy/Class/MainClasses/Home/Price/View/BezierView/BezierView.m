@@ -100,12 +100,12 @@
 
         if (self.currentSpace >= _defaultSpace) {
             
-            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
+//            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
             self.currentSpace = _defaultSpace;
             
         }
         else if (self.currentSpace <= _minSpace){
-            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
+//            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
             self.currentSpace = _minSpace;
         }
         

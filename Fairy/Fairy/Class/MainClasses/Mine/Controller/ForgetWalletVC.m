@@ -172,8 +172,8 @@
     
     
     
-    
-    [backView addSubview:self.loginBtn];
+    [self.view setUserInteractionEnabled:YES];
+    [self.view addSubview:self.loginBtn];
     [self.loginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(backView.mas_bottom).offset(kScreenValue(59));
         make.left.equalTo(self.view.mas_left).offset(kScreenValue(14));
@@ -190,13 +190,22 @@
 - (void)loginAction:(UIButton *)sender
 {
 
+    if (self.NewPassTF.text.length<6)
+    {
+        return;
+    }
+    if (self.codeTF.text.length<6)
+    {
+        return;
+    }
+    
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"token"]  = userModel.token;
     
     NSString *str = [NSString stringWithFormat:@"%@?token=%@", ResetForgetPayPassword,dict[@"token"]];
     NSMutableDictionary *dic = [@{@"checkCode":self.codeTF.text,
-                                  @"payPassword":self.NewPassTF
+                                  @"payPassword":self.NewPassTF.text
                                   } mutableCopy];
     
     [NetworkManage Post:str andParams:dic success:^(id responseObject) {
@@ -214,25 +223,6 @@
         [self showHint:@"网络错误"];
     }];
 
-    if (self.phoneTF.text.length != 11)
-    {
-        [SVProgressHUD setMinimumDismissTimeInterval:2];
-        [SVProgressHUD showInfoWithStatus:@"请输入11位手机号码"];
-    }
-    else if (![CommonTool isTelePhone:self.phoneTF.text] || ![self.phoneTF.text isEqualToString:self.phoneStr])
-    {
-        [SVProgressHUD setMinimumDismissTimeInterval:2];
-        [SVProgressHUD showInfoWithStatus:@"手机号码不正确"];
-    }
-    else if (![self.codeTF.text isEqualToString:self.codeStr])
-    {
-        [SVProgressHUD setMinimumDismissTimeInterval:2];
-        [SVProgressHUD showInfoWithStatus:@"验证码不正确"];
-    }
-    else
-    {
-        
-    }
 
 }
 
@@ -254,15 +244,6 @@
     } failure:^(NSError *error) {
         [self showHint:@"网络错误"];
     }];
-
-    if (self.phoneTF.text.length != 11)
-    {
-        [SVProgressHUD showInfoWithStatus:@"请输入11位手机号码"];
-    }
-    else if (![CommonTool isTelePhone:self.phoneTF.text])
-    {
-        [SVProgressHUD showInfoWithStatus:@"手机号码不正确"];
-    }
 
     
     //计时器
@@ -296,16 +277,7 @@
 
 - (void)textFieldValueChange
 {
-    if (self.phoneTF.text.length != 0 && self.codeTF.text.length != 0)
-    {
-        self.loginBtn.enabled = YES;
-        self.loginBtn.backgroundColor = [UIColor mainBlueColor];
-    }
-    else
-    {
-        self.loginBtn.enabled = NO;
-        self.loginBtn.backgroundColor = [UIColor mainBlueColorEnable];
-    }
+    
 }
 
 
@@ -387,8 +359,6 @@
         _loginBtn.backgroundColor = [UIColor mainBlueColorEnable];
         [_loginBtn addTarget:self action:@selector(loginAction:) forControlEvents:UIControlEventTouchUpInside];
         _loginBtn.layer.cornerRadius = kScreenValue(5);
-        _loginBtn.adjustsImageWhenHighlighted = NO;
-        _loginBtn.enabled = NO;
         _loginBtn.layer.masksToBounds = YES;
         _loginBtn.layer.cornerRadius = 5;
     }
