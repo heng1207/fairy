@@ -43,18 +43,18 @@
     UIButton *RMBbtn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 22)];
     self.RMBbtn = RMBbtn;
     [priceView addSubview:RMBbtn];
-    [RMBbtn setImage:[UIImage imageNamed:@"icon_switch_money_$"] forState:UIControlStateNormal];
-    [RMBbtn setImage:[UIImage imageNamed:@"icon_switch_money_$_select"] forState:UIControlStateSelected];
-    RMBbtn.selected = YES;
+    [RMBbtn setImage:[UIImage imageNamed:@"icon_switch_money_￥"] forState:UIControlStateNormal];
+    [RMBbtn setImage:[UIImage imageNamed:@"icon_switch_money_￥_select"] forState:UIControlStateSelected];
+    RMBbtn.selected = NO;
     [RMBbtn addTarget:self action:@selector(rmbBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
     UIButton *USAbtn =[[UIButton alloc]initWithFrame:CGRectMake(30, 0, 30, 22)];
     self.USAbtn = USAbtn;
     [priceView addSubview:USAbtn];
-    [USAbtn setImage:[UIImage imageNamed:@"icon_switch_money_￥"] forState:UIControlStateNormal];
-    [USAbtn setImage:[UIImage imageNamed:@"icon_switch_money_￥_select"] forState:UIControlStateSelected];
-    USAbtn.selected = NO;
+    [USAbtn setImage:[UIImage imageNamed:@"icon_switch_money_$"] forState:UIControlStateNormal];
+    [USAbtn setImage:[UIImage imageNamed:@"icon_switch_money_$_select"] forState:UIControlStateSelected];
+    USAbtn.selected = YES;
     [USAbtn addTarget:self action:@selector(usaBtnClick:) forControlEvents:UIControlEventTouchUpInside];
     
     
@@ -105,6 +105,21 @@
     }
     btn.selected = YES;
     self.USAbtn.selected = NO;
+    
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"moneyType"] = @"1";
+    if (self.marchBtn.selected) {
+        dict[@"month"] = @"3";
+    }
+    else if (self.juneBtn.selected){
+        dict[@"month"] = @"6";
+    }
+    else{
+        dict[@"month"] = @"12";
+    }
+    dict[@"tag"] = [NSString stringWithFormat:@"%ld",(long)self.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SegmentViewMoneyTypeAndMonthSelect" object:dict];
+    
 }
 -(void)usaBtnClick:(UIButton *)btn{
     if (btn.selected) {
@@ -112,6 +127,21 @@
     }
     btn.selected = YES;
     self.RMBbtn.selected = NO;
+
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"moneyType"] = @"2";
+    if (self.marchBtn.selected) {
+        dict[@"month"] = @"3";
+    }
+    else if (self.juneBtn.selected){
+        dict[@"month"] = @"6";
+    }
+    else{
+        dict[@"month"] = @"12";
+    }
+    dict[@"tag"] = [NSString stringWithFormat:@"%ld",(long)self.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SegmentViewMoneyTypeAndMonthSelect" object:dict];
+    
 }
 
 
@@ -123,6 +153,17 @@
     btn.selected = YES;
     self.juneBtn.selected = NO;
     self.yearBtn.selected = NO;
+    
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"month"] = @"3";
+    if (self.RMBbtn.selected) {
+        dict[@"moneyType"] = @"1";
+    }
+    else{
+        dict[@"moneyType"] = @"2";
+    }
+    dict[@"tag"] = [NSString stringWithFormat:@"%ld",(long)self.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SegmentViewMoneyTypeAndMonthSelect" object:dict];
 }
 
 -(void)juneBtnClick:(UIButton *)btn{
@@ -132,6 +173,16 @@
     btn.selected = YES;
     self.marchBtn.selected = NO;
     self.yearBtn.selected = NO;
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"month"] = @"6";
+    if (self.RMBbtn.selected) {
+        dict[@"moneyType"] = @"1";
+    }
+    else{
+        dict[@"moneyType"] = @"2";
+    }
+    dict[@"tag"] = [NSString stringWithFormat:@"%ld",(long)self.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SegmentViewMoneyTypeAndMonthSelect" object:dict];
 }
 
 -(void)yearBtnClick:(UIButton *)btn{
@@ -141,6 +192,16 @@
     btn.selected = YES;
     self.marchBtn.selected = NO;
     self.juneBtn.selected = NO;
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"month"] = @"12";
+    if (self.RMBbtn.selected) {
+        dict[@"moneyType"] = @"1";
+    }
+    else{
+        dict[@"moneyType"] = @"2";
+    }
+    dict[@"tag"] = [NSString stringWithFormat:@"%ld",(long)self.tag];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SegmentViewMoneyTypeAndMonthSelect" object:dict];
 }
 
 /*

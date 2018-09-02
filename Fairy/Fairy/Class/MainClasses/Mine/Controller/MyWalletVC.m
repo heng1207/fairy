@@ -8,14 +8,21 @@
 
 #import "MyWalletVC.h"
 #import "MyWalletCell.h"
-
+#import "MyWalletDetailVC.h"
+#import "ChangeWalletVC.h"
+#import "ForgetWalletVC.h"
 @interface MyWalletVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 
 @end
 
 @implementation MyWalletVC
-
+-(NSMutableDictionary *)dataSource{
+    if (!_dataSource) {
+        _dataSource = [NSMutableDictionary dictionary];
+    }
+    return _dataSource;
+}
 - (void)viewDidLoad {
     self.view.backgroundColor =[UIColor grayColor];
     [self initNavtionBar];
@@ -99,8 +106,7 @@
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.backgroundColor =[UIColor whiteColor];
             UIImageView *imageView = [[UIImageView alloc]init];
-            imageView.image = [UIImage imageNamed:@"AppIcon"];
-            imageView.backgroundColor = [UIColor blueColor];
+            imageView.image = [UIImage imageNamed:@"我的钱包拷贝"];
             
             [cell addSubview:imageView];
             [imageView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -115,17 +121,17 @@
         }else if(indexPath.row == 1){
             MyWalletCell *SetCell = [tableView dequeueReusableCellWithIdentifier:@"MyWalletCell" forIndexPath:indexPath];
             SetCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            SetCell.icon.image = [UIImage imageNamed:@"AppIcon"];
+            SetCell.icon.image = [UIImage imageNamed:@"FYC"];
             SetCell.title.text = @"FYC";
-            SetCell.count.text = @"2.00FYC";
+            SetCell.count.text = [NSString stringWithFormat:@"%@",self.dataSource[@"remainCurrencyFYC"]];
             return SetCell;
             
         }else if(indexPath.row == 2){
             MyWalletCell *SetCell = [tableView dequeueReusableCellWithIdentifier:@"MyWalletCell" forIndexPath:indexPath];
             SetCell.selectionStyle = UITableViewCellSelectionStyleNone;
-            SetCell.icon.image = [UIImage imageNamed:@"AppIcon"];
+            SetCell.icon.image = [UIImage imageNamed:@"ETH"];
             SetCell.title.text = @"ETH";
-            SetCell.count.text = @"2.00ETH";
+            SetCell.count.text = [NSString stringWithFormat:@"%@",self.dataSource[@"remainCurrency"]];
             return SetCell;
             
         }else{
@@ -154,7 +160,30 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+
+    if (indexPath.section == 0) {
+        MyWalletDetailVC *vc =[MyWalletDetailVC new];
+        vc.hidesBottomBarWhenPushed = YES;
+        if (indexPath.row == 1) {
+            vc.title = @"FYC";
+        }
+        else if (indexPath.row == 2) {
+        
+            vc.title = @"ETH";
+        }
+        vc.Data = self.dataSource;
+        [self.navigationController pushViewController:vc animated:YES];
+    }else{
+        if (indexPath.row == 0) {
+            ChangeWalletVC *vc =[ChangeWalletVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }else{
+            ForgetWalletVC *vc =[ForgetWalletVC new];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+        }
+    }
 }
 
 //section头部间距

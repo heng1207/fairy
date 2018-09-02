@@ -40,7 +40,6 @@
 
 -(void)initNavtionBar{
     UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-//    ItemLab.text = @"全网 ETH";
     ItemLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
     ItemLab.textColor=[UIColor whiteColor];
     ItemLab.font = [UIFont systemFontOfSize:18];
@@ -130,6 +129,11 @@
         vc.priceModel = self.priceModel;
         return vc;
     }
+    else if (index==2){
+        Y_StockChartViewController* vc = [[Y_StockChartViewController alloc]init];
+        vc.priceModel = self.priceModel;
+        return vc;
+    }
     else{
         UIViewController* vc = [[UIViewController alloc]init];
         return vc;
@@ -159,9 +163,7 @@
 - (NSMutableArray *)flagArray
 {
     if (_flagArray == nil) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        NSString *platformCnName = [defaults objectForKey:@"platformCnName"];
-        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",platformCnName, nil];
+        _flagArray = [NSMutableArray arrayWithObjects:@"趋势",@"中币",@"BITFINEX", nil];
     }
     return _flagArray;
 }

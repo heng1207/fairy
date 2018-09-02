@@ -148,9 +148,30 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row==2){
-            MyWalletVC *vc =[MyWalletVC new];
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
+            
+            PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+            NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+            dict[@"token"]  = userModel.token;
+            
+            NSString *str = [NSString stringWithFormat:@"%@?token=%@",GetAmountInfo,dict[@"token"]];
+            
+            [NetworkManage Get:str andParams:nil success:^(id responseObject) {
+                if ([responseObject[@"code"]integerValue] ==200) {
+                    MyWalletVC *vc =[MyWalletVC new];
+                    vc.dataSource = responseObject[@"data"];
+                    vc.hidesBottomBarWhenPushed = YES;
+                    [self.navigationController pushViewController:vc animated:YES];
+                }else{
+                    [self showHint:responseObject[@"message"]];
+
+                }
+                
+                
+            } failure:^(NSError *error) {
+                [self showHint:@"网站有错"];
+            }];
+            
+           
         }
     }
     else if (indexPath.section==1){
@@ -241,6 +262,9 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             NSLog(@"%@",obj[@"data"]);
+            
+            [kUserDefaults setObject:obj[@"data"][@"phoneNumber"] forKey:KphoneNumber];
+            
             /*
              {
              appVersion = "<null>";

@@ -14,8 +14,6 @@
 
 
 #define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
-#define kScreenHeight [UIScreen mainScreen].bounds.size.height
 #define SCREEN_MAX_LENGTH MAX(kScreenWidth,kScreenHeight)
 #define IS_IPHONE_X (IS_IPHONE && SCREEN_MAX_LENGTH == 812.0)
 
@@ -204,6 +202,9 @@
     [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
+        if (reversedArray.count<=0) {
+            return ;
+        }
         Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
         self.groupModel = groupModel;
         [self.modelsDict setObject:groupModel forKey:self.type];
@@ -267,6 +268,9 @@
         [hud hideAnimated:YES];
         NSLog(@"%@",responseObject);
         NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
+        if (reversedArray.count<=0) {
+            return ;
+        }
         Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
         
         Y_KLineGroupModel *nowModel = [self.modelsDict objectForKey:self.type];

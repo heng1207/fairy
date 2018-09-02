@@ -222,13 +222,16 @@
     }
     else if (self.currentIndex==3){
         urlPath = [NSString stringWithFormat:@"%@/kline/get_kline_1d",SERVER];
-//        param[@"tradePlatform"] = @"bitfinex";
+ //        param[@"tradePlatform"] = @"bitfinex";
 //        param[@"coinPair"] = @"eth_btc";
     }
     
     [NetworkManage Get:urlPath andParams:param success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
+        if (reversedArray.count<=0) {
+            return ;
+        }
         Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
         self.groupModel = groupModel;
         [self.modelsDict setObject:groupModel forKey:self.type];
@@ -293,8 +296,10 @@
         [hud hideAnimated:YES];
         NSLog(@"%@",responseObject);
         NSArray* reversedArray = [[responseObject[@"data"] reverseObjectEnumerator] allObjects];
+        if (reversedArray.count<=0) {
+            return ;
+        }
         Y_KLineGroupModel *groupModel = [Y_KLineGroupModel objectWithArray:reversedArray];
-    
         Y_KLineGroupModel *nowModel = [self.modelsDict objectForKey:self.type];
         [nowModel.models addObjectsFromArray:groupModel.models];
         self.groupModel = nowModel;

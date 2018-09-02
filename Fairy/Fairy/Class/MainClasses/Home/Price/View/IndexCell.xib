@@ -219,7 +219,7 @@
                 <outlet property="secondView" destination="zit-DS-Hwk" id="Rej-jS-1Ia"/>
                 <outlet property="thirdView" destination="7Sr-Hr-Sp7" id="MMH-ED-TE3"/>
             </connections>
-            <point key="canvasLocation" x="294" y="147"/>
+            <point key="canvasLocation" x="156" y="22"/>
         </tableViewCell>
     </objects>
     <resources>

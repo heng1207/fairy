@@ -8,7 +8,7 @@
 
 #import "YAxisView.h"
 
-#define topMargin 25   // 为顶部留出的空白
+#define topMargin 10   // 为顶部留出的空白
 #define xAxisTextGap 5 //x轴文字与x轴坐标轴间隙
 #define numberOfYAxisElements 5 // y轴分为几段
 #define kChartLineColor         [UIColor grayColor]

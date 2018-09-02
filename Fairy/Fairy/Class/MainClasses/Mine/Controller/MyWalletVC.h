@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface MyWalletVC : UIViewController
+@property (nonatomic,strong)NSMutableDictionary *dataSource;
 
 @end

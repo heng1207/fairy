@@ -27,7 +27,7 @@
         botlabel.textAlignment = NSTextAlignmentCenter;
         botlabel.textColor = [UIColor blackColor];
         botlabel.font = [UIFont systemFontOfSize:15];
-        botlabel.backgroundColor = [UIColor grayColor];
+        botlabel.backgroundColor = [UIColor colorWithHex:@"#f2f2f2"];
         [self.contentView addSubview:botlabel];
         
     }

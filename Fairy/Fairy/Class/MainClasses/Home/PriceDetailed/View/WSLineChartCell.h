@@ -10,5 +10,5 @@
 
 @interface WSLineChartCell : UITableViewCell
 @property (nonatomic,strong)NSMutableArray* firstDataArr;
-@property (nonatomic,strong)NSMutableArray* secondDataArr;
+//@property (nonatomic,strong)NSMutableArray* secondDataArr;
 @end

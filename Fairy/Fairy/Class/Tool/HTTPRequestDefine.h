@@ -85,7 +85,7 @@
 
 
 //K线图
-//http://47.75.145.77:8080/interface/kline/get_kline_15m?tradePlatform=bitfinex&coinPair=eth_btc&klineDate=20180801
+//http://47.254.69.147:8080/interface/kline/get_kline_15m?tradePlatform=bitfinex&coinPair=eth_btc&klineDate=20180801
 
 //价格趋势图
 #define PriceTrendChart           (SERVER@"/kline/getPriceListData")
@@ -98,6 +98,46 @@
 //资讯
 #define Information                (SERVER@"/news/list_data")
 //http://47.75.145.77:8080/interface/news/list_data?lang=cn
+
+
+//钱包打开页面
+#define GetAmountInfo              (SERVER@"/wallet/getAmountInfo")
+
+//钱包判断是否有支付密码
+#define HasPayPassword              (SERVER@"/wallet/hasPayPassword")
+
+//忘记或重置支付密码
+#define ResetForgetPayPassword              (SERVER@"/wallet/resetForgetPayPassword")
+
+
+//获取验证码
+#define GetCheckCode              (SERVER@"/wallet/getCheckCode")
+
+//获取交易记录
+#define GetTradeHistory              (SERVER@"/wallet/getTradeHistory")
+
+
+//钱包判断是否有支付密码
+#define WalletRecharge              (SERVER@"/wallet/recharge")
+
+//设置支付密码
+#define setPayPassword              (SERVER@"/wallet/setPayPassword")
+
+//验证支付密码
+#define verifyPayPassword              (SERVER@"/wallet/verifyPayPassword")
+
+//提币
+#define sendToAddress              (SERVER@"/wallet/sendToAddress")
+
+//当天该币交易量排行查询
+#define SelectNowList              (SERVER@"/tranOcRatio/selectNowList")
+
+//当天该币种饼图数据查询
+#define SelectPie              (SERVER@"/tranOcRatio/selectPie")
+
+//当天该币种饼图数据查询
+#define GetTradeHistory              (SERVER@"/wallet/getTradeHistory")
+
 
 
 #endif /* HTTPRequestDefine_h */

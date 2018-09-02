@@ -10,4 +10,5 @@
 
 @interface SegmentView : UIView
 
+
 @end

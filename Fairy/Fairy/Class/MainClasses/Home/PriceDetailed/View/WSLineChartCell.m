@@ -11,7 +11,10 @@
 #import "SegmentView.h"
 
 @interface  WSLineChartCell()
+@property(nonatomic,strong)WSLineChartView *wsLine;
 
+@property(nonatomic,strong)UILabel *titleLab;
+@property(nonatomic,strong)SegmentView *segView;
 @end
 
 
@@ -20,7 +23,8 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self =[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHex:@"#e8f0f3"];
+        self.backgroundColor = [UIColor whiteColor];
+
     }
     return self;
 }
@@ -28,9 +32,6 @@
 
 -(void)setFirstDataArr:(NSMutableArray *)firstDataArr{
     _firstDataArr = firstDataArr;
-    
-    SegmentView *segView=[[SegmentView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 22)];
-    [self.contentView addSubview:segView];
     
     
     //获取显示区间最大值，最小值
@@ -52,47 +53,58 @@
         [xArray addObject:obj[@"historyDate"]];
         [yArray addObject:obj[@"closePrice"]];
     }];
-    
-    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 22, UIScreenW, 173) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
-    
+    if (self.wsLine) {
+        [self.wsLine removeFromSuperview];
+        self.wsLine = nil;
+    }
+    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 130) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+    self.wsLine = wsLine;
     [self.contentView addSubview:wsLine];
     
 }
-
--(void)setSecondDataArr:(NSMutableArray *)secondDataArr{
-    _secondDataArr = secondDataArr;
-    if (secondDataArr.count>0) {
-        
-        SegmentView *segView=[[SegmentView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 22)];
-        [self.contentView addSubview:segView];
-        
-        
-        //获取显示区间最大值，最小值
-        NSMutableArray *price = [NSMutableArray array];
-        for (NSDictionary *item in secondDataArr) {
-            [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
-        }
-        CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
-        CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
-        int maxSection = (maxPrice/10);
-        int minSection = (minPrice/10);
-        int maxPriceSection = maxSection*10+10;
-        int minPriceSection = minSection*10;
-        //            NSLog(@"%f---%f",maxPrice,minPrice);
-        
-        NSMutableArray *xArray = [NSMutableArray array];
-        NSMutableArray *yArray = [NSMutableArray array];
-        [secondDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            [xArray addObject:obj[@"historyDate"]];
-            [yArray addObject:obj[@"closePrice"]];
-        }];
-        
-        WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 195, UIScreenW, 195) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
-        
-        [self.contentView addSubview:wsLine];
-        
-    }
-}
+//
+//-(void)setSecondDataArr:(NSMutableArray *)secondDataArr{
+//    _secondDataArr = secondDataArr;
+//    if (secondDataArr.count>0) {
+//        
+//        UILabel *titleLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 15, self.width, 17)];
+//        titleLab.textAlignment = NSTextAlignmentCenter;
+//        titleLab.text =@"某某某折线图";
+//        titleLab.font = [UIFont systemFontOfSize:15];
+//        [self.contentView addSubview:titleLab];
+//        
+//        SegmentView *segView=[[SegmentView alloc]initWithFrame:CGRectMake(0, 40, SCREEN_WIDTH, 22)];
+//        segView.tag = 22;
+//        [self.contentView addSubview:segView];
+//
+//        
+//
+//        //获取显示区间最大值，最小值
+//        NSMutableArray *price = [NSMutableArray array];
+//        for (NSDictionary *item in secondDataArr) {
+//            [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
+//        }
+//        CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
+//        CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
+//        int maxSection = (maxPrice/10);
+//        int minSection = (minPrice/10);
+//        int maxPriceSection = maxSection*10+10;
+//        int minPriceSection = minSection*10;
+//        //            NSLog(@"%f---%f",maxPrice,minPrice);
+//        
+//        NSMutableArray *xArray = [NSMutableArray array];
+//        NSMutableArray *yArray = [NSMutableArray array];
+//        [secondDataArr enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+//            [xArray addObject:obj[@"historyDate"]];
+//            [yArray addObject:obj[@"closePrice"]];
+//        }];
+//        
+//        WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 75, UIScreenW, 120) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+//        
+//        [self.contentView addSubview:wsLine];
+//        
+//    }
+//}
 
 
 

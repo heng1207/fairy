@@ -60,6 +60,10 @@
 
 #define KurgentInfo         @"urgentInfo"
 
+#define KchoseCoin         @"choseCoin"
+
+#define KphoneNumber         @"phoneNumber"
+
 
 //判断设备的屏幕尺寸
 #define IS_SCREEN_4_INCH	([UIScreen instancesRespondToSelector:@selector(currentMode)] ? CGSizeEqualToSize(CGSizeMake(640, 1136), [[UIScreen mainScreen] currentMode].size) : NO)

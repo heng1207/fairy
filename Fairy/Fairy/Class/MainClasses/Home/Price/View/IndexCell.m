@@ -88,15 +88,18 @@
         return;
     }
     
-    self.nameLab1.text = globalIndexData[0][@"platformCnName"];
+    self.nameLab1.text = globalIndexData[0][@"fsym"];
+    self.gloadLab1.text = globalIndexData[0][@"platformCnName"];
     self.RMBLab1.text = globalIndexData[0][@"rmbPrice"];
     self.USBLab1.text = globalIndexData[0][@"lastPrice"];
     
-    self.nameLab2.text = globalIndexData[1][@"platformCnName"];
+    self.nameLab2.text = globalIndexData[1][@"fsym"];
+    self.gloadLab2.text = globalIndexData[1][@"platformCnName"];
     self.RMBLab2.text = globalIndexData[1][@"rmbPrice"];
     self.USBLab2.text = globalIndexData[1][@"lastPrice"];
     
-    self.nameLab3.text = globalIndexData[2][@"platformCnName"];
+    self.nameLab3.text = globalIndexData[2][@"fsym"];
+    self.gloadLab3.text = globalIndexData[2][@"platformCnName"];
     self.RMBLab3.text = globalIndexData[2][@"rmbPrice"];
     self.USBLab3.text = globalIndexData[2][@"lastPrice"];
     
@@ -106,12 +109,20 @@
 
 -(void)firstTapClick:(UIGestureRecognizer*)tap{
     
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"selectType"] = self.globalIndexData[0][@"fsym"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"indexTypeViewTypeSelect" object:dict];
 }
 -(void)secondTapClick:(UIGestureRecognizer*)tap{
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"selectType"] = self.globalIndexData[1][@"fsym"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"indexTypeViewTypeSelect" object:dict];
     
 }
 -(void)thirdTapClick:(UIGestureRecognizer*)tap{
-    
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    dict[@"selectType"] = self.globalIndexData[2][@"fsym"];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"indexTypeViewTypeSelect" object:dict];
 }
 
 

@@ -8,7 +8,7 @@
 
 #import "XAxisView.h"
 
-#define topMargin 25   // 为顶部留出的空白
+#define topMargin 10   // 为顶部留出的空白
 #define kChartLineColor         [UIColor grayColor]
 #define kChartTextColor         [UIColor blackColor]
 

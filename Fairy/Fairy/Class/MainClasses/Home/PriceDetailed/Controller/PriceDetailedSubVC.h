@@ -11,5 +11,6 @@
 
 @interface PriceDetailedSubVC : UIViewController
 
+
 -(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index  PriceModel:(PriceModel*)priceModel;
 @end

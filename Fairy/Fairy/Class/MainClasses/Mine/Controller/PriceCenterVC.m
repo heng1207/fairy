@@ -65,7 +65,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -73,7 +73,7 @@
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row ==1 ) {
+    if (indexPath.row ==0 ) {
         UITableViewCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"ExitCell"];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ExitCell"];
@@ -123,13 +123,13 @@
     else {
         MessageCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"MessageCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (indexPath.row == 2)
-        {
+//        if (indexPath.row == 2)
+//        {
             cell.lineView.hidden = YES;
-        }else
-        {
-            cell.lineView.hidden = NO;
-        }
+//        }else
+//        {
+//            cell.lineView.hidden = NO;
+//        }
         
         //箭头
         cell.JianTouIM.image = [UIImage imageNamed:@"prices_down"];
@@ -141,19 +141,19 @@
         }];
         
         
-        if (indexPath.row ==0)
-        {
-            cell.TitleLab.text = @"选择默认交易平台";
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            cell.DetailsLab.text = [defaults objectForKey:@"platformCnName"];
-            cell.JianTouIM.image = [UIImage imageNamed:@"prices_down"];
-        }
-        else if (indexPath.row == 2)
-        {
+//        if (indexPath.row ==0)
+//        {
+//            cell.TitleLab.text = @"选择默认交易平台";
+//            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//            cell.DetailsLab.text = [defaults objectForKey:@"platformCnName"];
+//            cell.JianTouIM.image = [UIImage imageNamed:@"prices_down"];
+//        }
+//        else if (indexPath.row == 2)
+//        {
             cell.TitleLab.text = @"默认法币";
             cell.DetailsLab.text = @"人民币";
             cell.JianTouIM.image = [UIImage imageNamed:@"prices_down"];
-        }
+//        }
         return cell;
     }
 }
@@ -167,8 +167,8 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row ==0 || indexPath.row ==2) {
-        [self getCellLocationOnView:indexPath];
+    if (indexPath.row ==1) {
+//        [self getCellLocationOnView:indexPath];
     }
 }
 

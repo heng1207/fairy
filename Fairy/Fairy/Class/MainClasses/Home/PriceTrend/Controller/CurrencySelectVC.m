@@ -34,7 +34,7 @@
     UICollectionView *mainCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:layout];
     self.mainCollectionView = mainCollectionView;
     [self.view addSubview:mainCollectionView];
-    mainCollectionView.backgroundColor = [UIColor clearColor];
+    mainCollectionView.backgroundColor = [UIColor whiteColor];
     //4.设置代理
     mainCollectionView.delegate = self;
     mainCollectionView.dataSource = self;
@@ -120,10 +120,11 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionReusableView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"reusableView" forIndexPath:indexPath];
-    headerView.backgroundColor =[UIColor grayColor];
+    headerView.backgroundColor =[UIColor colorWithHex:@"#e9eff8"];
     UILabel *label = [[UILabel alloc] initWithFrame:headerView.bounds];
-    label.text = @"请选择一个币种进行对比";
+    label.text = @"  请选择一个币种进行对比";
     label.font = [UIFont systemFontOfSize:15];
+    label.textColor = [UIColor grayColor];
     [headerView addSubview:label];
     return headerView;
 }

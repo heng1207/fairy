@@ -12,7 +12,8 @@
 + (instancetype) objectWithArray:(NSArray *)arr {
     
     NSAssert([arr isKindOfClass:[NSArray class]], @"arr不是一个数组");
-    
+
+        
     Y_KLineGroupModel *groupModel = [Y_KLineGroupModel new];
     NSMutableArray *mutableArr = @[].mutableCopy;
     __block Y_KLineModel *preModel = [[Y_KLineModel alloc]init];

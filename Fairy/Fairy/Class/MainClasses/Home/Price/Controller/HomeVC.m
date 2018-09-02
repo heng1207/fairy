@@ -11,8 +11,9 @@
 #import "FSBaseTableView.h"
 #import "FSBottomTableViewCell.h"
 #import "HomeSubVC.h"
-#import "IndexCell.h"
+#import "IndexTypeCell.h"
 #import "GraphCell.h"
+#import "IndexCell.h"
 #import "SSSearchBar.h"
 #import "HomeNavView.h"
 #import "SearchVC.h"
@@ -84,16 +85,20 @@
     if (section == 1) {
         return 1;
     }
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
         if (indexPath.row == 0) {
-            return 170;
-        }else{
-            return 158;//137
+            return 25;
+        }
+        else if (indexPath.row==1){
+            return 145;
+        }
+        else{
+            return 158;
         }
         
     }
@@ -138,12 +143,18 @@
         return _contentCell;
     }
     if (indexPath.row == 0) {
+        IndexTypeCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IndexTypeCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        return cell;
+    }
+    else if (indexPath.row==1){
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.dataDic = self.IndexTypeViewDic;
+        //        cell.dataDic = self.IndexTypeViewDic;
         cell.firstDataArr = self.secondDataArr;
         return cell;
-    }else{
+    }
+    else{
         IndexCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"IndexCell"  forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.globalIndexData = self.globalIndexData;
@@ -226,6 +237,7 @@
         _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
         
+        [_tableView registerClass:[IndexTypeCell class] forCellReuseIdentifier:@"IndexTypeCell"];
         [_tableView registerClass:[GraphCell class] forCellReuseIdentifier:@"GraphCell"];
         [_tableView registerNib:[UINib nibWithNibName:@"IndexCell" bundle:nil] forCellReuseIdentifier:@"IndexCell"];
         
@@ -254,7 +266,7 @@
             self.globalIndexData = obj[@"data"];
             
             //指定刷新某行cell
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         }
     } failure:^(NSError *error) {
@@ -273,7 +285,7 @@
 //        NSLog(@"%@",error);
 //    }];
     
-    [self requestIndexSelectDatas:@"btc"];
+    [self requestIndexSelectDatas:@"bch"];
 }
 
 #pragma mark 通知
@@ -321,7 +333,7 @@
             self.secondDataArr = obj[@"data"];
             
             //指定刷新某行cell
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:0 inSection:0];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             
         }

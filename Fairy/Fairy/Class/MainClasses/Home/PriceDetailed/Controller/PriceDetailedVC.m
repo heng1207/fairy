@@ -17,12 +17,10 @@
 #import "PriceDetailedCell.h"
 #import "CompareCell.h"
 #import "WSLineChartCell.h"
-
-#import "WSLineChartView.h"
-
+#import "MoneyTypeMonthCell.h"
 
 
-@interface PriceDetailedVC ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate,CompareCellDelegate>
+@interface PriceDetailedVC ()<UITableViewDelegate,UITableViewDataSource,FSPageContentViewDelegate,FSSegmentTitleViewDelegate,CompareCellDelegate,MoneyTypeMonthCellDelegate>
 
 @property (nonatomic, strong) FSBaseTableView *tableView;
 @property (nonatomic, strong) FSBottomTableViewCell *contentCell;
@@ -32,6 +30,7 @@
 
 @property (nonatomic,strong)NSMutableArray* firstDataArr;
 @property (nonatomic,strong)NSMutableArray*secondDataArr;
+@property (nonatomic,strong)NSString *indexName;
 
 
 @end
@@ -42,35 +41,23 @@
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor whiteColor];
     [self initNavtionBar];
-
-
     self.canScroll = YES;
     [self.view addSubview:self.tableView];
-    
+
     [self requestData];
     
     // Do any additional setup after loading the view.
 }
 
 -(void)initNavtionBar{
-    UIView *viewTitle = [[UIView alloc] init];
-    viewTitle.frame = CGRectMake(0, 0, 150, 36);
-
-    UILabel *fromLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 0, 150, 18)];
-    fromLab.font = AdaptedFontSize(30);
-    fromLab.textColor = [UIColor whiteColor];
-    fromLab.textAlignment = NSTextAlignmentCenter;
-    fromLab.text = self.priceModel.platformCnName;
-    [viewTitle addSubview:fromLab];
     
-    UILabel *nameLab =[[ UILabel alloc]initWithFrame:CGRectMake(0, 18, 150, 18)];
-    nameLab.font = AdaptedFontSize(30);
-    nameLab.textColor = [UIColor whiteColor];
-    nameLab.textAlignment = NSTextAlignmentCenter;
-    nameLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
-    [viewTitle addSubview:nameLab];
-    self.navigationItem.titleView =viewTitle;
-
+    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
+    ItemLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
+    ItemLab.textAlignment = NSTextAlignmentCenter;
+    ItemLab.textColor=[UIColor whiteColor];
+    ItemLab.font = [UIFont systemFontOfSize:18];
+    self.navigationItem.titleView = ItemLab;
+    
     
     UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 50, 40)];
     [personalCenter setImage:[UIImage imageNamed:@"navBack"] forState:UIControlStateNormal];
@@ -104,7 +91,14 @@
     if (section == 1) {
         return 1;
     }
-    return 4;
+    
+    if (self.secondDataArr.count>0) {
+        return 6;
+    }
+    else{
+        return 4;
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -113,21 +107,37 @@
         if (indexPath.row == 0) {
             return 128;
         }
-        else if (indexPath.row == 3){
-            return 60;
-        }
         else if (indexPath.row == 1){
-            return 195;
+            return 65;
         }
-        else{
+        else if (indexPath.row == 2){
+            return 130;
+        }
+        else if (indexPath.row == 5){
             if (self.secondDataArr.count>0) {
-                return 195;
+                return 60;
             }
             else{
                 return 0;
             }
-            
         }
+        else if (indexPath.row == 3){
+            if (self.secondDataArr.count>0) {
+                return 65;
+            }
+            else{
+                return 60;
+            }
+        }
+        else if (indexPath.row == 4){
+            if (self.secondDataArr.count>0) {
+                return 130;
+            }
+            else{
+                return 0;
+            }
+        }
+   
         
     }
     return CGRectGetHeight(self.view.bounds);
@@ -147,7 +157,11 @@
         NSMutableArray *contentVCs = [NSMutableArray array];
         for (NSInteger i =0; i<self.flagArray.count; i++) {
             PriceDetailedSubVC*vc = [[PriceDetailedSubVC alloc]init];
-            vc.title = self.flagArray[i];
+//            vc.title = self.flagArray[i];
+            [vc loadMainTableData:self.flagArray[i] Index:i PriceModel:nil];
+          
+            [kUserDefaults setValue:self.priceModel.fsym forKey:KchoseCoin];
+
             [contentVCs addObject:vc];
         }
         
@@ -168,29 +182,66 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.model = self.priceModel;
         return cell;
-    }else if (indexPath.row == 3){
-        CompareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompareCell" forIndexPath:indexPath];
+    }
+    else if (indexPath.row ==1){
+        MoneyTypeMonthCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MoneyTypeMonthCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
+        cell.titleLab.text= [NSString stringWithFormat:@"%@折线图",self.priceModel.fsym];
         return cell;
     }
-    else{
+    else if (indexPath.row ==2){
         WSLineChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WSLineChartCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        if (indexPath.row==1) {
+        if (indexPath.row ==2) {
             cell.firstDataArr = self.firstDataArr;
         }
         else{
-            cell.secondDataArr = self.secondDataArr;
+            cell.firstDataArr = self.secondDataArr;
         }
+        
         return cell;
     }
+    else if (indexPath.row == 3){
+        if (self.secondDataArr.count>0) {
+            MoneyTypeMonthCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MoneyTypeMonthCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            cell.titleLab.text= [NSString stringWithFormat:@"%@折线图",self.indexName];
+            return cell;
+        }
+        else{
+            CompareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompareCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            return cell;
+        }
+    }
+    else if (indexPath.row ==4){
+        if (self.secondDataArr.count>0) {
+            WSLineChartCell *cell = [tableView dequeueReusableCellWithIdentifier:@"WSLineChartCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.firstDataArr = self.secondDataArr;
+            return cell;
+        }
+
+    }
+    else if (indexPath.row == 5){
+        if (self.secondDataArr.count>0) {
+            CompareCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CompareCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.delegate = self;
+            return cell;
+        }
+
+    }
+    
+    return nil;
     
 }
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     self.titleView = [[FSSegmentTitleView alloc]initWithFrame:CGRectMake(0, 0, CGRectGetWidth(self.view.bounds), 26) titles:self.flagArray delegate:self indicatorType:FSIndicatorTypeEqualTitle];
-    
     self.titleView.backgroundColor = [UIColor whiteColor];
     self.titleView.titleFont = AdaptedFontSize(33);
     self.titleView.titleSelectFont = AdaptedFontSize(33);
@@ -237,6 +288,10 @@
         [_tableView registerClass:[WSLineChartCell class] forCellReuseIdentifier:@"WSLineChartCell"];
         [_tableView registerNib:[UINib nibWithNibName:@"PriceDetailedCell" bundle:nil] forCellReuseIdentifier:@"PriceDetailedCell"];
          [_tableView registerNib:[UINib nibWithNibName:@"CompareCell" bundle:nil] forCellReuseIdentifier:@"CompareCell"];
+        [_tableView registerClass:[MoneyTypeMonthCell class] forCellReuseIdentifier:@"MoneyTypeMonthCell"];
+
+        
+        
     }
     return _tableView;
 }
@@ -257,6 +312,7 @@
 - (void)cellPlatformClick{
     CurrencySelectVC *vc=[CurrencySelectVC new];
     vc.block = ^(NSString *content) {
+        self.indexName = content;
         [self requestSelectData:content];
     };
     [self.navigationController pushViewController:vc animated:YES];
@@ -266,13 +322,16 @@
 
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"coinPair"] = self.priceModel.fsym;
+    dict[@"moneyType"] = @"2";
+    dict[@"month"] = @"3";
     
     [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.firstDataArr = [NSMutableArray array];
             self.firstDataArr = obj[@"data"];
-            [self.tableView reloadData];
+            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
@@ -283,18 +342,56 @@
 
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"coinPair"] = type;
+    dict[@"moneyType"] = @"2";
+    dict[@"month"] = @"3";
     [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.secondDataArr = obj[@"data"];
-            
-            //指定刷新某行cell
-            NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
-            [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            [self.tableView reloadData];
+
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
+}
+
+#pragma mark  MoneyTypeMonthCellDelegate
+-(void)cellMoneyTypeMonthSelectMoneyType:(NSString *)moneyType Month:(NSString *)month Cell:(MoneyTypeMonthCell *)selectCell{
+    
+    NSIndexPath *index = [self.tableView indexPathForCell:selectCell];
+    NSLog(@"%ld",(long)index.row);//上面1，下面3
+    
+    NSMutableDictionary *dict =[NSMutableDictionary dictionary];
+    if(index.row ==1) {
+        dict[@"coinPair"] = self.priceModel.fsym;
+    }
+    else{
+        dict[@"coinPair"] = self.indexName;
+    }
+    dict[@"moneyType"] = moneyType;
+    dict[@"month"] = month;
+    
+    [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            if (index.row ==1) {
+                self.firstDataArr = obj[@"data"];
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            }
+            else{
+                self.secondDataArr = obj[@"data"];
+                //指定刷新某行cell
+                NSIndexPath *indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
+                [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
+            }
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"%@",error);
+    }];
+
+    
 }
 
 

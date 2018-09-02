@@ -229,10 +229,13 @@
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     NSLog(@"%f",scrollView.contentOffset.y);
     int startNum = scrollView.contentOffset.x/self.pointGap;
+    if (startNum<0) {
+        startNum = 0;
+    }
     self.startLab.text = self.xTitleArray[startNum];
     
     NSUInteger endNum = startNum + scrollView.width/self.pointGap;
-    if (endNum > self.xTitleArray.count) {
+    if (endNum >= self.xTitleArray.count) {
         endNum = self.xTitleArray.count-1;
     }
     self.endLab.text = self.xTitleArray[endNum];

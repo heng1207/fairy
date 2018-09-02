@@ -10,6 +10,8 @@
 #import "PriceAnalyzeView.h"
 #import "PriceIntroduceView.h"
 #import "PriceForecastView.h"
+#import "PriceDetailDataView.h"
+
 
 
 @interface PriceDetailedSubVC ()
@@ -17,7 +19,6 @@
 @property(nonatomic,strong)PriceAnalyzeView *analyzeView;
 @property(nonatomic,strong)PriceIntroduceView *introduceView;
 @property(nonatomic,strong)PriceForecastView *forecastView;
-
 @property (nonatomic,strong) PriceModel *priceModel;
 @property(nonatomic,strong)NSArray *typeDataArr;
 @end
@@ -64,10 +65,17 @@
         [self.view addSubview:view];
         [self requestDuanQiYuCe];
     }
+    else if ([selectType isEqualToString:@"数据"]){
+        PriceDetailDataView *DataVc  =[[PriceDetailDataView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+
+        self.forecastView = DataVc;
+        [self.view addSubview:DataVc];
+        //        [self requestDuanQiYuCe];
+    }
     else{ //预警
         
     }
-
+    
 }
 -(void)requestJieShao{
     NSString *fsymStr = [self.priceModel.fsym lowercaseString];
@@ -90,7 +98,7 @@
     [NetworkManage Get:PriceAnalyze andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-         
+            
             [self.analyzeView setDataDic:obj[@"data"]];
             /*
              {
@@ -115,13 +123,13 @@
 -(NSArray*)typeDataArr{
     if (!_typeDataArr) {
         _typeDataArr = @[@{@"type":@"coincorelation",@"content":@"用协整分析法分析各点和位点之间的相互关系"},
-  @{@"type":@"coinvscoin",@"content":@"在两个币之间进行币的对比"},
-  @{@"type":@"coinchgvscoinchg",@"content":@"在币变化之间进行对比"},
-  @{@"type":@"googlevscoin",@"content":@"google关注度的增长与币价格的对比"},
-  @{@"type":@"metalvscoin",@"content":@"贵重金属与币价格变化的百分比之间的关系"},
-  @{@"type":@"orilvscoin",@"content":@"原油与币价格变化的百分比之间的关系"},
-  @{@"type":@"redditvscoin",@"content":@"reddit关注度与币价格之间的关系"},
-  @{@"type":@"exchangeratevscoin",@"content":@"汇率与币价格之间的关系"},
+                         @{@"type":@"coinvscoin",@"content":@"在两个币之间进行币的对比"},
+                         @{@"type":@"coinchgvscoinchg",@"content":@"在币变化之间进行对比"},
+                         @{@"type":@"googlevscoin",@"content":@"google关注度的增长与币价格的对比"},
+                         @{@"type":@"metalvscoin",@"content":@"贵重金属与币价格变化的百分比之间的关系"},
+                         @{@"type":@"orilvscoin",@"content":@"原油与币价格变化的百分比之间的关系"},
+                         @{@"type":@"redditvscoin",@"content":@"reddit关注度与币价格之间的关系"},
+                         @{@"type":@"exchangeratevscoin",@"content":@"汇率与币价格之间的关系"},
                          ];
     }
     return _typeDataArr;
@@ -148,13 +156,13 @@
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 @end
