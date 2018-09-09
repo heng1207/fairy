@@ -13,7 +13,7 @@
 #define kChartTextColor         [UIColor blackColor]
 //#define defaultSpace 5
 #define leftMargin 45
-#define kScreenWidth [UIScreen mainScreen].bounds.size.width
+
 
 
 @interface LDXAxisView ()

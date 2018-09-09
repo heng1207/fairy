@@ -7,11 +7,12 @@
 //
 
 #import "MyWalletDetailVC.h"
-#import "MyWalletCell.h"
+#import "WallentDJCell.h"
 #import "GetCoinVC.h"
 #import "ReceiveCoinVC.h"
 #import "WalletListVC.h"
-
+#import "MyWalletCell.h"
+#import "MyWalletDetailListVC.h"
 
 @interface MyWalletDetailVC ()<UITableViewDataSource, UITableViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
@@ -60,8 +61,9 @@
         
         [_myTableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"Cell"];
         
+        [_myTableView registerClass:[WallentDJCell class] forCellReuseIdentifier:@"WallentDJCell"];
         [_myTableView registerClass:[MyWalletCell class] forCellReuseIdentifier:@"MyWalletCell"];
-        
+
     }
     return _myTableView;
 }
@@ -88,7 +90,7 @@
         if (indexPath.row==0) {
             return 168;
         }else{
-            return 62;
+            return 82;
         }
     }
     else {
@@ -123,28 +125,27 @@
             return cell;
             
         }else if(indexPath.row == 1){
-            MyWalletCell *SetCell = [tableView dequeueReusableCellWithIdentifier:@"MyWalletCell" forIndexPath:indexPath];
+            WallentDJCell *SetCell = [tableView dequeueReusableCellWithIdentifier:@"WallentDJCell" forIndexPath:indexPath];
             SetCell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             if ([self.title isEqualToString:@"FYC"]) {
                 SetCell.icon.image = [UIImage imageNamed:@"FYC"];
                 SetCell.title.text = @"FYC";
-                SetCell.count.text = [NSString stringWithFormat:@"%@",self.Data[@"remainCurrencyFYC"]];
+                SetCell.keyong.text = [NSString stringWithFormat:@"可用:%@",self.Data[@"remainCurrencyFYC"]];
+                SetCell.dongjie.text = [NSString stringWithFormat:@"冻结:%@",self.Data[@"lockCurrencyFYC"]];
             }else
             {
                 SetCell.icon.image = [UIImage imageNamed:@"ETH"];
                 SetCell.title.text = @"ETH";
-                SetCell.count.text = [NSString stringWithFormat:@"%@",self.Data[@"remainCurrency"]];
+                SetCell.keyong.text = [NSString stringWithFormat:@"可用:%@",self.Data[@"remainCurrency"]];
+                SetCell.dongjie.text = [NSString stringWithFormat:@"冻结:%@",self.Data[@"lockCurrency"]];
             }
-            
-            
+
             return SetCell;
             
         }else{
             return nil;
-            
         }
-        
     }else{
         MyWalletCell *SetCell = [tableView dequeueReusableCellWithIdentifier:@"MyWalletCell" forIndexPath:indexPath];
         SetCell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -213,7 +214,9 @@
             
         }
         else{
-            WalletListVC *vc =[WalletListVC new];
+            
+            
+            MyWalletDetailListVC *vc =[MyWalletDetailListVC new];
             vc.title = self.title;
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];

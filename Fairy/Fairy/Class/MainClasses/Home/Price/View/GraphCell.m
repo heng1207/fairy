@@ -8,12 +8,12 @@
 
 #import "GraphCell.h"
 #import "CurveLineChartView.h"
-#import "WSLineChartView.h"
+
 
 
 @interface GraphCell()
 
-@property (strong,nonatomic)WSLineChartView *wsLine;
+@property (strong,nonatomic)CurveLineChartView *wsLine;
 
 @end
 
@@ -22,41 +22,15 @@
 -(instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self =[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        self.backgroundColor = [UIColor colorWithHex:@"#e8f0f3"];
+        self.backgroundColor = [UIColor whiteColor];
         
     }
     return self;
 }
 
-//-(void)setDataDic:(NSMutableDictionary *)dataDic{
-//    _dataDic = dataDic;
-//
-//    self.typeView.selectType = dataDic[@"selectType"];
-//
-//
-//    if (self.wsLine) {
-//        [self.wsLine removeFromSuperview];
-//        self.wsLine = nil;
-//    }
-//    NSString *maxStr = dataDic[@"max"];
-//    NSString *minStr = dataDic[@"min"];
-//
-//    UIColor *lineColor;
-//    if ([dataDic[@"selectType"] isEqualToString:@"btc"]) {
-//        lineColor = [UIColor redColor];
-//    }
-//    else if ([dataDic[@"selectType"] isEqualToString:@"bch"]){
-//        lineColor = [UIColor greenColor];
-//    }
-//    else{
-//        lineColor = [UIColor blueColor];
-//    }
-//
-//    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(0, 25, UIScreenW, 145) xTitleArray:dataDic[@"xArray"] yValueArray:dataDic[@"targetArray"] yMax:[maxStr floatValue] yMin:[minStr floatValue] LineColor:lineColor];
-//    self.wsLine =wsLine;
-//    [self.contentView addSubview:wsLine];
-//}
-
+-(void)setCurrentIndexType:(NSString *)currentIndexType{
+    _currentIndexType = currentIndexType;
+}
 
 -(void)setFirstDataArr:(NSMutableArray *)firstDataArr{
     _firstDataArr = firstDataArr;
@@ -86,7 +60,7 @@
         [self.wsLine removeFromSuperview];
         self.wsLine = nil;
     }
-    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 145) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+    CurveLineChartView *wsLine = [[CurveLineChartView alloc]initWithFrame:CGRectMake(12, 0, UIScreenW-12, 155) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection LineType:self.currentIndexType];
     self.wsLine = wsLine;
     [self.contentView addSubview:wsLine];
     

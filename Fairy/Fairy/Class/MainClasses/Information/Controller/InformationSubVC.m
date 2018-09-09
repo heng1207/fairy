@@ -13,7 +13,6 @@
 #import "InformationFrameModel.h"
 #import "InformationDetailsVC.h"
 
-
 @interface InformationSubVC ()<UITableViewDataSource, UITableViewDelegate,InformationCellDelegate>
 
 @property (nonatomic, strong) UITableView *myTableView;
@@ -38,9 +37,11 @@
     [self.myTableView.mj_header beginRefreshing];
     
     // 加载更多
-    self.myTableView.mj_footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
         [self requestMoreDatas];
     }];
+    [footer setTitle:@"无更多数据" forState:MJRefreshStateNoMoreData];
+    self.myTableView.mj_footer = footer;
     
     // Do any additional setup after loading the view.
 }
@@ -80,9 +81,17 @@
     cell.delegate = self;
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-
-}
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+////    InformationCell *cell  = [tableView dequeueReusableCellWithIdentifier:@"InformationCell" forIndexPath:indexPath];
+////    cell.informationFrameModel = self.informationFrameModelArr[indexPath.row];    WebViewController *web = [[WebViewController alloc]init];
+////    web.url = cell.informationFrameModel.informationModel.url;
+////    [self setHidesBottomBarWhenPushed: YES];
+////    [self.navigationController pushViewController:web animated:YES];
+////    [self setHidesBottomBarWhenPushed: NO];
+//
+//
+//
+//}
 
 #pragma mark InformationDelegate
 -(void)urlclick:(InformationCell *)informationCellCell{
@@ -162,7 +171,7 @@
 -(void)requestMoreDatas{
     
     if (self.informationFrameModelArr.count >= self.allNumber) {
-        [self.myTableView.mj_footer endRefreshing];
+        [self.myTableView.mj_footer  endRefreshingWithNoMoreData];
         return;
     }
 
@@ -205,14 +214,14 @@
         // 将InformationModel数组模型转换成InformationFrameModel数组模型
         NSMutableArray *informationFrameModelArr = [weakSelf informationFrameModelWithInformationModel:informationTimeModelArr];
         [weakSelf.informationFrameModelArr addObjectsFromArray:informationFrameModelArr];;
-        [weakSelf.myTableView.mj_footer endRefreshing];
+        [weakSelf.myTableView.mj_footer  endRefreshingWithNoMoreData];
         [weakSelf.myTableView reloadData];
         
         
         
         
     } failure:^(NSError *error) {
-        [self.myTableView.mj_footer endRefreshing];
+        [self.myTableView.mj_footer endRefreshingWithNoMoreData];
         NSLog(@"%@",error);
     }];
     

@@ -370,36 +370,35 @@
             
             
             //画选中的数值
-            [[NSString stringWithFormat:@"时间:%@",self.xTitleArray[nowPoint]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor redColor]}];
+            [[NSString stringWithFormat:@"时间:%@",self.xTitleArray[nowPoint]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor blackColor]}];
             
             
             // 判断是不是小数
             if ([self isPureFloat:[num floatValue]]) {
-                [[NSString stringWithFormat:@"水位:%.2fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor whiteColor]}];
+                [[NSString stringWithFormat:@"价格:%.2f", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor redColor]}];
             }
             else {
-                [[NSString stringWithFormat:@"水位:%.0fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15)withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor blueColor]}];
+                [[NSString stringWithFormat:@"价格:%.0f", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15)withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor redColor]}];
                 
             }
             
             
-            //画十字线
-            //            CGContextRestoreGState(context);
-            //            CGContextSetLineWidth(context, 1);
-            //            CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
-            //            CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-            //
-            ////            // 选中横线
-            ////            CGContextMoveToPoint(context, 0, selectPoint.y);
-            ////            CGContextAddLineToPoint(context, self.frame.size.width, selectPoint.y);
-            //
-            //            // 选中竖线
-            //            CGContextMoveToPoint(context, selectPoint.x, 0);
-            //            CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height- textSize.height - 5);
-            //
-            //            CGContextStrokePath(context);
+            // 画十字线
+            CGContextRestoreGState(context);
+            CGContextSetLineWidth(context, 1);
+            CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+            CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
             
-            [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height- textSize.height - 5) lineColor:[UIColor lightGrayColor] lineWidth:1];
+            // 选中横线
+            CGContextMoveToPoint(context, 0, selectPoint.y);
+            CGContextAddLineToPoint(context, self.frame.size.width, selectPoint.y);
+            
+            // 选中竖线
+            CGContextMoveToPoint(context, selectPoint.x, 0);
+            CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height- textSize.height - 5);
+            CGContextStrokePath(context);
+            
+//            [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height- textSize.height - 5) lineColor:[UIColor lightGrayColor] lineWidth:1];
             
             // 交界点
             CGRect myOval = {selectPoint.x-2, selectPoint.y-2, 4, 4};

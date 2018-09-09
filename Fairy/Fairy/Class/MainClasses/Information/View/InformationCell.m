@@ -99,6 +99,11 @@
     line.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.contentView addSubview:line];
     
+    
+    UITapGestureRecognizer *NewTap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(urlLabTap:)];
+    [self addGestureRecognizer:NewTap];
+    
+    
 }
 -(void)setInformationFrameModel:(InformationFrameModel *)informationFrameModel{
     _informationFrameModel = informationFrameModel;

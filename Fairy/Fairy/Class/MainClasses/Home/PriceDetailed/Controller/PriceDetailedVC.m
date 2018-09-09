@@ -54,6 +54,8 @@
     UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 30, 20)];
     ItemLab.text = [NSString stringWithFormat:@"%@/%@",self.priceModel.fsym,self.priceModel.tsyms];
     ItemLab.textAlignment = NSTextAlignmentCenter;
+    [kUserDefaults setValue:self.priceModel.fsym forKey:KchoseCoin];
+
     ItemLab.textColor=[UIColor whiteColor];
     ItemLab.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = ItemLab;
@@ -158,9 +160,9 @@
         for (NSInteger i =0; i<self.flagArray.count; i++) {
             PriceDetailedSubVC*vc = [[PriceDetailedSubVC alloc]init];
 //            vc.title = self.flagArray[i];
+            vc.coin = self.priceModel.fsym;
             [vc loadMainTableData:self.flagArray[i] Index:i PriceModel:nil];
           
-            [kUserDefaults setValue:self.priceModel.fsym forKey:KchoseCoin];
 
             [contentVCs addObject:vc];
         }
@@ -187,7 +189,7 @@
         MoneyTypeMonthCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MoneyTypeMonthCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.delegate = self;
-        cell.titleLab.text= [NSString stringWithFormat:@"%@折线图",self.priceModel.fsym];
+        cell.titleLab.text= [NSString stringWithFormat:@"%@",self.priceModel.fsym];
         return cell;
     }
     else if (indexPath.row ==2){
@@ -207,7 +209,7 @@
             MoneyTypeMonthCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MoneyTypeMonthCell" forIndexPath:indexPath];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.delegate = self;
-            cell.titleLab.text= [NSString stringWithFormat:@"%@折线图",self.indexName];
+            cell.titleLab.text= [NSString stringWithFormat:@"%@",self.indexName];
             return cell;
         }
         else{
@@ -305,16 +307,16 @@
 
 #pragma mark CompareCellDelegate
 -(void)cellTrendClick{
-    TrendVC *vc=[TrendVC new];
-    vc.priceModel = self.priceModel;
-    [self.navigationController pushViewController:vc animated:YES];
-}
-- (void)cellPlatformClick{
     CurrencySelectVC *vc=[CurrencySelectVC new];
     vc.block = ^(NSString *content) {
         self.indexName = content;
         [self requestSelectData:content];
     };
+    [self.navigationController pushViewController:vc animated:YES];
+}
+- (void)cellPlatformClick{
+    TrendVC *vc=[TrendVC new];
+    vc.priceModel = self.priceModel;
     [self.navigationController pushViewController:vc animated:YES];
 }
 
@@ -329,7 +331,7 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             self.firstDataArr = [NSMutableArray array];
-            self.firstDataArr = obj[@"data"];
+            self.firstDataArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
         }
@@ -347,7 +349,7 @@
     [NetworkManage Get:coinmarketcapHistory andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            self.secondDataArr = obj[@"data"];
+            self.secondDataArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
             [self.tableView reloadData];
 
         }
@@ -376,12 +378,12 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             if (index.row ==1) {
-                self.firstDataArr = obj[@"data"];
+                self.firstDataArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
                 NSIndexPath *indexPath=[NSIndexPath indexPathForRow:2 inSection:0];
                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
             }
             else{
-                self.secondDataArr = obj[@"data"];
+                self.secondDataArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
                 //指定刷新某行cell
                 NSIndexPath *indexPath=[NSIndexPath indexPathForRow:4 inSection:0];
                 [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];

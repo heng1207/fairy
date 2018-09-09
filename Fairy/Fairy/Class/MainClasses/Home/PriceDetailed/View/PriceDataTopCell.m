@@ -53,7 +53,7 @@
     [self.totleCount mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.totle.mas_bottom).offset(kScreenValue(8));
         make.left.equalTo(backView.mas_left).offset(kScreenValue(30));
-        make.width.mas_equalTo(   kScreenWidth/3);
+        make.width.mas_equalTo(  kScreenWidth  - kScreenValue(60));
         make.height.mas_equalTo(kScreenValue(18));
     }];
     
@@ -89,7 +89,7 @@
     self.supply = [[UILabel alloc]init];
     self.supply.font = [UIFont systemFontOfSize:kScreenValue(11)];
     self.supply.textColor = [UIColor lightGrayColor];
-    self.supply.text = @"流通供应量(%)";
+    self.supply.text = @"流通供应量";
     [backView addSubview:self.supply];
     
     [self.supply mas_makeConstraints:^(MASConstraintMaker *make) {

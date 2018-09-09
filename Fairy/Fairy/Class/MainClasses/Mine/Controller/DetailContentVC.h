@@ -10,4 +10,6 @@
 
 @interface DetailContentVC : UIViewController
 
+@property(nonatomic,strong)NSString *typeStr;
+
 @end

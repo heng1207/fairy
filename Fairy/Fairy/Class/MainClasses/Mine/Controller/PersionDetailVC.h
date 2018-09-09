@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PersionDetailVC : UIViewController
+@property (nonatomic, strong) NSMutableDictionary *userInfoDic;
 
 @end

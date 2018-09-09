@@ -245,10 +245,10 @@
                     //绘制数据（折线）
 //                    [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor blackColor] lineWidth:1];
                     if (currentI == 0) {
-                        [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor blackColor] lineWidth:1];
+                        [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor blueColor] lineWidth:1];
                     }
                     else{
-                       [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor blueColor] lineWidth:1];
+                       [self drawLine:context startPoint:startPoint endPoint:endPoint lineColor:[UIColor redColor] lineWidth:1];
                     }
                     
                     
@@ -329,9 +329,10 @@
     {
         NSLog(@"%f",_currentLoc.x/self.pointGap);
         int nowPoint = _currentLoc.x/self.pointGap;
-        if(nowPoint >= 0 && nowPoint < [self.yValueArray count]) {
+        NSArray *currentYValueArray = self.yValueArray[0];
+        if(nowPoint >= 0 && nowPoint < [currentYValueArray count]) {
             
-            NSNumber *num = [self.yValueArray objectAtIndex:nowPoint];
+            NSNumber *num = [currentYValueArray objectAtIndex:nowPoint];
             CGFloat chartHeight = self.frame.size.height - textSize.height - 5 - topMargin;
             
             //            CGPoint selectPoint = CGPointMake((nowPoint+1)*self.pointGap, chartHeight -  (num.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
@@ -339,16 +340,15 @@
             
             
             
-            //            NSLog(@"_screenLoc=%@",NSStringFromCGPoint(_screenLoc));
-            //            NSLog(@"_currentLoc=%@",NSStringFromCGPoint(_currentLoc));
-            
-            // 显示的时间和水位
-            //            CGContextSetFillColorWithColor(context, [UIColor greenColor].CGColor);
-            //            CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
+            NSLog(@"_screenLoc=%@",NSStringFromCGPoint(_screenLoc));
+            NSLog(@"_currentLoc=%@",NSStringFromCGPoint(_currentLoc));
+             //显示的时间和水位
+//            CGContextSetFillColorWithColor(context, [UIColor greenColor].CGColor);
+//            CGContextSetStrokeColorWithColor(context, [UIColor greenColor].CGColor);
             CGContextSaveGState(context);
             
             
-            //            NSString *timeStr = ;
+    
             NSDictionary *timeAttr = @{NSFontAttributeName : [UIFont systemFontOfSize:12]};
             CGSize timeSize = [[NSString stringWithFormat:@"时间:%@",self.xTitleArray[nowPoint]] sizeWithAttributes:timeAttr];
             
@@ -383,42 +383,63 @@
             
             
             //画选中的数值
-            [[NSString stringWithFormat:@"时间:%@",self.xTitleArray[nowPoint]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor redColor]}];
+            [[NSString stringWithFormat:@"时间:%@",self.xTitleArray[nowPoint]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor blackColor]}];
             
             
-            // 判断是不是小数
-            if ([self isPureFloat:[num floatValue]]) {
-                [[NSString stringWithFormat:@"水位:%.2fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor whiteColor]}];
-            }
-            else {
-                [[NSString stringWithFormat:@"水位:%.0fm", [num floatValue]] drawAtPoint:CGPointMake(drawPoint.x, drawPoint.y+15)withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:[UIColor blueColor]}];
+  
+            for (int i =0; i<self.yValueArray.count; i++) {
+                NSArray *yValueArray = self.yValueArray[i];
+                NSNumber *currentNum = [yValueArray objectAtIndex:nowPoint];
+                float Y = drawPoint.y+15 + i*15;
+                UIColor *currentColor ;
+                if (i==0) {
+                    currentColor =[UIColor blueColor];
+                }
+                else if (i==1){
+                    currentColor =[UIColor redColor];
+                }
+                // 判断是不是小数
+                if ([self isPureFloat:[num floatValue]]) {
+                    [[NSString stringWithFormat:@"量:%.2f", [currentNum floatValue]] drawAtPoint:CGPointMake(drawPoint.x, Y) withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:currentColor}];
+                }
+                else {
+                    [[NSString stringWithFormat:@"量:%.0f", [currentNum floatValue]] drawAtPoint:CGPointMake(drawPoint.x, Y)withAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12],NSForegroundColorAttributeName:currentColor}];
+                    
+                }
                 
             }
             
+
             
-            //画十字线
-            //            CGContextRestoreGState(context);
-            //            CGContextSetLineWidth(context, 1);
-            //            CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
-            //            CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
-            //
-            ////            // 选中横线
-            ////            CGContextMoveToPoint(context, 0, selectPoint.y);
-            ////            CGContextAddLineToPoint(context, self.frame.size.width, selectPoint.y);
-            //
-            //            // 选中竖线
-            //            CGContextMoveToPoint(context, selectPoint.x, 0);
-            //            CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height- textSize.height - 5);
-            //
-            //            CGContextStrokePath(context);
             
-            [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height- textSize.height - 5) lineColor:[UIColor lightGrayColor] lineWidth:1];
+           // 画十字线
+            CGContextRestoreGState(context);
+            CGContextSetLineWidth(context, 1);
+            CGContextSetFillColorWithColor(context, [UIColor lightGrayColor].CGColor);
+            CGContextSetStrokeColorWithColor(context, [UIColor lightGrayColor].CGColor);
+            
+           // 选中横线
+            CGContextMoveToPoint(context, 0, selectPoint.y);
+            CGContextAddLineToPoint(context, self.frame.size.width, selectPoint.y);
+            
+            // 选中竖线
+            CGContextMoveToPoint(context, selectPoint.x, 0);
+            CGContextAddLineToPoint(context, selectPoint.x, self.frame.size.height- textSize.height - 5);
+            CGContextStrokePath(context);
+            
+//            [self drawLine:context startPoint:CGPointMake(selectPoint.x, 0) endPoint:CGPointMake(selectPoint.x, self.frame.size.height- textSize.height - 5) lineColor:[UIColor lightGrayColor] lineWidth:1];
             
             // 交界点
-            CGRect myOval = {selectPoint.x-2, selectPoint.y-2, 4, 4};
-            CGContextSetFillColorWithColor(context, [UIColor orangeColor].CGColor);
-            CGContextAddEllipseInRect(context, myOval);
-            CGContextFillPath(context);
+            for (int i =0; i<self.yValueArray.count; i++) {
+                NSArray *yValueArray = self.yValueArray[i];
+                NSNumber *currentNum = [yValueArray objectAtIndex:nowPoint];
+                CGPoint nextPoint = CGPointMake( nowPoint*self.pointGap, chartHeight -  (currentNum.floatValue-self.yMin)/(self.yMax-self.yMin) * chartHeight+topMargin);
+                CGRect myOval = {nextPoint.x-2, nextPoint.y-2, 4, 4};
+                CGContextSetFillColorWithColor(context, [UIColor orangeColor].CGColor);
+                CGContextAddEllipseInRect(context, myOval);
+                CGContextFillPath(context);
+                
+            }
         }
     }
     

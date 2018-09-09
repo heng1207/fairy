@@ -24,11 +24,11 @@
     
     TLTextView *textContentView = [[TLTextView alloc]init];
     self.textContentView = textContentView;
-    textContentView.placeholderText =@" 请输入昵称";
+    textContentView.placeholderText =@" 请输入内容";
     textContentView.textColor=[UIColor colorWithHex:@"#333333"];
     textContentView.font = [UIFont systemFontOfSize:AdaptedWidth(28)];
     [self.view addSubview:textContentView];
-    textContentView.frame = CGRectMake(0, 0, SCREEN_WIDTH, AdaptedHeight(120));
+    textContentView.frame = CGRectMake(0, LL_StatusBarAndNavigationBarHeight, SCREEN_WIDTH, AdaptedHeight(120));
 
     
     // Do any additional setup after loading the view.
@@ -37,7 +37,18 @@
 -(void)initNavtionBar{
     
     UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    ItemLab.text = @"昵称";
+    if ([self.typeStr isEqualToString:@"email"]) {
+         ItemLab.text = @"邮箱";
+    }
+    else if ([self.typeStr isEqualToString:@"nickname"])
+    {
+        ItemLab.text = @"昵称";
+    }
+    else if ([self.typeStr isEqualToString:@"phoneNumber"])
+    {
+         ItemLab.text = @"手机号";
+    }
+
     ItemLab.textColor=[UIColor whiteColor];
     ItemLab.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = ItemLab;
@@ -64,13 +75,26 @@
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
     PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
     dict[@"consumerID"] = userModel.consumerID;
-    dict[@"nickname"] = self.textContentView.text;
+    if ([self.typeStr isEqualToString:@"email"]) {
+        dict[@"email"] = self.textContentView.text;
+    }
+    else if ([self.typeStr isEqualToString:@"nickname"])
+    {
+        dict[@"nickname"] = self.textContentView.text;
+    }
+    else if ([self.typeStr isEqualToString:@"phoneNumber"])
+    {
+        dict[@"phoneNumber"] = self.textContentView.text;
+
+    }
+ 
+    
     NSString *path =[NSString stringWithFormat:@"%@?token=%@",consumerUpdate,userModel.token];
     [NetworkManage Post:path andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             NSLog(@"%@",obj[@"data"]);
-
+            [self.navigationController popViewControllerAnimated:YES];
         }
     } failure:^(NSError *error) {
         NSLog(@"网络有问题");

@@ -37,7 +37,7 @@
     [self creatToolBarView];
     
     [self requestPriceDatas];
-    [self requestVolumeDatas];
+   
     
     
     // Do any additional setup after loading the view.
@@ -62,6 +62,7 @@
     UIButton *ZBbtn =[[UIButton alloc]initWithFrame:CGRectMake(0, 0, toolBar.width/2, 30)];
     self.firstBtn = ZBbtn;
     ZBbtn.backgroundColor= [UIColor colorWithHex:@"#e6e6e7"];
+    [ZBbtn setImage:[UIImage imageNamed:@"platform_normol"] forState:UIControlStateNormal];
     [toolBar addSubview:ZBbtn];
     [ZBbtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [ZBbtn setTitle:self.priceModel.platformCnName forState:UIControlStateNormal];
@@ -70,6 +71,7 @@
     UIButton *Bibtn =[[UIButton alloc]initWithFrame:CGRectMake(toolBar.width/2, 0, toolBar.width/2, 30)];
     [toolBar addSubview:Bibtn];
     self.secondBtn = Bibtn;
+    [Bibtn setImage:[UIImage imageNamed:@"platform_select"] forState:UIControlStateNormal];
     Bibtn.backgroundColor= [UIColor colorWithHex:@"#e6e6e7"];
     [Bibtn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [Bibtn addTarget:self action:@selector(BitClick) forControlEvents:UIControlEventTouchUpInside];
@@ -149,7 +151,7 @@
             self.wsLine =wsLine;
             [self.view addSubview:wsLine];
             
-        
+            [self requestVolumeDatas];
             
         }
     } failure:^(NSError *error) {

@@ -33,7 +33,7 @@
     ItemLab.textColor=[UIColor whiteColor];
     ItemLab.font = [UIFont systemFontOfSize:18];
     self.navigationItem.titleView = ItemLab;
-    
+
     
     UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
     [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];

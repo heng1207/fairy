@@ -22,31 +22,31 @@
     [self.one mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.contentView.mas_top).offset(kScreenValue(8));
         make.left.equalTo(self.contentView.mas_left).offset(kScreenValue(15));
-        make.width.mas_equalTo(kScreenValue(30));
+        make.width.mas_equalTo(kScreenValue(25));
         make.height.mas_equalTo(kScreenValue(12));
     }];
     
     [self.contentView addSubview:self.two];
     [self.two mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.one);
-        make.left.equalTo(self.one.mas_right).offset(kScreenValue(28));
-        make.width.mas_equalTo(kScreenValue(70));
+        make.left.equalTo(self.one.mas_right).offset(kScreenValue(5));
+        make.width.mas_equalTo(kScreenValue(60));
         make.height.mas_equalTo(kScreenValue(12));
     }];
     
     [self.contentView addSubview:self.three];
     [self.three mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.one);
-        make.left.equalTo(self.contentView.mas_left).offset(kScreenValue(157));
-        make.width.mas_equalTo(kScreenValue(65));
+        make.left.equalTo(self.two.mas_right).offset(kScreenValue(8));
+        make.width.mas_equalTo(kScreenValue(80));
         make.height.mas_equalTo(kScreenValue(12));
     }];
     
     [self.contentView addSubview:self.four];
     [self.four mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.one);
-        make.left.equalTo(self.three.mas_right).offset(kScreenValue(36));
-        make.width.mas_equalTo(kScreenValue(42));
+        make.left.equalTo(self.three.mas_right).offset(kScreenValue(5));
+        make.width.mas_equalTo(kScreenValue(110));
         make.height.mas_equalTo(kScreenValue(12));
     }];
     
@@ -54,7 +54,7 @@
     [self.five mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(self.one);
         make.right.equalTo(self.contentView.mas_right).offset(kScreenValue(-15));
-        make.width.mas_equalTo(kScreenValue(42));
+        make.width.mas_equalTo(kScreenValue(62));
         make.height.mas_equalTo(kScreenValue(12));
     }];
     
@@ -94,7 +94,7 @@
         _four = [[UILabel alloc]init];
         _four.font = [UIFont systemFontOfSize:kScreenValue(12)];
         _four.textAlignment = NSTextAlignmentCenter;
-
+        _four.numberOfLines = 0;
     }
     return _four;
 }

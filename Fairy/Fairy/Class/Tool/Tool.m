@@ -75,7 +75,7 @@
         return NO;
     }
     
-    //由字母或数字组成 6-18位密码字符串（正则）
+    //由字母或数字组成6-18位密码字符串（正则）
     NSString * regex = @"^[A-Za-z0-9_]{6,18}$";
     NSPredicate *pred = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", regex];
     if ([pred evaluateWithObject:password]) {

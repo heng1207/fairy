@@ -11,6 +11,6 @@
 
 @interface PriceDetailedSubVC : UIViewController
 
-
+@property (nonatomic,copy)NSString *coin;
 -(void)loadMainTableData:(NSString*)selectType Index:(NSInteger)index  PriceModel:(PriceModel*)priceModel;
 @end

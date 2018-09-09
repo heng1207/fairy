@@ -123,7 +123,9 @@
 //是否为空
 + (BOOL)isNullToString:(id)string
 {
-    if ([string isEqual:@"NULL"] || [string isKindOfClass:[NSNull class]] || [string isEqual:[NSNull null]] || [string isEqual:NULL] || [[string class] isSubclassOfClass:[NSNull class]] || string == nil || string == NULL || [string isKindOfClass:[NSNull class]] || [[string stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0 || [string isEqualToString:@"<null>"] || [string isEqualToString:@"(null)"])
+    NSString *str = [NSString stringWithFormat:@"%@",string];
+    
+    if ([str isEqual:@"NULL"] || [str isKindOfClass:[NSNull class]] || [str isEqual:[NSNull null]] || [str isEqual:NULL] || [[str class] isSubclassOfClass:[NSNull class]] || str == nil || str == NULL || [str isKindOfClass:[NSNull class]] || [[str stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length]==0 || [str isEqualToString:@"<null>"] || [str isEqualToString:@"(null)"])
     {
         return YES;
         
@@ -279,6 +281,21 @@
     return dateString;
 }
 
++ (NSString *)HHmmtimeWithTimeIntervalString:(NSString *)timeString
+{
+    // 格式化时间
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    [formatter setDateFormat:@"HH:mm"];
+    
+    // 毫秒值转化为秒
+    NSDate* date = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]/ 1000.0];
+    NSString* dateString = [formatter stringFromDate:date];
+    return dateString;
+}
+
 + (NSString *)YYYYMMDDHHmmtimeWithTimeIntervalString:(NSString *)timeString
 {
     // 格式化时间
@@ -286,7 +303,7 @@
     formatter.timeZone = [NSTimeZone timeZoneWithName:@"shanghai"];
     [formatter setDateStyle:NSDateFormatterMediumStyle];
     [formatter setTimeStyle:NSDateFormatterShortStyle];
-    [formatter setDateFormat:@"yyyy-MM-dd HH: mm"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm"];
     
     // 毫秒值转化为秒
     NSDate* date = [NSDate dateWithTimeIntervalSince1970:[timeString doubleValue]/ 1000.0];
@@ -619,6 +636,60 @@
     }
     //NSLog(@"两者时间是同一个时间");
     return 0;
+    
+}
+
++ (NSString*)weekdayStringFromDate:(NSDate*)inputDate {
+    NSArray *weekdays =
+    [NSArray arrayWithObjects:
+     [NSNull null], @"周日", @"周一", @"周二", @"周三",@"周四", @"周五", @"周六", nil];
+     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+     
+     NSTimeZone *timeZone = [[NSTimeZone alloc] initWithName:@"Asia/Shanghai"];
+     
+     [calendar setTimeZone: timeZone];
+     
+     NSCalendarUnit calendarUnit = NSWeekdayCalendarUnit;
+     
+     NSDateComponents *theComponents = [calendar components:calendarUnit fromDate:inputDate];
+     
+     return [weekdays objectAtIndex:theComponents.weekday];
+     
+    }
+     
++(NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format{
+    
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:format]; //(@"YYYY-MM-dd hh:mm:ss") ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    
+    
+    
+    NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Beijing"];
+    
+    [formatter setTimeZone:timeZone];
+    
+    
+    
+    NSDate* date = [formatter dateFromString:formatTime]; //------------将字符串按formatter转成nsdate
+    
+    //时间转时间戳的方法:
+    
+    NSInteger timeSp = [[NSNumber numberWithDouble:[date timeIntervalSince1970]] integerValue];
+    
+    
+    
+    NSLog(@"将某个时间转化成 时间戳&&&&&&&timeSp:%ld",(long)timeSp); //时间戳的值
+    
+    
+    
+    return timeSp;
     
 }
 

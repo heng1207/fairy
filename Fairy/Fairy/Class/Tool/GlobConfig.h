@@ -63,6 +63,7 @@
 #define KchoseCoin         @"choseCoin"
 
 #define KphoneNumber         @"phoneNumber"
+#define KmyCode         @"myCode"
 
 
 //判断设备的屏幕尺寸

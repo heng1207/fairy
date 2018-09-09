@@ -8,8 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+
+@protocol WSLineChartViewDelegate <NSObject>
+
+-(void)xAxisViewCompareClick;
+-(void)xAxisViewTapClick;
+@end
+
 @interface CurveLineChartView : UIView
 
-- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin LineColor:(UIColor *)lineColor;
+- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin LineType:(NSString*)lineType;
+
+@property(nonatomic,weak)id<WSLineChartViewDelegate> delegate;
+
 
 @end

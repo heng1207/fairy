@@ -18,11 +18,12 @@
 #import "GeneralVC.h"
 #import "ShareVC.h"
 #import "MyWalletVC.h"
-
+#import "NewShareViewController.h"
 
 @interface MineVC ()<UITableViewDataSource,UITableViewDelegate,HeadViewDelegate>
 @property (nonatomic, strong) UITableView *myTableView;
 @property (nonatomic, strong) HeadView *headView;
+@property (nonatomic, strong) NSMutableDictionary *userInfoDic;
 @end
 
 @implementation MineVC
@@ -30,8 +31,15 @@
     [super viewWillAppear:animated];
     self.navigationController.navigationBar.hidden = YES;
     
-    [self requestData];
-    [self.headView updateUserInfo];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+    if ([loginStatus isEqualToString:@"已登录"]) {
+        [self requestData];
+    }
+    else{
+        [self.headView updateUserInfo:nil];
+    }
     
     
 }
@@ -112,7 +120,7 @@
         }
         else if (indexPath.row == 2)
         {
-            cell.logoIM.image = [UIImage imageNamed:@"icon_Warning"];
+            cell.logoIM.image = [UIImage imageNamed:@"8"];
             cell.nameLab.text = @"我的钱包";
             cell.detailLab.text = @"";
         }
@@ -165,10 +173,9 @@
                     [self showHint:responseObject[@"message"]];
 
                 }
-                
-                
+
             } failure:^(NSError *error) {
-                [self showHint:@"网站有错"];
+                [self showHint:@"请前往登录"];
             }];
             
            
@@ -181,12 +188,11 @@
             [self.navigationController pushViewController:vc animated:YES];
         }
         else if (indexPath.row==1){
-            ShareVC* vc =[ShareVC new];
+            NewShareViewController* vc =[NewShareViewController new];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
         }
     }
-    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -233,6 +239,7 @@
     NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
     if ([loginStatus isEqualToString:@"已登录"]) {
         PersionDetailVC *vc=[PersionDetailVC new];
+        vc.userInfoDic = self.userInfoDic;
         vc.hidesBottomBarWhenPushed = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
@@ -261,6 +268,11 @@
             NSLog(@"%@",obj[@"data"]);
             
             [kUserDefaults setObject:obj[@"data"][@"phoneNumber"] forKey:KphoneNumber];
+            [kUserDefaults setObject:obj[@"data"][@"myCode"] forKey:KmyCode];
+
+            
+            [self.headView updateUserInfo:obj[@"data"]];
+            self.userInfoDic = obj[@"data"];
             
             /*
              {

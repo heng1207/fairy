@@ -16,8 +16,18 @@
 [UIColor colorWithRed:245/255.0 green:94/255.0 blue:102/255.0 alpha:1],\
 [UIColor colorWithRed:29/255.0 green:140/255.0 blue:140/255.0 alpha:1],\
 [UIColor colorWithRed:121/255.0 green:113/255.0 blue:199/255.0 alpha:1],\
-[UIColor colorWithRed:16/255.0 green:149/255.0 blue:224/255.0 alpha:1]\
+[UIColor colorWithRed:16/255.0 green:149/255.0 blue:224/255.0 alpha:1],\
+[UIColor colorWithRed:133/255.0 green:158.9/255.0 blue:200.5/255.0 alpha:1],\
+[UIColor colorWithRed:124.9/255.0 green:138/255.0 blue:188.8/255.0 alpha:1],\
+[UIColor colorWithRed:19/255.0 green:13/255.0 blue:9/255.0 alpha:1],\
+[UIColor colorWithRed:169/255.0 green:219/255.0 blue:94/255.0 alpha:1],\
+[UIColor colorWithRed:183/255.0 green:98.9/255.0 blue:190.5/255.0 alpha:1],\
+[UIColor colorWithRed:194.9/255.0 green:28/255.0 blue:1098.8/255.0 alpha:1],\
+[UIColor colorWithRed:45/255.0 green:155/255.0 blue:78/255.0 alpha:1],\
+[UIColor colorWithRed:88/255.0 green:88/255.0 blue:210/255.0 alpha:1]\
 ]
+
+#define RandColor RGBColor(arc4random_uniform(255), arc4random_uniform(255), arc4random_uniform(255))
 
 #define CHART_MARGIN 50
 
@@ -85,7 +95,8 @@
             DVFoodPieModel *model = self.dataArray[i];
             CGFloat percent = model.rate;
             UIColor *color = COLOR_ARRAY[i];
-            
+//            UIColor *color = RandColor;
+
             start = end;
             
             angle = percent * M_PI * 2;

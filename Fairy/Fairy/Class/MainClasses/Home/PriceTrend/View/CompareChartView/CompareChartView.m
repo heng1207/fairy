@@ -112,8 +112,8 @@
         
         
         //长按手势
-//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-//        [self.xAxisView addGestureRecognizer:longPress];
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+        [self.xAxisView addGestureRecognizer:longPress];
         
     }
     return self;

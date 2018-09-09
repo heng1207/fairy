@@ -45,7 +45,7 @@
 + (NSString *)YYYYMMDDHHmmtimeWithTimeIntervalString:(NSString *)timeString;
 + (NSString *)YYYYMMtimeWithTimeIntervalString:(NSString *)timeString;
 + (NSString *)YYYYMMddHHtimeWithTimeIntervalString:(NSString *)timeString;
-
++ (NSString *)HHmmtimeWithTimeIntervalString:(NSString *)timeString;
 + (NSString *)updateTimeForTimestamp:(NSString *)timestamp;
 
 /**
@@ -83,5 +83,7 @@
 + (UIImage *)getImageFromURL:(NSString *)fileURL;
 //日期比较
 + (int)compareOneDay:(NSDate *)oneDay withAnotherDay:(NSDate *)anotherDay;
++ (NSString*)weekdayStringFromDate:(NSDate*)inputDate;
++(NSInteger)timeSwitchTimestamp:(NSString *)formatTime andFormatter:(NSString *)format;
 
 @end

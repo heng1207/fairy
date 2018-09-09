@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DVFoodPieModel.h"
 
 @interface PriceDataMiddleCell : UITableViewCell
+
+- (void)setValueWithArr:(NSMutableArray *)arr;
+
 
 @end

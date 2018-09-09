@@ -12,7 +12,7 @@
 #import "CurveXAxisView.h"
 #import "CurveYAxisView.h"
 
-#define leftMargin 45
+#define leftMargin 40
 #define minNumbers 10  //小于等于10不会缩放
 
 
@@ -26,19 +26,20 @@
 @property (assign, nonatomic) CGFloat yMin;
 @property (strong, nonatomic) CurveYAxisView *yAxisView;
 @property (strong, nonatomic) CurveXAxisView *xAxisView;
-@property (strong, nonatomic) UIColor *lineColor;
+
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (assign, nonatomic) CGFloat pointGap;
 
 
 @property (assign, nonatomic) CGFloat defaultSpace;//默认间距，根据数据多少计算
-@property (assign, nonatomic) CGFloat MinSpace;//最小间隔，当数据小于 minNumbers 时,不能捏合
+@property (assign, nonatomic) CGFloat MaxSpace;//最大间隔，当数据小于 minNumbers 时,不能捏合
 
 @property (assign, nonatomic) CGFloat moveDistance;
 
 @property (nonatomic,strong)UILabel *startLab;
 @property (nonatomic,strong)UILabel *endLab;
+@property (strong, nonatomic)NSString *lineType;
 
 @end
 
@@ -47,7 +48,7 @@
 
 @implementation CurveLineChartView
 
-- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin LineColor:(UIColor *)lineColor{
+- (id)initWithFrame:(CGRect)frame xTitleArray:(NSArray*)xTitleArray yValueArray:(NSArray*)yValueArray yMax:(CGFloat)yMax yMin:(CGFloat)yMin LineType:(NSString*)lineType{
     
     self = [super initWithFrame:frame];
     if (self) {
@@ -57,15 +58,15 @@
         self.yValueArray = yValueArray;
         self.yMax = yMax;
         self.yMin = yMin;
-        self.lineColor = lineColor;
+        self.lineType = lineType;
+        
+        _defaultSpace = (self.frame.size.width-leftMargin)/(xTitleArray.count-1);
+        _MaxSpace = (self.frame.size.width-leftMargin)/(minNumbers-1);
 
-
-        _defaultSpace = (self.frame.size.width-leftMargin)/(minNumbers-1);
-        _MinSpace = (self.frame.size.width-leftMargin)/(xTitleArray.count-1);
         
         self.pointGap = _defaultSpace;
         
-        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(leftMargin, 0, self.frame.size.width-leftMargin, self.frame.size.height)];
+        _scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height)];
         _scrollView.showsHorizontalScrollIndicator = NO;
         _scrollView.bounces = NO;
         _scrollView.delegate = self;
@@ -76,32 +77,43 @@
         
         [self creatXAxisView];
         
-        UILabel *startLab=[[UILabel alloc]initWithFrame:CGRectMake(leftMargin, self.height-10, 35, 10)];
+        UILabel *startLab=[[UILabel alloc]initWithFrame:CGRectMake(0, self.height-10, 35, 10)];
         self.startLab = startLab;
-        startLab.text = @"8-31";
+        startLab.text = xTitleArray.firstObject;
         startLab.textAlignment = NSTextAlignmentLeft;
         startLab.font = [UIFont systemFontOfSize:10];
         [self addSubview:startLab];
         
-        UILabel *endLab=[[UILabel alloc]initWithFrame:CGRectMake(self.width-35, self.height-10, 35, 10)];
+        UILabel *endLab=[[UILabel alloc]initWithFrame:CGRectMake(self.width-leftMargin -35, self.height-10, 35, 10)];
         self.endLab = endLab;
-        endLab.text = @"12-31";
+        endLab.text =  xTitleArray.lastObject;
         endLab.textAlignment = NSTextAlignmentCenter;
         endLab.font = [UIFont systemFontOfSize:10];
         [self addSubview:endLab];
+
+        
+        UILabel *priceUSDLab=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 15)];
+        priceUSDLab.textAlignment =NSTextAlignmentCenter;
+        priceUSDLab.text = self.lineType;
+        priceUSDLab.font = [UIFont systemFontOfSize:10];
+        [self addSubview:priceUSDLab];
         
         
-        
-        // 2. 捏合手势
+        //捏合手势
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self action:@selector(pinchGesture:)];
         [self.xAxisView addGestureRecognizer:pinch];
         
         
-        //长按手势
-//        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
-//        [self.xAxisView addGestureRecognizer:longPress];
+        //点击手势
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doTapClick:)];
+        tap.numberOfTapsRequired = 1;
+        [self.xAxisView addGestureRecognizer:tap];
         
-
+        
+        //长按手势
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc]initWithTarget:self action:@selector(event_longPressAction:)];
+        [self.xAxisView addGestureRecognizer:longPress];
+        
     }
     return self;
 }
@@ -110,21 +122,18 @@
 
 - (void)creatYAxisView {
     
-    self.yAxisView = [[CurveYAxisView alloc]initWithFrame:CGRectMake(0, 0, leftMargin, self.frame.size.height) yMax:self.yMax yMin:self.yMin];
+    self.yAxisView = [[CurveYAxisView alloc]initWithFrame:CGRectMake(self.frame.size.width-leftMargin, 0, leftMargin, self.frame.size.height) yMax:self.yMax yMin:self.yMin];
     [self addSubview:self.yAxisView];
     
 }
 
 - (void)creatXAxisView {
     
-//    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
+    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width-leftMargin, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap];
     NSLog(@"%f---%f",self.frame.size.width,self.frame.size.height);
-    self.xAxisView = [[CurveXAxisView alloc] initWithFrame:CGRectMake(0, 0, (self.xTitleArray.count-1) * self.pointGap, self.frame.size.height) xTitleArray:self.xTitleArray yValueArray:self.yValueArray yMax:self.yMax yMin:self.yMin PointGap:self.pointGap LineColor:self.lineColor];
     [_scrollView addSubview:self.xAxisView];
  
-
-    _scrollView.contentSize = CGSizeMake((self.xTitleArray.count-1) * self.pointGap, 0);
-    self.scrollView.contentOffset = CGPointMake(0, 0);
+    _scrollView.contentSize = CGSizeMake(self.xAxisView.frame.size.width, 0);
     
 }
 
@@ -157,16 +166,17 @@
         NSLog(@"%f",recognizer.scale);
         self.pointGap *= recognizer.scale;
         //            self.pointGap = self.pointGap > _defaultSpace ? _defaultSpace : self.pointGap;
-        if (self.pointGap <= _MinSpace) {
-//            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
-            self.pointGap = _MinSpace;
+        if (self.pointGap >= _MaxSpace) {
+            
+//            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
+            self.pointGap = _MaxSpace;
             
         }
-        else if (self.pointGap >= _defaultSpace){
-//            [SVProgressHUD showErrorWithStatus:@"已经放至最大"];
+        else if (self.pointGap <= _defaultSpace){
+//            [SVProgressHUD showErrorWithStatus:@"已经缩小到最小"];
             self.pointGap = _defaultSpace;
         }
-        
+         
         self.xAxisView.pointGap = self.pointGap;
         recognizer.scale = 1.0;
         
@@ -212,12 +222,30 @@
     }
 }
 
+-(void)compareClick{
+    if ([_delegate respondsToSelector:@selector(xAxisViewTapClick)]) {
+        [_delegate xAxisViewCompareClick];
+    }
+}
+
+-(void)doTapClick:(UITapGestureRecognizer*)tap{
+    if ([_delegate respondsToSelector:@selector(xAxisViewTapClick)]) {
+        [_delegate xAxisViewTapClick];
+    }
+}
+
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
     NSLog(@"%f",scrollView.contentOffset.y);
     int startNum = scrollView.contentOffset.x/self.pointGap;
+    if (startNum<0) {
+        startNum = 0;
+    }
     self.startLab.text = self.xTitleArray[startNum];
     
-    int endNum = startNum + scrollView.width/self.pointGap;
+    NSUInteger endNum = startNum + scrollView.width/self.pointGap;
+    if (endNum >= self.xTitleArray.count) {
+        endNum = self.xTitleArray.count-1;
+    }
     self.endLab.text = self.xTitleArray[endNum];
     
 }

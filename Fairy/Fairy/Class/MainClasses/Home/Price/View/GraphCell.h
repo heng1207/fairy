@@ -10,7 +10,7 @@
 
 @interface GraphCell : UITableViewCell
 
-@property(nonatomic,strong)NSMutableDictionary *dataDic;
 @property(nonatomic,strong)NSArray* firstDataArr;
+@property(nonatomic,strong)NSString *currentIndexType;
 
 @end

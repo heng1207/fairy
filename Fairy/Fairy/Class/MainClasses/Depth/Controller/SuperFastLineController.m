@@ -9,34 +9,54 @@
 
 #import "SuperFastLineController.h"
 #import "SuperFastLineDetailVC.h"
+#import "WSLPictureBrowseView.h"
 @interface SuperFastLineController ()
-
+@property (nonatomic,strong)NSMutableArray *array;
+@property (nonatomic,strong)NSMutableDictionary *dicData;
+@property (nonatomic,strong)SuperFastLineDetailVC *vc;
 @end
 
 @implementation SuperFastLineController
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    [self initNavtionBar];
-    // Do any additional setup after loading the view.
-    
-    SuperFastLineDetailVC *vc1 = [[SuperFastLineDetailVC alloc] init];
-    SuperFastLineDetailVC *vc2 = [[SuperFastLineDetailVC alloc] init];
-    SuperFastLineDetailVC *vc3 = [[SuperFastLineDetailVC alloc] init];
-    SuperFastLineDetailVC *vc4 = [[SuperFastLineDetailVC alloc] init];
-    
-    vc1.title = @"BTC";
-    vc2.title = @"ETH";
-    vc3.title = @"BCH";
-    vc4.title = @"LTC";
+-(NSMutableArray *)array{
+    if (!_array) {
+        _array = [NSMutableArray array];
+    }
+    return _array;
+}
+-(NSMutableDictionary *)dicData{
+    if (!_dicData) {
+        _dicData = [NSMutableDictionary dictionary];
+    }
+    return _dicData;
+}
+-(void)GetData{
+    [NetworkManage Get:@"http://47.254.69.147:8080/interface/depth_coins/list_data" andParams:nil success:^(id responseObject) {
+        NSLog(@"%@",responseObject);
+        
+        if ([responseObject[@"code"]integerValue ] ==200) {
+            
+            for (NSDictionary *dic in responseObject[@"data"]) {
+                self.vc = [[SuperFastLineDetailVC alloc] init];
+                self.vc.title = dic[@"currencyShortEnName"];
+                self.vc.currencyid = dic[@"digitalCurrencyID"];
+                [self.array addObject:self.vc];
+            }
+            self.viewControllers = self.array;
+        }
  
-    self.viewControllers = @[vc1, vc2, vc3 , vc4 ];
+    } failure:^(NSError *error) {
+//        [self showHint:@"网络有问题"];
+    }];
+    
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self GetData];
+    [self initNavtionBar];
+    // Do any additional setup after loading the view.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(tongzhi:)name:@"openView" object:nil];
+  
 }
 
 -(void)initNavtionBar{
@@ -52,12 +72,27 @@
     [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
     
-    //    UIButton *search = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-    //    [search setImage:[UIImage imageNamed:@"searchLogo"] forState:UIControlStateNormal];
-    //    [search addTarget:self action:@selector(searchClick) forControlEvents:UIControlEventTouchDown];
-    //    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:search];
-    
 }
+
+
+- (void)tongzhi:(NSNotification *)text{
+    
+    NSLog(@"%@",text.userInfo[@"data"]);
+        WSLPictureBrowseView * browseView = [[WSLPictureBrowseView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT)];
+        browseView.backgroundColor = [UIColor blackColor];
+        //    browseView.urlArray = urlArray;
+        browseView.viewController = self;
+        NSMutableArray * pathArray  = [NSMutableArray array];
+        [pathArray addObject:text.userInfo[@"data"]];
+        browseView.pathArray = pathArray;
+        [self.view addSubview:browseView];
+ 
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
 
 -(void)backClick{
     [self.navigationController popViewControllerAnimated:YES];

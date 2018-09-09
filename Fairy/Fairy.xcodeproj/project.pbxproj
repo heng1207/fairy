@@ -13,7 +13,6 @@
 		04B218E420D11867000D661F /* UIView+BorderLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B218E320D11867000D661F /* UIView+BorderLine.m */; };
 		4E9AB6F621242D9200BAFB22 /* TLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E9AB6F421242D9200BAFB22 /* TLTextView.m */; };
 		4EFA7A8A2138E92800462304 /* welcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA7A882138E92800462304 /* welcomeViewController.m */; };
-		4EFA7A8D2138F2C100462304 /* SegmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFA7A8C2138F2C100462304 /* SegmentView.m */; };
 		7E00514A2114A3F100A2CA8F /* InformationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0051492114A3F100A2CA8F /* InformationModel.m */; };
 		7E00514D2114AA5B00A2CA8F /* InformationDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E00514C2114AA5B00A2CA8F /* InformationDetailsVC.m */; };
 		7E0B97E5211691250054014C /* InformationFrameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E0B97E4211691250054014C /* InformationFrameModel.m */; };
@@ -141,6 +140,9 @@
 		AA01047E2135A284008EC784 /* PriceDataBottomListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0104762135A283008EC784 /* PriceDataBottomListCell.m */; };
 		AA01047F2135A284008EC784 /* PriceDataMiddleCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0104772135A283008EC784 /* PriceDataMiddleCell.m */; };
 		AA0104802135A284008EC784 /* PriceDataTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA0104792135A284008EC784 /* PriceDataTopCell.m */; };
+		AA8633AC214402850096563B /* SuperDetailTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8633AB214402850096563B /* SuperDetailTopCell.m */; };
+		AA86342C2144A4200096563B /* CurrencyModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA86342B2144A4200096563B /* CurrencyModel.m */; };
+		AA87AA2421426AF4008D9423 /* NewDXYCViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA87AA2321426AF4008D9423 /* NewDXYCViewController.m */; };
 		AA8D8A2B213AD14B000FBD5B /* PriceDetailDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8D8A29213AD14A000FBD5B /* PriceDetailDataView.m */; };
 		AA8D8A2E213AD543000FBD5B /* WallentModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AA8D8A2D213AD543000FBD5B /* WallentModel.m */; };
 		AA9CCA5C213AE9540043A0CC /* WarnCenterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CCA40213AE9520043A0CC /* WarnCenterVC.m */; };
@@ -178,6 +180,20 @@
 		AA9CCAC0213AEC2E0043A0CC /* PhotoSetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CCAB5213AEC2E0043A0CC /* PhotoSetCell.m */; };
 		AA9CCAC3213AEC8D0043A0CC /* MyWalletCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AA9CCAC1213AEC8C0043A0CC /* MyWalletCell.m */; };
 		AAE30524213C26B0001A9668 /* AbstractView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30523213C26B0001A9668 /* AbstractView.m */; };
+		AAE30527213D0380001A9668 /* DepthWarningViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30526213D0380001A9668 /* DepthWarningViewController.m */; };
+		AAE3052A213D03CC001A9668 /* DepthWaringDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30529213D03CC001A9668 /* DepthWaringDetailVC.m */; };
+		AAE3052D213D0432001A9668 /* WaringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3052C213D0432001A9668 /* WaringCell.m */; };
+		AAE30533213D0FD5001A9668 /* DepthWaringDetailNewVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30532213D0FD5001A9668 /* DepthWaringDetailNewVC.m */; };
+		AAE30536213D0FE0001A9668 /* DepthWaringDetailGoogleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30535213D0FE0001A9668 /* DepthWaringDetailGoogleVC.m */; };
+		AAE3053C213D1EC4001A9668 /* WallentDJCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3053B213D1EC4001A9668 /* WallentDJCell.m */; };
+		AAE3053F213D4531001A9668 /* WaringTopCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3053E213D4531001A9668 /* WaringTopCell.m */; };
+		AAE30542213E8983001A9668 /* NewShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30541213E8983001A9668 /* NewShareViewController.m */; };
+		AAE30549213E9A30001A9668 /* WSLPhotoZoom.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30543213E9A2F001A9668 /* WSLPhotoZoom.m */; };
+		AAE3054A213E9A30001A9668 /* UIImageView+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30544213E9A30001A9668 /* UIImageView+GIF.m */; };
+		AAE3054B213E9A30001A9668 /* WSLPictureBrowseView.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE30548213E9A30001A9668 /* WSLPictureBrowseView.m */; };
+		AAE3054E2140182D001A9668 /* MyWalletDetailListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3054D2140182D001A9668 /* MyWalletDetailListVC.m */; };
+		AAE3055121401A24001A9668 /* WallentListGetList.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE3055021401A24001A9668 /* WallentListGetList.m */; };
+		AAE305542141055D001A9668 /* NewDepthDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AAE305532141055D001A9668 /* NewDepthDetailViewController.m */; };
 		E4454832EAD5360F49E317BF /* Pods_Fairy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 78493D73EEE62E43218BE701 /* Pods_Fairy.framework */; };
 /* End PBXBuildFile section */
 
@@ -196,7 +212,6 @@
 		4EFA7A882138E92800462304 /* welcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = welcomeViewController.m; sourceTree = "<group>"; };
 		4EFA7A892138E92800462304 /* welcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = welcomeViewController.h; sourceTree = "<group>"; };
 		4EFA7A8B2138F2C100462304 /* SegmentView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SegmentView.h; sourceTree = "<group>"; };
-		4EFA7A8C2138F2C100462304 /* SegmentView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SegmentView.m; sourceTree = "<group>"; };
 		78493D73EEE62E43218BE701 /* Pods_Fairy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Fairy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E0051482114A3F100A2CA8F /* InformationModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InformationModel.h; sourceTree = "<group>"; };
 		7E0051492114A3F100A2CA8F /* InformationModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InformationModel.m; sourceTree = "<group>"; };
@@ -452,6 +467,12 @@
 		AA01047A2135A284008EC784 /* PriceDataTopCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceDataTopCell.h; sourceTree = "<group>"; };
 		AA01047B2135A284008EC784 /* PriceDataBottomCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceDataBottomCell.h; sourceTree = "<group>"; };
 		AA01047C2135A284008EC784 /* PriceDataMiddleCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceDataMiddleCell.h; sourceTree = "<group>"; };
+		AA8633AA214402850096563B /* SuperDetailTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SuperDetailTopCell.h; sourceTree = "<group>"; };
+		AA8633AB214402850096563B /* SuperDetailTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SuperDetailTopCell.m; sourceTree = "<group>"; };
+		AA86342A2144A4200096563B /* CurrencyModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrencyModel.h; path = Fairy/Class/MainClasses/Home/PriceTrend/Model/CurrencyModel.h; sourceTree = SOURCE_ROOT; };
+		AA86342B2144A4200096563B /* CurrencyModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrencyModel.m; path = Fairy/Class/MainClasses/Home/PriceTrend/Model/CurrencyModel.m; sourceTree = SOURCE_ROOT; };
+		AA87AA2221426AF4008D9423 /* NewDXYCViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewDXYCViewController.h; sourceTree = "<group>"; };
+		AA87AA2321426AF4008D9423 /* NewDXYCViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewDXYCViewController.m; sourceTree = "<group>"; };
 		AA8D8A29213AD14A000FBD5B /* PriceDetailDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PriceDetailDataView.m; sourceTree = "<group>"; };
 		AA8D8A2A213AD14B000FBD5B /* PriceDetailDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PriceDetailDataView.h; sourceTree = "<group>"; };
 		AA8D8A2C213AD543000FBD5B /* WallentModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = WallentModel.h; path = Fairy/Class/MainClasses/Mine/View/WallentModel.h; sourceTree = SOURCE_ROOT; };
@@ -522,6 +543,34 @@
 		AA9CCAC2213AEC8D0043A0CC /* MyWalletCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletCell.h; sourceTree = "<group>"; };
 		AAE30522213C26B0001A9668 /* AbstractView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AbstractView.h; sourceTree = "<group>"; };
 		AAE30523213C26B0001A9668 /* AbstractView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AbstractView.m; sourceTree = "<group>"; };
+		AAE30525213D0380001A9668 /* DepthWarningViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DepthWarningViewController.h; sourceTree = "<group>"; };
+		AAE30526213D0380001A9668 /* DepthWarningViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DepthWarningViewController.m; sourceTree = "<group>"; };
+		AAE30528213D03CC001A9668 /* DepthWaringDetailVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DepthWaringDetailVC.h; sourceTree = "<group>"; };
+		AAE30529213D03CC001A9668 /* DepthWaringDetailVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DepthWaringDetailVC.m; sourceTree = "<group>"; };
+		AAE3052B213D0432001A9668 /* WaringCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaringCell.h; sourceTree = "<group>"; };
+		AAE3052C213D0432001A9668 /* WaringCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaringCell.m; sourceTree = "<group>"; };
+		AAE30531213D0FD5001A9668 /* DepthWaringDetailNewVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DepthWaringDetailNewVC.h; sourceTree = "<group>"; };
+		AAE30532213D0FD5001A9668 /* DepthWaringDetailNewVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DepthWaringDetailNewVC.m; sourceTree = "<group>"; };
+		AAE30534213D0FE0001A9668 /* DepthWaringDetailGoogleVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DepthWaringDetailGoogleVC.h; sourceTree = "<group>"; };
+		AAE30535213D0FE0001A9668 /* DepthWaringDetailGoogleVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DepthWaringDetailGoogleVC.m; sourceTree = "<group>"; };
+		AAE3053A213D1EC4001A9668 /* WallentDJCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallentDJCell.h; sourceTree = "<group>"; };
+		AAE3053B213D1EC4001A9668 /* WallentDJCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallentDJCell.m; sourceTree = "<group>"; };
+		AAE3053D213D4531001A9668 /* WaringTopCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WaringTopCell.h; sourceTree = "<group>"; };
+		AAE3053E213D4531001A9668 /* WaringTopCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WaringTopCell.m; sourceTree = "<group>"; };
+		AAE30540213E8983001A9668 /* NewShareViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewShareViewController.h; sourceTree = "<group>"; };
+		AAE30541213E8983001A9668 /* NewShareViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewShareViewController.m; sourceTree = "<group>"; };
+		AAE30543213E9A2F001A9668 /* WSLPhotoZoom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSLPhotoZoom.m; sourceTree = "<group>"; };
+		AAE30544213E9A30001A9668 /* UIImageView+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+GIF.m"; sourceTree = "<group>"; };
+		AAE30545213E9A30001A9668 /* WSLPictureBrowseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSLPictureBrowseView.h; sourceTree = "<group>"; };
+		AAE30546213E9A30001A9668 /* UIImageView+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+GIF.h"; sourceTree = "<group>"; };
+		AAE30547213E9A30001A9668 /* WSLPhotoZoom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WSLPhotoZoom.h; sourceTree = "<group>"; };
+		AAE30548213E9A30001A9668 /* WSLPictureBrowseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WSLPictureBrowseView.m; sourceTree = "<group>"; };
+		AAE3054C2140182D001A9668 /* MyWalletDetailListVC.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyWalletDetailListVC.h; sourceTree = "<group>"; };
+		AAE3054D2140182D001A9668 /* MyWalletDetailListVC.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyWalletDetailListVC.m; sourceTree = "<group>"; };
+		AAE3054F21401A24001A9668 /* WallentListGetList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WallentListGetList.h; sourceTree = "<group>"; };
+		AAE3055021401A24001A9668 /* WallentListGetList.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WallentListGetList.m; sourceTree = "<group>"; };
+		AAE305522141055D001A9668 /* NewDepthDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NewDepthDetailViewController.h; sourceTree = "<group>"; };
+		AAE305532141055D001A9668 /* NewDepthDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NewDepthDetailViewController.m; sourceTree = "<group>"; };
 		FE3B6BC3057507CD425B9D57 /* Pods-Fairy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Fairy.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Fairy/Pods-Fairy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -600,8 +649,8 @@
 		7E5F6C7121315DFE00AC115E /* BTC_K线图 */ = {
 			isa = PBXGroup;
 			children = (
-				7E5F6C7C21315DFE00AC115E /* Y_StockChartView.m */,
 				7E5F6C7221315DFE00AC115E /* Y_StockChartView.h */,
+				7E5F6C7C21315DFE00AC115E /* Y_StockChartView.m */,
 				7E5F6C7321315DFE00AC115E /* Config */,
 				7E5F6C7D21315DFE00AC115E /* KLine */,
 			);
@@ -901,7 +950,6 @@
 				7E5F6CDB21315DFE00AC115E /* PriceIntroduceView.h */,
 				7E5F6CCD21315DFE00AC115E /* PriceIntroduceView.m */,
 				4EFA7A8B2138F2C100462304 /* SegmentView.h */,
-				4EFA7A8C2138F2C100462304 /* SegmentView.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -947,6 +995,8 @@
 		7E5F6CE421315DFE00AC115E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				AA86342A2144A4200096563B /* CurrencyModel.h */,
+				AA86342B2144A4200096563B /* CurrencyModel.m */,
 				7E5F6CE521315DFE00AC115E /* PriceModel.h */,
 				7E5F6CE621315DFE00AC115E /* PriceModel.m */,
 			);
@@ -1014,6 +1064,18 @@
 				AA0104552135A1D6008EC784 /* SuperFastLineVC.m */,
 				7E5F6D4A21315EE700AC115E /* DepthVC.h */,
 				7E5F6D4B21315EE700AC115E /* DepthVC.m */,
+				AAE30525213D0380001A9668 /* DepthWarningViewController.h */,
+				AAE30526213D0380001A9668 /* DepthWarningViewController.m */,
+				AAE30528213D03CC001A9668 /* DepthWaringDetailVC.h */,
+				AAE30529213D03CC001A9668 /* DepthWaringDetailVC.m */,
+				AAE30531213D0FD5001A9668 /* DepthWaringDetailNewVC.h */,
+				AAE30532213D0FD5001A9668 /* DepthWaringDetailNewVC.m */,
+				AAE30534213D0FE0001A9668 /* DepthWaringDetailGoogleVC.h */,
+				AAE30535213D0FE0001A9668 /* DepthWaringDetailGoogleVC.m */,
+				AAE305522141055D001A9668 /* NewDepthDetailViewController.h */,
+				AAE305532141055D001A9668 /* NewDepthDetailViewController.m */,
+				AA87AA2221426AF4008D9423 /* NewDXYCViewController.h */,
+				AA87AA2321426AF4008D9423 /* NewDXYCViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1036,6 +1098,12 @@
 				AA01045D2135A200008EC784 /* SuperFastBottomCell.m */,
 				AA01045E2135A200008EC784 /* SuperFastTopCell.h */,
 				AA01045F2135A200008EC784 /* SuperFastTopCell.m */,
+				AA8633AA214402850096563B /* SuperDetailTopCell.h */,
+				AA8633AB214402850096563B /* SuperDetailTopCell.m */,
+				AAE3052B213D0432001A9668 /* WaringCell.h */,
+				AAE3052C213D0432001A9668 /* WaringCell.m */,
+				AAE3053D213D4531001A9668 /* WaringTopCell.h */,
+				AAE3053E213D4531001A9668 /* WaringTopCell.m */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1244,8 +1312,14 @@
 				AA9CCA51213AE9530043A0CC /* ShareVC.m */,
 				AA9CCA52213AE9530043A0CC /* WalletListVC.h */,
 				AA9CCA4B213AE9530043A0CC /* WalletListVC.m */,
+				AAE3054F21401A24001A9668 /* WallentListGetList.h */,
+				AAE3055021401A24001A9668 /* WallentListGetList.m */,
+				AAE3054C2140182D001A9668 /* MyWalletDetailListVC.h */,
+				AAE3054D2140182D001A9668 /* MyWalletDetailListVC.m */,
 				AA9CCA4C213AE9530043A0CC /* WarnCenterVC.h */,
 				AA9CCA40213AE9520043A0CC /* WarnCenterVC.m */,
+				AAE30540213E8983001A9668 /* NewShareViewController.h */,
+				AAE30541213E8983001A9668 /* NewShareViewController.m */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1264,6 +1338,8 @@
 			children = (
 				AA9CCAC2213AEC8D0043A0CC /* MyWalletCell.h */,
 				AA9CCAC1213AEC8C0043A0CC /* MyWalletCell.m */,
+				AAE3053A213D1EC4001A9668 /* WallentDJCell.h */,
+				AAE3053B213D1EC4001A9668 /* WallentDJCell.m */,
 				AA9CCAA8213AEC2D0043A0CC /* HeadView.h */,
 				AA9CCAB4213AEC2E0043A0CC /* HeadView.m */,
 				AA9CCAAC213AEC2D0043A0CC /* MessageCell.h */,
@@ -1302,6 +1378,12 @@
 		7EB5E25020CCAD40004BFAE2 /* Tool */ = {
 			isa = PBXGroup;
 			children = (
+				AAE30546213E9A30001A9668 /* UIImageView+GIF.h */,
+				AAE30544213E9A30001A9668 /* UIImageView+GIF.m */,
+				AAE30547213E9A30001A9668 /* WSLPhotoZoom.h */,
+				AAE30543213E9A2F001A9668 /* WSLPhotoZoom.m */,
+				AAE30545213E9A30001A9668 /* WSLPictureBrowseView.h */,
+				AAE30548213E9A30001A9668 /* WSLPictureBrowseView.m */,
 				AA9CCA6C213AE9BC0043A0CC /* CommonTool.h */,
 				AA9CCA6F213AE9BD0043A0CC /* CommonTool.m */,
 				AA9CCA6B213AE9BC0043A0CC /* NetworkHelper.h */,
@@ -1464,7 +1546,7 @@
 					7EFBA34E20CC2F050059090B = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0930;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -1610,8 +1692,11 @@
 				7EB5E29B20CD00F0004BFAE2 /* FSPageContentView.m in Sources */,
 				AA9CCABE213AEC2E0043A0CC /* MessageCell.m in Sources */,
 				7E4002D22135B9B200D199CA /* CurrencySelectVC.m in Sources */,
+				AAE3053C213D1EC4001A9668 /* WallentDJCell.m in Sources */,
 				AA9CCA68213AE9540043A0CC /* GeneralVC.m in Sources */,
+				AA86342C2144A4200096563B /* CurrencyModel.m in Sources */,
 				7E00514D2114AA5B00A2CA8F /* InformationDetailsVC.m in Sources */,
+				AAE305542141055D001A9668 /* NewDepthDetailViewController.m in Sources */,
 				7E57D8092139AB0900BA70B4 /* MoneyTypeMonthCell.m in Sources */,
 				AA8D8A2B213AD14B000FBD5B /* PriceDetailDataView.m in Sources */,
 				AA0104652135A200008EC784 /* SuperFastBottomCell.m in Sources */,
@@ -1626,6 +1711,7 @@
 				7E5F6D4121315DFF00AC115E /* FSBottomTableViewCell.m in Sources */,
 				7E5F6D1C21315DFF00AC115E /* Y_StockChartSegmentView.m in Sources */,
 				AA9CCA67213AE9540043A0CC /* ShareVC.m in Sources */,
+				AAE3052D213D0432001A9668 /* WaringCell.m in Sources */,
 				AA9CCA5E213AE9540043A0CC /* PriceCenterVC.m in Sources */,
 				AA9CCA61213AE9540043A0CC /* MineVC.m in Sources */,
 				AA0104732135A258008EC784 /* NewPriceDetailedVC.m in Sources */,
@@ -1634,10 +1720,14 @@
 				7EB5E26020CCADFC004BFAE2 /* MonitorNetwork.m in Sources */,
 				7E5F6D1B21315DFF00AC115E /* Y_KLine.m in Sources */,
 				7EAA3D64213A6ECB00B202EF /* CompareXAxisView.m in Sources */,
+				AAE30542213E8983001A9668 /* NewShareViewController.m in Sources */,
+				AAE3054E2140182D001A9668 /* MyWalletDetailListVC.m in Sources */,
 				7EB5E28E20CCB61D004BFAE2 /* LoginVC.m in Sources */,
 				7E5F6D2721315DFF00AC115E /* PriceDetailedSubVC.m in Sources */,
 				7E5F6D2921315DFF00AC115E /* BaseTypeView.m in Sources */,
 				7EB5E27020CCAE09004BFAE2 /* UIDevice+KCHardware.m in Sources */,
+				AAE3053F213D4531001A9668 /* WaringTopCell.m in Sources */,
+				AAE3054A213E9A30001A9668 /* UIImageView+GIF.m in Sources */,
 				7E5F6D5821316F0F00AC115E /* CompareCell.m in Sources */,
 				AA9CCA81213AEB1C0043A0CC /* HQLPasswordBackgroundView.m in Sources */,
 				AA9CCA5F213AE9540043A0CC /* PersionDetailVC.m in Sources */,
@@ -1650,6 +1740,7 @@
 				7E5F6D3121315DFF00AC115E /* HomeVC.m in Sources */,
 				7EB5E29C20CD00F0004BFAE2 /* FSSegmentTitleView.m in Sources */,
 				AA9CCA60213AE9540043A0CC /* ChangeWalletVC.m in Sources */,
+				AA8633AC214402850096563B /* SuperDetailTopCell.m in Sources */,
 				7E5F6D1721315DFF00AC115E /* Y_KLineVolumeView.m in Sources */,
 				7ED6F9032115A6D400C1A2EC /* CodeLoginVC.m in Sources */,
 				AA01047E2135A284008EC784 /* PriceDataBottomListCell.m in Sources */,
@@ -1662,6 +1753,7 @@
 				7E5F6D1521315DFF00AC115E /* Y_KLineGroupModel.m in Sources */,
 				7E5F6D2B21315DFF00AC115E /* BezierLineView.m in Sources */,
 				AAE30524213C26B0001A9668 /* AbstractView.m in Sources */,
+				AA87AA2421426AF4008D9423 /* NewDXYCViewController.m in Sources */,
 				AA9CCA74213AE9BD0043A0CC /* CommonTool.m in Sources */,
 				AA01044C2135A168008EC784 /* DVPieCenterView.m in Sources */,
 				7E5F6D3A21315DFF00AC115E /* GraphCell.m in Sources */,
@@ -1675,6 +1767,7 @@
 				AA9CCA73213AE9BD0043A0CC /* NetworkHelper.m in Sources */,
 				7ED90700213834B7003FD8C2 /* HomeNavView.m in Sources */,
 				7EB5E28B20CCB60A004BFAE2 /* RegisterVC.m in Sources */,
+				AAE30536213D0FE0001A9668 /* DepthWaringDetailGoogleVC.m in Sources */,
 				AA9CCA7F213AEB1C0043A0CC /* HQLConst.m in Sources */,
 				AA9CCA69213AE9540043A0CC /* MyWalletDetailVC.m in Sources */,
 				AA9CCA6A213AE9540043A0CC /* MyWalletVC.m in Sources */,
@@ -1692,6 +1785,7 @@
 				7E5F6D3021315DFF00AC115E /* PriceForecastView.m in Sources */,
 				7EB5E25320CCAD40004BFAE2 /* MainTabBarController.m in Sources */,
 				0469DFC720D26AF60096C35C /* PhoneZhuCeModel.m in Sources */,
+				AAE30527213D0380001A9668 /* DepthWarningViewController.m in Sources */,
 				7E4002CF2135B97200D199CA /* ReusableHeadView.m in Sources */,
 				AA8D8A2E213AD543000FBD5B /* WallentModel.m in Sources */,
 				7E5F6D0A21315DFE00AC115E /* UIColor+Y_StockChart.m in Sources */,
@@ -1713,12 +1807,14 @@
 				7E5F6D1021315DFF00AC115E /* Y_KLineAccessoryView.m in Sources */,
 				7EB5E27C20CCB124004BFAE2 /* InformationVC.m in Sources */,
 				7E5F6D1621315DFF00AC115E /* Y_KLineVolumePositionModel.m in Sources */,
+				AAE3054B213E9A30001A9668 /* WSLPictureBrowseView.m in Sources */,
 				7EAA3D59213A6E0E00B202EF /* CurveYAxisView.m in Sources */,
 				4EFA7A8A2138E92800462304 /* welcomeViewController.m in Sources */,
 				7E5F6D2021315DFF00AC115E /* TrendVC.m in Sources */,
 				7E5F6D2621315DFF00AC115E /* PriceDetailedVC.m in Sources */,
 				AA9CCA5D213AE9540043A0CC /* DetailContentVC.m in Sources */,
 				7E5F6D3321315DFF00AC115E /* FSBaseTableView.m in Sources */,
+				AAE3052A213D03CC001A9668 /* DepthWaringDetailVC.m in Sources */,
 				7EC51B78213C1DE500C48C9E /* ProgresView.m in Sources */,
 				7EB5E27320CCAE09004BFAE2 /* UIColor+Addition.m in Sources */,
 				7E5F6D1421315DFF00AC115E /* Y_KLineModel.m in Sources */,
@@ -1734,19 +1830,21 @@
 				7E0B97E82116999B0054014C /* InformationCell.m in Sources */,
 				7E5F6D2D21315DFF00AC115E /* YAxisView.m in Sources */,
 				0445DBC720CFA618009BA6BF /* InformationSubVC.m in Sources */,
+				AAE30549213E9A30001A9668 /* WSLPhotoZoom.m in Sources */,
 				7E1A256020D66BE30061D98B /* SwiftTest.swift in Sources */,
 				7E5F6D3F21315DFF00AC115E /* BezierCurveView.m in Sources */,
 				7E5F6D2A21315DFF00AC115E /* PriceIntroduceView.m in Sources */,
 				7E5F6D3D21315DFF00AC115E /* BezierView.m in Sources */,
 				AA9CCA82213AEB1C0043A0CC /* HQLPasswordView.m in Sources */,
+				AAE3055121401A24001A9668 /* WallentListGetList.m in Sources */,
 				AA0104802135A284008EC784 /* PriceDataTopCell.m in Sources */,
 				7EB5E27420CCAE09004BFAE2 /* NSDate+Extension.m in Sources */,
 				7E5F6D3921315DFF00AC115E /* NavView.m in Sources */,
 				7EB5E27620CCAE09004BFAE2 /* UIViewController+SLHUD.m in Sources */,
 				7EB5E25920CCADF2004BFAE2 /* NetworkManage.m in Sources */,
+				AAE30533213D0FD5001A9668 /* DepthWaringDetailNewVC.m in Sources */,
 				AA0104662135A200008EC784 /* SuperFastTopCell.m in Sources */,
 				7EAA3D63213A6ECB00B202EF /* CompareYAxisView.m in Sources */,
-				4EFA7A8D2138F2C100462304 /* SegmentView.m in Sources */,
 				7EAA3D47213A41AE00B202EF /* IndexTypeCell.m in Sources */,
 				AA9CCA62213AE9540043A0CC /* ReceiveCoinVC.m in Sources */,
 			);
@@ -1886,17 +1984,17 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M5DX7QDNW;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FCKPE9UKJQ;
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = fairy.fairy.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyqm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3ac51b3b-7835-46bf-9141-d716c652ac33";
+				PROVISIONING_PROFILE_SPECIFIER = Flyqm;
 				SWIFT_OBJC_BRIDGING_HEADER = "Fairy/Fairy-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1911,17 +2009,17 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 7M5DX7QDNW;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = FCKPE9UKJQ;
 				ENABLE_BITCODE = YES;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/Fairy/PrefixHeader.pch";
 				INFOPLIST_FILE = Fairy/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = fairy.fairy.com;
+				PRODUCT_BUNDLE_IDENTIFIER = com.flyqm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "3ac51b3b-7835-46bf-9141-d716c652ac33";
+				PROVISIONING_PROFILE_SPECIFIER = Flyqm;
 				SWIFT_OBJC_BRIDGING_HEADER = "Fairy/Fairy-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

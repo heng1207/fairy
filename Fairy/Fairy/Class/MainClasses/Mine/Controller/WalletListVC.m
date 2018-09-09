@@ -25,7 +25,6 @@
 }
 - (void)viewDidLoad {
     self.view.backgroundColor =[UIColor grayColor];
-    [self initNavtionBar];
     [self GeiDataList];
     self.view.backgroundColor = RGBA(232,239, 245, 1);
     [self.view addSubview:self.myTableView];
@@ -40,7 +39,7 @@
     
     NSString *str = [NSString stringWithFormat:@"%@?token=%@",GetTradeHistory,dict[@"token"]];
     
-    NSDictionary *dic = @{@"coinType":self.title};
+    NSDictionary *dic = @{@"coinType":self.titleCoin};
     
     [NetworkManage Get:str andParams:dic success:^(id responseObject) {
         
@@ -66,21 +65,7 @@
     
     
 }
--(void)initNavtionBar{
-    
-    UILabel *ItemLab =[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 60, 20)];
-    ItemLab.text = [NSString stringWithFormat:@"明细-%@",self.title];
-    ItemLab.textColor=[UIColor whiteColor];
-    ItemLab.font = [UIFont systemFontOfSize:18];
-    self.navigationItem.titleView = ItemLab;
-    UIButton *personalCenter = [[UIButton alloc]initWithFrame:CGRectMake(20, 0, 30, 40)];
-    [personalCenter setImage:[UIImage imageNamed:@"navBar_back"] forState:UIControlStateNormal];
-    [personalCenter addTarget:self action:@selector(backClick) forControlEvents:UIControlEventTouchDown];
-    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc]initWithCustomView:personalCenter];
-}
--(void)backClick{
-    [self.navigationController popViewControllerAnimated:YES];
-}
+
 - (UITableView *)myTableView {
     if (!_myTableView) {
         _myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT) style:UITableViewStyleGrouped];

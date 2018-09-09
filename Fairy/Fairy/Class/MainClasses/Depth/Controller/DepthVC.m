@@ -10,7 +10,10 @@
 #import "DepthTitleCell.h"
 #import "DepthBtnCell.h"
 #import "SuperFastLineController.h"
-
+#import "DepthWarningViewController.h"
+#import "NewDepthDetailViewController.h"
+#import "NewDXYCViewController.h"
+#import "LoginVC.h"
 @interface DepthVC ()<UITableViewDelegate,UITableViewDataSource>
 
 @property (nonatomic, strong) FSBaseTableView *tableView;
@@ -99,17 +102,25 @@
     
     if (indexPath.section == 0) {
         
-        cell.title.text = @"超短线";
-        cell.twoTitle.text = @"平均持仓周期1-10小时";
+       
         
         switch (indexPath.row) {
             case 0:
+                cell.title.text = @"超短线助手";
+                cell.twoTitle.text = @"预测区间为6小时";
+
                 cell.icon.image = [UIImage imageNamed:@"ChartUp"];
                 break;
             case 1:
+                cell.title.text = @"短线预测";
+                cell.twoTitle.text = @"预测区间为1天";
+
                 cell.icon.image = [UIImage imageNamed:@"Chart"];
                 break;
             case 2:
+                cell.title.text = @"预警中心";
+                cell.twoTitle.text = @"相关性、预测、市场情感";
+
                 cell.icon.image = [UIImage imageNamed:@"Antenna1"];
                 break;
             default:
@@ -118,12 +129,12 @@
         
         
         
-        
-        NSString *str = @"100MT/天";
-        NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
-        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:str attributes:attribtDic];
-        // 赋值
-        cell.payForDay.attributedText = attribtStr;
+//        
+//        NSString *str = @"100MT/天";
+//        NSDictionary *attribtDic = @{NSStrikethroughStyleAttributeName: [NSNumber numberWithInteger:NSUnderlineStyleSingle]};
+//        NSMutableAttributedString *attribtStr = [[NSMutableAttributedString alloc]initWithString:str attributes:attribtDic];
+//        // 赋值
+//        cell.payForDay.attributedText = attribtStr;
         
         return cell;
         
@@ -155,32 +166,41 @@
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    SuperFastLineController *vc = [[SuperFastLineController alloc]init];
-    [self setHidesBottomBarWhenPushed:YES];
-    [self.navigationController pushViewController:vc animated:YES];
-    [self setHidesBottomBarWhenPushed:NO];
+
+    
+    
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
+
+    if ([loginStatus isEqualToString:@"未登录"]||[CommonTool isNullToString:loginStatus]) {
+        LoginVC *vc =[LoginVC new];
+        UINavigationController *nav =[[UINavigationController alloc]initWithRootViewController:vc];
+        vc.hidesBottomBarWhenPushed = YES;
+        [self presentViewController:nav animated:YES completion:nil];
+    }else
+    if (indexPath.section == 0) {
+        if (indexPath.row == 0) {
+            NewDepthDetailViewController *vc = [[NewDepthDetailViewController alloc]init];
+            [self setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+            [self setHidesBottomBarWhenPushed:NO];
+        }else if (indexPath.row == 1) {
+            NewDXYCViewController *vc = [[NewDXYCViewController alloc]init];
+            [self setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+            [self setHidesBottomBarWhenPushed:NO];
+        }else{
+            DepthWarningViewController *vc = [[DepthWarningViewController alloc]init];
+            [self setHidesBottomBarWhenPushed:YES];
+            [self.navigationController pushViewController:vc animated:YES];
+            [self setHidesBottomBarWhenPushed:NO];
+        }
+    }
     
 }
 
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//
-//    UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(10, 10, 100, 20)];
-//    label.text = @"    工具箱";
-//    label.font = [UIFont systemFontOfSize:kScreenValue(17)];
-//
-//    UIView *line = [[UIView alloc] init];
-//    line.backgroundColor = [UIColor lightGrayColor];
-//    [label addSubview:line];
-//    [line mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.bottom.equalTo(label.mas_bottom).offset(10);
-//        make.left.right.equalTo(label);
-//        make.height.mas_equalTo(kScreenValue(1));
-//    }];
-//
-//
-//    return label;
-//}
+
 //section头部间距
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {

@@ -12,13 +12,14 @@
 // http://47.75.145.77:8080/interface/swagger-ui.html#/  接口测试链接
 
 //#define SERVER        @"http://47.75.145.77:8080/interface"
-#define SERVER        @"http://47.254.69.147:8080/interface"
-
+#define SERVER        @"https://app.fairycoins.com/interface"
 
 
 /*
  登陆注册
  */
+// 注册，检验手机号是否可以注册
+#define CheckPhone(phone)   ([NSString stringWithFormat:@"%@/consumer/check_login_name/%@",SERVER,phone])
 // 注册，获取短信验证码
 #define GetLoginMessage(phone)   ([NSString stringWithFormat:@"%@/front/get_check_code/%@",SERVER,phone])
 //注册
@@ -66,9 +67,9 @@
 
 
 
-//http://47.254.69.147:8080/interface/coin_pair/list_data?pageNo=1&pageSize=10
+//http://47.254.69.147:8080/interface/digital_currency/list_data?pageSize=1000
 //币种选择
-#define moneyTypeSelect           (SERVER@"/coin_pair/list_data")
+#define moneyTypeSelect           (SERVER@"/digital_currency/list_data")
 //行情详情折线图
 #define coinmarketcapHistory      (SERVER@"/coinmarketcap/getCoinmarketcapHistoryData")
 //http://47.75.145.77:8080/interface/coinmarketcap/getCoinmarketcapHistoryData?coinPair=eth
@@ -135,8 +136,36 @@
 //当天该币种饼图数据查询
 #define SelectPie              (SERVER@"/tranOcRatio/selectPie")
 
-//当天该币种饼图数据查询
+//转账
 #define GetTradeHistory              (SERVER@"/wallet/getTradeHistory")
+//充值
+#define GetRechargeHistory              (SERVER@"/wallet/getRechargeHistory")
+
+
+//深度接口
+//预警中心 - 相关性
+#define googleGetWarning              (SERVER@"/google/getWarning")
+
+//预测对应
+#define GetWarning              (SERVER@"/pctPred/getWarning")
+
+//新闻预警
+#define newsGetWarnin              (SERVER@"/news/getWarning")
+
+
+//超短线预测
+
+#define search_shortline              (SERVER@"/predict/search_shortline")
+
+//超短线预测
+
+#define getHistory              (SERVER@"/history/getHistoryByDay")
+
+//超短线预测
+
+#define getHistoryByHour              (SERVER@"/history/getHistoryByHour")
+
+
 
 
 

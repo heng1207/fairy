@@ -63,6 +63,7 @@
     self.nameLab = nameLab;
     self.nameLab.font = AdaptedFontSize(27);
     self.nameLab.textAlignment =NSTextAlignmentCenter;
+    nameLab.hidden= YES;
     nameLab.text=@"昵称";
     nameLab.textColor =[UIColor whiteColor];
     [nameLab mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -100,19 +101,34 @@
     }
 }
 
--(void)updateUserInfo{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
-    if ([loginStatus isEqualToString:@"已登录"]) {
-     
-        self.nameLab.text =@"赵四赵四赵四";
+-(void)updateUserInfo:(NSDictionary *)dict{
+    
+    if (!dict) {
+        self.nameLab.text = @"昵称";
+        self.headIM.image = [UIImage imageNamed:@"personal_img"];
         self.nameLab.hidden=NO;
         self.loginBtn.hidden = YES;
+        return;
+    }
+    
+    
+
+    if ([Tool isBlankString:dict[@"nickname"]]) {
+        self.nameLab.text = @"昵称";
     }
     else{
-        self.nameLab.hidden=YES;
-        self.loginBtn.hidden = NO;
+        self.nameLab.text = dict[@"nickname"];
     }
+    
+
+    if (![Tool isBlankString:dict[@"headerPic"]]) {
+        [self.headIM sd_setImageWithURL:[NSURL URLWithString:dict[@"headerPic"]] placeholderImage:[UIImage imageNamed:@"personal_img"]];
+    }else{
+        self.headIM.image = [UIImage imageNamed:@"personal_img"];
+    }
+    self.nameLab.hidden=NO;
+    self.loginBtn.hidden = YES;
+    
 }
 
 

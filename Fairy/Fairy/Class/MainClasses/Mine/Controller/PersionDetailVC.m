@@ -21,6 +21,10 @@
 
 @implementation PersionDetailVC
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self requestData];
+}
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor =[UIColor grayColor];
@@ -142,25 +146,43 @@
         if (indexPath.section==0&&indexPath.row ==1)
         {
             cell.TitleLab.text = @"ID";
-            cell.DetailsLab.text = @"273970";
+//            cell.DetailsLab.text = @"273970";
+            cell.DetailsLab.text = [NSString stringWithFormat:@"%@",self.userInfoDic[@"fairycoinID"]];
             cell.JianTouIM.hidden = YES;
         }
         else if (indexPath.section==0&&indexPath.row == 2)
         {
-            cell.TitleLab.text = @"登陆账号";
-            cell.DetailsLab.text = @"未设置";
+            cell.TitleLab.text = @"昵称";
+//            cell.DetailsLab.text = @"未设置";
+            if ([Tool isBlankString:self.userInfoDic[@"nickname"]]) {
+                cell.DetailsLab.text = @"未设置";
+            }
+            else{
+                cell.DetailsLab.text = self.userInfoDic[@"nickname"];
+            }
             cell.JianTouIM.hidden = NO;
         }
         else if (indexPath.section==1&&indexPath.row == 0)
         {
             cell.TitleLab.text = @"邮箱地址";
-            cell.DetailsLab.text = @"未设置";
+            if ([Tool isBlankString:self.userInfoDic[@"email"]]) {
+                cell.DetailsLab.text = @"未设置";
+            }
+            else{
+                cell.DetailsLab.text = self.userInfoDic[@"email"];
+            }
             cell.JianTouIM.hidden = NO;
         }
         else if (indexPath.section==1&&indexPath.row == 1)
         {
             cell.TitleLab.text = @"手机号码";
-            cell.DetailsLab.text = @"12345678";
+            if ([Tool isBlankString:self.userInfoDic[@"phoneNumber"]]) {
+                cell.DetailsLab.text = @"未设置";
+            }
+            else{
+                cell.DetailsLab.text = self.userInfoDic[@"phoneNumber"];
+            }
+            
             cell.JianTouIM.hidden = NO;
         }
         
@@ -173,6 +195,24 @@
     if (indexPath.section==0&&indexPath.row==0) {
         UIAlertView *alert =[[UIAlertView alloc]initWithTitle:@"提示" message:nil delegate:self cancelButtonTitle:@"取消" otherButtonTitles:@"从手机相册选择",@"拍照", nil];
         [alert show];
+        
+    }
+    else if (indexPath.section==0&&indexPath.row==2){
+        DetailContentVC *vc =[DetailContentVC new];
+        vc.typeStr = @"nickname";
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    else if (indexPath.section==1&&indexPath.row==0){
+        DetailContentVC *vc =[DetailContentVC new];
+        vc.typeStr = @"email";
+        [self.navigationController pushViewController:vc animated:YES];
+        
+    }
+    else if (indexPath.section==1&&indexPath.row==1){
+        DetailContentVC *vc =[DetailContentVC new];
+        vc.typeStr = @"phoneNumber";
+        [self.navigationController pushViewController:vc animated:YES];
         
     }
     else if (indexPath.section==1&&indexPath.row==3){//退出登录
@@ -255,7 +295,7 @@
     [NetworkManage Post:uploadPhoto andParams:dict andPhotoArr:photoArr success:^(id responseObject) {
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
         if ([dic[@"code"] integerValue] ==200 ) {
-               self.photoIM.image = dic[@"headerPic"];
+            [self.photoIM sd_setImageWithURL:[NSURL URLWithString:dic[@"data"][@"headerPic"]] placeholderImage:[UIImage imageNamed:@"personal_img"]];
         }else {
             [self showHint:dic[@"message"]];
         }
@@ -277,6 +317,8 @@
             //退出成功
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:@"未登录" forKey:@"loginStatus"];
+            
+            
             [defaults synchronize];
             
             [self.navigationController popViewControllerAnimated:YES];
@@ -290,6 +332,28 @@
         [self showHint:@"网络有问题"];
     }];
     
+}
+
+-(void)requestData{
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
+    dict[@"consumerID"] = userModel.consumerID;
+    
+    NSString *path =[NSString stringWithFormat:@"%@?token=%@",consumerView,userModel.token];
+    
+    [NetworkManage Get:path andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            NSLog(@"%@",obj[@"data"]);
+        
+            self.userInfoDic = obj[@"data"];
+            [self.myTableView reloadData];
+            
+        }
+    } failure:^(NSError *error) {
+        NSLog(@"网络有问题");
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

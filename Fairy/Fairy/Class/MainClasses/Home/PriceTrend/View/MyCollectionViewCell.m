@@ -34,9 +34,9 @@
     return self;
 }
 
--(void)setModel:(PriceModel *)model{
+-(void)setModel:(CurrencyModel *)model{
     _model = model;
-    self.botlabel.text = model.fsym;
+    self.botlabel.text = model.currencyShortEnName;
 }
 
 

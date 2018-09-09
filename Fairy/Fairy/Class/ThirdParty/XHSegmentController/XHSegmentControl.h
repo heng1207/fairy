@@ -34,11 +34,21 @@ typedef NS_ENUM(NSInteger, XHSegmentType)
 
 - (void)xhSegmentSelectAtIndex:(NSInteger)index animation:(BOOL)animation;
 
+
+
+@end
+@protocol XHTSegmentControlDelegate <NSObject>
+
+
+- (void)XHTSegmentSelectAtIndex:(NSInteger)index animation:(BOOL)animation;
+
+
 @end
 
 @interface XHSegmentControl : UIView
 
 @property(nonatomic, weak)      id<XHSegmentControlDelegate>    delegate;
+@property(nonatomic, weak)      id<XHTSegmentControlDelegate>    tdelegate;
 
 //  选中
 @property(nonatomic)            NSInteger       selectIndex;

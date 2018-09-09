@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PriceModel.h"
+#import "CurrencyModel.h"
 
 @interface MyCollectionViewCell : UICollectionViewCell
 
-@property(nonatomic,strong)PriceModel *model;
+@property(nonatomic,strong)CurrencyModel *model;
 @end

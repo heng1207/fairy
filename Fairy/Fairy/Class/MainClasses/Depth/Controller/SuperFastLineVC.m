@@ -73,8 +73,7 @@
 {
     if (!_MessageView)
     {
-        CGFloat y = !self.navigationController?20:64;
-        _MessageView = [[UIView alloc] initWithFrame:CGRectMake(0, y, [UIScreen mainScreen].bounds.size.width, 58)];
+        _MessageView = [[UIView alloc] initWithFrame:CGRectMake(0, SafeAreaTopHeight, [UIScreen mainScreen].bounds.size.width, 58)];
         _MessageView.backgroundColor =RGBA(239, 239, 244, 1);
         UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(26, 14, kScreenWidth-52, 35)];
         title.font = [UIFont systemFontOfSize:13];
@@ -90,9 +89,11 @@
 {
     if (!_segmentControl)
     {
-        CGFloat y = !self.navigationController?20+58:64+58;
+        CGFloat y = !self.navigationController?20+SafeAreaTopHeight:64+SafeAreaTopHeight;
         _segmentControl = [[XHSegmentControl alloc] initWithFrame:CGRectMake(0, y, [UIScreen mainScreen].bounds.size.width, DefaultSegmentHeight)];
         _segmentControl.delegate = self;
+        _segmentControl.segmentType = XHSegmentTypeFit;          //  适应文字大小
+//        _segmentControl.segmentType =XHSegmentTypeCircle; 
     }
     return _segmentControl;
 }

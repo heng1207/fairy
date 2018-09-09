@@ -8,13 +8,13 @@
 
 #import "WSLineChartCell.h"
 #import "WSLineChartView.h"
-#import "SegmentView.h"
+
 
 @interface  WSLineChartCell()
 @property(nonatomic,strong)WSLineChartView *wsLine;
 
 @property(nonatomic,strong)UILabel *titleLab;
-@property(nonatomic,strong)SegmentView *segView;
+
 @end
 
 
@@ -57,7 +57,7 @@
         [self.wsLine removeFromSuperview];
         self.wsLine = nil;
     }
-    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, 130) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
+    WSLineChartView *wsLine = [[WSLineChartView alloc]initWithFrame:CGRectMake(12, 0, UIScreenW-12, 130) xTitleArray:xArray yValueArray:yArray yMax:maxPriceSection yMin:minPriceSection];
     self.wsLine = wsLine;
     [self.contentView addSubview:wsLine];
     

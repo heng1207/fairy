@@ -8,11 +8,13 @@
 
 #import "RegisterVC.h"
 
-@interface RegisterVC ()
-@property(nonatomic,strong)UITextField *userNameTF;
-@property(nonatomic,strong)UITextField *passwordTF;
+@interface RegisterVC ()<UITextFieldDelegate>
+
 @property(nonatomic,strong)UITextField *phoneTF;
+@property(nonatomic,strong)UITextField *passwordTF;
 @property(nonatomic,strong)UITextField *codeTF;
+@property(nonatomic,strong)UITextField *inviteTF;
+
 @end
 
 @implementation RegisterVC
@@ -28,6 +30,23 @@
 }
 
 -(void)creatSubViews{
+    UIButton *backBtn =[UIButton new];
+    [self.view addSubview:backBtn];
+    [backBtn setImage:[UIImage imageNamed:@"loginBack"] forState:UIControlStateNormal];
+    [backBtn addTarget:self action:@selector(registerClick) forControlEvents:UIControlEventTouchUpInside];
+    [backBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        if (LL_iPhoneX) {
+            make.top.mas_equalTo(AdaptedHeight(50+44));
+        }
+        else{
+            make.top.mas_equalTo(AdaptedHeight(50));
+        }
+        make.left.mas_equalTo(AdaptedWidth(60));
+        make.width.mas_equalTo(AdaptedWidth(36));
+        make.height.mas_equalTo(AdaptedHeight(46));
+    }];
+    
+    
     
     UIImageView *logoIM=[UIImageView new];
     logoIM.image =[UIImage imageNamed:@"loginLogo"];
@@ -43,15 +62,16 @@
         make.width.mas_equalTo(AdaptedWidth(436));
         make.height.mas_equalTo(AdaptedHeight(230));
     }];
+
     
-    //用户名
-    UILabel *userNameLab =[UILabel new];
-    userNameLab.text=@"用户名";
-    userNameLab.font = AdaptedFontSize(34);
-    userNameLab.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:userNameLab];
+    //手机号
+    UILabel *phoneLab =[UILabel new];
+    phoneLab.text=@"手机号";
+    phoneLab.font= AdaptedFontSize(34);
+    phoneLab.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:phoneLab];
     
-    [userNameLab mas_makeConstraints:^(MASConstraintMaker *make) {
+    [phoneLab mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
         make.left.mas_equalTo(AdaptedWidth(50));
         make.width.mas_equalTo(AdaptedWidth(116));
@@ -59,32 +79,51 @@
     }];
     
     
-    UITextField *userNameTF =[UITextField new];
-    self.userNameTF = userNameTF;
-    userNameTF.font= AdaptedFontSize(34);
-    userNameTF.placeholder=@"请设置用户名";
-    [self.view addSubview:userNameTF];
-    [userNameTF mas_makeConstraints:^(MASConstraintMaker *make) {
+    UITextField *phoneTF =[UITextField new];
+    self.phoneTF = phoneTF;
+    phoneTF.tag=1;
+    phoneTF.delegate = self;
+    phoneTF.font= AdaptedFontSize(34);
+    phoneTF.placeholder=@"请输入手机号";
+    phoneTF.keyboardType = UIKeyboardTypeNumberPad;
+    [self.view addSubview:phoneTF];
+    [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
-        make.left.mas_equalTo(userNameLab.mas_right).offset(AdaptedWidth(12));
+        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
     }];
+    
+    UIButton *sendCodeBtn =[UIButton new];
+    [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
+    sendCodeBtn.backgroundColor = [UIColor colorWithHex:@"#031b92"];
+    sendCodeBtn.titleLabel.font = AdaptedFontSize(28);
+    sendCodeBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
+    sendCodeBtn.layer.cornerRadius = AdaptedHeight(25);
+    sendCodeBtn.layer.masksToBounds = YES;
+    [self.view addSubview:sendCodeBtn];
+    [sendCodeBtn addTarget:self action:@selector(sendCodeClick) forControlEvents:UIControlEventTouchUpInside];
+    [sendCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(74));
+        make.right.mas_equalTo(-AdaptedWidth(38));
+        make.width.mas_equalTo(AdaptedWidth(216));
+        make.height.mas_equalTo(AdaptedHeight(50));
+    }];
+    
+    
     UIView *line1 =[UIView new];
     line1.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
     [self.view addSubview:line1];
     [line1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(userNameLab.mas_bottom).offset(AdaptedHeight(10));
+        make.top.mas_equalTo(phoneTF.mas_bottom).offset(AdaptedHeight(10));
         make.left.mas_equalTo(AdaptedWidth(50));
         make.right.mas_equalTo(-AdaptedWidth(50));
         make.height.mas_equalTo(AdaptedWidth(1));
     }];
     
     
-    
     //密码
     UILabel *passwordLab =[UILabel new];
-//    passwordLab.text=@"密   码";
     passwordLab.text=@"密    码";
     passwordLab.font = AdaptedFontSize(34);
     passwordLab.textAlignment = NSTextAlignmentLeft;
@@ -100,6 +139,7 @@
     
     UITextField *passwordTF =[UITextField new];
     self.passwordTF = passwordTF;
+    passwordTF.tag=2;
     passwordTF.font= AdaptedFontSize(34);
     passwordTF.placeholder=@"请输入密码";
     [self.view addSubview:passwordTF];
@@ -123,64 +163,6 @@
     
 
     
-    
-    //手机号
-    UILabel *phoneLab =[UILabel new];
-    phoneLab.text=@"手机号";
-    phoneLab.font= AdaptedFontSize(34);
-    phoneLab.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:phoneLab];
-    
-    [phoneLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(AdaptedWidth(50));
-        make.width.mas_equalTo(AdaptedWidth(116));
-        make.height.mas_equalTo(AdaptedHeight(70));
-    }];
-    
-    
-    UITextField *phoneTF =[UITextField new];
-    self.phoneTF = phoneTF;
-    phoneTF.font= AdaptedFontSize(34);
-    phoneTF.placeholder=@"请输入手机号";
-    phoneTF.keyboardType = UIKeyboardTypeNumberPad;
-    [self.view addSubview:phoneTF];
-    [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(18));
-        make.left.mas_equalTo(phoneLab.mas_right).offset(AdaptedWidth(12));
-        make.width.mas_equalTo(AdaptedWidth(460));
-        make.height.mas_equalTo(AdaptedHeight(70));
-    }];
-    
-    UIButton *sendCodeBtn =[UIButton new];
-    [sendCodeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
-    sendCodeBtn.backgroundColor = [UIColor colorWithHex:@"#031b92"];
-    sendCodeBtn.titleLabel.font = AdaptedFontSize(28);
-    sendCodeBtn.titleLabel.textColor = [UIColor colorWithHex:@"#ffffff"];
-    sendCodeBtn.layer.cornerRadius = AdaptedHeight(25);
-    sendCodeBtn.layer.masksToBounds = YES;
-    [self.view addSubview:sendCodeBtn];
-    [sendCodeBtn addTarget:self action:@selector(sendCodeClick) forControlEvents:UIControlEventTouchUpInside];
-    [sendCodeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(28));
-        make.right.mas_equalTo(-AdaptedWidth(38));
-        make.width.mas_equalTo(AdaptedWidth(216));
-        make.height.mas_equalTo(AdaptedHeight(50));
-    }];
-    
-    
-    UIView *line3 =[UIView new];
-    line3.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
-    [self.view addSubview:line3];
-    [line3 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(phoneLab.mas_bottom).offset(AdaptedHeight(10));
-        make.left.mas_equalTo(AdaptedWidth(50));
-        make.right.mas_equalTo(-AdaptedWidth(50));
-        make.height.mas_equalTo(AdaptedWidth(1));
-    }];
-    
-    
-    
     //验证码
     UILabel *codeLab =[UILabel new];
     codeLab.text=@"验证码";
@@ -189,7 +171,7 @@
     [self.view addSubview:codeLab];
     
     [codeLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line3.mas_bottom).offset(AdaptedHeight(18));
+        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(18));
         make.left.mas_equalTo(AdaptedWidth(50));
         make.width.mas_equalTo(AdaptedWidth(116));
         make.height.mas_equalTo(AdaptedHeight(70));
@@ -198,12 +180,13 @@
     
     UITextField *codeTF =[UITextField new];
     self.codeTF = codeTF;
+    codeTF.tag=3;
     codeTF.placeholder=@"请输入验证码";
     codeTF.font= AdaptedFontSize(34);
     codeTF.keyboardType = UIKeyboardTypeNumberPad;
     [self.view addSubview:codeTF];
     [codeTF mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line3.mas_bottom).offset(AdaptedHeight(18));
+        make.top.mas_equalTo(line2.mas_bottom).offset(AdaptedHeight(18));
         make.left.mas_equalTo(codeLab.mas_right).offset(AdaptedWidth(12));
         make.width.mas_equalTo(AdaptedWidth(460));
         make.height.mas_equalTo(AdaptedHeight(70));
@@ -215,6 +198,45 @@
     [self.view addSubview:line4];
     [line4 mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(codeLab.mas_bottom).offset(AdaptedHeight(10));
+        make.left.mas_equalTo(AdaptedWidth(50));
+        make.right.mas_equalTo(-AdaptedWidth(50));
+        make.height.mas_equalTo(AdaptedWidth(1));
+    }];
+    
+    
+    //邀请码
+    UILabel *inviteLab =[UILabel new];
+    inviteLab.text=@"邀请码";
+    inviteLab.font= AdaptedFontSize(34);
+    inviteLab.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:inviteLab];
+    [inviteLab mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(line4.mas_bottom).offset(AdaptedHeight(18));
+        make.left.mas_equalTo(AdaptedWidth(50));
+        make.width.mas_equalTo(AdaptedWidth(116));
+        make.height.mas_equalTo(AdaptedHeight(70));
+    }];
+    
+    UITextField *inviteTF =[UITextField new];
+    self.inviteTF = inviteTF;
+    inviteTF.tag=4;
+    inviteTF.placeholder=@"请输入邀请码";
+    inviteTF.font= AdaptedFontSize(34);
+    inviteTF.keyboardType = UIKeyboardTypeDefault;
+    [self.view addSubview:inviteTF];
+    [inviteTF mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(line4.mas_bottom).offset(AdaptedHeight(18));
+        make.left.mas_equalTo(inviteLab.mas_right).offset(AdaptedWidth(12));
+        make.width.mas_equalTo(AdaptedWidth(460));
+        make.height.mas_equalTo(AdaptedHeight(70));
+    }];
+    
+    
+    UIView *line5 =[UIView new];
+    line5.backgroundColor=[UIColor colorWithHex:@"#cccccc"];
+    [self.view addSubview:line5];
+    [line5 mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(inviteLab.mas_bottom).offset(AdaptedHeight(10));
         make.left.mas_equalTo(AdaptedWidth(50));
         make.right.mas_equalTo(-AdaptedWidth(50));
         make.height.mas_equalTo(AdaptedWidth(1));
@@ -233,7 +255,7 @@
     [self.view addSubview:LoginBtn];
     [LoginBtn addTarget:self action:@selector(LoginClick) forControlEvents:UIControlEventTouchUpInside];
     [LoginBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.mas_equalTo(line4.mas_bottom).offset(AdaptedHeight(60));
+        make.top.mas_equalTo(line5.mas_bottom).offset(AdaptedHeight(60));
         make.left.mas_equalTo(AdaptedWidth(64));
         make.right.mas_equalTo(-AdaptedWidth(64));
         make.height.mas_equalTo(AdaptedHeight(76));
@@ -279,15 +301,10 @@
     }];
 }
 -(void)LoginClick{
-    if ([Tool isBlankString:self.userNameTF.text]) {
-        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"用户名不能为空" message:@"请键入用户名" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
-        [alertView show];
+    if ( ![Tool checkTel:self.phoneTF.text]){
         return;
     }
     if ( ![Tool checkPassWord:self.passwordTF.text]){
-        return;
-    }
-    if ( ![Tool checkTel:self.phoneTF.text]){
         return;
     }
     if ([Tool isBlankString:self.codeTF.text]) {
@@ -297,10 +314,10 @@
     }
     
     NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-    dict[@"loginName"] = self.userNameTF.text;
-    dict[@"password"] = self.passwordTF.text;
     dict[@"phoneNumber"] = self.phoneTF.text;
+    dict[@"password"] = self.passwordTF.text;
     dict[@"checkCode"] = self.codeTF.text;
+    dict[@"referCode"] = self.inviteTF.text;
     [NetworkManage Post:Register andParams:dict success:^(id responseObject) {
         NSLog(@"%@",responseObject);
         NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
@@ -317,6 +334,23 @@
     
     
 }
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSLog(@"%ld",(long)textField.tag);
+    if (textField.tag==1) {
+        //http://47.254.69.147:8080/interface/consumer/check_login_name/18512956666
+        [NetworkManage Get:CheckPhone(textField.text) andParams:nil success:^(id responseObject) {
+            NSMutableDictionary *dic = (NSMutableDictionary*)responseObject;
+            if ([dic[@"code"] integerValue] ==200 ) {
+                [self showHint:dic[@"message"]];
+            }
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+        
+    }
+    
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

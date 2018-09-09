@@ -19,6 +19,8 @@
 @property(nonatomic,strong)NSMutableArray *dataArrs;
 @property(nonatomic,strong)PriceModel *selectModel;
 
+@property(nonatomic,assign)NSInteger allNumber;
+@property(nonatomic,assign)NSInteger currentPage;
 
 @end
 
@@ -37,6 +39,8 @@
     [self.view addSubview:_tableView];
     
     
+    
+    
     // Do any additional setup after loading the view.
 }
 
@@ -44,6 +48,13 @@
     [super viewWillAppear:animated];
     NSLog(@"当前类型%@",self.headTypeID);
     [self loadDatas];
+    
+    // 加载更多
+    MJRefreshAutoNormalFooter *footer = [MJRefreshAutoNormalFooter footerWithRefreshingBlock:^{
+        [self requestMoreDatas];
+    }];
+    [footer setTitle:@"无更多数据" forState:MJRefreshStateNoMoreData];
+    self.tableView.mj_footer = footer;
 }
 #pragma mark Setter 刷新
 - (void)setIsRefresh:(BOOL)isRefresh
@@ -152,6 +163,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
     if ([loginStatus isEqualToString:@"未登录"]) {
+    
         return;
     }
     
@@ -185,12 +197,6 @@
     
 }
 -(void)deleteOptional{
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
-    if ([loginStatus isEqualToString:@"未登录"]) {
-        return;
-    }
     
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
     dict[@"coinPairID"] = self.selectModel.coinPairID;
@@ -234,6 +240,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *loginStatus = [defaults objectForKey:@"loginStatus"];
         if ([loginStatus isEqualToString:@"未登录"]) {
+
             return;
         }
         
@@ -256,8 +263,12 @@
     }
     
     else{
+        
+        
+        
         NSMutableDictionary *dict=[NSMutableDictionary dictionary];
-        dict[@"pageNo"] = @1;
+        self.currentPage = 1;
+        dict[@"pageNo"] = [NSString stringWithFormat:@"%ld",(long)self.currentPage];
         dict[@"pageSize"] = @10;
         if ([self.headTypeID isEqualToString:@"币值"]) {
             
@@ -272,6 +283,8 @@
         [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
             NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
             if ([obj[@"code"] integerValue] ==200 ) {
+                
+                self.allNumber = [obj[@"totalRows"] integerValue];
                 self.dataArrs = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
                 [self.tableView reloadData];
             }
@@ -285,6 +298,43 @@
 }
 
 
+-(void)requestMoreDatas{
+  
+    if (self.dataArrs.count >= self.allNumber) {
+        [self.tableView.mj_footer  endRefreshingWithNoMoreData];
+        return;
+    }
+    
+    NSMutableDictionary *dict=[NSMutableDictionary dictionary];
+    self.currentPage++ ;
+    dict[@"pageNo"] = [NSString stringWithFormat:@"%ld",(long)self.currentPage];
+    dict[@"pageSize"] = @10;
+    if ([self.headTypeID isEqualToString:@"币值"]) {
+        
+    }
+    else if ([self.headTypeID isEqualToString:@"Bitfinex"]){
+        dict[@"tradePlatformID"] = @"1";
+    }
+    else if ([self.headTypeID isEqualToString:@"ZB"]){
+        dict[@"tradePlatformID"] = @"4";
+    }
+    
+    [NetworkManage Get:moneyClassContent andParams:dict success:^(id responseObject) {
+        NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
+        if ([obj[@"code"] integerValue] ==200 ) {
+            
+            NSArray *arr = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
+            [self.dataArrs addObjectsFromArray:arr];
+            [self.tableView.mj_footer  endRefreshingWithNoMoreData];
+            [self.tableView reloadData];
+        }
+    } failure:^(NSError *error) {
+        [self.tableView.mj_footer  endRefreshingWithNoMoreData];
+        NSLog(@"%@",error);
+    }];
+    
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

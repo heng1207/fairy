@@ -31,6 +31,7 @@
     
     self.logoArr= @[@"WechatFriend",@"QQLogo",@"WeiBo"];
     [self creatSubViews];
+   
     // Do any additional setup after loading the view.
 }
 
@@ -72,7 +73,7 @@
     
     //手机号
     UILabel *phoneLab =[UILabel new];
-    phoneLab.text=@"用户名";
+    phoneLab.text=@"手机号";
     phoneLab.font= AdaptedFontSize(34);
     phoneLab.textAlignment = NSTextAlignmentLeft;
     [self.view addSubview:phoneLab];
@@ -88,8 +89,8 @@
     UITextField *phoneTF =[UITextField new];
     self.phoneTF= phoneTF;
     phoneTF.font= AdaptedFontSize(34);
-    phoneTF.keyboardType = UIKeyboardTypeDefault;
-    phoneTF.placeholder=@"请输入用户名";
+    phoneTF.keyboardType = UIKeyboardTypeNumberPad;
+    phoneTF.placeholder=@"请输入手机号";
     [self.view addSubview:phoneTF];
     [phoneTF mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.mas_equalTo(logoIM.mas_bottom).offset(AdaptedHeight(66));
@@ -225,58 +226,58 @@
     }];
     
     
+//    
+//    //三方登录
+//    float leftRightSpace = AdaptedWidth(60);
+//    float MidSpace = AdaptedWidth(84);
+//    float Y = LL_TabbarSafeBottomMargin + AdaptedHeight(196);
+//    float width =  (UIScreenW - 2*leftRightSpace- 2*MidSpace)/3;
+//    float height = AdaptedHeight(118);
+//    for (NSInteger i =0; i<3; i++) {
+//        UIButton *btn =[[UIButton alloc]init];
+//        btn.frame= CGRectMake(leftRightSpace + i*(MidSpace+width), UIScreenH-Y, width, height);
+//        btn.tag = i;
+//        [btn setImage:[UIImage imageNamed:self.logoArr[i]] forState:UIControlStateNormal];
+//        [btn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+//        [self.view addSubview:btn];
+//    }
+//    
     
-    //三方登录
-    float leftRightSpace = AdaptedWidth(60);
-    float MidSpace = AdaptedWidth(84);
-    float Y = LL_TabbarSafeBottomMargin + AdaptedHeight(196);
-    float width =  (UIScreenW - 2*leftRightSpace- 2*MidSpace)/3;
-    float height = AdaptedHeight(118);
-    for (NSInteger i =0; i<3; i++) {
-        UIButton *btn =[[UIButton alloc]init];
-        btn.frame= CGRectMake(leftRightSpace + i*(MidSpace+width), UIScreenH-Y, width, height);
-        btn.tag = i;
-        [btn setImage:[UIImage imageNamed:self.logoArr[i]] forState:UIControlStateNormal];
-        [btn addTarget:self action:@selector(shareBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:btn];
-    }
     
-    
-    
-    UILabel *thirdPartyLab= [UILabel new];
-    thirdPartyLab.text = @"第三方登录";
-    thirdPartyLab.font = AdaptedFontSize(28);
-    thirdPartyLab.textColor = [UIColor colorWithHex:@"#a3a3a3"];
-    thirdPartyLab.textAlignment =NSTextAlignmentCenter;
-    [self.view addSubview:thirdPartyLab];
-    
-    float thirdPartyY = LL_TabbarSafeBottomMargin + AdaptedHeight(250);
-    [thirdPartyLab mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.mas_equalTo(- thirdPartyY);
-        make.centerX.mas_equalTo(self.view);
-        make.width.mas_equalTo(AdaptedHeight(162));
-        make.height.mas_equalTo(AdaptedHeight(42));
-    }];
-    
-    UIView *thirdPartyline1 = [UIView new];
-    thirdPartyline1.backgroundColor =[UIColor colorWithHex:@"#cccccc"];;
-    [self.view addSubview:thirdPartyline1];
-    [thirdPartyline1 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(AdaptedWidth(60));
-        make.centerY.mas_equalTo(thirdPartyLab);
-        make.right.mas_equalTo(thirdPartyLab.mas_left).offset(-AdaptedWidth(24));
-        make.height.mas_equalTo(AdaptedHeight(1));
-    }];
-    
-    UIView *thirdPartyline2 = [UIView new];
-    thirdPartyline2.backgroundColor =[UIColor colorWithHex:@"#cccccc"];
-    [self.view addSubview:thirdPartyline2];
-    [thirdPartyline2 mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.mas_equalTo(thirdPartyLab.mas_right).offset(AdaptedWidth(24));
-        make.centerY.mas_equalTo(thirdPartyLab);
-        make.right.mas_equalTo(-AdaptedWidth(60));
-        make.height.mas_equalTo(AdaptedHeight(1));
-    }];
+//    UILabel *thirdPartyLab= [UILabel new];
+//    thirdPartyLab.text = @"第三方登录";
+//    thirdPartyLab.font = AdaptedFontSize(28);
+//    thirdPartyLab.textColor = [UIColor colorWithHex:@"#a3a3a3"];
+//    thirdPartyLab.textAlignment =NSTextAlignmentCenter;
+//    [self.view addSubview:thirdPartyLab];
+//    
+//    float thirdPartyY = LL_TabbarSafeBottomMargin + AdaptedHeight(250);
+//    [thirdPartyLab mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.bottom.mas_equalTo(- thirdPartyY);
+//        make.centerX.mas_equalTo(self.view);
+//        make.width.mas_equalTo(AdaptedHeight(162));
+//        make.height.mas_equalTo(AdaptedHeight(42));
+//    }];
+//    
+//    UIView *thirdPartyline1 = [UIView new];
+//    thirdPartyline1.backgroundColor =[UIColor colorWithHex:@"#cccccc"];;
+//    [self.view addSubview:thirdPartyline1];
+//    [thirdPartyline1 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(AdaptedWidth(60));
+//        make.centerY.mas_equalTo(thirdPartyLab);
+//        make.right.mas_equalTo(thirdPartyLab.mas_left).offset(-AdaptedWidth(24));
+//        make.height.mas_equalTo(AdaptedHeight(1));
+//    }];
+//    
+//    UIView *thirdPartyline2 = [UIView new];
+//    thirdPartyline2.backgroundColor =[UIColor colorWithHex:@"#cccccc"];
+//    [self.view addSubview:thirdPartyline2];
+//    [thirdPartyline2 mas_makeConstraints:^(MASConstraintMaker *make) {
+//        make.left.mas_equalTo(thirdPartyLab.mas_right).offset(AdaptedWidth(24));
+//        make.centerY.mas_equalTo(thirdPartyLab);
+//        make.right.mas_equalTo(-AdaptedWidth(60));
+//        make.height.mas_equalTo(AdaptedHeight(1));
+//    }];
     
 }
 -(void)backBtnClick{
@@ -298,7 +299,7 @@
 
 -(void)LoginClick{
     if ([Tool isBlankString:self.phoneTF.text]) {
-        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"用户名不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
+        UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:@"提示" message:@"手机号不能为空" delegate:self cancelButtonTitle:@"好" otherButtonTitles:nil];
         [alertView show];
         return;
     }
@@ -310,7 +311,7 @@
     }
     
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"loginName"] = self.phoneTF.text;
+    dict[@"phoneNumber"] = self.phoneTF.text;
     dict[@"password"] = self.passwordTF.text;
 //    dict[@"loginName"] = @"zhangfeng";
 //    dict[@"password"] = @"000000";

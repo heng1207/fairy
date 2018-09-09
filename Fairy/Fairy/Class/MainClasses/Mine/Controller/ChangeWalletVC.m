@@ -88,7 +88,7 @@
     [phoneLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(backView.mas_top).offset(kScreenValue(17));
         make.left.equalTo(backView.mas_left).offset(kScreenValue(16));
-        make.width.mas_equalTo(kScreenValue(55));
+        make.width.mas_equalTo(kScreenValue(80));
         make.height.mas_equalTo(kScreenValue(14));
     }];
     
@@ -120,7 +120,7 @@
     [NewPasswordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineView1.mas_bottom).offset(kScreenValue(17));
         make.left.equalTo(self.view.mas_left).offset(kScreenValue(16));
-        make.width.mas_equalTo(kScreenValue(55));
+        make.width.mas_equalTo(kScreenValue(80));
         make.height.mas_equalTo(kScreenValue(14));
     }];
     
@@ -153,7 +153,7 @@
     [passwordLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(lineView2.mas_bottom).offset(kScreenValue(17));
         make.left.equalTo(self.view.mas_left).offset(kScreenValue(16));
-        make.width.mas_equalTo(kScreenValue(65));
+        make.width.mas_equalTo(kScreenValue(90));
         make.height.mas_equalTo(kScreenValue(14));
     }];
     
@@ -196,9 +196,7 @@
     if (self.phoneTF.text.length<6) {
         return;
     }
-    if (self.codeTF.text.length<6) {
-        return;
-    }if (self.NewPassTF.text.length<6) {
+    if (self.NewPassTF.text.length<6) {
         return;
     }
     
@@ -234,7 +232,16 @@
 
 - (void)codeAction:(UIButton *)sender
 {
-
+    if (self.phoneTF.text.length<6) {
+        return;
+    }
+    if (self.codeTF.text.length<6) {
+        return;
+    }if (self.NewPassTF.text.length<6) {
+        return;
+    }
+    
+    
         PhoneZhuCeModel *userModel =[NSKeyedUnarchiver unarchiveObjectWithFile:kFilePath];
         NSMutableDictionary *dict =[NSMutableDictionary dictionary];
         dict[@"token"]  = userModel.token;

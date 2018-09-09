@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PriceDetailDataView : UIView
+@property (nonatomic,copy)NSString *Coin;
 
 @end

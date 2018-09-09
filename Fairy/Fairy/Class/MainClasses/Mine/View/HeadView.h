@@ -16,6 +16,6 @@
 
 @property(nonatomic,weak)id<HeadViewDelegate> delegate;
 
--(void)updateUserInfo;
+-(void)updateUserInfo:(NSDictionary*)dict;
 
 @end

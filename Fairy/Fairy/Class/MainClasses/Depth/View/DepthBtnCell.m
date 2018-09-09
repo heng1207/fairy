@@ -22,6 +22,9 @@
         FL_Button *btnn = [[FL_Button alloc]initWithAlignmentStatus:FLAlignmentStatusTop];
         [btnn setImage:[UIImage imageNamed:arrImage[i]] forState:UIControlStateNormal];
         btnn.imageView.contentMode = UIViewContentModeScaleAspectFill;
+        [btnn setTintColor:[UIColor grayColor]];
+        btnn.alpha=0.4;
+        btnn.titleLabel.font = [UIFont systemFontOfSize:kScreenValue(14)];
         [btnn setTitle:titleImage[i] forState:UIControlStateNormal];
         [btnn setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         btnn.frame = CGRectMake(i * SCREEN_WIDTH /4,  0  ,SCREEN_WIDTH/4, SCREEN_WIDTH/4);

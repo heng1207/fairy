@@ -38,13 +38,14 @@
     NSLog(@"%@---%ld",selectType,index);
     self.priceModel = priceModel;
     //60 +180 +10 + 35 + 30
-    NSInteger height = SCREEN_HEIGHT - LL_TabbarSafeBottomMargin - LL_StatusBarAndNavigationBarHeight - 315;
+    NSInteger height = SCREEN_HEIGHT - LL_TabbarSafeBottomMargin - LL_StatusBarAndNavigationBarHeight - 315+64;
     if ([selectType isEqualToString:@"分析"]) {
         if (index==0) {
 //            PriceIntroduceView *view =[[PriceIntroduceView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
 //            self.introduceView = view;
 //            [self.view addSubview:view];
             AbstractView *DataVc  =[[AbstractView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+            DataVc.Coin = self.coin;
             self.introduceView = DataVc;
             [self.view addSubview:DataVc];
             
@@ -71,6 +72,7 @@
     }
     else if ([selectType isEqualToString:@"数据"]){
         PriceDetailDataView *DataVc  =[[PriceDetailDataView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+        DataVc.Coin = self.coin;
 
         self.forecastView = DataVc;
         [self.view addSubview:DataVc];
@@ -78,6 +80,7 @@
     }
     else if ([selectType isEqualToString:@"简介"]){
         AbstractView *DataVc  =[[AbstractView alloc]initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, height)];
+        
         self.forecastView = DataVc;
         [self.view addSubview:DataVc];
         //        [self requestDuanQiYuCe];

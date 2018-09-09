@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface WalletListVC : UIViewController
-
+@property (nonatomic,copy)NSString *titleCoin;
 @end

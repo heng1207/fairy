@@ -7,7 +7,7 @@
 //
 
 #import "CurrencySelectVC.h"
-#import "PriceModel.h"
+#import "CurrencyModel.h"
 #import "MyCollectionViewCell.h"
 
 @interface CurrencySelectVC ()<UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout>
@@ -88,8 +88,8 @@
 //点击item方法
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PriceModel *model = self.flagArray[indexPath.row];
-    self.block(model.fsym);
+    CurrencyModel *model = self.flagArray[indexPath.row];
+    self.block(model.currencyShortEnName);
     [self.navigationController popViewControllerAnimated:YES];
 }
 //设置每个item的尺寸
@@ -135,24 +135,14 @@
 
 -(void)requestDatas{
     
-    //http://47.254.69.147:8080/interface/coin_pair/list_data?pageNo=1&pageSize=10
+    
     NSMutableDictionary *dict =[NSMutableDictionary dictionary];
-    dict[@"pageNo"]  = @1;
-    dict[@"pageSize"]  = @200;
+    dict[@"pageSize"]  = @1000;
     [NetworkManage Get:moneyTypeSelect andParams:dict success:^(id responseObject) {
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
-            self.flagArray = obj[@"data"];
-            self.flagArray = [PriceModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
+            self.flagArray = [CurrencyModel mj_objectArrayWithKeyValuesArray:obj[@"data"]];
             [self.mainCollectionView reloadData];
-            /*
-             "fsym":"BCH",
-             "tsyms":"USDT",
-             "platformCnName":"中币",
-             "rmbLastPrice":"￥3789.64005",
-             "tradingVolume":"3472.50800",
-             "priceChangeRatio":"+3.626%",
-             */
         }
     } failure:^(NSError *error) {
         NSLog(@"%@",error);

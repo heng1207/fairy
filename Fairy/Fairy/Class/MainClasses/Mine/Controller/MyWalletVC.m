@@ -145,12 +145,12 @@
         SetCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         if (indexPath.row == 0)
         {
-            SetCell.icon.image = [UIImage imageNamed:@"AppIcon"];
+            SetCell.icon.image = [UIImage imageNamed:@"11"];
             SetCell.title.text = @"修改密码";
             SetCell.count.text = @"";
             
         }else{
-            SetCell.icon.image = [UIImage imageNamed:@"AppIcon"];
+            SetCell.icon.image = [UIImage imageNamed:@"12"];
             SetCell.title.text = @"忘记密码";
             SetCell.count.text = @"";
             

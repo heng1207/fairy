@@ -56,26 +56,23 @@
 -(void)setPriceModel:(PriceModel *)priceModel{
     _priceModel = priceModel;
     
+    NSString *picUrl =[NSString stringWithFormat:@"%@%@",SERVER,priceModel.coinPicPath];
+    [self.logo sd_setImageWithURL:[NSURL URLWithString:picUrl] placeholderImage:[UIImage imageNamed:@""]];
     self.nameLab.text =[NSString stringWithFormat:@"%@/%@",priceModel.fsym,priceModel.tsyms];
     self.fromLab.text = priceModel.platformCnName;
     self.volumeLab.text = [NSString stringWithFormat:@"量 %@",priceModel.tradingVolume];
     self.increaseLab.text = priceModel.priceChangeRatio;
-//    self.priceLab.text = [NSString stringWithFormat:@"%@\n≈%@",priceModel.lastPrice,priceModel.rmbLastPrice];
-    if ([priceModel.rmbLastPrice isEqualToString:@"0"]) {
-        self.priceLab.text = [NSString stringWithFormat:@"%@",priceModel.lastPrice];
-    }
-    else{
-        self.priceLab.text = [NSString stringWithFormat:@"%@\n≈%@",priceModel.lastPrice,priceModel.rmbLastPrice];
-    }
+    self.priceLab.text = [NSString stringWithFormat:@"%@\n≈%@",priceModel.lastPrice,priceModel.rmbLastPrice];
+
     
     NSString *increaseType = [priceModel.priceChangeRatio substringToIndex:1];//截取掉下标1之前的字符串
     if ([increaseType isEqualToString:@"+"]) {
-        self.logo.image =[UIImage imageNamed:@"icon_row-b"];
+//        self.logo.image =[UIImage imageNamed:@"icon_row-b"];
         self.increaseLogo.image = [UIImage imageNamed:@"icon_rise"];
         self.increaseLab.textColor =[UIColor colorWithHex:@"#ff1515"];
     }
     else{
-        self.logo.image =[UIImage imageNamed:@"icon_row-box"];
+//        self.logo.image =[UIImage imageNamed:@"icon_row-box"];
         self.increaseLogo.image = [UIImage imageNamed:@"icon_row"];
         self.increaseLab.textColor =[UIColor colorWithHex:@"#1ca012"];
     }

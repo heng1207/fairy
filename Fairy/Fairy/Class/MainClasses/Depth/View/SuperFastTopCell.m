@@ -38,7 +38,7 @@
     
     [self.RedView addSubview:self.NowHelp];
     [self.NowHelp mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.RedView.mas_top).offset(kScreenValue(12));
+        make.top.equalTo(self.RedView.mas_top).offset(kScreenValue(7));
         make.left.equalTo(self.RedView.mas_left).offset(kScreenValue(30));
         make.right.equalTo(self.RedView.mas_right).offset(kScreenValue(-30));
         make.width.mas_equalTo(kScreenValue(15));
@@ -46,7 +46,7 @@
     
     [self.RedView addSubview:self.UpdateTime];
     [self.UpdateTime mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.NowHelp.mas_bottom).offset(kScreenValue(9));
+        make.top.equalTo(self.NowHelp.mas_bottom).offset(kScreenValue(5));
         make.left.equalTo(self.RedView.mas_left).offset(kScreenValue(30));
         make.right.equalTo(self.RedView.mas_right).offset(kScreenValue(-30));
         make.width.mas_equalTo(kScreenValue(11));
@@ -79,7 +79,7 @@
     UILabel *shouyi = [[UILabel alloc]init];
     shouyi.font = [UIFont systemFontOfSize:12];
     shouyi.textColor = [UIColor blackColor];
-    shouyi.text = @"超短期收益率";
+    shouyi.text = @"预测涨幅";
     shouyi.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:shouyi];
     [shouyi mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -96,7 +96,7 @@
     UILabel *jizhun = [[UILabel alloc]init];
     jizhun.font = [UIFont systemFontOfSize:12];
     jizhun.textColor = [UIColor blackColor];
-    jizhun.text = @"基准收益率";
+    jizhun.text = @"实际涨幅";
     jizhun.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:jizhun];
     [jizhun mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -120,7 +120,7 @@
     UILabel *time11 = [[UILabel alloc]init];
     time11.font = [UIFont systemFontOfSize:12];
     time11.textColor = [UIColor blackColor];
-    time11.text = @"近1周";
+    time11.text = @"近12小时";
     time11.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:time11];
     [time11 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -133,8 +133,9 @@
     
     self.shouyi1 = [[UILabel alloc]init];
     self.shouyi1.font = [UIFont systemFontOfSize:12];
-    self.shouyi1.textColor = [UIColor blackColor];
-    self.shouyi1.text = @"+8.11%";
+//    self.shouyi1.textColor = [UIColor redColor];
+    
+//    self.shouyi1.text = @"+8.11%";
     self.shouyi1.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.shouyi1];
     [self.shouyi1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -150,8 +151,8 @@
     //基准收益率列
     self.jizhun1 = [[UILabel alloc]init];
     self.jizhun1.font = [UIFont systemFontOfSize:12];
-    self.jizhun1.textColor = [UIColor blackColor];
-    self.jizhun1.text = @"-2.11%";
+//    self.jizhun1.textColor = [UIColor redColor];
+//    self.jizhun1.text = @"-2.11%";
     self.jizhun1.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.jizhun1];
     [self.jizhun1 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -178,7 +179,7 @@
     UILabel *time22 = [[UILabel alloc]init];
     time22.font = [UIFont systemFontOfSize:12];
     time22.textColor = [UIColor blackColor];
-    time22.text = @"近2周";
+    time22.text = @"近18小时";
     time22.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:time22];
     [time22 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -192,8 +193,8 @@
     
     self.shouyi2 = [[UILabel alloc]init];
     self.shouyi2.font = [UIFont systemFontOfSize:12];
-    self.shouyi2.textColor = [UIColor blackColor];
-    self.shouyi2.text = @"+8.111%";
+//    self.shouyi2.textColor = [UIColor redColor];
+//    self.shouyi2.text = @"+8.111%";
     self.shouyi2.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.shouyi2];
     [self.shouyi2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -209,8 +210,8 @@
     //基准收益率列
     self.jizhun2 = [[UILabel alloc]init];
     self.jizhun2.font = [UIFont systemFontOfSize:12];
-    self.jizhun2.textColor = [UIColor blackColor];
-    self.jizhun2.text = @"-2.111%";
+//    self.jizhun2.textColor = [UIColor redColor];
+//    self.jizhun2.text = @"-2.111%";
     self.jizhun2.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.jizhun2];
     [self.jizhun2 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -233,7 +234,7 @@
     UILabel *time33 = [[UILabel alloc]init];
     time33.font = [UIFont systemFontOfSize:12];
     time33.textColor = [UIColor blackColor];
-    time33.text = @"近4周";
+    time33.text = @"近24小时";
     time33.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:time33];
     [time33 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -247,8 +248,8 @@
 
     self.shouyi3 = [[UILabel alloc]init];
     self.shouyi3.font = [UIFont systemFontOfSize:12];
-    self.shouyi3.textColor = [UIColor blackColor];
-    self.shouyi3.text = @"+8.11%";
+//    self.shouyi3.textColor = [UIColor redColor];
+//    self.shouyi3.text = @"+8.11%";
     self.shouyi3.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.shouyi3];
     [self.shouyi3 mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -264,8 +265,8 @@
     //基准收益率列
     self.jizhun3 = [[UILabel alloc]init];
     self.jizhun3.font = [UIFont systemFontOfSize:12];
-    self.jizhun3.textColor = [UIColor blackColor];
-    self.jizhun3.text = @"-2.11%";
+//    self.jizhun3.textColor = [UIColor redColor];
+//    self.jizhun3.text = @"-2.11%";
     self.jizhun3.textAlignment = NSTextAlignmentCenter;
     [self.contentView addSubview:self.jizhun3];
     [self.jizhun3 mas_makeConstraints:^(MASConstraintMaker *make) {

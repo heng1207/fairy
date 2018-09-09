@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface SuperFastLineDetailVC : UIViewController
-
+@property (nonatomic,copy)NSString *currencyid;
 @end

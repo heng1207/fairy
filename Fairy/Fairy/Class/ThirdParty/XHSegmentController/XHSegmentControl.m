@@ -262,6 +262,9 @@
         
         [self.scrollView scrollRectToVisible:item.frame animated:YES];
         [self.delegate xhSegmentSelectAtIndex:selectIndex animation:animation];
+        [self.tdelegate XHTSegmentSelectAtIndex:selectIndex animation:animation];
+
+        
     }
 }
 

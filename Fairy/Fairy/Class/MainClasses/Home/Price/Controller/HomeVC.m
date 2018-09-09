@@ -28,7 +28,7 @@
 
 @property (nonatomic,strong) NSArray *globalIndexData;
 @property (nonatomic,strong) NSArray *moneyClassData;
-@property (nonatomic,strong) NSMutableDictionary *IndexTypeViewDic;
+@property (nonatomic,strong) NSString *currentIndexType;
 @property (nonatomic,strong) NSArray *secondDataArr;
 
 @end
@@ -49,7 +49,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(indexTypeClick:) name:@"indexTypeViewTypeSelect" object:nil];
 
-    self.IndexTypeViewDic = [NSMutableDictionary dictionary];
+ 
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     [self creatSearchBar];
@@ -95,7 +95,7 @@
             return 25;
         }
         else if (indexPath.row==1){
-            return 145;
+            return 155;
         }
         else{
             return 158;
@@ -137,6 +137,7 @@
             _contentCell.pageContentView = nil;
         }
         _contentCell.pageContentView = [[FSPageContentView alloc]initWithFrame:CGRectMake(0, 0, UIScreenW, UIScreenH ) childVCs:contentVCs parentVC:self delegate:self];
+        _contentCell.pageContentView.contentViewCurrentIndex = 1;
         _contentCell.pageContentView.backgroundColor = [UIColor whiteColor];
         [_contentCell.contentView addSubview:_contentCell.pageContentView];
         
@@ -150,7 +151,7 @@
     else if (indexPath.row==1){
         GraphCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GraphCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //        cell.dataDic = self.IndexTypeViewDic;
+        cell.currentIndexType = self.currentIndexType;
         cell.firstDataArr = self.secondDataArr;
         return cell;
     }
@@ -181,6 +182,7 @@
     self.titleView.titleSelectColor = [UIColor colorWithHex:@"#0e5f9f"];
     self.titleView.indicatorColor = [UIColor colorWithHex:@"#0e5f9f"];
     self.titleView.indicatorExtension = 10;
+    self.titleView.selectIndex = 1;
     return self.titleView;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -285,6 +287,7 @@
 //        NSLog(@"%@",error);
 //    }];
     
+    self.currentIndexType = @"BCH";
     [self requestIndexSelectDatas:@"bch"];
 }
 
@@ -292,7 +295,9 @@
 -(void)indexTypeClick:(NSNotification *)notification{
     NSDictionary * infoDic = [notification object];
     NSLog(@"%@",infoDic[@"selectType"]);
-    [self requestIndexSelectDatas:infoDic[@"selectType"]];
+    self.currentIndexType = infoDic[@"selectType"];
+    NSString *typeLower = [infoDic[@"selectType"] lowercaseString];    //小写
+    [self requestIndexSelectDatas:typeLower];
 }
 
 -(void)requestIndexSelectDatas:(NSString*)selectType{
@@ -302,36 +307,7 @@
         NSMutableDictionary *obj = (NSMutableDictionary*)responseObject;
         if ([obj[@"code"] integerValue] ==200 ) {
             
-//            //获取显示区间最大值，最小值
-//            NSMutableArray *price = [NSMutableArray array];
-//            for (NSDictionary *item in obj[@"data"] ) {
-//                [price addObject: [NSNumber numberWithFloat:[item[@"closePrice"] floatValue]]];
-//            }
-//            CGFloat maxPrice = [[price valueForKeyPath:@"@max.floatValue"] floatValue];
-//            CGFloat minPrice = [[price valueForKeyPath:@"@min.floatValue"] floatValue];
-//            int maxSection = (maxPrice/10);
-//            int minSection = (minPrice/10);
-//            int maxPriceSection = maxSection*10+10;
-//            int minPriceSection = minSection*10;
-//
-//
-//            NSMutableArray *xArray = [NSMutableArray array];
-//            NSMutableArray *targetArray = [NSMutableArray array];
-//            [obj[@"data"] enumerateObjectsUsingBlock:^(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-//                [xArray addObject:obj[@"historyDate"]];
-//                [targetArray addObject:obj[@"closePrice"]];
-//            }];
-//
-//            NSLog(@"%d---%d",maxPriceSection,minPriceSection);
-//            self.IndexTypeViewDic[@"max"] = [NSString stringWithFormat:@"%d",maxPriceSection];
-//            self.IndexTypeViewDic[@"min"] = [NSString stringWithFormat:@"%d",minPriceSection];
-//            self.IndexTypeViewDic[@"xArray"] = xArray;
-//            self.IndexTypeViewDic[@"targetArray"] = targetArray;
-//            self.IndexTypeViewDic[@"selectType"] = selectType;
-            
-            
-            self.secondDataArr = obj[@"data"];
-            
+            self.secondDataArr = [[obj[@"data"] reverseObjectEnumerator] allObjects];
             //指定刷新某行cell
             NSIndexPath *indexPath=[NSIndexPath indexPathForRow:1 inSection:0];
             [self.tableView reloadRowsAtIndexPaths:[NSArray arrayWithObjects:indexPath,nil] withRowAnimation:UITableViewRowAnimationNone];
